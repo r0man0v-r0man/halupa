@@ -339,3 +339,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /api/appsettings.Production.json
+/api/appsettings.json
+/api/appsettings.Development.json
