@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repo.Interfaces
 {
-    interface IUserRepo
+    public interface IUserRepo
     {
         /// <summary>
         /// Create user when register

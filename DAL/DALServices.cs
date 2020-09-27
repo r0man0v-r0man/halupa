@@ -38,6 +38,7 @@ namespace DAL
                 .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(IUserRepo), typeof(UserRepo));
+            services.AddScoped(typeof(IAdvertRepo), typeof(AdvertRepo));
 
             var imgurClientId = configuration.GetValue<string>("Imgur:ClientId");
             var imgurClientSecretId = configuration.GetValue<string>("Imgur:ClientSecretKey");
