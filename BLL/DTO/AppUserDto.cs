@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using Adv.DAL.Entities;
+using DAL.Entities;
 
 namespace BLL.DTO
 {
@@ -9,13 +9,13 @@ namespace BLL.DTO
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
 
-        public static AppUserDto ToAppUserDto(AppUser appUser) => new AppUserDto
+        public static implicit operator AppUserDto(AppUser appUser) => new AppUserDto
         {
             UserName = appUser?.UserName,
             Id = appUser?.Id
         };
 
-        public static AppUser ToAppUserDal(AppUserDto appUserDto) => new AppUser
+        public static implicit operator AppUser(AppUserDto appUserDto) => new AppUser
         {
             UserName = appUserDto?.UserName,
             NormalizedUserName = appUserDto?.UserName.ToUpper(CultureInfo.GetCultureInfo(1049))

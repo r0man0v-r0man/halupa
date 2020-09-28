@@ -1,4 +1,4 @@
-﻿using Adv.DAL.Entities;
+﻿using DAL.Entities;
 using DAL.Context;
 using DAL.Context.Interfaces;
 using DAL.Repo;

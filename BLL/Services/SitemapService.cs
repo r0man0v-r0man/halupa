@@ -13,16 +13,12 @@ namespace BLL.Services
         private readonly IAdvertService _advertService;
         private readonly IMemoryCache _memoryCache;
 
-        private MemoryCacheEntryOptions MemoryCacheEntryOptions { get; }
+        private MemoryCacheEntryOptions memoryCacheEntryOptions => memoryCacheEntryOptions ?? new MemoryCacheEntryOptions { SlidingExpiration = TimeSpan.FromDays(1) };
 
         public SitemapService(IMemoryCache memoryCache, IAdvertService advertService)
         {
             _memoryCache = memoryCache;
             _advertService = advertService;
-            MemoryCacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
-            };
         }
 
         public async Task<XDocument> GetSitemapAsync()
