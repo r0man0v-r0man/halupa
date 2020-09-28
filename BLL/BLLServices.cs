@@ -11,6 +11,7 @@ namespace BLL
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(IAdvertService), typeof(AdvertService));
             services.AddScoped(typeof(IFileService), typeof(FileService));
+            services.AddScoped(typeof(ISitemapService), typeof(SitemapService));
 
             services.AddMemoryCache();
 
