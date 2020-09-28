@@ -1,4 +1,4 @@
-﻿namespace Adv.DAL.Entities.Address
+﻿namespace DAL.Entities.Address
 {
     public class Component
     {

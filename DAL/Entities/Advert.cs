@@ -1,5 +1,5 @@
-﻿using Adv.DAL.Entities;
-using Adv.DAL.Entities.Address;
+﻿using DAL.Entities;
+using DAL.Entities.Address;
 using DAL.Entities.Common;
 using System.Collections.Generic;
 

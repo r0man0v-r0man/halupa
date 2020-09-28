@@ -1,4 +1,4 @@
-﻿using Adv.DAL.Entities;
+﻿using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

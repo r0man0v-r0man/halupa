@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Adv.DAL.Entities.Address
+namespace DAL.Entities.Address
 {
     public class Address
     {

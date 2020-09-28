@@ -39,6 +39,7 @@ namespace DAL
 
             services.AddScoped(typeof(IUserRepo), typeof(UserRepo));
             services.AddScoped(typeof(IAdvertRepo), typeof(AdvertRepo));
+            services.AddScoped(typeof(IFileRepo), typeof(FileRepo));
 
             var imgurClientId = configuration.GetValue<string>("Imgur:ClientId");
             var imgurClientSecretId = configuration.GetValue<string>("Imgur:ClientSecretKey");

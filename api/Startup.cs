@@ -1,3 +1,4 @@
+using BLL;
 using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +21,7 @@ namespace api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApiServices();
+            services.AddBllServices();
             services.AddDalServices(Configuration);
         }
 

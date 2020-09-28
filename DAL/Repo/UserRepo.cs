@@ -1,4 +1,4 @@
-﻿using Adv.DAL.Entities;
+﻿using DAL.Entities;
 using DAL.Repo.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

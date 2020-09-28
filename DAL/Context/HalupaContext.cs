@@ -1,7 +1,6 @@
-﻿using Adv.DAL.Context.Extensions;
-using Adv.DAL.Entities;
-using DAL.Context.Interfaces;
+﻿using DAL.Context.Extensions;
 using DAL.Entities;
+using DAL.Context.Interfaces;
 using DAL.Entities.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

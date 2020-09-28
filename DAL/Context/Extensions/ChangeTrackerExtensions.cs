@@ -3,7 +3,7 @@ using DAL.Entities.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Adv.DAL.Context.Extensions
+namespace DAL.Context.Extensions
 {
     public static class ChangeTrackerExtensions
     {
