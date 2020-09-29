@@ -52,6 +52,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.less"
             ],
             "scripts": []
@@ -152,6 +153,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "spa"
 }
