@@ -1,6 +1,26 @@
 ﻿:host {
-    display: flex;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 60px auto 180px;
+    grid-template-areas: "header"
+                         "main"
+                         "footer";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+header{
+    background-color: #263238;
+    grid-area: header;
+}
+main{
+    background-color: #37474F;
+    grid-area: main;
+    height: 100vh;
+}
+
+footer{
+    background-color: #212121;
+    grid-area: footer;
 }

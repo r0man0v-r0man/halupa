@@ -8,6 +8,7 @@ import { ru_RU } from 'ng-zorro-antd/i18n';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { FooterModule } from './modules/footer/footer.module';
+import { HeaderModule } from './modules/header/header.module';
 
 registerLocaleData(ru);
 
@@ -20,7 +21,8 @@ registerLocaleData(ru);
     BrowserModule.withServerTransition({ appId: 'serverApp' }),//добавить state
     BrowserAnimationsModule,
     CommonModule,
-    FooterModule
+    FooterModule,
+    HeaderModule
   ],
   providers: [{ provide: NZ_I18N, useValue: ru_RU }],
   bootstrap: [AppComponent]
