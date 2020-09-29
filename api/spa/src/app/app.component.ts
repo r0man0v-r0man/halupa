@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<mat-slider min="1" max="100" step="1" value="1"></mat-slider>`,
+  template: `<h1>{{title}}</h1>`,
   styles: []
 })
 export class AppComponent {
