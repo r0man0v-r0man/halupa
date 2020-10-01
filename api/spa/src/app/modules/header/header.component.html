@@ -1,21 +1,16 @@
 <div>
-    <span nz-typography>
-        <a [routerLink]="[ '/login' ]">
-            <h4 class="logo-brand">Halupa.by</h4>
-        </a>
-    </span>
+    <h2 class="logo-brand" >
+        <a [routerLink]="[ '/' ]" nz-typography >Halupa.by</a>
+    </h2>
 </div>
 <ul>
     <li>
         <a [routerLink]="[ '/adverts' ]">Объявления</a>
     </li>
     <li>
-        item 2
+        <a [routerLink]="[ '/cabinet' ]">Кабинет</a>
     </li>
     <li>
-        item 3
-    </li>
-    <li>
-        item 4
+        <button nz-button nzType="primary" nzShape="round"><i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление</button>
     </li>
 </ul>

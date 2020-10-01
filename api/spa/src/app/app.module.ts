@@ -10,6 +10,7 @@ import ru from '@angular/common/locales/ru';
 import { FooterModule } from './modules/footer/footer.module';
 import { HeaderModule } from './modules/header/header.module';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(ru);
 
@@ -22,6 +23,7 @@ registerLocaleData(ru);
     BrowserModule.withServerTransition({ appId: 'serverApp' }),//добавить state
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     CommonModule,
     FooterModule,
     HeaderModule

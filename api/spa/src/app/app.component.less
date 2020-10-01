@@ -1,4 +1,5 @@
-﻿:host {
+﻿@main-bg-color: #37474F;
+:host {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 60px auto 180px;
@@ -8,7 +9,6 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
 }
 header{
     background-color: #263238;
@@ -17,18 +17,22 @@ header{
     display: flex;
     align-items: center;
     app-header{
+        flex-flow: row wrap;
         display: flex;
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
         height: 100%;
         align-items: center;
+        justify-content: flex-end;
+        padding: 0 24px;
     }
 }
 main{
-    background-color: #37474F;
+    background-color: @main-bg-color;
     grid-area: main;
     height: 100vh;
+    padding: 24px;
     section{
         display: flex;
         width: 100%;
@@ -42,6 +46,7 @@ footer{
     grid-area: footer;
     display: flex;
     align-items: center;
+    padding: 24px;
     app-footer{
         display: flex;
         width: 100%;
