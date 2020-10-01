@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -9,7 +9,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { FooterModule } from './modules/footer/footer.module';
 import { HeaderModule } from './modules/header/header.module';
-import { MainModule } from './modules/main/main.module';
+import { AppRoutingModule } from './app-routing.module';
 
 registerLocaleData(ru);
 
@@ -20,13 +20,18 @@ registerLocaleData(ru);
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),//добавить state
+    AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
     FooterModule,
-    MainModule,
     HeaderModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: ru_RU }],
+  providers: [
+    Title,
+    { 
+      provide: NZ_I18N, useValue: ru_RU 
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
