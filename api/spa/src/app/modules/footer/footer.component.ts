@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
-  template: `
-    halupa.by - Сайт по аренде и продаже недвижимости, {{ currentYear }} - Created by <a [href]="linkedInUrl" rel="noreferrer" target="_blank">Романов Роман</a>
-  `,
-  styles: [
-  ]
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.less']
 })
 export class FooterComponent implements OnInit {
 

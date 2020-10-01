@@ -9,6 +9,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { FooterModule } from './modules/footer/footer.module';
 import { HeaderModule } from './modules/header/header.module';
+import { MainModule } from './modules/main/main.module';
 
 registerLocaleData(ru);
 
@@ -22,6 +23,7 @@ registerLocaleData(ru);
     BrowserAnimationsModule,
     CommonModule,
     FooterModule,
+    MainModule,
     HeaderModule
   ],
   providers: [{ provide: NZ_I18N, useValue: ru_RU }],
