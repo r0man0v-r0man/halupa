@@ -23,6 +23,19 @@ const routes: Routes =
         title: 'Halupa.by - Объявления',
         description: 'Объявления о продаже квартир и домов от собственника, без посредников'
       }
+    },
+    {
+      path: 'cabinet',
+      loadChildren: () => import('./pages/cabinet/cabinet.module').then(m => m.CabinetModule),
+      data: {
+        title: 'Halupa.by - Кабинет',
+        description: 'Кабинет пользователя',
+        robots: 'noindex, nofollow'
+      }
+    },
+    {
+      path: '**',
+      redirectTo: '/not-found'
     }
 ]
 
