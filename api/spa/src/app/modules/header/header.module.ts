@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
-import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
@@ -17,8 +16,7 @@ const icons = [
     CommonModule,
     AppRoutingModule,
     NzIconModule,
-    NzButtonModule,
-    NzTypographyModule
+    NzButtonModule
   ],
   exports:[
     HeaderComponent

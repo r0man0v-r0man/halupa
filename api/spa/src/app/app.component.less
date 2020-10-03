@@ -1,6 +1,4 @@
-﻿@main-bg-color: #37474F;
-@section-bg-color: #546E7A;
-:host {
+﻿:host {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 60px auto 180px;
@@ -12,17 +10,17 @@
     -moz-osx-font-smoothing: grayscale;
 }
 header{
-    background-color: #455A64;
     grid-area: header;
     z-index: 9999;
     display: flex;
     align-items: center;
+    background-color:#0277BD;
     app-header{
         flex-flow: row wrap;
         display: flex;
         width: 100%;
         max-width: 1440px;
-        margin: 24px auto;
+        margin: 0 auto;
         height: 100%;
         align-items: center;
         justify-content: flex-end;
@@ -30,22 +28,20 @@ header{
     }
 }
 main{
-    background-color: @main-bg-color;
     grid-area: main;
+    padding: 0 24px;
+
     section{
-        background-color: @section-bg-color;
-        display: flex;
         width: 100%;
         max-width: 1440px;
-        margin: 0 auto;
-        padding: 0 24px;
-        margin-top: 24px;
+        margin: 24px auto;
         height: 100vh;
     }
 }
 
 footer{
-    background-color: #212121;
+    color: #fff;
+    background-color: #01579B;
     grid-area: footer;
     display: flex;
     align-items: center;
