@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL.Context.Interfaces
 {
-    public interface IContextFactory 
+    public interface IContextFactory : IDisposable
     {
         IHalupaContext GetHalupaContext();
     }

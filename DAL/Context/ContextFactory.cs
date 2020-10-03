@@ -1,4 +1,5 @@
 ﻿using DAL.Context.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 
@@ -16,7 +17,14 @@ namespace DAL.Context
 
         public IHalupaContext GetHalupaContext()
         {
-            throw new NotImplementedException();
+            var optionsBuilder = new DbContextOptionsBuilder<HalupaContext>();
+            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("HalupaConnection"));
+
+            return new HalupaContext(optionsBuilder.Options);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

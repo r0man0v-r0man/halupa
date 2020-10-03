@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Context.Interfaces
 {
-    public interface IBaseContext
+    public interface IBaseContext : IDisposable
     {
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

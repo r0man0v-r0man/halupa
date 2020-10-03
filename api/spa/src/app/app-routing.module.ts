@@ -34,6 +34,15 @@ const routes: Routes =
       }
     },
     {
+      path: 'add',
+      loadChildren: () => import('./pages/add/add.module').then(m => m.AddModule),
+      data: {
+        title: 'Halupa.by - Добавить объявление',
+        description: 'Добавить объявление',
+        robots: 'noindex, nofollow'
+      }
+    },
+    {
       path: '**',
       redirectTo: '/not-found'
     }
