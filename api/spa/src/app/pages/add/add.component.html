@@ -1,27 +1,29 @@
 <h2 nz-typography>Добавить объявление</h2>
-<form nz-form [formGroup]="form" (ngSubmit)="_submitForm(form.value)">
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
     <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Адрес</nz-form-label>
-        <nz-form-control [nzSpan]="12" nzHasFeedback>
-                <input placeholder="input here" 
+        <nz-form-control [nzSpan]="17" nzHasFeedback>
+                <input placeholder="Например, Лермонтова 2 Несвиж" #input
                 nz-input 
                 formControlName="address" 
-                (input)="onChange($event)" 
+                (input)="geocoderService.onSearch(input.value)" 
                 [nzAutocomplete]="auto" />
               <nz-autocomplete #auto>
-                <nz-auto-option class="global-search-item" *ngFor="let option of options" [nzValue]="option.category">
-                  Found {{ option.value }} on
-                  <a
-                    class="global-search-item-desc"
-                    [href]="'https://s.taobao.com/search?q=' + option.value"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {{ option.category }}
-                  </a>
-                  <span class="global-search-item-count">{{ option.count }} results</span>
+                <nz-auto-option 
+                class="global-search-item" 
+                *ngFor="let option of geocoderService.optionList" 
+                [nzValue]="option" 
+                [nzLabel]="option.GeoObject.name + ' ' +  option.GeoObject.description">
+                    <span class="global-search-item-desc">
+                        {{ option.GeoObject.name + ' ' +  option.GeoObject.description }}
+                    </span>
                 </nz-auto-option>
               </nz-autocomplete>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" [disabled]="!form.valid">Добавить</button>
         </nz-form-control>
       </nz-form-item>
 </form>
