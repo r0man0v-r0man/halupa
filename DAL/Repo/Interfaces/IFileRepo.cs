@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Imgur.API.Models;
+﻿using System.Threading.Tasks;
+using DAL.Entities;
 using Microsoft.AspNetCore.Http;
 
 namespace DAL.Repo.Interfaces
@@ -10,6 +7,6 @@ namespace DAL.Repo.Interfaces
     public interface IFileRepo
     {
         Task<bool> DeleteFileAsync(string deleteHash);
-        Task<IImage> UploadFileAsync(IFormFile file);
+        Task<Image> UploadFileAsync(IFormFile file);
     }
 }

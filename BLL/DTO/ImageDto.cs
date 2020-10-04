@@ -7,7 +7,8 @@ namespace BLL.DTO
 {
     public class ImageDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// уникальная строка для удаления
         /// </summary>
@@ -15,7 +16,7 @@ namespace BLL.DTO
         /// <summary>
         /// URL картинки
         /// </summary>
-        public string Url { get; set; }
+        public Links LinkProps { get; set; }
         /// <summary>
         /// уникальный идентификатор, имя
         /// </summary>
@@ -31,16 +32,26 @@ namespace BLL.DTO
             Id = imageDto.Id,
             Size = imageDto.Size,
             Uid = imageDto?.Uid,
-            Url = imageDto?.Url
+            Url = imageDto?.LinkProps.Download
         };
 
         public static implicit operator ImageDto(Image image) => new ImageDto
         {
-            Url = image?.Url,
+            LinkProps = image?.Url,
             DeleteHash = image?.DeleteHash,
             Id = image.Id,
             Size = image.Size,
-            Uid = image?.Uid
+            Uid = image?.Uid,
+            Name = image?.Uid
+        };
+        
+    }
+    public class Links
+    {
+        public string Download { get; set; }
+        public static implicit operator Links(string image) => new Links
+        {
+            Download = image
         };
     }
 }

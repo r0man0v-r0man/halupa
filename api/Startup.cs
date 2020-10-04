@@ -27,10 +27,12 @@ namespace api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-
-            app.UseCors(options => { options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
-            
+            if (env.IsDevelopment()) { 
+                app.UseDeveloperExceptionPage();
+                app.UseCors(options => {
+                    options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            }
             app.UseRouting();
             app.UseHsts();
             app.UseHttpsRedirection();

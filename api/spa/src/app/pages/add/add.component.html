@@ -1,5 +1,5 @@
 <h2 nz-typography>Добавить объявление</h2>
-<form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+<form nz-form [formGroup]="form" >
     <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Адрес</nz-form-label>
         <nz-form-control [nzSpan]="17" nzHasFeedback>
@@ -24,8 +24,33 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
+        <nz-form-control >
+            <nz-upload
+            nzAction="{{imageService.uploadURL}}"
+            [nzHeaders]="imageService.headers"
+            [nzTransformFile]="imageService.transformFile"
+            [nzBeforeUpload]="imageService.beforeUpload"
+            
+            [nzShowUploadList]="imageService.showUploadList"
+            [nzFileList]="imageList"
+            [nzShowButton]="imageList.length < 8"
+            [nzAccept]="'image/png,image/jpeg,image/gif,image/jpg'"
+            nzFileType="image/png,image/jpeg,image/gif,image/jpg"
+            (nzChange)="onUploadChange($event)"
+            [nzListType]="'picture'"
+            >
+            <button nzBlock="true" nz-button>
+                <i nz-icon nzType="upload" nzTheme="outline"></i>
+                Загрузите изображение
+            </button>
+            <p><small>Максимальный размер фото 5mb.</small>
+            </p>
+            </nz-upload>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
         <nz-form-control [nzOffset]="7">
-            <button nz-button nzType="primary" [disabled]="!form.valid">Добавить</button>
+            <button nz-button nzType="primary" (click)="submitForm()" [disabled]="!form.valid">Добавить</button>
         </nz-form-control>
     </nz-form-item>
 </form>

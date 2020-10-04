@@ -9,6 +9,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 import {
   SearchOutline
 } from '@ant-design/icons-angular/icons';
@@ -27,7 +28,8 @@ const icons = [
     NzAutocompleteModule,
     NzButtonModule,
     NzIconModule,
-    NzInputModule
+    NzInputModule,
+    NzUploadModule
   ],
   exports:[
     AddComponent

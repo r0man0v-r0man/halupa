@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using DAL.Entities;
 using DAL.Repo.Interfaces;
 using Imgur.API;
 using Imgur.API.Endpoints;
-using Imgur.API.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace DAL.Repo
@@ -25,19 +21,27 @@ namespace DAL.Repo
             {
                 return await _imageEndpoint.DeleteImageAsync(deleteHash).ConfigureAwait(false);
             }
-            catch (ImgurException e)
+            catch (ImgurException)
             {
                 throw;
             }
         }
 
-        public async Task<IImage> UploadFileAsync(IFormFile file)
+        public async Task<Image> UploadFileAsync(IFormFile file)
         {
             try
             {
-                return await _imageEndpoint.UploadImageAsync(file?.OpenReadStream()).ConfigureAwait(false);
+                var result = await _imageEndpoint.UploadImageAsync(file?.OpenReadStream()).ConfigureAwait(false);
+                return new Image
+                {
+                    DeleteHash = result.DeleteHash,
+                    Id = result.Id,
+                    Size = result.Size,
+                    Uid = result.Link,
+                    Url = result.Link
+                };
             }
-            catch (ImgurException e)
+            catch (ImgurException)
             {
                 throw;
             }
