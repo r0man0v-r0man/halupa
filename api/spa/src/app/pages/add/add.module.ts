@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { AddRoutingModule } from './add-routing.module';
 import { AddComponent } from './add.component';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NzFormModule } from 'ng-zorro-antd';
-
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
+import {
+  SearchOutline
+} from '@ant-design/icons-angular/icons';
+const icons = [
+  SearchOutline
+]
 @NgModule({
   declarations: [AddComponent],
   imports: [
@@ -15,10 +23,17 @@ import { NzFormModule } from 'ng-zorro-antd';
     NzTypographyModule,
     FormsModule,
     ReactiveFormsModule,
-    NzFormModule
+    NzFormModule,
+    NzAutocompleteModule,
+    NzButtonModule,
+    NzIconModule,
+    NzInputModule
   ],
   exports:[
     AddComponent
+  ],
+  providers:[
+    { provide: NZ_ICONS, useValue: icons }
   ]
 })
 export class AddModule { }
