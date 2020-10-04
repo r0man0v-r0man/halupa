@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAdvert } from 'src/app/models/advert.model';
+import { AddFormService } from './services/add-form.service';
 import { GeocoderService } from './services/geocoder.service';
 
 @Component({
@@ -8,20 +8,22 @@ import { GeocoderService } from './services/geocoder.service';
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.less'],
   providers:[
-    GeocoderService
+    GeocoderService,
+    AddFormService
   ]
 })
 export class AddComponent implements OnInit {
-  form: FormGroup;
   constructor(
-    private fb: FormBuilder,
-    public geocoderService: GeocoderService
+    public geocoderService: GeocoderService,
+    private addFormService: AddFormService
   ) {
-    this.form = this.fb.group({
-      address: ['', [Validators.required]]
-    })
    }
-
+  get form() {
+    return this.addFormService.form;
+  }
+  get isValid() {
+    return this.addFormService.isValid;
+  }
   ngOnInit(): void {
   }
   submitForm(){

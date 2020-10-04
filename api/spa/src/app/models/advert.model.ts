@@ -1,3 +1,4 @@
+import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { IAddress } from './address.model';
 
 export interface IAdvert {
@@ -5,4 +6,5 @@ export interface IAdvert {
     appUserId: string;
     isActive: boolean;
     address: IAddress;
+    images: NzUploadFile[];
 }
