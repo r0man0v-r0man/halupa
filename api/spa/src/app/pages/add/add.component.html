@@ -24,8 +24,8 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-        <nz-form-control >
-            <nz-upload
+        <nz-form-control [nzOffset]="7" [nzSpan]="17">
+            <nz-upload 
             nzAction="{{imageService.uploadURL}}"
             [nzHeaders]="imageService.headers"
             [nzTransformFile]="imageService.transformFile"

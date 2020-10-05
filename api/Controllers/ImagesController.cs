@@ -17,12 +17,12 @@ namespace api.Controllers
             _fileService = fileService;
         }
         [HttpPost]
-        public async Task<ActionResult<ImageDto>> Post(IFormFile image)
+        public async Task<ActionResult<ImageDto>> Post(IFormFile file)
         {
-            if (image is null) return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            if (file is null) return StatusCode(StatusCodes.Status503ServiceUnavailable);
             try
             {
-                var result = await _fileService.UploadAsync(image).ConfigureAwait(false);
+                var result = await _fileService.UploadAsync(file).ConfigureAwait(false);
                 return CreatedAtAction(nameof(Post), result);
             }
             catch (Exception)

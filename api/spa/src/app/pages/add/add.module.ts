@@ -11,10 +11,10 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import {
-  SearchOutline
+  UploadOutline
 } from '@ant-design/icons-angular/icons';
 const icons = [
-  SearchOutline
+  UploadOutline
 ]
 @NgModule({
   declarations: [AddComponent],

@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { ImageService } from 'src/app/services/image.service';
 import { AddFormService } from './services/add-form.service';
