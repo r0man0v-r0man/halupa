@@ -24,13 +24,14 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-        <nz-form-control [nzOffset]="7" [nzSpan]="17">
+        <nz-form-label [nzSpan]="7" nzRequired>Фото</nz-form-label>
+        <nz-form-control [nzSpan]="17">
             <nz-upload 
             nzAction="{{imageService.uploadURL}}"
             [nzHeaders]="imageService.headers"
             [nzTransformFile]="imageService.transformFile"
             [nzBeforeUpload]="imageService.beforeUpload"
-            
+            [nzRemove]="onDelete"
             [nzShowUploadList]="imageService.showUploadList"
             [nzFileList]="imageList"
             [nzShowButton]="imageList.length < 8"
@@ -48,9 +49,49 @@
             </nz-upload>
         </nz-form-control>
     </nz-form-item>
+    <nz-form-item [formGroup]="form.get('price')">
+        <nz-form-label [nzSpan]="7" nzRequired>Цена</nz-form-label>
+        <nz-form-control [nzSpan]="17">
+            <nz-input-number
+            formControlName="value" 
+            [nzMin]="1"
+            [nzMax]="99999999"
+            [nzStep]="100"
+            [nzFormatter]="formatterDollar"
+            [nzParser]="parserDollar"
+          ></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item [formGroup]="form.get('description')">
+        <nz-form-label [nzSpan]="7" nzRequired>Описание</nz-form-label>
+        <nz-form-control [nzSpan]="17">
+            <textarea 
+            formControlName="value" 
+            placeholder="Добавьте комментарий"
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+            nz-input></textarea>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item [formGroup]="form.get('area')">
+        <nz-form-label [nzSpan]="7" nzRequired>Площадь, кв.м.</nz-form-label>
+        <nz-form-control [nzSpan]="17">
+            <nz-input-number
+            formControlName="value" 
+            [nzMin]="1"
+            [nzMax]="99999"
+            [nzStep]="1"
+          ></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">
-            <button nz-button nzType="primary" (click)="submitForm()" [disabled]="!form.valid">Добавить</button>
+            <button 
+            nz-button 
+            nzType="primary" 
+            (click)="submitForm()" 
+            [disabled]="!form.valid">
+                Добавить
+            </button>
         </nz-form-control>
     </nz-form-item>
 </form>

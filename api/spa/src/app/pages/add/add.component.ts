@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { ImageService } from 'src/app/services/image.service';
 import { AddFormService } from './services/add-form.service';
@@ -47,24 +48,24 @@ export class AddComponent implements OnInit {
     });
   }
   /** Delete file */
-  // onDelete = (file: NzUploadFile): Observable<boolean> => {
-  //   return new Observable(observer => {
-  //     if (file) {
-  //       this.imageService.delete(file.response.deleteHash)
-  //       .subscribe(response => {
-  //         if (response) {
-  //         const index = this.images.findIndex(x => x.uid === file.response.uid);
-  //         if (index > -1) {
-  //           this.images.splice(index, 1);
-  //         }
-  //         this.setRentFlatFormControlValue('images', this.images);
-  //         observer.next(response);
-  //         observer.complete();
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+  onDelete = (file: NzUploadFile): Observable<boolean> => {
+    return new Observable(observer => {
+      if (file) {
+        this.imageService.delete(file.response.deleteHash)
+        .subscribe(response => {
+          if (response) {
+          const index = this.images.findIndex(x => x.uid === file.response.uid);
+          if (index > -1) {
+            this.images.splice(index, 1);
+          }
+          this.setRentFlatFormControlValue('images', this.images);
+          observer.next(response);
+          observer.complete();
+          }
+        });
+      }
+    });
+  }
   /**
    * установка значения для поля формы
    * @param formControlName имя поля
@@ -73,4 +74,6 @@ export class AddComponent implements OnInit {
   private setRentFlatFormControlValue(formControlName: string, value: any) {
     this.form.controls[formControlName].setValue(value);
   }
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
 }

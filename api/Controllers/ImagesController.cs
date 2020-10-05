@@ -31,5 +31,16 @@ namespace api.Controllers
                 throw;
             }
         }
+        [HttpDelete("{deleteHash}")]
+        public async Task<IActionResult> Delete(string deleteHash)
+        {
+            if (string.IsNullOrEmpty(deleteHash)) return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            
+            var result = await _fileService
+                .DeleteAsync(deleteHash).ConfigureAwait(false);
+
+            return result ? Ok(result) : (IActionResult)BadRequest(result);
+
+        }
     }
 }

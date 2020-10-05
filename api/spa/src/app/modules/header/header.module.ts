@@ -5,10 +5,10 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import {
-  PlusCircleOutline
+  PlusOutline
 } from '@ant-design/icons-angular/icons';
 const icons = [
-  PlusCircleOutline
+  PlusOutline
 ]
 @NgModule({
   declarations: [HeaderComponent],

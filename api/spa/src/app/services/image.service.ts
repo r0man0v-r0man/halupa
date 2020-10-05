@@ -147,7 +147,7 @@ export class ImageService {
     })
   }
   /** удалить изображение */
-  // delete(deleteHash: string){
-  //   return this.httpService.delete<boolean>(this.deleteImageUrl + '/' + deleteHash, { headers: this.authService.SecureHeaders })
-  // }
+  delete(deleteHash: string){
+    return this.httpService.delete<boolean>(URLs.deleteImageURL + '/' + deleteHash, { headers: this.headers })
+  }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BLL.DTO;
 using BLL.Services.Interfaces;
 using DAL.Repo.Interfaces;
@@ -21,5 +18,7 @@ namespace BLL.Services
             ImageDto result = await _fileRepo.UploadFileAsync(image).ConfigureAwait(false);
             return result;
         }
+
+        public async Task<bool> DeleteAsync(string deleteHash) => await _fileRepo.DeleteFileAsync(deleteHash).ConfigureAwait(false);
     }
 }

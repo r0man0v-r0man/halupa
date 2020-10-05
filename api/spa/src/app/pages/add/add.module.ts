@@ -10,6 +10,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import {
   UploadOutline
 } from '@ant-design/icons-angular/icons';
@@ -29,7 +30,8 @@ const icons = [
     NzButtonModule,
     NzIconModule,
     NzInputModule,
-    NzUploadModule
+    NzUploadModule,
+    NzInputNumberModule
   ],
   exports:[
     AddComponent
