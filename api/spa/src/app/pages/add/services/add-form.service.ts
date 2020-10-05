@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable()
 export class AddFormService {
@@ -24,7 +24,10 @@ export class AddFormService {
       area: this.fb.group({
         value: [ 70, [Validators.required]]
       }),
-      contacts: this.fb.array([])
+      contacts: this.fb.array([
+        new FormControl('sdfsfa'),
+        new FormControl('123123123')
+      ])
     })
   }
   get isValid() {

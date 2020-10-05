@@ -83,6 +83,15 @@
           ></nz-input-number>
         </nz-form-control>
     </nz-form-item>
+    <nz-form-item formArrayName="contacts">
+        <nz-form-label [nzSpan]="7" nzRequired>Контакты</nz-form-label>
+        <nz-form-control [nzSpan]="17" 
+        *ngFor="let control of form.controls.contacts['controls']; let i = index">
+            <input 
+            nz-input 
+            [formControlName]="i"/>
+        </nz-form-control>
+    </nz-form-item>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">
             <button 
