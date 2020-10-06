@@ -24,10 +24,12 @@ export class AddFormService {
       area: this.fb.group({
         value: [ 70, [Validators.required]]
       }),
-      contacts: this.fb.array([
-        new FormControl('sdfsfa'),
-        new FormControl('123123123')
-      ])
+      contacts: this.fb.group({
+        values: this.fb.array([
+          new FormControl(''),
+          new FormControl('')
+        ])
+      })
     })
   }
   get isValid() {

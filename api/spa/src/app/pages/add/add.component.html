@@ -82,14 +82,15 @@
             [nzStep]="1"
           ></nz-input-number>
         </nz-form-control>
-    </nz-form-item>
-    <nz-form-item formArrayName="contacts">
-        <nz-form-label [nzSpan]="7" nzRequired>Контакты</nz-form-label>
-        <nz-form-control [nzSpan]="17" 
-        *ngFor="let control of form.controls.contacts['controls']; let i = index">
+    </nz-form-item> 
+    <!-- доделать массив -->
+    <nz-form-item formArrayName="contacts" *ngFor="let control of form.controls.contacts['controls']; let i = index">
+        <nz-form-label [nzSpan]="7" *ngIf="i == 0" nzRequired>Контакты</nz-form-label>
+        <nz-form-control  [nzOffset]="i == 0? '' : '7'">
             <input 
             nz-input 
-            [formControlName]="i"/>
+            [formControlName]="i" 
+            [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
