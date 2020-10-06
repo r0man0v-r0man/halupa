@@ -83,16 +83,20 @@
           ></nz-input-number>
         </nz-form-control>
     </nz-form-item> 
-    <!-- доделать массив -->
-    <nz-form-item formArrayName="contacts" *ngFor="let control of form.controls.contacts['controls']; let i = index">
-        <nz-form-label [nzSpan]="7" *ngIf="i == 0" nzRequired>Контакты</nz-form-label>
-        <nz-form-control  [nzOffset]="i == 0? '' : '7'">
-            <input 
-            nz-input 
-            [formControlName]="i" 
-            [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
-        </nz-form-control>
-    </nz-form-item>
+    <div [formGroup]="form.get('contacts')">
+      <div formArrayName="phones">
+          <nz-form-item *ngFor="let control of form.get('contacts').controls.phones['controls']; let i = index" >
+            <nz-form-label [nzSpan]="7" *ngIf="i == 0" nzRequired>Контакты</nz-form-label>
+            <nz-form-control [nzOffset]="i == 0? '' : '7'">
+                <input 
+                nz-input 
+                [formControlName]="i" 
+                [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
+            </nz-form-control>
+          </nz-form-item>
+        
+      </div>
+    </div>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">
             <button 

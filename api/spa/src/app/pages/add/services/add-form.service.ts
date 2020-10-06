@@ -25,7 +25,7 @@ export class AddFormService {
         value: [ 70, [Validators.required]]
       }),
       contacts: this.fb.group({
-        values: this.fb.array([
+        phones: this.fb.array([
           new FormControl(''),
           new FormControl('')
         ])
