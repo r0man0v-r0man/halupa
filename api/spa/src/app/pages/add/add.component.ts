@@ -33,7 +33,7 @@ export class AddComponent implements OnInit {
     return this.addFormService.isValid;
   }
   ngOnInit(): void {
-    console.log(this.form.get('contacts.phones'));
+    console.log(this.form.get('contacts.phones').value);
     
   }
   submitForm(){
@@ -78,4 +78,8 @@ export class AddComponent implements OnInit {
   }
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
+  onChange(value){
+    console.log(value.value);
+    
+  }
 }
