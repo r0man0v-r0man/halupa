@@ -33,7 +33,7 @@ export class AddComponent implements OnInit {
     return this.addFormService.isValid;
   }
   ngOnInit(): void {
-    console.log(this.form.get('contacts.phones').value);
+    console.log(this.form.get('contacts.phones'));
     
   }
   submitForm(){
@@ -45,7 +45,7 @@ export class AddComponent implements OnInit {
     this.imageService.handleChange(info).subscribe(response => {
       this.imageList = [...this.imageService.imageList];
       this.images = response;
-      this.setRentFlatFormControlValue('images', this.images);
+      this.setFormControlValue('images', this.images);
       this.cd.detectChanges();
     });
   }
@@ -60,7 +60,7 @@ export class AddComponent implements OnInit {
           if (index > -1) {
             this.images.splice(index, 1);
           }
-          this.setRentFlatFormControlValue('images', this.images);
+          this.setFormControlValue('images', this.images);
           observer.next(response);
           observer.complete();
           }
@@ -73,13 +73,18 @@ export class AddComponent implements OnInit {
    * @param formControlName имя поля
    * @param value значение
    */
-  private setRentFlatFormControlValue(formControlName: string, value: any) {
+  private setFormControlValue(formControlName: string, value: any) {
     this.form.controls[formControlName].setValue(value);
   }
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
-  onChange(value){
-    console.log(value.value);
-    
+  onChange(value: string, index: number){
+    this.updatePhonesArray(index, value);
+  }
+
+  private updatePhonesArray(index: number, value: string) {
+    let phones = this.form.get('contacts.phones').value;
+    phones[index] = value;
+    this.form.get('contacts.phones').patchValue(phones);
   }
 }

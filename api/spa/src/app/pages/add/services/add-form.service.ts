@@ -26,7 +26,7 @@ export class AddFormService {
       }),
       contacts: this.fb.group({
         phones: [ 
-          ['efasf', '12341'], [Validators.required]
+          ['', '']
         ]
       })
     })

@@ -82,29 +82,17 @@
             [nzStep]="1"
           ></nz-input-number>
         </nz-form-control>
-    </nz-form-item> 
-    <!-- доделать массив -->
+    </nz-form-item>
     <div [formGroup]="form.get('contacts')">
             <nz-form-item formArrayName="phones"  >
                 <nz-form-label [nzSpan]="7" nzRequired>Контакты</nz-form-label>
                 <nz-form-control [nzSpan]="17" *ngFor="let item of form.get('contacts.phones').value; let i = index" >
-                    <input (change)="onChange($event)"
+                    <input #input (change)="onChange(input.value, i)"
+                    [value]="item"
                     nz-input 
                     [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
                 </nz-form-control>
             </nz-form-item>
-      <!-- <div formArrayName="form.get('contacts.phones')">
-          <nz-form-item *ngFor="let control of form.get('contacts.phones')['controls']; let i = index" >
-            <nz-form-label [nzSpan]="7" *ngIf="i == 0" nzRequired>Контакты</nz-form-label>
-            <nz-form-control [nzOffset]="i == 0? '' : '7'">
-                <input 
-                nz-input 
-                [formControlName]="i" 
-                [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
-            </nz-form-control>
-          </nz-form-item>
-        
-      </div> -->
     </div>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">
