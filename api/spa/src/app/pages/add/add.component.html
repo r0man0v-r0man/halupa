@@ -1,5 +1,5 @@
 <h2 nz-typography>Добавить объявление</h2>
-<form nz-form [formGroup]="form" >
+<form nz-form [formGroup]="form">
     <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Адрес</nz-form-label>
         <nz-form-control [nzSpan]="17" nzHasFeedback>
@@ -83,16 +83,16 @@
           ></nz-input-number>
         </nz-form-control>
     </nz-form-item>
-    <div [formGroup]="form.get('contacts')">
-            <nz-form-item formArrayName="phones"  >
-                <nz-form-label [nzSpan]="7" nzRequired>Контакты</nz-form-label>
-                <nz-form-control [nzSpan]="17" *ngFor="let item of form.get('contacts.phones').value; let i = index" >
-                    <input #input (change)="onChange(input.value, i)"
-                    [value]="item"
-                    nz-input 
-                    [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
-                </nz-form-control>
-            </nz-form-item>
+    <div [formGroup]="form.get('contacts')" nz-row>
+        <nz-form-item formArrayName="phones"  >
+            <nz-form-label [nzSpan]="7" nzRequired>Контакты</nz-form-label>
+            <nz-form-control [nzSpan]="8" *ngFor="let item of form.get('contacts.phones').value; let i = index" >
+                <input #input (change)="onChange(input.value, i)"  
+                [value]="item"
+                nz-input 
+                [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
+            </nz-form-control>
+        </nz-form-item>
     </div>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">
