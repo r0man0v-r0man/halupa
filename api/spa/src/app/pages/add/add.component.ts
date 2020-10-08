@@ -33,8 +33,6 @@ export class AddComponent implements OnInit {
     return this.addFormService.isValid;
   }
   ngOnInit(): void {
-    console.log(this.form.get('contacts.phones'));
-    
   }
   submitForm(){
     const advert: IAdvert = { ...this.form.value };

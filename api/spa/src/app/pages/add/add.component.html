@@ -25,8 +25,8 @@
     </nz-form-item>
     <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Фото</nz-form-label>
-        <nz-form-control [nzSpan]="17">
-            <nz-upload 
+        <nz-form-control >
+            <nz-upload   
             nzAction="{{imageService.uploadURL}}"
             [nzHeaders]="imageService.headers"
             [nzTransformFile]="imageService.transformFile"
@@ -40,10 +40,10 @@
             (nzChange)="onUploadChange($event)"
             [nzListType]="'picture'"
             >
-            <button nzBlock="true" nz-button>
+            <a [nzBlock]="'true'" nz-button>
                 <i nz-icon nzType="upload" nzTheme="outline"></i>
                 Загрузите изображение
-            </button>
+            </a>
             <p><small>Максимальный размер фото 5mb.</small>
             </p>
             </nz-upload>
@@ -83,17 +83,17 @@
           ></nz-input-number>
         </nz-form-control>
     </nz-form-item>
-    <div [formGroup]="form.get('contacts')" nz-row>
-        <nz-form-item formArrayName="phones"  >
+    <nz-form-item [formGroup]="form.get('contacts')" >
+      
             <nz-form-label [nzSpan]="7" nzRequired>Контакты</nz-form-label>
-            <nz-form-control [nzSpan]="8" *ngFor="let item of form.get('contacts.phones').value; let i = index" >
+            <nz-form-control [nzSpan]="8" [nzOffset]="i == 0? '0':'1'" formArrayName="phones" *ngFor="let item of form.get('contacts.phones').value; let i = index" >
                 <input #input (change)="onChange(input.value, i)"  
                 [value]="item"
                 nz-input 
                 [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
             </nz-form-control>
-        </nz-form-item>
-    </div>
+      
+    </nz-form-item>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">
             <button 
