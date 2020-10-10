@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
+import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { AddFormService } from './services/add-form.service';
 import { GeocoderService } from './services/geocoder.service';
@@ -12,7 +13,8 @@ import { GeocoderService } from './services/geocoder.service';
   styleUrls: ['./add.component.less'],
   providers:[
     GeocoderService,
-    AddFormService
+    AddFormService,
+    AdvertService
   ]
 })
 export class AddComponent implements OnInit {
@@ -23,7 +25,8 @@ export class AddComponent implements OnInit {
     public geocoderService: GeocoderService,
     private addFormService: AddFormService,
     public imageService: ImageService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private advertService: AdvertService
   ) {
    }
   get form() {
@@ -36,7 +39,7 @@ export class AddComponent implements OnInit {
   }
   submitForm(){
     const advert: IAdvert = { ...this.form.value };
-    console.log(advert);
+    this.advertService.addAdvert(advert);
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ) {

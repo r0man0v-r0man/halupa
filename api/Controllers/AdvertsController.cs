@@ -19,8 +19,8 @@ namespace api.Controllers
             _advertService = advertService;
         }
 
-        [HttpPost("/add")]
-        public async Task<IActionResult> Add(AdvertDto advert)
+        [HttpPost("add")]
+        public async Task<ActionResult<int>> Add(AdvertDto advert)
         {
             var result = await _advertService.AddAsync(advert).ConfigureAwait(false);
             return Ok();

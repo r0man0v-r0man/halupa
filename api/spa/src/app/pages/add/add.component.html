@@ -79,7 +79,7 @@
             <input 
             formControlName="phone" 
             nz-input 
-            [placeholder]="+375295353535"/>
+            [placeholder]="80295353535"/>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item [formGroup]="form.get('description')">
@@ -94,7 +94,7 @@
     </nz-form-item>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">
-            <button 
+            <button [nzBlock]="'true'"
             nz-button 
             nzType="primary" 
             (click)="submitForm()" 

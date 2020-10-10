@@ -25,6 +25,14 @@ const routes: Routes =
       }
     },
     {
+      path: 'adverts/:id',
+      loadChildren: () => import('./pages/advert/advert.module').then(m => m.AdvertModule),
+      data: {
+        title: 'Halupa.by - Подробная информация об обяъвлении',
+        description: 'Информация об объявлении, номера телефонов, фотографии и координаты места'
+      }
+    },
+    {
       path: 'cabinet',
       loadChildren: () => import('./pages/cabinet/cabinet.module').then(m => m.CabinetModule),
       data: {
@@ -34,7 +42,7 @@ const routes: Routes =
       }
     },
     {
-      path: 'create',
+      path: 'add',
       loadChildren: () => import('./pages/add/add.module').then(m => m.AddModule),
       data: {
         title: 'Halupa.by - Добавить объявление',
