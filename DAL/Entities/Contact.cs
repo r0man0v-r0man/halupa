@@ -3,6 +3,6 @@
     public class Contact
     {
         public int Id { get; set; }
-        public string[] Phones { get; set; }
+        public string Phone { get; set; }
     }
 }

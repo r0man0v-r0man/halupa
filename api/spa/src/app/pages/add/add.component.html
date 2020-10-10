@@ -62,16 +62,6 @@
           ></nz-input-number>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item [formGroup]="form.get('description')">
-        <nz-form-label [nzSpan]="7" nzRequired>Описание</nz-form-label>
-        <nz-form-control [nzSpan]="17">
-            <textarea 
-            formControlName="value" 
-            placeholder="Добавьте комментарий"
-            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
-            nz-input></textarea>
-        </nz-form-control>
-    </nz-form-item>
     <nz-form-item [formGroup]="form.get('area')">
         <nz-form-label [nzSpan]="7" nzRequired>Площадь, кв.м.</nz-form-label>
         <nz-form-control [nzSpan]="17">
@@ -84,15 +74,23 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item [formGroup]="form.get('contacts')" >
-      
-            <nz-form-label [nzSpan]="7" nzRequired>Контакты</nz-form-label>
-            <nz-form-control [nzSpan]="8" [nzOffset]="i == 0? '0':'1'" formArrayName="phones" *ngFor="let item of form.get('contacts.phones').value; let i = index" >
-                <input #input (change)="onChange(input.value, i)"  
-                [value]="item"
-                nz-input 
-                [placeholder]="i == 0? '+375295353535' : 'Доп. телефон'"/>
-            </nz-form-control>
-      
+        <nz-form-label [nzSpan]="7" nzRequired>Телефон</nz-form-label>
+        <nz-form-control [nzSpan]="7">
+            <input 
+            formControlName="phone" 
+            nz-input 
+            [placeholder]="+375295353535"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item [formGroup]="form.get('description')">
+        <nz-form-label [nzSpan]="7" nzRequired>Описание</nz-form-label>
+        <nz-form-control [nzSpan]="17">
+            <textarea 
+            formControlName="value" 
+            placeholder="Добавьте комментарий"
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+            nz-input></textarea>
+        </nz-form-control>
     </nz-form-item>
     <nz-form-item>
         <nz-form-control [nzOffset]="7">

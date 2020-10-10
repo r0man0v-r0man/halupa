@@ -5,16 +5,16 @@ namespace BLL.DTO
 {
     public class ContactDto
     {
-        public string[] Phones { get; set; }
+        public string Phone { get; set; }
 
         public static implicit operator ContactDto(Contact contact) => new ContactDto
         {
-            Phones = contact?.Phones
+            Phone = contact?.Phone
         };
 
         public static implicit operator Contact(ContactDto contactDto) => new Contact
         {
-            Phones = contactDto?.Phones
+            Phone = contactDto?.Phone
         };
     }
 }

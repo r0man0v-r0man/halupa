@@ -1,3 +1,3 @@
 export interface IContacts{
-    phones: string[]
+    phone: string
 }

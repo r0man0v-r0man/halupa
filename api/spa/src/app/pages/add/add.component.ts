@@ -76,13 +76,5 @@ export class AddComponent implements OnInit {
   }
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
-  onChange(value: string, index: number){
-    this.updatePhonesArray(index, value);
-  }
-
-  private updatePhonesArray(index: number, value: string) {
-    let phones = this.form.get('contacts.phones').value;
-    phones[index] = value;
-    this.form.get('contacts.phones').patchValue(phones);
-  }
+  
 }
