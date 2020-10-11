@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(HalupaContext))]
-    [Migration("20200927185048_initHalupa")]
-    partial class initHalupa
+    [Migration("20201011171845_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace DAL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.Address", b =>
+            modelBuilder.Entity("DAL.Entities.Address.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace DAL.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.BoundedBy", b =>
+            modelBuilder.Entity("DAL.Entities.Address.BoundedBy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace DAL.Migrations
                     b.ToTable("BoundedBy");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.Component", b =>
+            modelBuilder.Entity("DAL.Entities.Address.Component", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,7 +82,7 @@ namespace DAL.Migrations
                     b.ToTable("Component");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.Envelope", b =>
+            modelBuilder.Entity("DAL.Entities.Address.Envelope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +100,7 @@ namespace DAL.Migrations
                     b.ToTable("Envelope");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.GeoObject", b =>
+            modelBuilder.Entity("DAL.Entities.Address.GeoObject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,7 +133,7 @@ namespace DAL.Migrations
                     b.ToTable("GeoObject");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.GeocoderMetaData", b =>
+            modelBuilder.Entity("DAL.Entities.Address.GeocoderMetaData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +159,7 @@ namespace DAL.Migrations
                     b.ToTable("GeocoderMetaData");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.MetaDataProperty", b =>
+            modelBuilder.Entity("DAL.Entities.Address.MetaDataProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -176,7 +176,7 @@ namespace DAL.Migrations
                     b.ToTable("MetaDataProperty");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.Point", b =>
+            modelBuilder.Entity("DAL.Entities.Address.Point", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,7 +191,7 @@ namespace DAL.Migrations
                     b.ToTable("Point");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.YandexAddress", b =>
+            modelBuilder.Entity("DAL.Entities.Address.YandexAddress", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -208,7 +208,58 @@ namespace DAL.Migrations
                     b.ToTable("YandexAddress");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.AppUser", b =>
+            modelBuilder.Entity("DAL.Entities.Advert", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("AreaId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ContactId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("DescriptionId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("PriceId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("AreaId");
+
+                    b.HasIndex("ContactId");
+
+                    b.HasIndex("DescriptionId");
+
+                    b.HasIndex("PriceId");
+
+                    b.ToTable("Adverts");
+                });
+
+            modelBuilder.Entity("DAL.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -272,57 +323,6 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Advert", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("AreaId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("ContactId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("DescriptionId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("PriceId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("AreaId");
-
-                    b.HasIndex("ContactId");
-
-                    b.HasIndex("DescriptionId");
-
-                    b.HasIndex("PriceId");
-
-                    b.ToTable("Adverts");
-                });
-
             modelBuilder.Entity("DAL.Entities.Area", b =>
                 {
                     b.Property<int>("Id")
@@ -345,8 +345,8 @@ namespace DAL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string[]>("Values")
-                        .HasColumnType("text[]");
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -370,12 +370,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Image", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
-                    b.Property<int>("AdvertId")
+                    b.Property<int?>("AdvertId")
                         .HasColumnType("integer");
 
                     b.Property<string>("DeleteHash")
@@ -545,64 +543,64 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.BoundedBy", b =>
+            modelBuilder.Entity("DAL.Entities.Address.BoundedBy", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Address.Envelope", "Envelope")
+                    b.HasOne("DAL.Entities.Address.Envelope", "Envelope")
                         .WithMany()
                         .HasForeignKey("EnvelopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.Component", b =>
+            modelBuilder.Entity("DAL.Entities.Address.Component", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Address.Address", null)
+                    b.HasOne("DAL.Entities.Address.Address", null)
                         .WithMany("Components")
                         .HasForeignKey("AddressId");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.GeoObject", b =>
+            modelBuilder.Entity("DAL.Entities.Address.GeoObject", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Address.BoundedBy", "BoundedBy")
+                    b.HasOne("DAL.Entities.Address.BoundedBy", "BoundedBy")
                         .WithMany()
                         .HasForeignKey("BoundedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Adv.DAL.Entities.Address.MetaDataProperty", "MetaDataProperty")
+                    b.HasOne("DAL.Entities.Address.MetaDataProperty", "MetaDataProperty")
                         .WithMany()
                         .HasForeignKey("MetaDataPropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Adv.DAL.Entities.Address.Point", "Point")
+                    b.HasOne("DAL.Entities.Address.Point", "Point")
                         .WithMany()
                         .HasForeignKey("PointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.GeocoderMetaData", b =>
+            modelBuilder.Entity("DAL.Entities.Address.GeocoderMetaData", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Address.Address", "Address")
+                    b.HasOne("DAL.Entities.Address.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.MetaDataProperty", b =>
+            modelBuilder.Entity("DAL.Entities.Address.MetaDataProperty", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Address.GeocoderMetaData", "GeocoderMetaData")
+                    b.HasOne("DAL.Entities.Address.GeocoderMetaData", "GeocoderMetaData")
                         .WithMany()
                         .HasForeignKey("GeocoderMetaDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Address.YandexAddress", b =>
+            modelBuilder.Entity("DAL.Entities.Address.YandexAddress", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Address.GeoObject", "GeoObject")
+                    b.HasOne("DAL.Entities.Address.GeoObject", "GeoObject")
                         .WithMany()
                         .HasForeignKey("GeoObjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -611,11 +609,11 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Advert", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Address.YandexAddress", "Address")
+                    b.HasOne("DAL.Entities.Address.YandexAddress", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
+                    b.HasOne("DAL.Entities.AppUser", "AppUser")
                         .WithMany("Adverts")
                         .HasForeignKey("AppUserId");
 
@@ -638,11 +636,9 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Image", b =>
                 {
-                    b.HasOne("DAL.Entities.Advert", "Advert")
+                    b.HasOne("DAL.Entities.Advert", null)
                         .WithMany("Images")
-                        .HasForeignKey("AdvertId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AdvertId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -656,7 +652,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.AppUser", null)
+                    b.HasOne("DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -665,7 +661,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.AppUser", null)
+                    b.HasOne("DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -680,7 +676,7 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Adv.DAL.Entities.AppUser", null)
+                    b.HasOne("DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -689,7 +685,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.AppUser", null)
+                    b.HasOne("DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

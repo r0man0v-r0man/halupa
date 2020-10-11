@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using BLL.DTO;
 using BLL.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -22,8 +19,17 @@ namespace api.Controllers
         [HttpPost("add")]
         public async Task<ActionResult<int>> Add(AdvertDto advert)
         {
-            var result = await _advertService.AddAsync(advert).ConfigureAwait(false);
-            return Ok();
+            if (advert == null) return BadRequest();
+            try
+            {
+                var result = await _advertService.AddAsync(advert).ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+                throw;
+            }
         }
     }
 }

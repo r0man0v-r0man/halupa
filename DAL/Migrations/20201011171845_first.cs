@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DAL.Migrations
 {
-    public partial class initHalupa : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,7 +81,7 @@ namespace DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Values = table.Column<string[]>(nullable: true)
+                    Phone = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -444,13 +444,12 @@ namespace DAL.Migrations
                 name: "Image",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(nullable: false),
                     DeleteHash = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
                     Uid = table.Column<string>(nullable: true),
                     Size = table.Column<long>(nullable: false),
-                    AdvertId = table.Column<int>(nullable: false)
+                    AdvertId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -460,7 +459,7 @@ namespace DAL.Migrations
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

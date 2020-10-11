@@ -13,7 +13,6 @@ export class AdvertService {
     private router: Router
   ) { }
   addAdvert(advert: IAdvert){
-    console.log(advert);
     this.httpClient.post<number>(URLs.addAdvertURL, advert, {headers: this.headers })
       .pipe(map((response: number) => {
         this.goToAdvert(response);
