@@ -9,5 +9,6 @@ namespace BLL.Services.Interfaces
     public interface IAdvertService
     {
         Task<int> AddAsync(AdvertDto advert);
+        Task<AdvertDto> GetAsync(int id);
     }
 }

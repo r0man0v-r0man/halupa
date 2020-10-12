@@ -24,7 +24,7 @@ export class AddFormService {
       area: this.fb.group({
         value: [ 70, [Validators.required]]
       }),
-      contacts: this.fb.group({
+      contact: this.fb.group({
         phone: [ '', [Validators.required]]
       })
     })

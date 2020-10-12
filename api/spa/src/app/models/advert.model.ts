@@ -12,5 +12,5 @@ export interface IAdvert {
     images: NzUploadFile[];
     price: IPrice,
     description: IDescription,
-    contacts: IContacts
+    contact: IContacts
 }

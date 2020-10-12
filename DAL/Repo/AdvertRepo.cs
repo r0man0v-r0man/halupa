@@ -2,6 +2,7 @@
 using DAL.Entities;
 using DAL.Repo.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -42,7 +43,20 @@ namespace DAL.Repo
 
         public async Task<Advert> GetAdvertByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using var context = _contextFactory.GetHalupaContext();
+            var result = await context.Adverts
+                .Include(prop => prop.Address.GeoObject.Point)
+                .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .Include(prop => prop.Images)
+                .Include(prop => prop.Price)
+                .Include(prop => prop.Contact)
+                .Include(prop => prop.Description)
+                .Include(prop => prop.Area)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(prop => prop.Id == id)
+                .ConfigureAwait(false);
+            return result ?? throw new Exception($"Not Found Advert with id: {id}");
         }
 
         public async Task<IEnumerable<Advert>> GetAdvertsAsync(int pageNumber)

@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
@@ -25,7 +26,9 @@ export class AdvertService {
   }
 
   getAdvert(id: number){
-    this.httpClient.get<IAdvert>(URLs.getAdvertURL).subscribe();
+    let params = new HttpParams();
+    params = params.append("id", id.toString());
+    return this.httpClient.get<IAdvert>(`${this.baseUrl}${URLs.getAdvertURL}`, { params : params});
   }
 
   private goToAdvert(response: number) {

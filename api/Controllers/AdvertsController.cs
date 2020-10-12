@@ -31,5 +31,20 @@ namespace api.Controllers
                 throw;
             }
         }
+        [HttpGet("getAdvert")]
+        public async Task<ActionResult<AdvertDto>> GetAdvert(int id)
+        {
+            if (id == 0) return BadRequest();
+            try
+            {
+                var result = await _advertService.GetAsync(id).ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+                throw;
+            }
+        }
     }
 }
