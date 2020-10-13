@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { AdvertRoutingModule } from './advert-routing.module';
 import { AdvertComponent } from './advert.component';
 
@@ -11,7 +11,8 @@ import { AdvertComponent } from './advert.component';
   ],
   imports: [
     CommonModule,
-    AdvertRoutingModule
+    AdvertRoutingModule,
+    NzPageHeaderModule
   ],
   exports: [
     AdvertComponent

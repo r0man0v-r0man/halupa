@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-advert',
-  template: `
-    <p>
-      advert works!
-    </p>
-    <pre>{{ advert | json }}</pre>
-  `,
+  templateUrl: './advert.component.html',
   styles: [
   ],
   providers:[
@@ -18,14 +14,27 @@ import { AdvertService } from 'src/app/services/advert.service';
 export class AdvertComponent implements OnInit {
   advert;
   constructor(
-    private advertService: AdvertService
+    private route: ActivatedRoute,
+    private advertService: AdvertService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.advertService.getAdvert(2).subscribe(response =>{
-      console.log(response);
+    this.initPage();
+  }
+  private getAdvert(id: number) {
+    this.advertService.getAdvert(id).subscribe(response => {
       this.advert = response;
-    })
+    });
   }
 
+  /** инициализация страницы */
+  private initPage() {
+    this.route.params.subscribe((params: Params) => {
+      this.getAdvert(params['id']);
+    });
+  }
+  onBack(): void {
+    this.location.back();
+  }
 }

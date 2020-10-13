@@ -1,0 +1,8 @@
+<nz-page-header *ngIf="advert"
+class="site-page-header" 
+(nzBack)="onBack()" 
+nzBackIcon 
+[nzTitle]="advert.address.geoObject.name" 
+[nzSubtitle]="advert.created | date : 'shortDate' : '' : 'ru' ">
+</nz-page-header>
+<pre>{{ advert | json }}</pre>
