@@ -4,5 +4,21 @@ class="site-page-header"
 nzBackIcon 
 [nzTitle]="advert.address.geoObject.name" 
 [nzSubtitle]="advert.created | date : 'shortDate' : '' : 'ru' ">
+    <nz-page-header-tags>
+        <nz-tag nzColor="#55acee">
+            <span>{{advert.price.value | currency}}</span>
+        </nz-tag>
+    </nz-page-header-tags>
+    <nz-page-header-extra>
+        <ng-container *ngIf="isShowPhone; else phoneTpl" >
+            <p nz-typography nzCopyable [nzCopyText]="advert.contact.phone">{{ advert.contact.phone }}</p>
+        </ng-container>
+        <ng-template #phoneTpl>
+            <button nz-button (click)="onShowPhone()">
+                <i nz-icon nzType="phone" nzTheme="outline"></i>
+                показать
+            </button>
+        </ng-template>
+    </nz-page-header-extra>
 </nz-page-header>
 <pre>{{ advert | json }}</pre>

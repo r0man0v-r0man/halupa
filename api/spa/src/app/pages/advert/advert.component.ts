@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { Location } from '@angular/common';
+import { IAdvert } from 'src/app/models/advert.model';
 @Component({
   selector: 'app-advert',
   templateUrl: './advert.component.html',
@@ -12,7 +13,8 @@ import { Location } from '@angular/common';
   ]
 })
 export class AdvertComponent implements OnInit {
-  advert;
+  advert: IAdvert;
+  isShowPhone = false;
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService,
@@ -36,5 +38,8 @@ export class AdvertComponent implements OnInit {
   }
   onBack(): void {
     this.location.back();
+  }
+  onShowPhone(){
+    this.isShowPhone = !this.isShowPhone;
   }
 }
