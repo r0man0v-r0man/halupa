@@ -6,8 +6,7 @@ import { IAdvert } from 'src/app/models/advert.model';
 @Component({
   selector: 'app-advert',
   templateUrl: './advert.component.html',
-  styles: [
-  ],
+  styleUrls: ['./advert.component.less' ],
   providers:[
     AdvertService
   ]

@@ -892,3 +892,24 @@
 // Notification
 // ---
 @notification-bg: @component-background;
+
+// typography
+.ant-typography-copy{
+  color: @text-color;
+  &:hover,
+  &:focus{
+    color: @text-color-secondary;
+  }
+  &-success {
+    &,
+    &:hover,
+    &:focus {
+      color: @success-color;
+    }
+  }
+}
+// page header
+.ant-page-header-heading-extra {
+  display: flex;
+  align-items: center;
+}
