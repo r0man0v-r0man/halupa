@@ -9,6 +9,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PhoneOutline, CopyOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { ImageSliderModule } from 'src/app/modules/image-slider/image-slider.module';
 
 const icons: IconDefinition[] = [ PhoneOutline, CopyOutline ];
 @NgModule({
@@ -22,7 +23,8 @@ const icons: IconDefinition[] = [ PhoneOutline, CopyOutline ];
     NzTagModule,
     NzButtonModule,
     NzIconModule.forChild(icons),
-    NzTypographyModule
+    NzTypographyModule,
+    ImageSliderModule
   ],
   exports: [
     AdvertComponent

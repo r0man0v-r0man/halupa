@@ -11,7 +11,9 @@ const icons = [
   PlusOutline
 ]
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [
+    HeaderComponent
+  ],
   imports: [
     CommonModule,
     AppRoutingModule,

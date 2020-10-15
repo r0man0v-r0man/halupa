@@ -22,5 +22,17 @@ nzBackIcon
             </button>
         </ng-template>
     </nz-page-header-extra>
+    <nz-page-header-content>
+        <div class="content">
+            <div class="main">
+                <app-image-slider *ngIf="images" [images]="images"></app-image-slider>
+            </div>
+            <div class="extra">
+                <div>
+
+                </div>
+            </div>
+        </div>
+      </nz-page-header-content>
 </nz-page-header>
 <pre>{{ advert | json }}</pre>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { Location } from '@angular/common';
 import { IAdvert } from 'src/app/models/advert.model';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
 @Component({
   selector: 'app-advert',
   templateUrl: './advert.component.html',
@@ -14,6 +15,8 @@ import { IAdvert } from 'src/app/models/advert.model';
 export class AdvertComponent implements OnInit {
   advert: IAdvert;
   isShowPhone = false;
+  /** изображения для слайдера */
+  images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService,
@@ -25,7 +28,10 @@ export class AdvertComponent implements OnInit {
   }
   private getAdvert(id: number) {
     this.advertService.getAdvert(id).subscribe(response => {
-      this.advert = response;
+      if(response) {
+        this.advert = response;
+        this.initSlides(this.advert.images);
+      }
     });
   }
 
@@ -34,6 +40,20 @@ export class AdvertComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.getAdvert(params['id']);
     });
+  }
+  /** преобразование картинок в слайды */
+  private initSlides(images: NzUploadFile[]) {
+    const slides: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
+    images.forEach((image, index) => {
+      const img = {
+        url: image.linkProps.download,
+        alt: this.advert.address.geoObject.name,
+        isVisible: false,
+        id: index
+      };
+      slides.push(img);
+    });
+    this.images = [...slides];
   }
   onBack(): void {
     this.location.back();
