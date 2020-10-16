@@ -70,7 +70,10 @@ export class AdvertComponent implements OnInit {
       nzContent: YandexMapComponent,
       nzComponentParams: {
         advert: this.advert
-      }
+      },
+      nzFooter: [
+        
+      ]
     })
   }
 }
