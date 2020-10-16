@@ -4,6 +4,8 @@ import { AdvertService } from 'src/app/services/advert.service';
 import { Location } from '@angular/common';
 import { IAdvert } from 'src/app/models/advert.model';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { YandexMapComponent } from 'src/app/modules/yandex-map/yandex-map.component';
 @Component({
   selector: 'app-advert',
   templateUrl: './advert.component.html',
@@ -20,7 +22,8 @@ export class AdvertComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService,
-    private location: Location
+    private location: Location,
+    private _modalService: NzModalService
   ) { }
 
   ngOnInit(): void {
@@ -60,5 +63,14 @@ export class AdvertComponent implements OnInit {
   }
   onShowPhone(){
     this.isShowPhone = !this.isShowPhone;
+  }
+  onShowMap(){
+    const modal = this._modalService.create({
+      nzTitle: `${this.advert.address.geoObject.name}`,
+      nzContent: YandexMapComponent,
+      nzComponentParams: {
+        advert: this.advert
+      }
+    })
   }
 }

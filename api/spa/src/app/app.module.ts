@@ -11,6 +11,12 @@ import { FooterModule } from './modules/footer/footer.module';
 import { HeaderModule } from './modules/header/header.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularYandexMapsModule, IConfig } from 'angular8-yandex-maps';
+const mapConfig: IConfig = {
+  apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
+  lang: 'ru_RU',
+  coordorder: 'latlong'
+};
 
 registerLocaleData(ru);
 
@@ -21,6 +27,7 @@ registerLocaleData(ru);
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),//добавить state
+    AngularYandexMapsModule.forRoot(mapConfig),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
