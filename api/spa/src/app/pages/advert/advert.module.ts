@@ -6,12 +6,13 @@ import { AdvertComponent } from './advert.component';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { PhoneOutline, CopyOutline } from '@ant-design/icons-angular/icons';
+import { PhoneOutline, CopyOutline, EnvironmentOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { ImageSliderModule } from 'src/app/modules/image-slider/image-slider.module';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-const icons: IconDefinition[] = [ PhoneOutline, CopyOutline ];
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+const icons: IconDefinition[] = [ PhoneOutline, CopyOutline, EnvironmentOutline ];
 @NgModule({
   declarations: [
     AdvertComponent
@@ -25,7 +26,8 @@ const icons: IconDefinition[] = [ PhoneOutline, CopyOutline ];
     NzIconModule.forChild(icons),
     NzTypographyModule,
     ImageSliderModule,
-    NzDescriptionsModule
+    NzDescriptionsModule,
+    NzStatisticModule
   ],
   exports: [
     AdvertComponent
