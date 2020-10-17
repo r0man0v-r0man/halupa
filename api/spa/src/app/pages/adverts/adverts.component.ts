@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-adverts',
-  template: `
-    <p>
-      adverts works!
-    </p>
-  `,
+  templateUrl: './adverts.component.html',
   styles: [
   ]
 })

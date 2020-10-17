@@ -4,7 +4,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 import { Location } from '@angular/common';
 import { IAdvert } from 'src/app/models/advert.model';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { YandexMapComponent } from 'src/app/modules/yandex-map/yandex-map.component';
 @Component({
   selector: 'app-advert',
@@ -65,14 +65,17 @@ export class AdvertComponent implements OnInit {
     this.isShowPhone = !this.isShowPhone;
   }
   onShowMap(){
-    const modal = this._modalService.create({
+    const modal: NzModalRef = this._modalService.create({
       nzTitle: `${this.advert.address.geoObject.name}`,
       nzContent: YandexMapComponent,
       nzComponentParams: {
         advert: this.advert
       },
       nzFooter: [
-        
+        {
+          label: 'Закрыть',
+          onClick: () => modal.destroy()
+        }
       ]
     })
   }
