@@ -5,6 +5,7 @@ import { AdvertsComponent } from './adverts.component';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { AdvertCardModule } from 'src/app/modules/advert-card/advert-card.module';
 
 @NgModule({
   declarations: [AdvertsComponent],
@@ -13,7 +14,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     AdvertsRoutingModule,
     NzListModule,
     NzButtonModule,
-    NzGridModule
+    NzGridModule,
+    AdvertCardModule
   ],
   exports:[
     AdvertsComponent
