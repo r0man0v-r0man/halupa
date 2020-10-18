@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BLL.DTO;
 using BLL.Services.Interfaces;
@@ -43,6 +44,20 @@ namespace api.Controllers
             catch (Exception)
             {
                 return BadRequest();
+                throw;
+            }
+        }
+        [HttpGet("getAnyAdverts")]
+        public async Task<ActionResult<IEnumerable<AdvertDto>>> GetAnyAdverts(int pageNumber)
+        {
+            try
+            {
+                var result = await _advertService.GetAnyAdverts(pageNumber).ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
                 throw;
             }
         }

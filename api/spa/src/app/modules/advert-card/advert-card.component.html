@@ -5,7 +5,7 @@
     style="width: 100%;"
     nzHoverable="true"
     [nzCover]="coverTpl"
-    [nzTitle]="item.price | currency" >
+    [nzTitle]="item.price.value | currency" >
     <nz-card-meta 
         [nzTitle]="cardMetaTitleTpl" 
         [nzDescription]="descriptionTpl">

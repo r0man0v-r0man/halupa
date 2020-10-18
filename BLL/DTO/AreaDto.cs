@@ -14,9 +14,11 @@ namespace BLL.DTO
             Value = areaDto.Value
         };
 
-        public static implicit operator AreaDto(Area area) => new AreaDto
-        {
-            Value = area.Value
-        };
+        public static implicit operator AreaDto(Area area) => area != null
+                ? new AreaDto
+                {
+                    Value = area.Value
+                }
+                : new AreaDto();
     }
 }

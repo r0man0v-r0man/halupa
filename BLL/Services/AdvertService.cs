@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BLL.DTO;
 using BLL.Services.Interfaces;
@@ -40,6 +42,12 @@ namespace BLL.Services
                 AdvertDto advert = await _advertRepo.GetAdvertByIdAsync(id).ConfigureAwait(false);
                 return advert;
             }).ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<AdvertDto>> GetAnyAdverts(int pageNumber)
+        {
+            var adverts = await _advertRepo.GetAnyAdverts(pageNumber).ConfigureAwait(false);
+            return adverts.Select(advert => (AdvertDto)advert);
         }
     }
 }

@@ -14,9 +14,11 @@ namespace BLL.DTO
             Value = descriptionDto?.Value
         };
 
-        public static implicit operator DescriptionDto(Description description) => new DescriptionDto
-        {
-            Value = description?.Value
-        };
+        public static implicit operator DescriptionDto(Description description) => description != null
+                ? new DescriptionDto
+                {
+                    Value = description.Value
+                }
+                : new DescriptionDto();
     }
 }

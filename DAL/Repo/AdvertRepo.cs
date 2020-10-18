@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.Repo
@@ -68,5 +69,22 @@ namespace DAL.Repo
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<Advert>> GetAnyAdverts(int pageNumber)
+        {
+            using var context = _contextFactory.GetHalupaContext();
+            return await context.Adverts
+                .Include(prop => prop.Images)
+                .Include(prop => prop.Price)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive)
+                .OrderByDescending(prop => prop.Created)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+        private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
     }
 }

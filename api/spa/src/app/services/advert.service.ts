@@ -37,4 +37,17 @@ export class AdvertService {
   navigateToAdvert(item: IAdvert) {
     this.router.navigate(['adverts', item.id]);
   }
+  getAnyAdverts(pageNumber: number){
+    const params = this.setHttpParams(pageNumber);
+    return this.httpClient.get<IAdvert[]>(
+      `${this.baseUrl}${URLs.getAnyAdvertsURL}`,
+      { params: params });
+  }
+  /**
+   * установка HttpParams
+   * @param pageNumber Номер страницы
+   */
+  private setHttpParams(pageNumber: number) {
+    return new HttpParams().set('pageNumber', pageNumber.toString());
+  }
 }

@@ -39,11 +39,11 @@ namespace BLL.DTO
             IsActive = advert.IsActive,
             Address = advert.Address,
             Images = advert.Images.Select(item => (ImageDto) item).ToList(),
-            Price = advert.Price,
-            AppUserId = advert.AppUserId,
-            Area = advert.Area,
-            Contact = advert.Contact,
-            Description = advert.Description
+            Price = advert?.Price,
+            AppUserId = advert?.AppUserId,
+            Area = advert?.Area,
+            Contact = advert?.Contact,
+            Description = advert?.Description
         };
     }
 }
