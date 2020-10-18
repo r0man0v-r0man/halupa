@@ -34,4 +34,7 @@ export class AdvertService {
   private goToAdvert(response: number) {
     this.router.navigate(['adverts', response]);
   }
+  navigateToAdvert(item: IAdvert) {
+    this.router.navigate(['adverts', item.id]);
+  }
 }
