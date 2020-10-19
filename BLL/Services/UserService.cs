@@ -4,13 +4,18 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.DTO;
 using BLL.Services.Interfaces;
+using DAL.Repo.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace BLL.Services
 {
     public class UserService : IUserService
-
     {
+        private readonly IUserRepo _userRepo;
+        public UserService(IUserRepo userRepo)
+        {
+            _userRepo = userRepo;
+        }
         public Task<IdentityResult> CreateAsync(AppUserDto user, string password)
         {
             throw new NotImplementedException();
@@ -21,9 +26,11 @@ namespace BLL.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsValidateUserNameAsync(string userName)
+        public async Task<bool> IsValidateUserNameAsync(string userName)
         {
-            throw new NotImplementedException();
+            var result = await _userRepo.IsValidateUserNameAsync(userName)
+                .ConfigureAwait(false);
+            return result;
         }
 
         public Task<AppUserDto> GetUserInfo(string currentUserId)

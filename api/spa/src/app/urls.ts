@@ -5,5 +5,9 @@ export const URLs = {
     getAdvertURL: api + 'adverts/getAdvert',
     getAnyAdvertsURL: api + 'adverts/getAnyAdverts',
     addImageURL: api + 'images',
-    deleteImageURL: api + 'images'
+    deleteImageURL: api + 'images',
+
+    // user
+    isUserNameExistURL: api + 'accounts/isUserNameExist',
+    registerURL: api + 'accounts/register'
 }

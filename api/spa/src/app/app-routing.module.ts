@@ -51,6 +51,15 @@ const routes: Routes =
       }
     },
     {
+      path: 'register',
+      loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule),
+      data: {
+        title: 'Halupa.by - Регистрация',
+        description: 'Регистрация нового пользователя',
+        robots: 'noindex, nofollow'
+      }
+    },
+    {
       path: '**',
       redirectTo: '/not-found'
     }
