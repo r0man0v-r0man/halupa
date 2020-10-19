@@ -12,20 +12,20 @@ namespace BLL.Services.Interfaces
         /// <param name="user">AppUserDTO model</param>
         /// <param name="password">Password</param>
         /// <returns></returns>
-        Task<IdentityResult> CreateAsync(AppUserDto user, string password);
+        Task<IdentityResult> CreateAsync(UserDto user, string password);
         /// <summary>
         /// Login user
         /// </summary>
         /// <param name="user"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        Task<string> LoginAsync(AppUserDto user, string password);
+        Task<string> LoginAsync(UserDto user, string password);
         Task<bool> IsValidateUserNameAsync(string userName);
         /// <summary>
         /// Get user info
         /// </summary>
         /// <param name="currentUserId"></param>
         /// <returns></returns>
-        Task<AppUserDto> GetUserInfo(string currentUserId);
+        Task<UserDto> GetUserInfo(string currentUserId);
     }
 }

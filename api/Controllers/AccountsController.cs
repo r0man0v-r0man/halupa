@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.DTO;
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,25 @@ namespace api.Controllers
                 return BadRequest(e.Message);
                 throw;
             }
+        }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserDto user)
+        {
+            if (user == null) return BadRequest();
+            try
+            {
+                var result = await _userService.CreateAsync(user, user?.Password).ConfigureAwait(false);
+
+                if (result.Succeeded) return Ok(true);
+
+                return BadRequest(result.Errors.FirstOrDefault().Description);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

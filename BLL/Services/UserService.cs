@@ -16,12 +16,13 @@ namespace BLL.Services
         {
             _userRepo = userRepo;
         }
-        public Task<IdentityResult> CreateAsync(AppUserDto user, string password)
+        public async Task<IdentityResult> CreateAsync(UserDto user, string password)
         {
-            throw new NotImplementedException();
+            var result = await _userRepo.CreateAsync(user, password).ConfigureAwait(false);
+            return result;
         }
 
-        public Task<string> LoginAsync(AppUserDto user, string password)
+        public Task<string> LoginAsync(UserDto user, string password)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +34,7 @@ namespace BLL.Services
             return result;
         }
 
-        public Task<AppUserDto> GetUserInfo(string currentUserId)
+        public Task<UserDto> GetUserInfo(string currentUserId)
         {
             throw new NotImplementedException();
         }
