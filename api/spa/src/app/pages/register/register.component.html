@@ -4,12 +4,12 @@
       [formGroup]="form" (ngSubmit)="submitForm(form.value)">
         <nz-spin [nzSpinning]="isLoading">
             <div nz-row nzJustify="center">
-                <h1 nz-typography>Halupa.by</h1>
+                <h1 nz-typography>Регистрация</h1>
             </div>
             <nz-form-item>
               <nz-form-control nzHasFeedback nzValidatingTip="Проверка..." [nzErrorTip]="userErrorTpl">
-                <nz-input-group nzPrefixIcon="user">
-                  <input nz-input 
+                <nz-input-group  [nzPrefix]="prefixUserTpl">
+                  <input nz-input  nzBorderless
                   formControlName="userName" 
                   id="userName"
                   placeHolder="Имя пользователя"  
@@ -20,18 +20,20 @@
                     </ng-container>
                   </ng-template>
                 </nz-input-group>
+                <ng-template #prefixUserTpl><i nz-icon nzType="user" nzTheme="outline"></i></ng-template>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                          <nz-form-control>
-                           <nz-input-group nzPrefixIcon="lock">
-                             <input nz-input 
+                           <nz-input-group [nzPrefix]="prefixPasswordTpl">
+                             <input nz-input nzBorderless 
                              type="password"
                              formControlName="password" 
                              id="password" 
                              placeholder="Пароль"
                              />
                            </nz-input-group>
+                <ng-template #prefixPasswordTpl><i nz-icon nzType="lock" nzTheme="outline"></i></ng-template>
                          </nz-form-control>
             </nz-form-item>
             <nz-form-item>
