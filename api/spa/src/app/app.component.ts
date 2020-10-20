@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  
+
   constructor(
     private seoService: SeoService,
     private router: Router, 

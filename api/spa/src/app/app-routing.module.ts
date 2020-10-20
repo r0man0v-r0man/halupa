@@ -60,6 +60,15 @@ const routes: Routes =
       }
     },
     {
+      path: 'login',
+      loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
+      data: {
+        title: 'Halupa.by - Войти',
+        description: 'Войти на сайт',
+        robots: 'noindex, nofollow'
+      }
+    },
+    {
       path: '**',
       redirectTo: '/not-found'
     }
