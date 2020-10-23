@@ -45,10 +45,24 @@ namespace api.Controllers
             }
             catch (Exception)
             {
-
+                return BadRequest();
                 throw;
             }
             
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserDto user)
+        {
+            try
+            {
+                var loginUser = await _userService.LoginAsync(user, user?.Password).ConfigureAwait(false);
+                return CreatedAtAction(nameof(Login), new { access_token = loginUser });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+                throw;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IUser } from '../models/user.model';
 import { URLs } from '../urls';
@@ -43,6 +45,19 @@ export class AuthService {
   /** register new user */
   registerUser(user: IUser){
     return this._httpService.post<boolean>(URLs.registerURL, user, { headers: this.headers })
+  }
+  /** Is User Login */
+  isLogedIn(): Observable<boolean>{
+    return new Observable<boolean>(observer => {
+      const jwtHelper = new JwtHelperService();
+      let token = this._localStorage.getItem('access_token');
+      
+      if(!token) return observer.next(false);
+
+      const isExpired = jwtHelper.isTokenExpired(token);
+  
+      return observer.next(!isExpired);
+    })
   }
   /**
   * текущий пользователь

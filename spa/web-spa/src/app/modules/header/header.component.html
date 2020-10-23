@@ -12,3 +12,10 @@
 <button nz-button nzType="primary" nzShape="round" [routerLink]="[ '/add' ]">
     <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление
 </button>
+<ng-container *ngIf="isLogIn; then privateTpl else publicTpl"></ng-container>
+<ng-template #privateTpl>
+private
+</ng-template>
+<ng-template #publicTpl>
+public
+</ng-template>

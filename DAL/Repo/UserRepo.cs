@@ -55,8 +55,7 @@ namespace DAL.Repo
                 notBefore: DateTime.Now,
                 expires: DateTime.Now.AddDays(7),
                 signingCredentials);
-            var tokenJson = new JwtSecurityTokenHandler().WriteToken(token);
-            return tokenJson;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         public async Task<AppUser> FindByIdAsync(string currentUserId) => await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == currentUserId).ConfigureAwait(false);

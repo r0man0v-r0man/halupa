@@ -26,7 +26,4 @@ export class RegisterFormService {
       password:[null, [Validators.required]]
     })
   }
-  get isValid() {
-    return this.form.valid;
-  }
 }

@@ -22,17 +22,25 @@ namespace BLL.Services
             return result;
         }
 
-        public Task<string> LoginAsync(UserDto user, string password)
+        public async Task<string> LoginAsync(UserDto user, string password)
         {
-            throw new NotImplementedException();
+            //find user
+            var existUser = await _userRepo.FindByNameAsync(user?.UserName).ConfigureAwait(false);
+            //check pair user - password
+            var checkUserPassword = await _userRepo.CheckPasswordAsync(existUser, password).ConfigureAwait(false);
+            if (existUser != null && checkUserPassword == true)
+            {
+                //generates user claims
+                var claims = await _userRepo.GetClaims(existUser).ConfigureAwait(false);
+                //create JWT
+                return _userRepo.CreateToken(claims);
+            }
+            return null;
         }
 
-        public async Task<bool> IsValidateUserNameAsync(string userName)
-        {
-            var result = await _userRepo.IsValidateUserNameAsync(userName)
+        public async Task<bool> IsValidateUserNameAsync(string userName) =>
+            await _userRepo.IsValidateUserNameAsync(userName)
                 .ConfigureAwait(false);
-            return result;
-        }
 
         public Task<UserDto> GetUserInfo(string currentUserId)
         {

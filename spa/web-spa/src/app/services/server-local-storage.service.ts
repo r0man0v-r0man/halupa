@@ -13,4 +13,7 @@ export class ServerLocalStorageService {
   setItem(key: string, value: string){
     this.store[key] = value;
   }
+  removeItem(key: string){
+    delete this.store[key]
+  }
 }

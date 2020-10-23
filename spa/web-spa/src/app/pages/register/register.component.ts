@@ -14,7 +14,6 @@ import { RegisterFormService } from './services/register-form.service';
   ]
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
   isLoading: boolean = false;
   constructor(
     private _registerFormService: RegisterFormService,
@@ -27,9 +26,6 @@ export class RegisterComponent implements OnInit {
 
   get form() {
     return this._registerFormService.form;
-  }
-  get isValid() {
-    return this._registerFormService.isValid;
   }
   /** регистрация пользователя */
   submitForm(user: IUser){
