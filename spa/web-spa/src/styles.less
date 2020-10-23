@@ -1003,3 +1003,62 @@
 @image-preview-operation-disabled-color: fade(@image-preview-operation-color, 45%);
 
 /* You can add global styles to this file, and also import other style files */
+:host {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 60px auto 180px;
+  grid-template-areas: "header"
+                       "main"
+                       "footer";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+}
+header{
+  grid-area: header;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  background-color:#0277BD;
+  padding: 0 24px;
+  app-header{
+      flex-flow: row wrap;
+      display: flex;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      height: 100%;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 24px;
+  }
+}
+main{
+  grid-area: main;
+  padding: 0 24px;
+  background-color: #fff;
+  display: flex;
+  section{
+      width: 100%;
+      max-width: 960px;
+      margin: 24px auto;
+      padding: 24px;
+      display: grid;
+  }
+}
+
+footer{
+  color: #fff;
+  background-color: #01579B;
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  app-footer{
+      display: flex;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+  }
+}

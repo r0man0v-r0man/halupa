@@ -34,7 +34,7 @@ namespace api
                     config.Events = new JwtBearerEvents()
                     {
                         OnMessageReceived = context =>
-                        {//for using token via auery string parameters
+                        {//for using token via query string parameters
                             if (context.Request.Query.ContainsKey("access_token"))
                             {
                                 context.Token = context.Request.Query["access_token"];
@@ -54,10 +54,6 @@ namespace api
                 });
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
-            services.AddSpaStaticFiles(options =>
-            {
-                options.RootPath = "spa/dist/spa/browser";
-            });
             return services;
         }
     }

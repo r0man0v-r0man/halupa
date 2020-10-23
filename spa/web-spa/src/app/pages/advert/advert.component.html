@@ -1,0 +1,46 @@
+<nz-page-header *ngIf="advert"
+class="site-page-header" 
+(nzBack)="onBack()" 
+nzBackIcon 
+[nzTitle]="advert.address.geoObject.name" 
+[nzSubtitle]="advert.created | date : 'shortDate' : '' : 'ru' ">
+    <nz-page-header-tags>
+        <nz-tag nzColor="#55acee">
+            <span>{{advert.price.value | currency}}</span>
+        </nz-tag>
+    </nz-page-header-tags>
+    <nz-page-header-extra>
+        <ng-container *ngIf="isShowPhone; else phoneTpl" >
+            <p style="margin-bottom: 0;" nz-typography 
+            nzCopyable 
+            [nzCopyText]="advert.contact.phone">{{ advert.contact.phone }}</p>
+        </ng-container>
+        <ng-template #phoneTpl>
+            <button nz-button [nzBlock]="true" (click)="onShowPhone()">
+                <i nz-icon nzType="phone" nzTheme="outline"></i>
+                показать
+            </button>
+        </ng-template>
+        <button nz-button [nzBlock]="true" (click)="onShowMap()">
+            <i nz-icon nzType="environment" nzTheme="outline"></i>
+            Открыть карту
+        </button>
+    </nz-page-header-extra>
+    <nz-page-header-content>
+        <div class="content">
+            <div class="main">
+                <app-image-slider *ngIf="images" [images]="images"></app-image-slider>
+                <nz-descriptions class="advert-desciptions" [nzColumn]="2">
+                    <nz-descriptions-item nzTitle="Описание" [nzSpan]="2">
+                        {{ advert.description.value }}
+                    </nz-descriptions-item>
+                </nz-descriptions>
+            </div>
+            <div class="extra">
+                <div>
+                    <nz-statistic nzTitle="Площадь, кв.м.:" [nzValue]="advert.area.value" style="margin: 0 32px"></nz-statistic>
+                </div>
+            </div>
+        </div>
+      </nz-page-header-content>
+</nz-page-header>
