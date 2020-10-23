@@ -9,5 +9,6 @@ export const URLs = {
 
     // user
     isUserNameExistURL: api + 'accounts/isUserNameExist',
-    registerURL: api + 'accounts/register'
+    registerURL: api + 'accounts/register',
+    loginURL: api + 'accounts/login'
 }
