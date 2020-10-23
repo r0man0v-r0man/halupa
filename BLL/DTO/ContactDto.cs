@@ -13,10 +13,10 @@ namespace BLL.DTO
         };
 
         public static implicit operator Contact(ContactDto contactDto) => contactDto != null
-                ? new ContactDto
+                ? new Contact
                 {
                     Phone = contactDto?.Phone
                 }
-                : new ContactDto();
+                : new Contact();
     }
 }

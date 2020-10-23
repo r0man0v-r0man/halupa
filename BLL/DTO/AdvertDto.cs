@@ -21,7 +21,7 @@ namespace BLL.DTO
         public static implicit operator Advert(AdvertDto advertDto) => new Advert
         {
             Id = advertDto.Id,
-            AppUserId = advertDto.AppUserId,
+            AppUserId = advertDto?.AppUserId,
             IsActive = advertDto.IsActive,
             Address = advertDto.Address,
             Images = advertDto.Images.Select(item => (Image) item).ToList(),
