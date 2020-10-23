@@ -7,7 +7,7 @@ export class ServerLocalStorageService {
   store: {[key: string]: string} = {};
   constructor() { }
   
-  getitem(key: string): string | null{
+  getItem(key: string): string | null{
     return this.store[key];
   }
   setItem(key: string, value: string){
