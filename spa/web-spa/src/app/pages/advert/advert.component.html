@@ -16,12 +16,12 @@ nzBackIcon
             [nzCopyText]="advert.contact.phone">{{ advert.contact.phone }}</p>
         </ng-container>
         <ng-template #phoneTpl>
-            <button nz-button [nzBlock]="true" (click)="onShowPhone()">
+            <button nz-button  (click)="onShowPhone()">
                 <i nz-icon nzType="phone" nzTheme="outline"></i>
                 показать
             </button>
         </ng-template>
-        <button nz-button [nzBlock]="true" (click)="onShowMap()">
+        <button nz-button  (click)="onShowMap()">
             <i nz-icon nzType="environment" nzTheme="outline"></i>
             Открыть карту
         </button>

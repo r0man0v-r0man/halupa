@@ -15,13 +15,15 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { 
   PhoneOutline, 
   CopyOutline, 
-  EnvironmentOutline } from '@ant-design/icons-angular/icons';
+  EnvironmentOutline,
+  ArrowLeftOutline } from '@ant-design/icons-angular/icons';
 import { YandexMapModule } from 'src/app/modules/yandex-map/yandex-map.module';
 
 const icons: IconDefinition[] = [ 
   PhoneOutline, 
   CopyOutline, 
-  EnvironmentOutline 
+  EnvironmentOutline,
+  ArrowLeftOutline
 ];
 
 

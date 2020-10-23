@@ -1,0 +1,40 @@
+// vars
+@normal-color: #d9d9d9;
+@white: #fff;
+@active-color: #81D4FA;
+// styles
+div{
+    margin-right: auto;
+    .logo-brand{
+        font-size: 24px;
+        color: @white;
+        cursor: pointer;
+    }
+}
+ul{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    li{
+        line-height: 60px;
+        height: inherit;
+        padding: 0 20px 0;
+        color: @white;
+        &:last-child{
+            margin-right: 24px;
+        }
+        a{
+            color: @white;
+        }
+        a:hover, a:active{
+            color: @normal-color;
+        }
+    }
+    li:hover, li:active {
+        border-bottom: 2px solid @active-color;
+        cursor: pointer;
+    }
+}

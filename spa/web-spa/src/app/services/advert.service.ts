@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { IAdvert } from '../models/advert.model';
@@ -13,10 +13,8 @@ export class AdvertService {
   headers = new HttpHeaders().set('content-type', 'application/json');
   constructor(
     private httpClient: HttpClient,
-    private router: Router,
-    private injector: Injector
+    private router: Router
   ) { 
-    this.baseUrl = this.injector.get('BASE_URL');
   }
   addAdvert(advert: IAdvert){
     this.httpClient.post<number>(URLs.addAdvertURL, advert, {headers: this.headers })
@@ -28,7 +26,7 @@ export class AdvertService {
   getAdvert(id: number){
     let params = new HttpParams();
     params = params.append("id", id.toString());
-    return this.httpClient.get<IAdvert>(`${this.baseUrl}${URLs.getAdvertURL}`, { params : params});
+    return this.httpClient.get<IAdvert>(URLs.getAdvertURL, { params : params});
   }
 
   private goToAdvert(response: number) {
@@ -40,7 +38,7 @@ export class AdvertService {
   getAnyAdverts(pageNumber: number){
     const params = this.setHttpParams(pageNumber);
     return this.httpClient.get<IAdvert[]>(
-      `${this.baseUrl}${URLs.getAnyAdvertsURL}`,
+      URLs.getAnyAdvertsURL,
       { params: params });
   }
   /**
