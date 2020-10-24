@@ -9,7 +9,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
   UserOutline,
   LockOutline
@@ -33,10 +33,7 @@ const icons = [
     NzButtonModule,
     NzInputModule,
     NzTypographyModule,
-    NzIconModule
-  ],
-  providers:[
-    { provide: NZ_ICONS, useValue: icons }
+    NzIconModule.forChild(icons)
   ]
 })
 export class RegisterModule { }

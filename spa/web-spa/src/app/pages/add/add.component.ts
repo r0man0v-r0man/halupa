@@ -32,9 +32,6 @@ export class AddComponent implements OnInit {
   get form() {
     return this.addFormService.form;
   }
-  get isValid() {
-    return this.addFormService.isValid;
-  }
   ngOnInit(): void {
   }
   submitForm(){

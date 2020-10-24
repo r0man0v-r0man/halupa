@@ -5,10 +5,15 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
-  PlusOutline
+  PlusOutline,
+  LoginOutline,
+  UserOutline
 } from '@ant-design/icons-angular/icons';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 const icons = [
-  PlusOutline
+  PlusOutline,
+  LoginOutline,
+  UserOutline
 ]
 @NgModule({
   declarations: [
@@ -18,7 +23,8 @@ const icons = [
     CommonModule,
     AppRoutingModule,
     NzIconModule.forChild(icons),
-    NzButtonModule
+    NzButtonModule,
+    NzDividerModule
   ],
   exports:[
     HeaderComponent

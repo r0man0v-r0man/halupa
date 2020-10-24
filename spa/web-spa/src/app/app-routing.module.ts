@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
     title: 'Halupa.by - Кабинет',
     description: 'Кабинет пользователя',
     robots: 'noindex, nofollow'
-  }
+  },
+  canActivate: [AuthGuardService] 
 },
 {
   path: 'add',
@@ -47,7 +49,8 @@ const routes: Routes = [
     title: 'Halupa.by - Добавить объявление',
     description: 'Добавить объявление',
     robots: 'noindex, nofollow'
-  }
+  },
+  canActivate: [AuthGuardService] 
 },
 {
   path: 'register',

@@ -11,7 +11,7 @@ nzBackIcon
     </nz-page-header-tags>
     <nz-page-header-extra>
         <ng-container *ngIf="isShowPhone; else phoneTpl" >
-            <p style="margin-bottom: 0;" nz-typography 
+            <p style="margin-bottom: 0; display: inline-block;" nz-typography 
             nzCopyable 
             [nzCopyText]="advert.contact.phone">{{ advert.contact.phone }}</p>
         </ng-container>

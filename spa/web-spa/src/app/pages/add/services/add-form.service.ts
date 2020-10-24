@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable()
 export class AddFormService {
   form: FormGroup;
   
   constructor(
-    private fb: FormBuilder
+    private _fb: FormBuilder,
+    private _authService: AuthService
   ) {
     this.initForm();
    }
   initForm() {
-    this.form = this.fb.group({
+    this.form = this._fb.group({
+      appUserId: [ this._authService.currentUser.sub, [Validators.required]],
       isActive:[true, [Validators.required]],
       address: [ '', [Validators.required]],
       images: [ null, [Validators.required]],
-      price: this.fb.group({
+      price: this._fb.group({
         value: [ 15000, [Validators.required]]
       }),
-      description: this.fb.group({
+      description: this._fb.group({
         value: [ '' , [Validators.required]]
       }),
-      area: this.fb.group({
+      area: this._fb.group({
         value: [ 70, [Validators.required]]
       }),
-      contact: this.fb.group({
+      contact: this._fb.group({
         phone: [ '', [Validators.required]]
       })
     })
-  }
-  get isValid() {
-    return this.form.valid;
   }
 }

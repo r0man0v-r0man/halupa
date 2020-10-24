@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,7 +16,8 @@ export class AuthService {
 
   constructor(
     private _httpService: HttpClient,
-    private _localStorage: LocalStorageService
+    private _localStorage: LocalStorageService,
+    private _router: Router
   ) { }
 
   /**login user */
@@ -37,6 +39,7 @@ export class AuthService {
   /**logout user */
   logOut(){
     this._localStorage.removeItem("access_token");
+    this._router.navigate(['/login']);
   }
   /**check the existing username */
   IsUserNameExist(userName: string){

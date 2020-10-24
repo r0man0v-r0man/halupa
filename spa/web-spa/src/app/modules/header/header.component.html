@@ -5,17 +5,19 @@
     <li >
         <a [routerLink]="[ '/adverts' ]">Объявления</a>
     </li>
-    <!-- <li>
-        <a [routerLink]="[ '/cabinet' ]">Кабинет</a>
-    </li> -->
 </ul>
 <button nz-button nzType="primary" nzShape="round" [routerLink]="[ '/add' ]">
     <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление
 </button>
-<ng-container *ngIf="isLogIn; then privateTpl else publicTpl"></ng-container>
+<nz-divider nzType="vertical"></nz-divider>
+<ng-container *ngIf="_authService.isLogedIn() | async; then privateTpl else publicTpl"></ng-container>
 <ng-template #privateTpl>
-private
+    <button nz-button nzType="primary" nzShape="circle" [routerLink]="[ '/cabinet' ]" >
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+    </button>
 </ng-template>
 <ng-template #publicTpl>
-public
+    <button nz-button nzType="primary" nzShape="circle" [routerLink]="[ '/login' ]">
+        <i nz-icon nzType="login" nzTheme="outline"></i>
+    </button>
 </ng-template>

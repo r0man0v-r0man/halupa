@@ -63,6 +63,9 @@ export class AdvertComponent implements OnInit {
   }
   onShowPhone(){
     this.isShowPhone = !this.isShowPhone;
+    setTimeout(() => {
+      this.isShowPhone = !this.isShowPhone;
+    }, 10000);
   }
   onShowMap(){
     const modal: NzModalRef = this._modalService.create({

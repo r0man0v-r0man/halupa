@@ -12,6 +12,7 @@ import { HeaderModule } from './modules/header/header.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularYandexMapsModule, IConfig } from 'angular8-yandex-maps';
+import { AuthGuardService } from './services/auth-guard.service';
 const mapConfig: IConfig = {
   apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
   lang: 'ru_RU',
@@ -26,7 +27,7 @@ registerLocaleData(ru);
     AppComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),//добавить state
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AngularYandexMapsModule.forRoot(mapConfig),
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -37,6 +38,7 @@ registerLocaleData(ru);
   ],
   providers: [
     Title,
+    AuthGuardService,
     { 
       provide: NZ_I18N, useValue: ru_RU 
     }
