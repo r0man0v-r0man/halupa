@@ -1,0 +1,12 @@
+**/bin
+**/obj
+bin/
+obj/
+*/node_modules
+.git
+*Dockerfile
+**docker-compose
+*node_modules
+**/node_modules
+spa
+spa/
