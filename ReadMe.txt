@@ -1,8 +1,8 @@
 docker
 docker build -t romanovdocker/halupa-api . --no-cache 
 docker build -t romanovdocker/halupa-spa . --no-cache
-docker run --rm -p -d 5000:5000/tcp romanovdocker/halupa-api:latest --name api
-docker run --rm -p -d 4000:80/tcp   romanovdocker/halupa-spa:latest --name spa
+docker run --rm -d -p  5000:5000/tcp romanovdocker/halupa-api:latest --name api
+docker run --rm -d -p 4000:80/tcp   romanovdocker/halupa-spa:latest --name spa
 
 dotnet ef:
 dotnet ef database update -p dal -s api
