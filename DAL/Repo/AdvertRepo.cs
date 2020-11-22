@@ -50,10 +50,10 @@ namespace DAL.Repo
                 .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
                 .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .Include(prop => prop.Images)
-                .Include(prop => prop.Price)
-                .Include(prop => prop.Contact)
+                .Include(prop => prop.Prices)
+                .Include(prop => prop.Contacts)
                 .Include(prop => prop.Description)
-                .Include(prop => prop.Area)
+                .Include(prop => prop.Areas)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(prop => prop.Id == id)
                 .ConfigureAwait(false);
@@ -75,7 +75,7 @@ namespace DAL.Repo
             using var context = _contextFactory.GetHalupaContext();
             return await context.Adverts
                 .Include(prop => prop.Images)
-                .Include(prop => prop.Price)
+                .Include(prop => prop.Prices)
                 .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)

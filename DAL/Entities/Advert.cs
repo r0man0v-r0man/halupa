@@ -13,9 +13,9 @@ namespace DAL.Entities
         public bool IsActive { get; set; }
         public YandexAddress Address { get; set; }
         public List<Image> Images { get; set; }
-        public Price Price { get; set; }
+        public List<Price> Prices { get; set; }
         public Description Description { get; set; }
-        public Area Area { get; set; }
-        public Contact Contact { get; set; }
+        public List<Area> Areas { get; set; }
+        public List<Contact> Contacts { get; set; }
     }
 }

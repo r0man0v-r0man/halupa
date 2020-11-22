@@ -13,10 +13,10 @@ namespace BLL.DTO
         public bool IsActive { get; set; }
         public YandexAddressDto Address { get; set; }
         public List<ImageDto> Images { get; set; }
-        public PriceDto Price { get; set; }
+        public List<PriceDto> Prices { get; set; }
         public DescriptionDto Description { get; set; }
-        public AreaDto Area { get; set; }
-        public ContactDto Contact { get; set; }
+        public List<AreaDto> Areas { get; set; }
+        public List<ContactDto> Contacts { get; set; }
 
         public static implicit operator Advert(AdvertDto advertDto) => new Advert
         {
@@ -25,10 +25,10 @@ namespace BLL.DTO
             IsActive = advertDto.IsActive,
             Address = advertDto.Address,
             Images = advertDto.Images.Select(item => (Image) item).ToList(),
-            Price = advertDto.Price,
+            Prices = advertDto.Prices.Select(item => (Price) item).ToList(),
             Description = advertDto.Description,
-            Area = advertDto.Area,
-            Contact = advertDto.Contact
+            Areas = advertDto.Areas.Select(item => (Area)item).ToList(),
+            Contacts = advertDto.Contacts.Select(item => (Contact)item).ToList()
         };
 
         public static implicit operator AdvertDto(Advert advert) => new AdvertDto
@@ -39,10 +39,10 @@ namespace BLL.DTO
             IsActive = advert.IsActive,
             Address = advert.Address,
             Images = advert.Images.Select(item => (ImageDto) item).ToList(),
-            Price = advert?.Price,
+            Prices = advert?.Prices.Select(item => (PriceDto)item).ToList(),
             AppUserId = advert?.AppUserId,
-            Area = advert?.Area,
-            Contact = advert?.Contact,
+            Areas = advert?.Areas.Select(item => (AreaDto)item).ToList(),
+            Contacts = advert?.Contacts.Select(item => (ContactDto)item).ToList(),
             Description = advert?.Description
         };
     }

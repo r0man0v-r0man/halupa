@@ -36,13 +36,11 @@ namespace api
             if (!env.IsDevelopment())
             {
                 app.UseCors(options => {
-                    options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    options.WithOrigins("https://halupa.by").AllowAnyHeader().AllowAnyMethod();
                 });
             }
             app.UseRouting();
             app.UseHsts();
-            app.UseStaticFiles();
-            //app.UseSpaStaticFiles();
             //who are you?
             app.UseAuthentication();
 

@@ -10,23 +10,23 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(HalupaContext))]
-    [Migration("20201011171845_first")]
+    [Migration("20201115135245_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.8")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .UseIdentityByDefaultColumns()
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("DAL.Entities.Address.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Country_code")
                         .HasColumnType("text");
@@ -47,7 +47,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<int>("EnvelopeId")
                         .HasColumnType("integer");
@@ -64,7 +64,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("integer");
@@ -87,7 +87,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("LowerCorner")
                         .HasColumnType("text");
@@ -105,7 +105,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<int>("BoundedById")
                         .HasColumnType("integer");
@@ -138,7 +138,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<int>("AddressId")
                         .HasColumnType("integer");
@@ -164,7 +164,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<int>("GeocoderMetaDataId")
                         .HasColumnType("integer");
@@ -181,7 +181,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Pos")
                         .HasColumnType("text");
@@ -196,7 +196,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<int>("GeoObjectId")
                         .HasColumnType("integer");
@@ -213,19 +213,13 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("integer");
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("text");
-
-                    b.Property<int?>("AreaId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("ContactId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
@@ -239,22 +233,13 @@ namespace DAL.Migrations
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("PriceId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("AreaId");
-
-                    b.HasIndex("ContactId");
-
                     b.HasIndex("DescriptionId");
-
-                    b.HasIndex("PriceId");
 
                     b.ToTable("Adverts");
                 });
@@ -272,8 +257,8 @@ namespace DAL.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
@@ -285,12 +270,12 @@ namespace DAL.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
@@ -308,17 +293,17 @@ namespace DAL.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -328,12 +313,20 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int?>("AdvertId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Kind")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Value")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdvertId");
 
                     b.ToTable("Area");
                 });
@@ -343,12 +336,20 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
-                    b.Property<string>("Phone")
+                    b.Property<int?>("AdvertId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Kind")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Value")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdvertId");
 
                     b.ToTable("Contact");
                 });
@@ -358,7 +359,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
@@ -400,7 +401,10 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int?>("AdvertId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Currency")
                         .HasColumnType("integer");
@@ -409,6 +413,8 @@ namespace DAL.Migrations
                         .HasColumnType("money");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdvertId");
 
                     b.ToTable("Price");
                 });
@@ -423,18 +429,18 @@ namespace DAL.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -444,7 +450,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -468,7 +474,7 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -550,6 +556,8 @@ namespace DAL.Migrations
                         .HasForeignKey("EnvelopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Envelope");
                 });
 
             modelBuilder.Entity("DAL.Entities.Address.Component", b =>
@@ -578,6 +586,12 @@ namespace DAL.Migrations
                         .HasForeignKey("PointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("BoundedBy");
+
+                    b.Navigation("MetaDataProperty");
+
+                    b.Navigation("Point");
                 });
 
             modelBuilder.Entity("DAL.Entities.Address.GeocoderMetaData", b =>
@@ -587,6 +601,8 @@ namespace DAL.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("DAL.Entities.Address.MetaDataProperty", b =>
@@ -596,6 +612,8 @@ namespace DAL.Migrations
                         .HasForeignKey("GeocoderMetaDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GeocoderMetaData");
                 });
 
             modelBuilder.Entity("DAL.Entities.Address.YandexAddress", b =>
@@ -605,6 +623,8 @@ namespace DAL.Migrations
                         .HasForeignKey("GeoObjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GeoObject");
                 });
 
             modelBuilder.Entity("DAL.Entities.Advert", b =>
@@ -617,27 +637,42 @@ namespace DAL.Migrations
                         .WithMany("Adverts")
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("DAL.Entities.Area", "Area")
-                        .WithMany()
-                        .HasForeignKey("AreaId");
-
-                    b.HasOne("DAL.Entities.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId");
-
                     b.HasOne("DAL.Entities.Description", "Description")
                         .WithMany()
                         .HasForeignKey("DescriptionId");
 
-                    b.HasOne("DAL.Entities.Price", "Price")
-                        .WithMany()
-                        .HasForeignKey("PriceId");
+                    b.Navigation("Address");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Description");
+                });
+
+            modelBuilder.Entity("DAL.Entities.Area", b =>
+                {
+                    b.HasOne("DAL.Entities.Advert", null)
+                        .WithMany("Areas")
+                        .HasForeignKey("AdvertId");
+                });
+
+            modelBuilder.Entity("DAL.Entities.Contact", b =>
+                {
+                    b.HasOne("DAL.Entities.Advert", null)
+                        .WithMany("Contacts")
+                        .HasForeignKey("AdvertId");
                 });
 
             modelBuilder.Entity("DAL.Entities.Image", b =>
                 {
                     b.HasOne("DAL.Entities.Advert", null)
                         .WithMany("Images")
+                        .HasForeignKey("AdvertId");
+                });
+
+            modelBuilder.Entity("DAL.Entities.Price", b =>
+                {
+                    b.HasOne("DAL.Entities.Advert", null)
+                        .WithMany("Prices")
                         .HasForeignKey("AdvertId");
                 });
 
@@ -690,6 +725,27 @@ namespace DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DAL.Entities.Address.Address", b =>
+                {
+                    b.Navigation("Components");
+                });
+
+            modelBuilder.Entity("DAL.Entities.Advert", b =>
+                {
+                    b.Navigation("Areas");
+
+                    b.Navigation("Contacts");
+
+                    b.Navigation("Images");
+
+                    b.Navigation("Prices");
+                });
+
+            modelBuilder.Entity("DAL.Entities.AppUser", b =>
+                {
+                    b.Navigation("Adverts");
                 });
 #pragma warning restore 612, 618
         }
