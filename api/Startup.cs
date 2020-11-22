@@ -2,6 +2,7 @@ using BLL;
 using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,11 +23,17 @@ namespace api
             services.AddApiServices(Configuration);
             services.AddBllServices();
             services.AddDalServices(Configuration);
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseForwardedHeaders();
+
             if (env.IsDevelopment()) { 
                 app.UseDeveloperExceptionPage();
                 app.UseCors(options => {
@@ -40,7 +47,7 @@ namespace api
                 });
             }
             app.UseRouting();
-            app.UseHsts();
+
             //who are you?
             app.UseAuthentication();
 

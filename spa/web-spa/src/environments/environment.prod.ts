@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  webApi: 'https://localhost:5000/api/'
+  webApi: 'https://halupa.by/api/'
 };
