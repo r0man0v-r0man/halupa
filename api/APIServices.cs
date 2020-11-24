@@ -54,8 +54,9 @@ namespace api
                         NameClaimType = JwtRegisteredClaimNames.UniqueName
                     };
                 });
-            services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
+
+            services.AddControllers().AddNewtonsoftJson();
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders =

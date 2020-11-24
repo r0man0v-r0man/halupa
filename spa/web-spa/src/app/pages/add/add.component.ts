@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
+import { CurrencyType } from 'src/app/models/price.model';
 import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { AddFormService } from './services/add-form.service';
@@ -18,6 +19,7 @@ import { GeocoderService } from './services/geocoder.service';
   ]
 })
 export class AddComponent implements OnInit {
+  limitOfPricesArray = Object.keys(CurrencyType).map(key => CurrencyType[key]).filter(x => !(parseInt(x) >= 0)).length - 1;
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
@@ -74,7 +76,7 @@ export class AddComponent implements OnInit {
   private setFormControlValue(formControlName: string, value: any) {
     this.form.controls[formControlName].setValue(value);
   }
-  formatterDollar = (value: number) => `$ ${value}`;
-  parserDollar = (value: string) => value.replace('$ ', '');
-  
+  onAddPrice(index: number){
+    this.addFormService.addPriceField(index);
+  }
 }

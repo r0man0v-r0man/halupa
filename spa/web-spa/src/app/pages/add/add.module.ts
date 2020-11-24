@@ -13,11 +13,14 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import {
   UploadOutline,
-  DeleteOutline
+  DeleteOutline,
+  PlusOutline
 } from '@ant-design/icons-angular/icons';
+import { PriceInputModule } from 'src/app/modules/price-input/price-input.module';
 const icons = [
   UploadOutline,
-  DeleteOutline
+  DeleteOutline,
+  PlusOutline
 ]
 @NgModule({
   declarations: [AddComponent],
@@ -33,7 +36,8 @@ const icons = [
     NzIconModule.forChild(icons),
     NzInputModule,
     NzUploadModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    PriceInputModule
   ],
   exports:[
     AddComponent
