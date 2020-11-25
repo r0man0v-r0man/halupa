@@ -76,7 +76,7 @@ export class AddComponent implements OnInit {
   private setFormControlValue(formControlName: string, value: any) {
     this.form.controls[formControlName].setValue(value);
   }
-  onAddPrice(index: number){
-    this.addFormService.addPriceField(index);
+  onAddPrice(index: number, e: MouseEvent){
+    this.addFormService.addPriceField(index, e);
   }
 }

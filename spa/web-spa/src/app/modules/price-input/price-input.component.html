@@ -1,6 +1,7 @@
 <nz-input-group 
 [nzAddOnBefore]="addOnBeforeTemplate">
     <nz-input-number
+     [nzDisabled]="price.disabled"
     [(ngModel)]="price.value"
     [nzMin]="1"
     [nzMax]="99999999"
@@ -9,6 +10,7 @@
 </nz-input-group>
 <ng-template #addOnBeforeTemplate>
     <nz-select 
+     [nzDisabled]="price.disabled"
     [(ngModel)]="price.currency">
         <nz-option
         *ngFor="let currency of listOfCurrencies"

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CurrencyType, IPrice } from 'src/app/models/price.model';
+import { CurrencyType, IPrice, IPriceView } from 'src/app/models/price.model';
 
 @Component({
   selector: 'app-price-input',
@@ -7,7 +7,7 @@ import { CurrencyType, IPrice } from 'src/app/models/price.model';
   styleUrls: ['./price-input.component.less']
 })
 export class PriceInputComponent implements OnInit {
-  @Input() price: IPrice;
+  @Input() price: IPriceView;
   listOfCurrencies: Array<{ label: string; value: number}> = [];
   constructor() { }
 

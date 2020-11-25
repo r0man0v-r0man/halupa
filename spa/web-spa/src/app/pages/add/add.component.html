@@ -62,14 +62,13 @@
         *ngIf="(form.controls['prices']['controls'].length - 1) == i">
             <a 
             *ngIf="i < limitOfPricesArray"
-            (click)="onAddPrice(i)"
+            (click)="onAddPrice(i, $event)"
             nzBlock="true"
             nz-button 
             nzType="link"><i nz-icon nzType="plus"></i>
             </a>
         </nz-form-label>
-        <nz-form-control 
-        
+        <nz-form-control
         [nzSpan]="17" 
         [nzOffset]="i == 0 || (form.controls['prices']['controls'].length - 1) == i ? '0':'7'">
             <app-price-input
