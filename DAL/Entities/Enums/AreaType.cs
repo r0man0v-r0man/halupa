@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace DAL.Entities.Enums
 {
     public enum AreaType
-    {
-        HOUSE,
+    {   
+        HOUSEFLAT, // house or flat
         SECTOR
     }
 }

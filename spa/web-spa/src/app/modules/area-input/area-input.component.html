@@ -1,7 +1,7 @@
 <nz-input-group 
 [nzAddOnBefore]="addOnBeforeTemplate">
     <nz-input-number
-    [(ngModel)]="price.value"
+    [(ngModel)]="area.value"
     [nzMin]="1"
     [nzMax]="99999999"
     [nzStep]="100"
@@ -9,12 +9,11 @@
 </nz-input-group>
 <ng-template #addOnBeforeTemplate>
     <nz-select 
-    [(ngModel)]="price.currency">
+    [(ngModel)]="area.kind">
         <nz-option
-        *ngFor="let currency of listOfCurrencies"
-        [nzLabel]="currency.label"
-        [nzValue]="currency.value">
+        *ngFor="let area of listOfAreas"
+        [nzLabel]="area.label"
+        [nzValue]="area.value">
         </nz-option>
     </nz-select>
 </ng-template>
-  

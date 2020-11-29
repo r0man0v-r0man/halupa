@@ -37,6 +37,9 @@ export class AddComponent implements OnInit {
   get isDisabledAddPriceButton() {
     return this.addFormService.isDisabledAddPriceButton;
   }
+  get disabledAddAreaFieldButton() {
+    return this.addFormService.disabledAddAreaFieldButton;
+  }
   ngOnInit(): void {
   }
   submitForm(){
@@ -84,5 +87,11 @@ export class AddComponent implements OnInit {
   }
   onRemovePrice(index: number){
     this.addFormService.removePriceField(index);
+  }
+  onAddArea(){
+    this.addFormService.addAreaField();
+  }
+  onRemoveArea(index: number){
+    this.addFormService.removeAreaField(index);
   }
 }

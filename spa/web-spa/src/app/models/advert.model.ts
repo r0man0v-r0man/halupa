@@ -1,6 +1,6 @@
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { IAddress } from './address.model';
-import { IContacts } from './contacts.model';
+import { IContact } from './contacts.model';
 import { IDescription } from './description.model';
 import { IPrice } from './price.model';
 
@@ -12,5 +12,5 @@ export interface IAdvert {
     images: NzUploadFile[];
     price: IPrice,
     description: IDescription,
-    contact: IContacts
+    contact: IContact
 }

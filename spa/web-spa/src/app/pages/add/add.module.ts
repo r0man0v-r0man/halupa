@@ -18,6 +18,8 @@ import {
   MinusOutline
 } from '@ant-design/icons-angular/icons';
 import { PriceInputModule } from 'src/app/modules/price-input/price-input.module';
+import { AreaInputModule } from 'src/app/modules/area-input/area-input.module';
+import { ContactInputModule } from 'src/app/modules/contact-input/contact-input.module';
 const icons = [
   UploadOutline,
   DeleteOutline,
@@ -39,7 +41,9 @@ const icons = [
     NzInputModule,
     NzUploadModule,
     NzInputNumberModule,
-    PriceInputModule
+    PriceInputModule,
+    AreaInputModule,
+    ContactInputModule
   ],
   exports:[
     AddComponent
