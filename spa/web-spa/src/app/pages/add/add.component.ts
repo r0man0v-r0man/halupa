@@ -34,6 +34,9 @@ export class AddComponent implements OnInit {
   get form() {
     return this.addFormService.form;
   }
+  get isDisabledAddPriceButton() {
+    return this.addFormService.isDisabledAddPriceButton;
+  }
   ngOnInit(): void {
   }
   submitForm(){
@@ -76,7 +79,10 @@ export class AddComponent implements OnInit {
   private setFormControlValue(formControlName: string, value: any) {
     this.form.controls[formControlName].setValue(value);
   }
-  onAddPrice(index: number, e: MouseEvent){
-    this.addFormService.addPriceField(index, e);
+  onAddPrice(){
+    this.addFormService.addPriceField();
+  }
+  onRemovePrice(index: number){
+    this.addFormService.removePriceField(index);
   }
 }

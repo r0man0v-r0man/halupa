@@ -1,38 +1,40 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CurrencyType, IPrice, IPriceView } from 'src/app/models/price.model';
+import { CurrencyType, IPrice } from 'src/app/models/price.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable()
 export class AddFormService {
   form: FormGroup;
   priceLimitLength = Object.keys(CurrencyType).map(key => CurrencyType[key]).filter(x => !(parseInt(x) >= 0)).length - 1;
-  listOfPrice: Array<IPriceView> = [];
+  listOfPrice: Array<IPrice> = [];
   listOfPriceControl: FormControl[] = [];
+  isDisabledAddPriceButton = false;
   constructor(
     private _fb: FormBuilder,
     private _authService: AuthService) {
     this.initForm();
   }
-  
-  addPriceField(index?: number, e?: MouseEvent){
-    if(e){
-      this.listOfPrice[index].disabled = false;  
+  removePriceField(index: number) {
+    if(index > 0) {
+      this.isDisabledAddPriceButton = false;
+      this.listOfPrice.splice(index, 1);
+      this.updatePriceFormArray();
     }
-    this.listOfPrice.push(this.getDefaultPrice(index));
-    // у последнего элемента установить disabled false
-    const controls = this.listOfPrice.map((i)=>new FormControl(i,Validators.required))
-    this.listOfPriceControl = [ ...controls ];
-    this.form.setControl('prices', this._fb.array(this.listOfPriceControl))
   }
-  private getDefaultPrice(index?: number){
-    if(index){
-      const price = { currency:CurrencyType.RUB, value: 40000, disabled: true };
-      return price;
-    } else {
-      const price = { currency:CurrencyType.BYN, value: 40000, disabled: false };
-      return price;
-    }
+  
+  addPriceField(){
+    if(!this.isDisabledAddPriceButton) this.listOfPrice.push(this.getDefaultPrice());
+    if(this.listOfPrice.length - 1 == this.priceLimitLength) this.isDisabledAddPriceButton = true;
+    this.updatePriceFormArray();
+  }
+  private updatePriceFormArray() {
+    const controls = this.listOfPrice.map((i) => new FormControl(i, Validators.required));
+    this.listOfPriceControl = [...controls];
+    this.form.setControl('prices', this._fb.array(this.listOfPriceControl));
+  }
+  private getDefaultPrice(){
+    return { currency:CurrencyType.BYN, value: 40000};
   }
   initForm() {
     this.form = this._fb.group({
@@ -52,6 +54,6 @@ export class AddFormService {
       })
     })
     this.addPriceField();
-    this.addPriceField(1);
   }
+
 }

@@ -59,23 +59,30 @@
         <nz-form-label 
         [nzSpan]="7" 
         nzNoColon="true" 
-        *ngIf="(form.controls['prices']['controls'].length - 1) == i">
-            <a 
-            *ngIf="i < limitOfPricesArray"
-            (click)="onAddPrice(i, $event)"
-            nzBlock="true"
-            nz-button 
-            nzType="link"><i nz-icon nzType="plus"></i>
-            </a>
+        *ngIf="i > 0">
+            
         </nz-form-label>
-        <nz-form-control
+        <nz-form-control 
         [nzSpan]="17" 
-        [nzOffset]="i == 0 || (form.controls['prices']['controls'].length - 1) == i ? '0':'7'">
-            <app-price-input
+        [nzOffset]="i >= 0 ? '0':'7'">
+            <app-price-input 
             [price]="form.controls['prices']['controls'][i].value"
             ></app-price-input>
+            <a *ngIf="i !== 0 "
+            nz-button 
+            (click)="onRemovePrice(i)"
+            nzType="link" nzDanger><i nz-icon nzType="delete"></i>
+            </a>
         </nz-form-control>
-        
+    </nz-form-item>
+    <nz-form-item >
+        <nz-form-control [nzOffset]="7" >
+            <a  [disabled]="isDisabledAddPriceButton"
+                (click)="onAddPrice()"
+                nz-button 
+                nzType="dashed"><i nz-icon nzType="plus"></i>Добавить цену
+            </a>
+        </nz-form-control>
     </nz-form-item>
     <nz-form-item [formGroup]="form.get('area')">
         <nz-form-label [nzSpan]="7" nzRequired>Площадь, кв.м.</nz-form-label>
