@@ -27,5 +27,7 @@ namespace BLL.Services.Interfaces
         /// <param name="currentUserId"></param>
         /// <returns></returns>
         Task<UserDto> GetUserInfo(string currentUserId);
+
+        Task<bool> IsUserExist(string userId);
     }
 }

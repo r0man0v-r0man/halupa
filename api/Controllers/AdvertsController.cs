@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BLL.DTO;
+﻿using BLL.DTO;
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace api.Controllers
 {
@@ -12,9 +12,11 @@ namespace api.Controllers
     public class AdvertsController : ControllerBase
     {
         private readonly IAdvertService _advertService;
-        public AdvertsController(IAdvertService advertService)
+        private readonly IUserService _userService;
+        public AdvertsController(IAdvertService advertService, IUserService userService)
         {
             _advertService = advertService;
+            _userService = userService;
         }
 
         [HttpPost("add")]
@@ -23,6 +25,9 @@ namespace api.Controllers
             if (advert == null) return BadRequest();
             try
             {
+                var isUserExist = await _userService.IsUserExist(advert.AppUserId).ConfigureAwait(false);
+                if (!isUserExist) return BadRequest();
+
                 var result = await _advertService.AddAsync(advert).ConfigureAwait(false);
                 return Ok(result);
             }

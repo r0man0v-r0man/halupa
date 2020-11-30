@@ -1,9 +1,9 @@
 <nz-input-group 
 [nzAddOnBefore]="addOnBeforeTemplate">
     <input 
-    [(ngModel)="contact.value"
+    [(ngModel)]="contact.value"
     nz-input 
-    [placeholder]="80295353535"/>
+    [placeholder]="contact.kind == 0? '80295357164':'ваша почта'"/>
 </nz-input-group>
 <ng-template #addOnBeforeTemplate>
     <nz-select 

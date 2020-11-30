@@ -40,6 +40,9 @@ export class AddComponent implements OnInit {
   get disabledAddAreaFieldButton() {
     return this.addFormService.disabledAddAreaFieldButton;
   }
+  get disabledAddContactFieldButton() {
+    return this.addFormService.disabledAddContactFieldButton;
+  }
   ngOnInit(): void {
   }
   submitForm(){
@@ -93,5 +96,11 @@ export class AddComponent implements OnInit {
   }
   onRemoveArea(index: number){
     this.addFormService.removeAreaField(index);
+  }
+  onAddContact(){
+    this.addFormService.addContactField();
+  }
+  onRemoveContact(index: number){
+    this.addFormService.removeContactField(index);
   }
 }

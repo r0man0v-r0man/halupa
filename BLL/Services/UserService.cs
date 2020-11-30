@@ -42,9 +42,18 @@ namespace BLL.Services
             await _userRepo.IsValidateUserNameAsync(userName)
                 .ConfigureAwait(false);
 
+
         public Task<UserDto> GetUserInfo(string currentUserId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsUserExist(string userId)
+        {
+            if (string.IsNullOrEmpty(userId)) return false;
+            
+            var user = await _userRepo.FindByIdAsync(userId).ConfigureAwait(false);
+            return user != null;
         }
     }
 }

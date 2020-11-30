@@ -62,7 +62,14 @@ export class AddFormService {
     this.updateFormArray(this.listOfArea, this.listOfAreaControl, 'areas');
   }
   addContactField(){
-    this.listOfContact.push({ kind: ContactType.PHONE, value: '80295357164'})
+    this.listOfContact.push({ kind: ContactType.PHONE, value: ''})
+    if(this.listOfContact.length > 4) this.disabledAddContactFieldButton = true;
+    this.updateFormArray(this.listOfContact, this.listOfContactControl, 'contacts');
+  }
+  removeContactField(index: number){
+    if(index > 0){
+      this.listOfContact.splice(index, 1);
+    }
     this.updateFormArray(this.listOfContact, this.listOfContactControl, 'contacts');
   }
   initForm() {
