@@ -76,6 +76,9 @@ namespace DAL.Repo
             return await context.Adverts
                 .Include(prop => prop.Images)
                 .Include(prop => prop.Prices)
+                .Include(prop => prop.Description)
+                .Include(prop => prop.Areas)
+                .Include(prop => prop.Contacts)
                 .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)

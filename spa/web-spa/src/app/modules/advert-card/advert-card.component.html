@@ -5,12 +5,15 @@
     style="width: 100%;"
     nzHoverable="true"
     [nzCover]="coverTpl"
-    [nzTitle]="item.price.value | currency" >
+    [nzTitle]="priceTpl" >
     <nz-card-meta 
         [nzTitle]="cardMetaTitleTpl" 
         [nzDescription]="descriptionTpl">
     </nz-card-meta>
 </nz-card>
+<ng-template #priceTpl>
+    {{ item.prices[0].value }} 
+</ng-template>
 <ng-template #descriptionTpl>
     {{ item.address.geoObject.metaDataProperty.geocoderMetaData.address.components[3].name }}
 </ng-template>

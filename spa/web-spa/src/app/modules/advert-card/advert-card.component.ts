@@ -13,6 +13,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 export class AdvertCardComponent implements OnInit {
  /** объявление */
  @Input() item: IAdvert;
+ price = 55000;
  constructor(
    private _advertService: AdvertService
  ) { }
