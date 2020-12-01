@@ -31,7 +31,7 @@ namespace api.Controllers
                 var result = await _advertService.AddAsync(advert).ConfigureAwait(false);
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest();
                 throw;
