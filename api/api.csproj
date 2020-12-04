@@ -2,9 +2,6 @@
 
   <PropertyGroup>
 	  <TargetFramework>net5.0</TargetFramework>
-	  <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
-	  <!-- Set this to true if you enable server-side prerendering -->
-	  <BuildServerSideRenderer>true</BuildServerSideRenderer>
   </PropertyGroup>
 
   <ItemGroup>

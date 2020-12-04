@@ -14,5 +14,6 @@ export interface IAdvert {
     prices: IPrice[],
     description: IDescription,
     contacts: IContact[],
-    areas: IArea[]
+    areas: IArea[],
+    created: any
 }

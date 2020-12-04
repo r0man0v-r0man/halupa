@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdvertCardComponent } from './advert-card.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import {NzTagModule} from "ng-zorro-antd/tag";
+import {PriceModule} from "../price/price.module";
 
 
 @NgModule({
@@ -10,7 +12,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
   ],
   imports: [
     CommonModule,
-    NzCardModule
+    NzCardModule,
+      PriceModule
   ],
   exports:[
     AdvertCardComponent

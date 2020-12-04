@@ -18,6 +18,7 @@ import {
   EnvironmentOutline,
   ArrowLeftOutline } from '@ant-design/icons-angular/icons';
 import { YandexMapModule } from 'src/app/modules/yandex-map/yandex-map.module';
+import {PriceModule} from "../../modules/price/price.module";
 
 const icons: IconDefinition[] = [ 
   PhoneOutline, 
@@ -43,7 +44,8 @@ const icons: IconDefinition[] = [
     NzDescriptionsModule,
     NzStatisticModule,
     NzModalModule,
-    YandexMapModule
+    YandexMapModule,
+      PriceModule
   ],
   exports: [
     AdvertComponent

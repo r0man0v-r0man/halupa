@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IAdvert } from 'src/app/models/advert.model';
-import { AdvertService } from 'src/app/services/advert.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {IAdvert} from 'src/app/models/advert.model';
+import {AdvertService} from 'src/app/services/advert.service';
 
 @Component({
   selector: 'app-advert-card',
@@ -13,7 +13,6 @@ import { AdvertService } from 'src/app/services/advert.service';
 export class AdvertCardComponent implements OnInit {
  /** объявление */
  @Input() item: IAdvert;
- price = 55000;
  constructor(
    private _advertService: AdvertService
  ) { }

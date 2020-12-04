@@ -1,0 +1,7 @@
+<nz-button-group>
+    <button [nzSize]="'small'" nz-button nzType="primary" (click)="onSwitchPriceCurrency()"><i nz-icon nzType="swap" nzTheme="outline"></i></button>
+
+    <a nz-button nzType="text" [nzSize]="'small'">
+        {{ priceView.value | currency : '' : '' : '1.0'}} <span style="font-size: xx-small">{{ priceView.currency | price }}</span>
+    </a>
+</nz-button-group>
