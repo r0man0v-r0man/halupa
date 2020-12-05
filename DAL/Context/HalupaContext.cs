@@ -12,7 +12,10 @@ namespace DAL.Context
     public class HalupaContext : IdentityDbContext<AppUser>, IHalupaContext
     {
         public DbSet<Advert> Adverts { get; set; }
-        public HalupaContext(DbContextOptions<HalupaContext> options) : base(options) { }
+        public HalupaContext(DbContextOptions<HalupaContext> options) : base(options) 
+        {
+
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder?.ApplyConfiguration(new AdvertConfiguration());

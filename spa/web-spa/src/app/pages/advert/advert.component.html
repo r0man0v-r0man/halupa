@@ -1,19 +1,17 @@
 <nz-page-header *ngIf="advert"
-class="site-page-header" 
+class="site-page-header wrap" 
 (nzBack)="onBack()" 
 nzBackIcon 
 [nzTitle]="advert.address.geoObject.name" 
 [nzSubtitle]="advert.created | date : 'shortDate' : '' : 'ru' ">
     <nz-page-header-tags>
-        <nz-tag nzColor="#55acee">
-            <span>{{advert.price.value | currency}}</span>
-        </nz-tag>
+        <app-price [prices]="advert.prices"></app-price>
     </nz-page-header-tags>
     <nz-page-header-extra>
         <ng-container *ngIf="isShowPhone; else phoneTpl" >
             <p style="margin-bottom: 0; display: inline-block;" nz-typography 
             nzCopyable 
-            [nzCopyText]="advert.contact.phone">{{ advert.contact.phone }}</p>
+            [nzCopyText]="advert.contacts[0].value">{{ advert.contacts[0].value }}</p>
         </ng-container>
         <ng-template #phoneTpl>
             <button nz-button  (click)="onShowPhone()">
@@ -38,7 +36,10 @@ nzBackIcon
             </div>
             <div class="extra">
                 <div>
-                    <nz-statistic nzTitle="Площадь, кв.м.:" [nzValue]="advert.area.value" style="margin: 0 32px"></nz-statistic>
+                    <nz-statistic nzTitle="Площадь, кв.м.:" [nzValue]="advert.areas[0].value" style="margin: 0 32px"></nz-statistic>
+                </div>
+                <div *ngIf="advert.areas[1]">
+                    <nz-statistic nzTitle="Участок, сот.:" [nzValue]="advert.areas[1].value" style="margin: 0 32px"></nz-statistic>
                 </div>
             </div>
         </div>

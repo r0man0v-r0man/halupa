@@ -8,7 +8,6 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100vh;
   }
   header{
     grid-area: header;
@@ -34,12 +33,18 @@
     padding: 0 24px;
     background-color: #fff;
     display: flex;
+    min-height: 100vh;
     section{
         width: 100%;
         max-width: 960px;
         margin: 24px auto;
         padding: 24px;
         display: grid;
+      ::ng-deep{
+        .wrap{
+          min-height: 100vh;
+        }
+      }
     }
   }
   

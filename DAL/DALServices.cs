@@ -1,6 +1,5 @@
-﻿using DAL.Entities;
-using DAL.Context;
-using DAL.Context.Interfaces;
+﻿using DAL.Context;
+using DAL.Entities;
 using DAL.Repo;
 using DAL.Repo.Interfaces;
 using Imgur.API.Authentication;
@@ -15,14 +14,16 @@ namespace DAL
 {
     public static class DALServices
     {
-        public static IServiceCollection AddDalServices(this IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection AddDalServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContextPool<HalupaContext>(options =>
+            services.AddDbContextFactory<HalupaContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("HalupaConnection"));
+                options.UseSqlite(configuration.GetConnectionString("HalupaConnection"));
             });
-            services.AddTransient<IContextFactory, ContextFactory>();
-
+            services
+                .AddTransient(o => o.GetRequiredService<IDbContextFactory<HalupaContext>>().CreateDbContext());
+            
+            
             services.Configure<PasswordHasherOptions>(options =>
             {
                 options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3;

@@ -31,10 +31,11 @@ export class AdvertComponent implements OnInit {
   }
   private getAdvert(id: number) {
     this.advertService.getAdvert(id).subscribe(response => {
-      if(response) {
-        this.advert = response;
-        this.initSlides(this.advert.images);
-      }
+        if(response) {
+          this.advert = response;
+          this.initSlides(this.advert.images);
+        }
+      
     });
   }
 

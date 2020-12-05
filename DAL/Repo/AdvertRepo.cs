@@ -1,4 +1,5 @@
-﻿using DAL.Context.Interfaces;
+﻿using DAL.Context;
+using DAL.Context.Interfaces;
 using DAL.Entities;
 using DAL.Repo.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -12,11 +13,11 @@ namespace DAL.Repo
 {
     public class AdvertRepo : IAdvertRepo
     {
-        private readonly IContextFactory _contextFactory;
+        private readonly IDbContextFactory<HalupaContext> _contextFactory;
         private readonly UserManager<AppUser> _userManager;
 
         const byte SIZE = 20;
-        public AdvertRepo(IContextFactory contextFactory, UserManager<AppUser> userManager)
+        public AdvertRepo(IDbContextFactory<HalupaContext> contextFactory, UserManager<AppUser> userManager)
         {
             _contextFactory = contextFactory;
             _userManager = userManager;
@@ -25,7 +26,7 @@ namespace DAL.Repo
         {
             try
             {
-                using var context = _contextFactory.GetHalupaContext();
+                using var context = _contextFactory.CreateDbContext();
                 await context.Adverts.AddAsync(advert).ConfigureAwait(false);
                 var result = await context.SaveChangesAsync().ConfigureAwait(false);
                 return result > 0 ? advert.Id : throw new Exception("Error save advert");
@@ -44,7 +45,7 @@ namespace DAL.Repo
 
         public async Task<Advert> GetAdvertByIdAsync(int id)
         {
-            using var context = _contextFactory.GetHalupaContext();
+            using var context = _contextFactory.CreateDbContext();
             var result = await context.Adverts
                 .Include(prop => prop.Address.GeoObject.Point)
                 .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
@@ -72,7 +73,7 @@ namespace DAL.Repo
 
         public async Task<IEnumerable<Advert>> GetAnyAdverts(int pageNumber)
         {
-            using var context = _contextFactory.GetHalupaContext();
+            using var context = _contextFactory.CreateDbContext();
             return await context.Adverts
                 .Include(prop => prop.Images)
                 .Include(prop => prop.Prices)

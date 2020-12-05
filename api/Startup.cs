@@ -30,7 +30,9 @@ namespace api
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IWebHostEnvironment env)
         {
             app.UseForwardedHeaders();
 

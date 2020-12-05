@@ -6,11 +6,7 @@ import { PricePipe } from './price.pipe';
 import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
-import {SwapOutline} from "@ant-design/icons-angular/icons";
 
-const icons = [
-    SwapOutline
-]
 @NgModule({
   declarations: [
       PriceComponent,
@@ -22,7 +18,7 @@ const icons = [
       FormsModule,
       ReactiveFormsModule,
       NzButtonModule,
-      NzIconModule.forChild(icons)
+      NzIconModule
   ],
   exports:[
       PriceComponent,

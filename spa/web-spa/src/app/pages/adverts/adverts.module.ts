@@ -6,7 +6,12 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { AdvertCardModule } from 'src/app/modules/advert-card/advert-card.module';
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {SwapOutline} from "@ant-design/icons-angular/icons";
 
+const icons = [
+  SwapOutline
+]
 @NgModule({
   declarations: [AdvertsComponent],
   imports: [
@@ -15,7 +20,8 @@ import { AdvertCardModule } from 'src/app/modules/advert-card/advert-card.module
     NzListModule,
     NzButtonModule,
     NzGridModule,
-    AdvertCardModule
+    AdvertCardModule,
+      NzIconModule.forChild(icons)
   ],
   exports:[
     AdvertsComponent

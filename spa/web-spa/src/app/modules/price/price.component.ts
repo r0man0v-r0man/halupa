@@ -22,7 +22,5 @@ export class PriceComponent implements OnInit {
       if (this.index >= this.prices.length){
         this.index=0;
       }
-    
-    console.log(this.index)
   }
 }
