@@ -7,10 +7,15 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit {
+  toggleMenu = false;
   constructor(
     public _authService: AuthService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  onToggle() {
+    this.toggleMenu = !this.toggleMenu;
   }
 }

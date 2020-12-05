@@ -1,23 +1,33 @@
-<div>
-    <a [routerLink]="[ '/' ]" class="logo-brand" ><strong>Halupa.by</strong></a>
-</div>
-<ul>
-    <li >
-        <a [routerLink]="[ '/adverts' ]">Объявления</a>
-    </li>
-</ul>
-<button nz-button nzType="primary" nzShape="round" [routerLink]="[ '/add' ]">
-    <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление
-</button>
-<nz-divider nzType="vertical"></nz-divider>
-<ng-container *ngIf="_authService.isLogedIn() | async; then privateTpl else publicTpl"></ng-container>
-<ng-template #privateTpl>
-    <button nz-button nzType="primary" nzShape="circle" [routerLink]="[ '/cabinet' ]" >
-        <i nz-icon nzType="user" nzTheme="outline"></i>
-    </button>
-</ng-template>
-<ng-template #publicTpl>
-    <button nz-button nzType="primary" nzShape="circle" [routerLink]="[ '/login' ]">
-        <i nz-icon nzType="login" nzTheme="outline"></i>
-    </button>
-</ng-template>
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a [routerLink]="[ '/' ]"><strong>Halupa.by</strong></a>
+    </div>
+    <div class="navbar-toggle">
+        <a nz-button nzType="link" nzSize="large" (click)="onToggle()"><i nz-icon nzType="menu" nzTheme="outline"></i></a>
+    </div>
+    <div class="navbar-items">
+        <ul [ngClass]="{visibility:toggleMenu}">
+            <li class="navbar-items-link" (click)="onToggle()">
+                <a [routerLink]="[ '/adverts' ]">Объявления</a>
+            </li>
+            <li >
+                <button nz-button nzType="primary" nzShape="round" (click)="onToggle()" [routerLink]="[ '/add' ]">
+                    <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление
+                </button>
+            </li>
+            <li >
+                <ng-container *ngIf="_authService.isLogedIn() | async; then privateTpl else publicTpl"></ng-container>
+                <ng-template #privateTpl>
+                    <button nz-button nzType="primary" nzShape="circle" (click)="onToggle()" [routerLink]="[ '/cabinet' ]" >
+                        <i nz-icon nzType="user" nzTheme="outline"></i>
+                    </button>
+                </ng-template>
+                <ng-template #publicTpl>
+                    <button nz-button nzType="primary" nzShape="circle" (click)="onToggle()" [routerLink]="[ '/login' ]">
+                        <i nz-icon nzType="login" nzTheme="outline"></i>
+                    </button>
+                </ng-template>
+            </li>
+        </ul>
+    </div>    
+</nav>

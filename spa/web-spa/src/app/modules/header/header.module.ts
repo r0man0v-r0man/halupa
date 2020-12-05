@@ -7,13 +7,15 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
   PlusOutline,
   LoginOutline,
-  UserOutline
+  UserOutline,
+    MenuOutline
 } from '@ant-design/icons-angular/icons';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 const icons = [
   PlusOutline,
   LoginOutline,
-  UserOutline
+  UserOutline,
+  MenuOutline
 ]
 @NgModule({
   declarations: [
