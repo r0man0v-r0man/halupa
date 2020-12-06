@@ -44,9 +44,9 @@ namespace BLL.Services
             }).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<AdvertDto>> GetAnyAdverts(int pageNumber)
+        public async Task<IEnumerable<AdvertDto>> GetAnyAdvertsAsync(int pageNumber)
         {
-            var adverts = await _advertRepo.GetAnyAdverts(pageNumber).ConfigureAwait(false);
+            var adverts = await _advertRepo.GetAnyAdvertsAsync(pageNumber).ConfigureAwait(false);
             return adverts.Select(advert => (AdvertDto)advert);
         }
     }

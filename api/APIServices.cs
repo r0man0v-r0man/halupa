@@ -55,13 +55,13 @@ namespace api
                     };
                 });
             services.AddCors();
-
-            services.AddControllers().AddNewtonsoftJson();
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
+            services.AddControllers().AddNewtonsoftJson();
+            
             return services;
         }
     }

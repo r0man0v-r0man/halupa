@@ -71,7 +71,7 @@ namespace DAL.Repo
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Advert>> GetAnyAdverts(int pageNumber)
+        public async Task<IEnumerable<Advert>> GetAnyAdvertsAsync(int pageNumber)
         {
             using var context = _contextFactory.CreateDbContext();
             return await context.Adverts

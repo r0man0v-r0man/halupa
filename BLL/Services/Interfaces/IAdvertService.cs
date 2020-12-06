@@ -10,6 +10,6 @@ namespace BLL.Services.Interfaces
     {
         Task<int> AddAsync(AdvertDto advert);
         Task<AdvertDto> GetAsync(int id);
-        Task<IEnumerable<AdvertDto>> GetAnyAdverts(int pageNumber);
+        Task<IEnumerable<AdvertDto>> GetAnyAdvertsAsync(int pageNumber);
     }
 }

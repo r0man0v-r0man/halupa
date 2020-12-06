@@ -46,7 +46,7 @@ namespace api.Controllers
                 var result = await _advertService.GetAsync(id).ConfigureAwait(false);
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest();
                 throw;
@@ -57,7 +57,7 @@ namespace api.Controllers
         {
             try
             {
-                var result = await _advertService.GetAnyAdverts(pageNumber).ConfigureAwait(false);
+                var result = await _advertService.GetAnyAdvertsAsync(pageNumber).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception e)

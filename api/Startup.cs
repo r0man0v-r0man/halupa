@@ -23,11 +23,6 @@ namespace api
             services.AddApiServices(Configuration);
             services.AddBllServices();
             services.AddDalServices(Configuration);
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.ForwardedHeaders =
-                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-            });
         }
 
         public void Configure(
