@@ -7,8 +7,8 @@
     </div>
     <div class="navbar-items">
         <ul [ngClass]="{visibility:toggleMenu}">
-            <li class="navbar-items-link" (click)="onToggle()">
-                <a [routerLink]="[ '/adverts' ]">Объявления</a>
+            <li class="navbar-items-link" (click)="onToggle()" [routerLink]="[ '/adverts' ]">
+                <a >Объявления</a>
             </li>
             <li >
                 <button nz-button nzType="primary" nzShape="round" (click)="onToggle()" [routerLink]="[ '/add' ]">

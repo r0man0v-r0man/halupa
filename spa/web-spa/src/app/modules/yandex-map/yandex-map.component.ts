@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { YandexMapService } from './yandex-map.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { YandexMapService } from './yandex-map.service';
     YandexMapService
   ]
 })
-export class YandexMapComponent {
+export class YandexMapComponent implements OnInit{
   advert;
   get mapCenter() {
     return this.yandexMapService.getCoords(this.advert.address);
@@ -22,4 +22,8 @@ export class YandexMapComponent {
   constructor(
     public yandexMapService: YandexMapService
   ) { }
+
+  ngOnInit(): void {
+    
+  }
 }
