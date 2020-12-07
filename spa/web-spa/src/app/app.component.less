@@ -8,11 +8,13 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
- 
-  }
+  min-height: 100vh;
+
+}
 header{
   grid-area: header;
   background-color:#0277BD;
+  z-index: 1;
 }
   main{
     grid-area: main;
@@ -26,7 +28,6 @@ header{
         padding: 24px;
       ::ng-deep{
         .wrap{
-          min-height: 100vh;
           height: 100%;
         }
       }
