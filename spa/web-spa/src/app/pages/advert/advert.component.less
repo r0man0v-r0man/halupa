@@ -1,8 +1,7 @@
-// todo переделать - в мобильном все плохо
-
+@bottom-space: .5em;
 .advert{
   &-header{
-    margin-bottom: .5em;
+    margin-bottom: @bottom-space;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,7 +14,17 @@
     }
   }
   &-info{
-    &-slider{}
+    margin-bottom: @bottom-space;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    &-item{
+      &-buttons{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+      }
+    }
   }
   &-footer{}
 }

@@ -13,7 +13,32 @@
             </div>
         </div>
         <div class="advert-info">
-            <app-image-slider class="advert-info-slider" *ngIf="images" [images]="images"></app-image-slider>
+            <div class="advert-info-item">
+                <app-image-slider *ngIf="images" [images]="images"></app-image-slider>
+            </div>
+            <div class="advert-info-item">
+                <div class="advert-info-item-buttons">
+                    <button nz-button  (click)="onShowMap()">
+                        <i nz-icon  nzType="environment" nzTheme="outline"></i>
+                        Открыть карту
+                    </button>
+<!--                    вынести в отдельный модуль-->
+                    <ng-container *ngIf="isShowPhone; else phoneTpl" > 
+                        <p nz-typography nzCopyable 
+                        [nzCopyText]="advert.contacts[0].value">{{ advert.contacts[0].value }}</p>
+                    </ng-container>
+                    <ng-template #phoneTpl>
+                        <button nz-button (click)="onShowPhone()">
+                            <i nz-icon nzType="phone" nzTheme="outline"></i>
+                            показать
+                        </button>
+                    </ng-template>
+                    <button nz-button  (click)="onShowMap()">
+                        <i nz-icon  nzType="environment" nzTheme="outline"></i>
+                        Открыть карту
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="advert-footer">
             {{ advert.description.value }}

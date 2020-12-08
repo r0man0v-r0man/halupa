@@ -23,6 +23,7 @@ export class AddComponent implements OnInit {
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
+  
   constructor(
     public geocoderService: GeocoderService,
     private addFormService: AddFormService,
