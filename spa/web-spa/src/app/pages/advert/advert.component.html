@@ -22,21 +22,18 @@
                         <i nz-icon  nzType="environment" nzTheme="outline"></i>
                         Открыть карту
                     </button>
-<!--                    вынести в отдельный модуль-->
-                    <ng-container *ngIf="isShowPhone; else phoneTpl" > 
-                        <p nz-typography nzCopyable 
-                        [nzCopyText]="advert.contacts[0].value">{{ advert.contacts[0].value }}</p>
+                    <ng-container *ngIf="isShowPhone; else phoneTpl" >
+                        <nz-button-group >
+                            <button nz-button nzType="text">{{advert.contacts[0].value}}</button>
+                            <button nz-button nzType="primary" (click)="onCopyPhone()"><i nz-icon nzType="copy" nzTheme="outline"></i></button>
+                        </nz-button-group>
                     </ng-container>
                     <ng-template #phoneTpl>
                         <button nz-button (click)="onShowPhone()">
                             <i nz-icon nzType="phone" nzTheme="outline"></i>
-                            показать
+                            Показать
                         </button>
                     </ng-template>
-                    <button nz-button  (click)="onShowMap()">
-                        <i nz-icon  nzType="environment" nzTheme="outline"></i>
-                        Открыть карту
-                    </button>
                 </div>
             </div>
         </div>

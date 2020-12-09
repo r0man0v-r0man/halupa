@@ -83,4 +83,8 @@ export class AdvertComponent implements OnInit {
       ]
     })
   }
+
+    onCopyPhone() {
+        
+    }
 }
