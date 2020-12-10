@@ -13,16 +13,17 @@ import {
   CopyOutline, 
   EnvironmentOutline,
   ArrowLeftOutline,
-SwapOutline} from '@ant-design/icons-angular/icons';
+SwapOutline, CheckOutline} from '@ant-design/icons-angular/icons';
 import { YandexMapModule } from 'src/app/modules/yandex-map/yandex-map.module';
 import {PriceModule} from "../../modules/price/price.module";
-
+import {ContactsViewModule} from "../../modules/contacts-view/contacts-view.module";
 const icons: IconDefinition[] = [ 
   PhoneOutline, 
   CopyOutline, 
   EnvironmentOutline,
   ArrowLeftOutline,
-  SwapOutline
+  SwapOutline,
+  CheckOutline
 ];
 
 
@@ -39,7 +40,8 @@ const icons: IconDefinition[] = [
     ImageSliderModule,
     NzModalModule,
     YandexMapModule,
-    PriceModule
+    PriceModule,
+    ContactsViewModule
   ],
   exports: [
     AdvertComponent

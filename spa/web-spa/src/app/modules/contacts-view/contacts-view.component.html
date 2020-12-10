@@ -1,0 +1,12 @@
+<ng-container *ngIf="isShowPhone; else phoneTpl" >
+    <nz-button-group >
+        <button nz-button nzType="text">{{contacts[0].value}}</button>
+        <button nz-button [nzType]="isCopied?'text':'primary'" (click)="onCopyPhone()"><i nz-icon [nzType]="isCopied?'check':'copy'" nzTheme="outline"></i></button>
+    </nz-button-group>
+</ng-container>
+<ng-template #phoneTpl>
+    <button nz-button nzBlock="true" (click)="onShowPhone()">
+        <i nz-icon nzType="phone" nzTheme="outline"></i>
+        Показать
+    </button>
+</ng-template>

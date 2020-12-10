@@ -16,14 +16,13 @@ import { YandexMapComponent } from 'src/app/modules/yandex-map/yandex-map.compon
 })
 export class AdvertComponent implements OnInit {
   advert: IAdvert;
-  isShowPhone = false;
   /** изображения для слайдера */
   images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService,
     private location: Location,
-    private _modalService: NzModalService
+    private _modalService: NzModalService,
   ) { }
 
   ngOnInit(): void {
@@ -62,12 +61,7 @@ export class AdvertComponent implements OnInit {
   onBack(): void {
     this.location.back();
   }
-  onShowPhone(){
-    this.isShowPhone = !this.isShowPhone;
-    setTimeout(() => {
-      this.isShowPhone = !this.isShowPhone;
-    }, 10000);
-  }
+
   onShowMap(){
     const modal: NzModalRef = this._modalService.create({
       nzTitle: `${this.advert.address.geoObject.name}`,
@@ -84,7 +78,5 @@ export class AdvertComponent implements OnInit {
     })
   }
 
-    onCopyPhone() {
-        
-    }
+  
 }
