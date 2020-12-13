@@ -7,10 +7,13 @@
     </div>
     <div class="navbar-items">
         <ul [ngClass]="{visibility:toggleMenu}">
+            <li>
+                <app-search-box></app-search-box>
+            </li>
             <li class="navbar-items-link" (click)="onToggle()" [routerLink]="[ '/adverts' ]">
                 <a >Объявления</a>
             </li>
-            <li >
+            <li class="navbar-items-button">
                 <button nz-button nzType="primary" nzShape="round" (click)="onToggle()" [routerLink]="[ '/add' ]">
                     <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление
                 </button>

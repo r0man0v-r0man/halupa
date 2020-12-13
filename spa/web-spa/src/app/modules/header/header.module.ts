@@ -8,10 +8,13 @@ import {
   PlusOutline,
   LoginOutline,
   UserOutline,
-    MenuOutline
+    MenuOutline,
+    SearchOutline
 } from '@ant-design/icons-angular/icons';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import {SearchBoxModule} from "../search-box/search-box.module";
 const icons = [
+  SearchOutline,
   PlusOutline,
   LoginOutline,
   UserOutline,
@@ -26,7 +29,8 @@ const icons = [
     AppRoutingModule,
     NzIconModule.forChild(icons),
     NzButtonModule,
-    NzDividerModule
+    NzDividerModule,
+      SearchBoxModule
   ],
   exports:[
     HeaderComponent

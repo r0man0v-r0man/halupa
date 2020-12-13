@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="submitSearch(form.value)">
+    <nz-input-group [nzPrefix]="prefix" [nzSuffix]="inputClearTpl">
+        <input class="search-box-input" formControlName="inputValue" 
+               type="text"
+               nzBorderless 
+               nz-input 
+               placeholder="поиск..." />
+    </nz-input-group>
+    <ng-template #prefix>
+        <i nz-icon nzType="search"></i>
+    </ng-template>
+    <ng-template #inputClearTpl>
+        <i nz-icon class="ant-input-clear-icon"
+           nzTheme="fill" nzType="close-circle" 
+           *ngIf="form.controls['inputValue'].value"
+           (click)="onClear()"></i>
+    </ng-template>
+</form>

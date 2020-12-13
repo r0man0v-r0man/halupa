@@ -21,6 +21,7 @@
     }
   }
   &-brand {
+    width: 17%;
     a{
       line-height: 60px;
       font-size: 24px;
@@ -32,6 +33,8 @@
     }
   }
   &-items{
+    width: 100%;
+    max-width: 1166px;
     &-link {
       cursor: pointer;
     }
@@ -50,6 +53,9 @@
     li{
       list-style: none;
       padding: 0 1rem;
+      &:first-child{
+        margin-right: auto;
+      }
       &:last-child{
         padding: 0;
       }
@@ -77,11 +83,18 @@
         width: 100%;
         text-align: center;
       }
+      
     }
     &-items ul{
       display: none; // переключатель в display: flex;
       flex-direction: column;
       align-items: center;
+      li{
+        &:first-child{
+          padding: 0 1rem;
+          margin-right: unset;
+        }
+      }
     }
     
   }
