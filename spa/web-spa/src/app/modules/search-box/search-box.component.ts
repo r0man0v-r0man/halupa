@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchBoxFormService} from "./search-box-form.service";
-import {Subject} from "rxjs";
-import {debounceTime, map} from "rxjs/operators";
-import {SearchBoxService} from "./search-box.service";
+import {AdvertService} from "../../services/advert.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search-box',
@@ -10,13 +9,12 @@ import {SearchBoxService} from "./search-box.service";
   styleUrls: ['./search-box.component.less'],
   providers:[
       SearchBoxFormService,
-      SearchBoxService
   ]
 })
 export class SearchBoxComponent implements OnInit {
   constructor(
       private _searchBoxFormService: SearchBoxFormService,
-      private _searchBoxService: SearchBoxService
+      private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -25,8 +23,8 @@ export class SearchBoxComponent implements OnInit {
     return this._searchBoxFormService.form;
   }
 
-  submitSearch(value: { inputValue: string }) {
-    this._searchBoxService.search(value);
+  submitSearch(value: { locality: string; pageNumber: number }) {
+    this._router.navigate(['search'], {queryParams: value, queryParamsHandling: "merge"})
   }
 
   onClear() {

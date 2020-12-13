@@ -11,5 +11,6 @@ namespace BLL.Services.Interfaces
         Task<int> AddAsync(AdvertDto advert);
         Task<AdvertDto> GetAsync(int id);
         Task<IEnumerable<AdvertDto>> GetAnyAdvertsAsync(int pageNumber);
+        Task<IEnumerable<AdvertDto>> SearchByLocalityAsync(int pageNumber, string locality);
     }
 }

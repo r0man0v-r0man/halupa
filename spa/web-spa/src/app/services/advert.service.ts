@@ -5,30 +5,29 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { IAdvert } from '../models/advert.model';
 import { URLs } from '../urls';
+import {ISearch, ISearchResult} from "../models/search.model";
 
 @Injectable()
 export class AdvertService {
+  searchResult: ISearchResult;
   /** for SSR */
   private baseUrl: string;
   headers = new HttpHeaders().set('content-type', 'application/json');
   constructor(
-    private httpClient: HttpClient,
+    private _httpClient: HttpClient,
     private router: Router
   ) { 
   }
   addAdvert(advert: IAdvert){
-    this.httpClient.post<number>(URLs.addAdvertURL, advert, {headers: this.headers })
-      .pipe(map((response: number) => {
-        this.goToAdvert(response);
-      })).subscribe();
+    this._httpClient.post<number>(URLs.addAdvertURL, advert, {headers: this.headers })
+      .pipe(map((response: number) => this.goToAdvert(response))).subscribe();
   }
 
   getAdvert(id: number){
     let params = new HttpParams();
     params = params.append("id", id.toString());
-    return this.httpClient.get<IAdvert>(URLs.getAdvertURL, { params : params});
+    return this._httpClient.get<IAdvert>(URLs.getAdvertURL, { params : params});
   }
-
   private goToAdvert(response: number) {
     this.router.navigate(['adverts', response]);
   }
@@ -37,7 +36,7 @@ export class AdvertService {
   }
   getAnyAdverts(pageNumber: number){
     const params = this.setHttpParams(pageNumber);
-    return this.httpClient.get<IAdvert[]>(
+    return this._httpClient.get<IAdvert[]>(
       URLs.getAnyAdvertsURL,
       { params: params });
   }
@@ -47,5 +46,20 @@ export class AdvertService {
    */
   private setHttpParams(pageNumber: number) {
     return new HttpParams().set('pageNumber', pageNumber.toString());
+  }
+
+  search(value: ISearch) {
+    let params = new HttpParams();
+    params = params.append("locality", value.locality);
+    params = params.append("pageNumber", value.pageNumber.toString());
+    this._httpClient.get<IAdvert[]>(
+        URLs.search.searchByLocality,
+        {params: params}
+    ).subscribe(response => {
+      this.searchResult = {
+        searchRequest: value.locality,
+        advertsByLocality: [...response]
+      }
+    });
   }
 }

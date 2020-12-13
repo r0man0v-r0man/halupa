@@ -49,5 +49,13 @@ namespace BLL.Services
             var adverts = await _advertRepo.GetAnyAdvertsAsync(pageNumber).ConfigureAwait(false);
             return adverts.Select(advert => (AdvertDto)advert);
         }
+
+        public async Task<IEnumerable<AdvertDto>> SearchByLocalityAsync(int pageNumber, string locality)
+        {
+            var result = await _advertRepo
+                .SearchByLocalityAsync(pageNumber, locality)
+                .ConfigureAwait(false);
+            return result.Select(advert => (AdvertDto)advert);
+        }
     }
 }

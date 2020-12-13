@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submitSearch(form.value)">
     <nz-input-group [nzPrefix]="prefix" [nzSuffix]="inputClearTpl">
-        <input class="search-box-input" formControlName="inputValue" 
+        <input class="search-box-input" formControlName="locality" 
                type="text"
                nzBorderless 
                nz-input 
@@ -12,7 +12,7 @@
     <ng-template #inputClearTpl>
         <i nz-icon class="ant-input-clear-icon"
            nzTheme="fill" nzType="close-circle" 
-           *ngIf="form.controls['inputValue'].value"
+           *ngIf="form.controls['locality'].value"
            (click)="onClear()"></i>
     </ng-template>
 </form>

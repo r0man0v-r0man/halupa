@@ -1,0 +1,19 @@
+<h3 nz-typography>Результаты поиска: <span nz-typography nzType="secondary">{{searchResult?.searchRequest | lowercase}}</span></h3>
+<nz-list class="wrap"
+         [nzLoading]="initLoading" >
+    <div nz-row  nzGutter="24" nzJustify="center" >
+        <div nz-col
+             [nzXs]="{ span : 24 }"
+             [nzSm]="{ span : 12 }"
+             [nzMd]="{ span : 8 }"
+             [nzLg]="{ span : 8 }"
+             [nzXl]="{ span : 8 }" *ngFor="let item of searchResult?.advertsByLocality">
+            <nz-list-item >
+                <app-advert-card [item]="item"></app-advert-card>
+            </nz-list-item>
+        </div>
+    </div>
+    <div class="loadmore" nz-list-load-more>
+        <button nz-button *ngIf="isShowMoreButton" (click)="onLoadMore()">Загрузить еще</button>
+    </div>
+</nz-list>

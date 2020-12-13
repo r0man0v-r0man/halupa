@@ -12,5 +12,6 @@ namespace DAL.Repo.Interfaces
         Task<IEnumerable<Advert>> GetUserAdvertsAsync(string userId, int pageNumber);
         Task<bool> DeleteAdvertAsync(int id);
         Task<IEnumerable<Advert>> GetAnyAdvertsAsync(int pageNumber);
+        Task<IEnumerable<Advert>> SearchByLocalityAsync(int pageNumber, string locality);
     }
 }

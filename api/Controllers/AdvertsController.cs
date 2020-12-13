@@ -66,5 +66,21 @@ namespace api.Controllers
                 throw;
             }
         }
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<AdvertDto>>> Search(int pageNumber, string locality)
+        {
+            try
+            {
+                var result = await _advertService
+                    .SearchByLocalityAsync(pageNumber, locality)
+                    .ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+                throw;
+            }
+        }
     }
 }

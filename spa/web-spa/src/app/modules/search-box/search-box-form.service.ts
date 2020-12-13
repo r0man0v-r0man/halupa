@@ -12,7 +12,8 @@ export class SearchBoxFormService {
 
   private initForm() {
     this.form = this._fb.group({
-      inputValue:[null]
+      locality:[null],
+      pageNumber: [1]
     })
   }
 

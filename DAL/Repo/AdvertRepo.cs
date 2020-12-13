@@ -90,5 +90,29 @@ namespace DAL.Repo
                 .ConfigureAwait(false);
         }
         private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
+
+        public async Task<IEnumerable<Advert>> SearchByLocalityAsync(int pageNumber, string locality)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            
+            return await context.Adverts
+                .Include(prop => prop.Images)
+                .Include(prop => prop.Prices)
+                .Include(prop => prop.Description)
+                .Include(prop => prop.Areas)
+                .Include(prop => prop.Contacts)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .AsNoTracking()
+                .Where(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
+                    // linq to sql сравнение без учета регистра
+                    // https://github.com/dotnet/efcore/issues/11414#issuecomment-376272297
+                    // https://docs.microsoft.com/en-us/ef/core/miscellaneous/collations-and-case-sensitivity#column-collation
+                    .Any(c => string.Equals(c.Kind, "locality") && EF.Functions.Collate(c.Name, "NOCASE") == locality)) // todo добавить enum kind
+                .OrderByDescending(prop => prop.Created)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
     }
 }

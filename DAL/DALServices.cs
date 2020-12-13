@@ -5,6 +5,7 @@ using DAL.Repo.Interfaces;
 using Imgur.API.Authentication;
 using Imgur.API.Endpoints;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +19,13 @@ namespace DAL
         {
             services.AddDbContextFactory<HalupaContext>(options =>
             {
-                options.UseSqlite(configuration.GetConnectionString("HalupaConnection"));
+                var connection = new SqliteConnection(configuration.GetConnectionString("HalupaConnection"));
+                // linq to sql сравнение без учета регистра
+                // https://github.com/dotnet/efcore/issues/11414#issuecomment-376272297
+                // https://docs.microsoft.com/en-us/ef/core/miscellaneous/collations-and-case-sensitivity#column-collation
+                connection.CreateCollation("NOCASE", (x, y) => string.Compare(x, y, ignoreCase: true));
+
+                options.UseSqlite(connection);
             });
             services
                 .AddTransient(o => o.GetRequiredService<IDbContextFactory<HalupaContext>>().CreateDbContext());

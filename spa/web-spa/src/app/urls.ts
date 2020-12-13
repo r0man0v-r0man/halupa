@@ -10,5 +10,9 @@ export const URLs = {
     // user
     isUserNameExistURL: api + 'accounts/isUserNameExist',
     registerURL: api + 'accounts/register',
-    loginURL: api + 'accounts/login'
+    loginURL: api + 'accounts/login',
+    
+    search: {
+        searchByLocality: api + 'adverts/search'
+    }
 }
