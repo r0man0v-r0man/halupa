@@ -6,6 +6,7 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import Axios from "axios";
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -22,9 +23,15 @@ export function app(): express.Express {
   server.set('views', distFolder);
   
   // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { 
-  //   res.redirect("http://localhost:19138" + req.url);
-  // });
+  server.get('*/sitemap**', (req, res) => {
+    const config = {
+      headers: {'Content-Type': 'text/xml'}
+    };
+    Axios.get('http://localhost:5000/sitemap.xml', config).then(sitemap => {
+      res.setHeader('Content-Type','text/xml')
+      res.send(sitemap.data)  
+    })
+  });
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
