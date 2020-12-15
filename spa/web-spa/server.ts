@@ -24,10 +24,10 @@ export function app(): express.Express {
   
   // Example Express Rest API endpoints
   server.get('*/sitemap**', (req, res) => {
-    Axios.get('http://localhost:5000/sitemap.xml').then(sitemap => {
+    Axios.get( 'http://localhost:5000/sitemap.xml').then(sitemap => {
       res.setHeader('Content-Type','text/xml')
       res.send(sitemap.data)  
-    })
+    });
   });
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
