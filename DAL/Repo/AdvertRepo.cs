@@ -61,6 +61,17 @@ namespace DAL.Repo
             return result ?? throw new Exception($"Not Found Advert with id: {id}");
         }
 
+        public async Task<IEnumerable<int>> GetAdvertsIds()
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return await context.Adverts
+                .AsNoTracking()
+                .Where(prop => prop.IsActive)
+                .Select(prop => prop.Id)
+                .ToArrayAsync()
+                .ConfigureAwait(false);
+        }
+
         public async Task<IEnumerable<Advert>> GetAdvertsAsync(int pageNumber)
         {
             throw new NotImplementedException();

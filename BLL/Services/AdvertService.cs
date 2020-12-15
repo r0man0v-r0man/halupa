@@ -57,5 +57,10 @@ namespace BLL.Services
                 .ConfigureAwait(false);
             return result.Select(advert => (AdvertDto)advert);
         }
+
+        public async Task<IEnumerable<int>> GetAdvertsIds()
+        {
+            return await _advertRepo.GetAdvertsIds().ConfigureAwait(false);
+        }
     }
 }
