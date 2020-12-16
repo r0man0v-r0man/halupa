@@ -8,7 +8,7 @@
     ></nz-input-number>
 </nz-input-group>
 <ng-template #addOnBeforeTemplate>
-    <nz-select 
+    <nz-select class="group-select"
     [(ngModel)]="price.currency">
         <nz-option
         *ngFor="let currency of listOfCurrencies"

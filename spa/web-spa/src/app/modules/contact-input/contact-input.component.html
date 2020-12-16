@@ -6,7 +6,7 @@
     [placeholder]="contact.kind == 0? '80295357164':'ваша почта'"/>
 </nz-input-group>
 <ng-template #addOnBeforeTemplate>
-    <nz-select 
+    <nz-select class="group-select"
     [(ngModel)]="contact.kind">
         <nz-option
         *ngFor="let contact of listOfContacts"

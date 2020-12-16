@@ -1,4 +1,4 @@
-<nz-input-group class="group-area"
+<nz-input-group
 [nzAddOnBefore]="addOnBeforeTemplate">
     <nz-input-number
     [(ngModel)]="area.value"
@@ -8,7 +8,7 @@
     ></nz-input-number>
 </nz-input-group>
 <ng-template #addOnBeforeTemplate>
-    <nz-select 
+    <nz-select class="group-select"
     [(ngModel)]="area.kind">
         <nz-option
         *ngFor="let area of listOfAreas"
