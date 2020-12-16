@@ -1,35 +1,30 @@
-
-<form nz-form [formGroup]="form">
-    <nz-form-item >
-        <h2 nz-typography>Добавить объявление</h2>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Адрес</nz-form-label>
-        <nz-form-control [nzSpan]="17">
+<div class="wrap">
+    <form class="form" [formGroup]="form">
+        <div class="form-item">
+            <h3 nz-typography class="form-item-header">Добавить объявление</h3>
+        </div>
+        <div class="form-item">
             <input 
-            placeholder="Например, Лермонтова 2 Несвиж" 
+            placeholder="Адрес" 
             #input
             nz-input 
             formControlName="address" 
             (input)="geocoderService.onSearch(input.value)" 
             [nzAutocomplete]="auto" />
-                <nz-autocomplete #auto>
-                    <nz-auto-option 
-                    class="global-search-item" 
-                    *ngFor="let option of geocoderService.optionList" 
-                    [nzValue]="option" 
-                    [nzLabel]="option.GeoObject.name + ' ' +  option.GeoObject.description">
-                        <span class="global-search-item-desc">
-                            {{ option.GeoObject.name + ' ' +  option.GeoObject.description }}
-                        </span>
-                    </nz-auto-option>
-                </nz-autocomplete>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Фото</nz-form-label>
-        <nz-form-control >
-            <nz-upload   
+            <nz-autocomplete #auto>
+                <nz-auto-option 
+                class="global-search-item" 
+                *ngFor="let option of geocoderService.optionList" 
+                [nzValue]="option" 
+                [nzLabel]="option.GeoObject.name + ' ' +  option.GeoObject.description">
+                    <span class="global-search-item-desc">
+                        {{ option.GeoObject.name + ' ' +  option.GeoObject.description }}
+                    </span>
+                </nz-auto-option>
+            </nz-autocomplete>
+        </div>
+        <div class="form-item">
+            <nz-upload   class="form-item-upload"
             nzAction="{{imageService.uploadURL}}"
             [nzHeaders]="imageService.headers"
             [nzTransformFile]="imageService.transformFile"
@@ -43,119 +38,92 @@
             (nzChange)="onUploadChange($event)"
             [nzListType]="'picture'"
             >
-            <a [nzBlock]="'true'" nz-button>
+            <a  nzBlock="true" nz-button>
                 <i nz-icon nzType="upload" nzTheme="outline"></i>
                 Загрузите изображение
             </a>
             <p><small>Максимальный размер фото 5mb.</small>
             </p>
             </nz-upload>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item 
-    formArrayName="prices"
-    *ngFor="let control of form.controls['prices']['controls']; let i = index">
-        <nz-form-label [nzSpan]="7" nzRequired  *ngIf="i == 0">Цена</nz-form-label>
-        <nz-form-label 
-        [nzSpan]="7" 
-        nzNoColon="true" 
-        *ngIf="i > 0">
-        </nz-form-label>
-        <nz-form-control 
-        [nzSpan]="17" 
-        [nzOffset]="i >= 0 ? '0':'7'">
-            <app-price-input 
-            [price]="form.controls['prices']['controls'][i].value"
-            ></app-price-input>
-            <a *ngIf="i !== 0 "
-            nz-button 
-            (click)="onRemovePrice(i)"
-            nzType="link" nzDanger><i nz-icon nzType="delete"></i>
-            </a>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item >
-        <nz-form-control [nzOffset]="7" >
-            <a  [disabled]="isDisabledAddPriceButton"
-                (click)="onAddPrice()"
-                nz-button 
-                nzType="dashed"><i nz-icon nzType="plus"></i>Добавить цену
-            </a>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item 
-    formArrayName="areas"
-    *ngFor="let control of form.controls['areas']['controls']; let i = index">
-        <nz-form-label [nzSpan]="7" nzRequired  *ngIf="i == 0">Площадь</nz-form-label>
-        <nz-form-label [nzSpan]="7" nzNoColon="true" *ngIf="i > 0"></nz-form-label>
-        <nz-form-control 
-        [nzSpan]="17" 
-        [nzOffset]="i >= 0 ? '0':'7'">
-            <app-area-input 
-            [area]="form.controls['areas']['controls'][i].value"
-            ></app-area-input>
-            <a *ngIf="i !== 0 "
-            nz-button 
-            (click)="onRemoveArea(i)"
-            nzType="link" nzDanger><i nz-icon nzType="delete"></i>
-            </a>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item >
-        <nz-form-control [nzOffset]="7" >
-            <a  [disabled]="disabledAddAreaFieldButton"
-                (click)="onAddArea()"
-                nz-button 
-                nzType="dashed"><i nz-icon nzType="plus"></i>Добавить площадь
-            </a>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item 
-    formArrayName="contacts"
-    *ngFor="let control of form.controls['contacts']['controls']; let i = index">
-        <nz-form-label [nzSpan]="7" nzRequired  *ngIf="i == 0">Контакты</nz-form-label>
-        <nz-form-label [nzSpan]="7" nzNoColon="true" *ngIf="i > 0"></nz-form-label>
-        <nz-form-control 
-        [nzSpan]="17" 
-        [nzOffset]="i >= 0 ? '0':'7'">
-            <app-contact-input 
-            [contact]="form.controls['contacts']['controls'][i].value"
-            ></app-contact-input>
-            <a *ngIf="i !== 0 "
-            nz-button 
-            (click)="onRemoveContact(i)"
-            nzType="link" nzDanger><i nz-icon nzType="delete"></i>
-            </a>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item >
-        <nz-form-control [nzOffset]="7" >
-            <a  [disabled]="disabledAddContactFieldButton"
-                (click)="onAddContact()"
-                nz-button  
-                nzType="dashed"><i nz-icon nzType="plus"></i>Добавить контакт
-            </a>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item [formGroup]="form.get('description')">
-        <nz-form-label [nzSpan]="7" nzRequired>Описание</nz-form-label>
-        <nz-form-control [nzSpan]="17">
-            <textarea 
-            formControlName="value" 
-            placeholder="Добавьте комментарий"
-            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
-            nz-input></textarea>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-control >
-            <button [nzBlock]="'true'"
+        </div> 
+        <div class="form-item">
+            <div class="form-item-box">
+                <div class="form-item-box-element">
+                    <div class="form-item-box-element-array"
+                    formArrayName="prices"
+                    *ngFor="let control of form.controls['prices']['controls']; let i = index">
+                        <app-price-input
+                            [price]="form.controls['prices']['controls'][i].value"
+                        ></app-price-input>
+                        <a [disabled]="i == 0 "
+                           nz-button
+                           (click)="onRemovePrice(i)"
+                           nzType="text" nzDanger><i nz-icon nzType="delete"></i>
+                        </a>
+                    </div>
+                    <a  [disabled]="isDisabledAddPriceButton"
+                        (click)="onAddPrice()"
+                        nz-button nzBlock
+                        nzType="dashed"><i nz-icon nzType="plus"></i>Добавить цену
+                    </a>
+                </div>
+                <div class="form-item-box-element">
+                    <div class="form-item-box-element-array"
+                            formArrayName="areas"
+                            *ngFor="let control of form.controls['areas']['controls']; let i = index">
+                        <app-area-input
+                                [area]="form.controls['areas']['controls'][i].value"
+                        ></app-area-input>
+                        <a [disabled]="i == 0 "
+                           nz-button
+                           (click)="onRemoveArea(i)"
+                           nzType="link" nzDanger><i nz-icon nzType="delete"></i>
+                        </a>
+                    </div>
+                    <a  [disabled]="disabledAddAreaFieldButton"
+                        (click)="onAddArea()"
+                        nz-button nzBlock
+                        nzType="dashed"><i nz-icon nzType="plus"></i>Добавить площадь
+                    </a>
+                </div>
+                <div class="form-item-box-element">
+                    <div class="form-item-box-element-array"
+                            formArrayName="contacts"
+                            *ngFor="let control of form.controls['contacts']['controls']; let i = index">
+                        <app-contact-input
+                                [contact]="form.controls['contacts']['controls'][i].value"
+                        ></app-contact-input>
+                        <a [disabled]="i == 0 "
+                           nz-button
+                           (click)="onRemoveContact(i)"
+                           nzType="link" nzDanger><i nz-icon nzType="delete"></i>
+                        </a>
+                    </div>
+                    <a  [disabled]="disabledAddContactFieldButton"
+                        (click)="onAddContact()"
+                        nz-button nzBlock
+                        nzType="dashed"><i nz-icon nzType="plus"></i>Добавить контакт
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-item">
+            <div [formGroup]="form.get('description')">
+                <textarea 
+                formControlName="value" 
+                placeholder="Описание"
+                [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+                nz-input></textarea>
+            </div>
+        </div>
+        <div class="form-item">
+            <button nzBlock="true"
             nz-button 
             nzType="primary" 
             (click)="submitForm()" 
             [disabled]="!form.valid">
                 Добавить
             </button>
-        </nz-form-control>
-    </nz-form-item>
-</form>
+        </div>
+    </form>
+</div>
