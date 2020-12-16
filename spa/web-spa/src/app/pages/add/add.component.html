@@ -67,25 +67,7 @@
                         nzType="dashed"><i nz-icon nzType="plus"></i>Добавить цену
                     </a>
                 </div>
-                <div class="form-item-box-element">
-                    <div class="form-item-box-element-array"
-                            formArrayName="areas"
-                            *ngFor="let control of form.controls['areas']['controls']; let i = index">
-                        <app-area-input
-                                [area]="form.controls['areas']['controls'][i].value"
-                        ></app-area-input>
-                        <a [disabled]="i == 0 "
-                           nz-button
-                           (click)="onRemoveArea(i)"
-                           nzType="link" nzDanger><i nz-icon nzType="delete"></i>
-                        </a>
-                    </div>
-                    <a  [disabled]="disabledAddAreaFieldButton"
-                        (click)="onAddArea()"
-                        nz-button nzBlock
-                        nzType="dashed"><i nz-icon nzType="plus"></i>Добавить площадь
-                    </a>
-                </div>
+                
                 <div class="form-item-box-element">
                     <div class="form-item-box-element-array"
                             formArrayName="contacts"
@@ -103,6 +85,25 @@
                         (click)="onAddContact()"
                         nz-button nzBlock
                         nzType="dashed"><i nz-icon nzType="plus"></i>Добавить контакт
+                    </a>
+                </div>
+                <div class="form-item-box-element">
+                    <div class="form-item-box-element-array"
+                         formArrayName="areas"
+                         *ngFor="let control of form.controls['areas']['controls']; let i = index">
+                        <app-area-input
+                                [area]="form.controls['areas']['controls'][i].value"
+                        ></app-area-input>
+                        <a [disabled]="i == 0 "
+                           nz-button
+                           (click)="onRemoveArea(i)"
+                           nzType="link" nzDanger><i nz-icon nzType="delete"></i>
+                        </a>
+                    </div>
+                    <a  [disabled]="disabledAddAreaFieldButton"
+                        (click)="onAddArea()"
+                        nz-button nzBlock
+                        nzType="dashed"><i nz-icon nzType="plus"></i>Добавить площадь
                     </a>
                 </div>
             </div>
