@@ -32,7 +32,7 @@ namespace api.Controllers
             }
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserDto user)
+        public async Task<IActionResult> Register(User user)
         {
             if (user == null) return BadRequest();
             try
@@ -51,7 +51,7 @@ namespace api.Controllers
             
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserDto user)
+        public async Task<IActionResult> Login(User user)
         {
             try
             {

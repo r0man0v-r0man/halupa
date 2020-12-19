@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BLL.DTO
 {
-    public class UserDto
+    public class User
     {
         /// <summary>
         /// Unique identificator
@@ -23,7 +23,7 @@ namespace BLL.DTO
         /// Mapping to AppUserDTO
         /// </summary>
         /// <param name="identityUser"></param>
-        public static implicit operator UserDto(AppUser appUser) => new UserDto
+        public static implicit operator User(AppUser appUser) => new User
         {
             UserName = appUser?.UserName,
             Id = appUser.Id
@@ -32,7 +32,7 @@ namespace BLL.DTO
         /// Mapping to AppUser
         /// </summary>
         /// <param name="userViewModel"></param>
-        public static implicit operator AppUser(UserDto appUserDTO) => new AppUser
+        public static implicit operator AppUser(User appUserDTO) => new AppUser
         {
             UserName = appUserDTO?.UserName,
             NormalizedUserName = appUserDTO.UserName.ToUpper(CultureInfo.GetCultureInfo(1049))
