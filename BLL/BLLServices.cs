@@ -3,6 +3,7 @@ using BLL.Config;
 using BLL.Services;
 using BLL.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace BLL
 {
@@ -17,10 +18,7 @@ namespace BLL
 
             services.AddMemoryCache();
 
-            services.AddAutoMapper(options =>
-            {
-                options.AddProfile<Mapping>();
-            });
+            services.AddAutoMapper(typeof(Mapping));
 
             return services;
         }

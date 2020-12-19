@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BLL.DTO;
 using BLL.Services.Interfaces;
+using DAL.Entities;
 using DAL.Repo.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
@@ -12,15 +14,17 @@ namespace BLL.Services
     public class UserService : IUserService
     {
         private readonly IUserRepo _userRepo;
-        public UserService(IUserRepo userRepo)
+        private readonly IMapper _mapper;
+        public UserService(IUserRepo userRepo, IMapper mapper)
         {
             _userRepo = userRepo;
+            _mapper = mapper;
         }
-        public async Task<IdentityResult> CreateAsync(User user, string password)
-        {
-            var result = await _userRepo.CreateAsync(user, password).ConfigureAwait(false);
-            return result;
-        }
+        public async Task<IdentityResult> CreateAsync(User user, string password) => 
+            await _userRepo
+                .CreateAsync(_mapper.Map<AppUser>(user), password)
+                .ConfigureAwait(false);
+           
 
         public async Task<string> LoginAsync(User user, string password)
         {

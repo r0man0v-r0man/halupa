@@ -43,9 +43,9 @@ namespace api.Controllers
 
                 return BadRequest(result.Errors.FirstOrDefault().Description);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e);
                 throw;
             }
             

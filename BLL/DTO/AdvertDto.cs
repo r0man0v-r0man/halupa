@@ -25,7 +25,7 @@ namespace BLL.DTO
             IsActive = advertDto.IsActive,
             Address = advertDto.Address,
             Images = advertDto.Images.Select(item => (Image) item).ToList(),
-            Prices = advertDto.Prices.Select(item => (DAL.Entities.Price) item).ToList(),
+            Prices = new List<DAL.Entities.Price>(),
             Description = advertDto.Description,
             Areas = advertDto.Areas.Select(item => (Area)item).ToList(),
             Contacts = advertDto.Contacts.Select(item => (Contact)item).ToList()
@@ -39,7 +39,7 @@ namespace BLL.DTO
             IsActive = advert.IsActive,
             Address = advert.Address,
             Images = advert.Images.Select(item => (ImageDto) item).ToList(),
-            Prices = advert?.Prices.Select(item => (Price)item).ToList(),
+            Prices = new List<Price>(),
             AppUserId = advert?.AppUserId,
             Areas = advert?.Areas.Select(item => (AreaDto)item).ToList(),
             Contacts = advert?.Contacts.Select(item => (ContactDto)item).ToList(),
