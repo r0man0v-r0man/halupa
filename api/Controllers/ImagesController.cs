@@ -17,7 +17,7 @@ namespace api.Controllers
             _fileService = fileService;
         }
         [HttpPost]
-        public async Task<ActionResult<ImageDto>> Post(IFormFile file)
+        public async Task<ActionResult<Image>> Post(IFormFile file)
         {
             if (file is null) return StatusCode(StatusCodes.Status503ServiceUnavailable);
             try

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using BLL.Config;
+using BLL.Helpers;
 using BLL.Services;
 using BLL.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace BLL
 {
@@ -17,8 +17,10 @@ namespace BLL
             services.AddScoped(typeof(ISitemapService), typeof(SitemapService));
 
             services.AddMemoryCache();
+            services.AddSingleton<CacheHelper>();
 
-            services.AddAutoMapper(typeof(Mapping));
+            services.AddAutoMapper(typeof(BLLMappingProfile));
+            
 
             return services;
         }

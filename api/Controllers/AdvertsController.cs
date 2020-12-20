@@ -20,7 +20,7 @@ namespace api.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult<int>> Add(AdvertDto advert)
+        public async Task<ActionResult<int>> Add(Advert advert)
         {
             if (advert == null) return BadRequest();
             try
@@ -38,7 +38,7 @@ namespace api.Controllers
             }
         }
         [HttpGet("getAdvert")]
-        public async Task<ActionResult<AdvertDto>> GetAdvert(int id)
+        public async Task<ActionResult<Advert>> GetAdvert(int id)
         {
             if (id == 0) return BadRequest();
             try
@@ -53,7 +53,7 @@ namespace api.Controllers
             }
         }
         [HttpGet("getAnyAdverts")]
-        public async Task<ActionResult<IEnumerable<AdvertDto>>> GetAnyAdverts(int pageNumber)
+        public async Task<ActionResult<IEnumerable<Advert>>> GetAnyAdverts(int pageNumber)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace api.Controllers
             }
         }
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<AdvertDto>>> Search(int pageNumber, string locality)
+        public async Task<ActionResult<IEnumerable<Advert>>> Search(int pageNumber, string locality)
         {
             try
             {

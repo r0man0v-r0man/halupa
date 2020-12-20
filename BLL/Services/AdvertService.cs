@@ -2,65 +2,77 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BLL.DTO;
+using AutoMapper;
+using BL = BLL.DTO;
+using DA = DAL.Entities;
 using BLL.Services.Interfaces;
 using DAL.Repo.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using BLL.Helpers;
 
 namespace BLL.Services
 {
     public class AdvertService : IAdvertService
     {
         private readonly IAdvertRepo _advertRepo;
+
         private readonly IMemoryCache _memoryCache;
+        private readonly MemoryCacheEntryOptions _memoryCacheEntryOptions;
+
+        private readonly IMapper _mapper;
+
         private const string advertKey = "advert";
-        private MemoryCacheEntryOptions MemoryCacheEntryOptions { get; }
         public AdvertService(
-            IAdvertRepo advertRepo, 
+            IAdvertRepo advertRepo,
             IMemoryCache memoryCache,
-            IConfiguration configuration)
+            CacheHelper cacheHelper,
+            IMapper mapper)
         {
             _advertRepo = advertRepo;
             _memoryCache = memoryCache;
-            MemoryCacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(configuration.GetValue<int>("MemoryCacheEntryOptions:AbsoluteExpirationRelativeToNow"))
-            };
-        }
-        public async Task<int> AddAsync(AdvertDto advert)
-        {
-            var result = await _advertRepo.AddAdvertAsync(advert).ConfigureAwait(false);
-            return result;
+            _mapper = mapper;
+            _memoryCacheEntryOptions = cacheHelper.MemoryCacheEntryOptions;
         }
 
-        public async Task<AdvertDto> GetAsync(int id)
+        public async Task<int> AddAsync(BL.Advert advert) =>
+             await _advertRepo
+                .AddAdvertAsync(_mapper.Map<DA.Advert>(advert))
+                .ConfigureAwait(false);
+        
+
+        public async Task<BL.Advert> GetAsync(int id)
         {
             return await _memoryCache.GetOrCreateAsync(advertKey + id, async cacheEntry =>
             {
-                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
-                AdvertDto advert = await _advertRepo.GetAdvertByIdAsync(id).ConfigureAwait(false);
-                return advert;
+                cacheEntry
+                .AbsoluteExpirationRelativeToNow = _memoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+                var result = await _advertRepo
+                    .GetAdvertByIdAsync(id)
+                    .ConfigureAwait(false);
+                return _mapper.Map<BL.Advert>(result);
             }).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<AdvertDto>> GetAnyAdvertsAsync(int pageNumber)
+        public async Task<IEnumerable<BL.Advert>> GetAnyAdvertsAsync(int pageNumber)
         {
-            var adverts = await _advertRepo.GetAnyAdvertsAsync(pageNumber).ConfigureAwait(false);
-            return adverts.Select(advert => (AdvertDto)advert);
+            var adverts = await _advertRepo
+                .GetAnyAdvertsAsync(pageNumber)
+                .ConfigureAwait(false);
+            return _mapper.Map<IEnumerable<BL.Advert>>(adverts);
         }
 
-        public async Task<IEnumerable<AdvertDto>> SearchByLocalityAsync(int pageNumber, string locality)
+        public async Task<IEnumerable<BL.Advert>> SearchByLocalityAsync(int pageNumber, string locality)
         {
             var result = await _advertRepo
                 .SearchByLocalityAsync(pageNumber, locality)
                 .ConfigureAwait(false);
-            return result.Select(advert => (AdvertDto)advert);
+            return _mapper.Map<IEnumerable<BL.Advert>>(result);
         }
 
-        public async Task<IEnumerable<int>> GetAdvertsIds()
-        {
-            return await _advertRepo.GetAdvertsIds().ConfigureAwait(false);
-        }
+        public async Task<IEnumerable<int>> GetAdvertsIds() => 
+            await _advertRepo
+                .GetAdvertsIds()
+                .ConfigureAwait(false);
     }
 }

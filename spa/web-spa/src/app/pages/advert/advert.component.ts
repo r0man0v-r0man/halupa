@@ -32,9 +32,9 @@ export class AdvertComponent implements OnInit {
     this.advertService.getAdvert(id).subscribe(response => {
         if(response) {
           this.advert = response;
+          console.warn(response)
           this.initSlides(this.advert.images);
         }
-      
     });
   }
 
@@ -49,7 +49,7 @@ export class AdvertComponent implements OnInit {
     const slides: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
     images.forEach((image, index) => {
       const img = {
-        url: image.linkProps.download,
+        url: image.url,
         alt: this.advert.address.geoObject.name,
         isVisible: false,
         id: index

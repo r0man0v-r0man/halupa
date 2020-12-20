@@ -24,7 +24,7 @@
     {{ item.created | date : 'shortDate' : '' : 'ru' }}
 </ng-template>
 <ng-template #coverTpl>
-    <img [alt]="item.address.geoObject.name" [src]="item.images[0]?.linkProps.download"/>
+    <img [alt]="item.address.geoObject.name" [src]="item.images[0]?.url"/>
 </ng-template>
 <ng-template #viewAction>
     <span (click)="onCardClick(item)">Посмотреть</span>

@@ -27,7 +27,12 @@
             </div>
         </div>
         <div class="advert-footer">
-            {{ advert.description.value }}
+            <div class="advert-footer-item">
+                <span nz-typography nzType="secondary">{{ advert.address.geoObject.description }}</span>
+            </div>
+            <div class="advert-footer-item">
+                {{ advert.description.value }}
+            </div>
         </div>
     </div>
 </div>

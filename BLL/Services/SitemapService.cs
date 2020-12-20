@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using BLL.Helpers;
 using BLL.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
@@ -11,25 +12,24 @@ namespace BLL.Services
     {
         private readonly IAdvertService _advertService;
         private readonly IMemoryCache _memoryCache;
+        private readonly MemoryCacheEntryOptions _memoryCacheEntryOptions;
 
-        private MemoryCacheEntryOptions MemoryCacheEntryOptions { get; }
-
-        public SitemapService(IMemoryCache memoryCache, IAdvertService advertService, IConfiguration configuration)
+        public SitemapService(IMemoryCache memoryCache,
+                              IAdvertService advertService,
+                              IConfiguration configuration,
+                              CacheHelper cacheHelper)
         {
             _memoryCache = memoryCache;
             _advertService = advertService;
-            MemoryCacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(configuration.GetValue<int>("MemoryCacheEntryOptions:AbsoluteExpirationRelativeToNow"))
-            };
+            _memoryCacheEntryOptions = cacheHelper.MemoryCacheEntryOptions;
         }
 
         public async Task<XDocument> GetSitemapAsync()
         {
             return await _memoryCache.GetOrCreateAsync("sitemap", async cacheEntry =>
             {
-                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
-                
+                cacheEntry.AbsoluteExpirationRelativeToNow = _memoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+
                 XNamespace xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
                 XElement root = new XElement(xmlns + "urlset");
                 

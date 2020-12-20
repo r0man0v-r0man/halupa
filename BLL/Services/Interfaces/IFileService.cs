@@ -9,7 +9,7 @@ namespace BLL.Services.Interfaces
 {
     public interface IFileService
     {
-        Task<ImageDto> UploadAsync(IFormFile image);
+        Task<Image> UploadAsync(IFormFile image);
         Task<bool> DeleteAsync(string deleteHash);
     }
 }

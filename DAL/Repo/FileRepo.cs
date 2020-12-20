@@ -31,7 +31,9 @@ namespace DAL.Repo
         {
             try
             {
-                var result = await _imageEndpoint.UploadImageAsync(file?.OpenReadStream()).ConfigureAwait(false);
+                var result = await _imageEndpoint
+                    .UploadImageAsync(file?.OpenReadStream())
+                    .ConfigureAwait(false);
                 return new Image
                 {
                     DeleteHash = result.DeleteHash,
