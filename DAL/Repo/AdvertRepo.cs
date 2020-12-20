@@ -55,6 +55,7 @@ namespace DAL.Repo
                 .Include(prop => prop.Contacts)
                 .Include(prop => prop.Description)
                 .Include(prop => prop.Areas)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(prop => prop.Id == id)
                 .ConfigureAwait(false);
@@ -92,6 +93,7 @@ namespace DAL.Repo
                 .Include(prop => prop.Areas)
                 .Include(prop => prop.Contacts)
                 .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
@@ -114,6 +116,7 @@ namespace DAL.Repo
                 .Include(prop => prop.Contacts)
                 .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
+                .AsSplitQuery()
                 .Where(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
                     // linq to sql сравнение без учета регистра
                     // https://github.com/dotnet/efcore/issues/11414#issuecomment-376272297

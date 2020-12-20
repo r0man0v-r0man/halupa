@@ -21,7 +21,8 @@ namespace api.Controllers
         {
             try
             {
-                var doc = await _sitemapService.GetSitemapAsync()
+                var doc = await _sitemapService
+                    .GetSitemapAsync()
                     .ConfigureAwait(false);
 
                 return Content(doc.ToString());
