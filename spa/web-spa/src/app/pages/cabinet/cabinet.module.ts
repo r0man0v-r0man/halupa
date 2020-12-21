@@ -9,6 +9,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
   LogoutOutline
 } from '@ant-design/icons-angular/icons';
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 const icons = [
   LogoutOutline
 ]
@@ -18,7 +19,8 @@ const icons = [
     CommonModule,
     CabinetRoutingModule,
     NzButtonModule,
-    NzIconModule.forChild(icons)
+    NzIconModule.forChild(icons),
+      NzTypographyModule
   ],
   exports:[
     CabinetComponent

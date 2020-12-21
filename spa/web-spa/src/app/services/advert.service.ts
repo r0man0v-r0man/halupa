@@ -6,18 +6,30 @@ import { map } from 'rxjs/operators';
 import { IAdvert } from '../models/advert.model';
 import { URLs } from '../urls';
 import {ISearch, ISearchResult} from "../models/search.model";
+import {AuthService} from "./auth.service";
 
 @Injectable()
 export class AdvertService {
+  userAdverts: IAdvert[] = [];
   searchResult: ISearchResult;
   /** for SSR */
   private baseUrl: string;
   headers = new HttpHeaders().set('content-type', 'application/json');
   constructor(
     private _httpClient: HttpClient,
-    private router: Router
-  ) { 
+    private router: Router,
+    private _authService: AuthService
+  ) { }
+
+  getUserAdverts(){
+    this._httpClient
+        .get(URLs.advert.userAdverts, {headers: this._authService.SecureHeaders})
+        .subscribe(response => {
+          console.warn(response)
+          console.log('1')
+        });
   }
+  
   addAdvert(advert: IAdvert){
     this._httpClient.post<number>(URLs.addAdvertURL, advert, {headers: this.headers })
       .pipe(map((response: number) => this.goToAdvert(response))).subscribe();
@@ -62,4 +74,5 @@ export class AdvertService {
       }
     });
   }
+
 }

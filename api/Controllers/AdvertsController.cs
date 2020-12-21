@@ -1,5 +1,6 @@
 ﻿using BLL.DTO;
 using BLL.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -79,6 +80,21 @@ namespace api.Controllers
             catch (Exception)
             {
                 return BadRequest();
+                throw;
+            }
+        }
+        [Authorize]
+        [HttpGet("userAdverts")]
+        public async Task<ActionResult<IEnumerable<Advert>>> UserAdverts()
+        {
+            try
+            {
+                var user = User;
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
                 throw;
             }
         }
