@@ -74,5 +74,13 @@ namespace BLL.Services
             await _advertRepo
                 .GetAdvertsIds()
                 .ConfigureAwait(false);
+
+        public async Task<IEnumerable<BL.Advert>> GetUserAdvertsAsync(string userId)
+        {
+           var result = await _advertRepo
+                .GetUserAdvertsAsync(userId)
+                .ConfigureAwait(false);
+            return _mapper.Map<IEnumerable<BL.Advert>>(result);
+        }
     }
 }

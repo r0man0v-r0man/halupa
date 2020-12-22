@@ -10,7 +10,7 @@ namespace DAL.Repo.Interfaces
         Task<Advert> GetAdvertByIdAsync(int id);
         Task<IEnumerable<int>> GetAdvertsIds();
         Task<IEnumerable<Advert>> GetAdvertsAsync(int pageNumber);
-        Task<IEnumerable<Advert>> GetUserAdvertsAsync(string userId, int pageNumber);
+        Task<IEnumerable<Advert>> GetUserAdvertsAsync(string userId);
         Task<bool> DeleteAdvertAsync(int id);
         Task<IEnumerable<Advert>> GetAnyAdvertsAsync(int pageNumber);
         Task<IEnumerable<Advert>> SearchByLocalityAsync(int pageNumber, string locality);

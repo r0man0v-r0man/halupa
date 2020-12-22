@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace api.Controllers
@@ -89,8 +90,11 @@ namespace api.Controllers
         {
             try
             {
-                var user = User;
-                return Ok();
+                var userAdverts = await _advertService
+                    .GetUserAdvertsAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                    .ConfigureAwait(false);
+
+                return Ok(userAdverts);
             }
             catch (Exception e)
             {

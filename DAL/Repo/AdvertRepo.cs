@@ -1,6 +1,7 @@
 ﻿using DAL.Context;
 using DAL.Context.Interfaces;
 using DAL.Entities;
+using DAL.Extensions;
 using DAL.Repo.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -47,15 +48,7 @@ namespace DAL.Repo
         {
             using var context = _contextFactory.CreateDbContext();
             var result = await context.Adverts
-                .Include(prop => prop.Address.GeoObject.Point)
-                .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
-                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
-                .Include(prop => prop.Images)
-                .Include(prop => prop.Prices)
-                .Include(prop => prop.Contacts)
-                .Include(prop => prop.Description)
-                .Include(prop => prop.Areas)
-                .AsSplitQuery()
+                .IncludeAdvertFields()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(prop => prop.Id == id)
                 .ConfigureAwait(false);
@@ -78,22 +71,29 @@ namespace DAL.Repo
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Advert>> GetUserAdvertsAsync(string userId, int pageNumber)
+        public async Task<IEnumerable<Advert>> GetUserAdvertsAsync(string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using var context = _contextFactory.CreateDbContext();
+                return await context.Adverts
+                    .AsNoTracking()
+                    .IncludeAdvertFields()
+                    .Where(prop => string.Equals(prop.AppUserId, userId))
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+            }
+            catch 
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<Advert>> GetAnyAdvertsAsync(int pageNumber)
         {
             using var context = _contextFactory.CreateDbContext();
             return await context.Adverts
-                .Include(prop => prop.Images)
-                .Include(prop => prop.Prices)
-                .Include(prop => prop.Description)
-                .Include(prop => prop.Areas)
-                .Include(prop => prop.Contacts)
-                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
-                .AsSplitQuery()
+                .IncludeAdvertFields()
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
@@ -109,14 +109,8 @@ namespace DAL.Repo
             using var context = _contextFactory.CreateDbContext();
             
             return await context.Adverts
-                .Include(prop => prop.Images)
-                .Include(prop => prop.Prices)
-                .Include(prop => prop.Description)
-                .Include(prop => prop.Areas)
-                .Include(prop => prop.Contacts)
-                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .IncludeAdvertFields()
                 .AsNoTracking()
-                .AsSplitQuery()
                 .Where(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
                     // linq to sql сравнение без учета регистра
                     // https://github.com/dotnet/efcore/issues/11414#issuecomment-376272297

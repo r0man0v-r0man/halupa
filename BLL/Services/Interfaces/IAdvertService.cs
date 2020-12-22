@@ -25,5 +25,6 @@ namespace BLL.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<int>> GetAdvertsIds();
+        Task<IEnumerable<BL.Advert>> GetUserAdvertsAsync(string userId);
     }
 }
