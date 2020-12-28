@@ -3,7 +3,12 @@
         <div class="cabinet-item">
             <h4 nz-typography>Мои объявления</h4>
             <div class="cabinet-item-list">
-                
+                <div *ngFor="let advert of adverts" class="cabinet-item-list-element">
+                    <div>
+                        {{advert.address.geoObject.name}}
+                    </div>
+                    <pre>{{advert | json}}</pre>
+                </div>
             </div>
         </div>
     </div>

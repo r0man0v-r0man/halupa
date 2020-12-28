@@ -23,10 +23,9 @@ export class AdvertService {
 
   getUserAdverts(){
     this._httpClient
-        .get(URLs.advert.userAdverts, {headers: this._authService.SecureHeaders})
+        .get<IAdvert[]>(URLs.advert.userAdverts, {headers: this._authService.SecureHeaders})
         .subscribe(response => {
-          console.warn(response)
-          console.log('1')
+          this.userAdverts = [...response]
         });
   }
   
