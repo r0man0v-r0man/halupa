@@ -7,7 +7,8 @@ export const URLs = {
     addImageURL: api + 'images',
     deleteImageURL: api + 'images',
     advert: {
-      userAdverts: api + 'adverts/userAdverts'  
+      getUserAdverts: api + 'adverts/userAdverts',
+      deleteAdvert: api + 'adverts/'
     },
     // user
     isUserNameExistURL: api + 'accounts/isUserNameExist',

@@ -10,6 +10,7 @@ import {AuthService} from "./auth.service";
 
 @Injectable()
 export class AdvertService {
+  
   userAdverts: IAdvert[] = [];
   searchResult: ISearchResult;
   /** for SSR */
@@ -23,7 +24,7 @@ export class AdvertService {
 
   getUserAdverts(){
     this._httpClient
-        .get<IAdvert[]>(URLs.advert.userAdverts, {headers: this._authService.SecureHeaders})
+        .get<IAdvert[]>(URLs.advert.getUserAdverts, {headers: this._authService.SecureHeaders})
         .subscribe(response => {
           this.userAdverts = [...response]
         });
@@ -73,5 +74,9 @@ export class AdvertService {
       }
     });
   }
-
+  remove(advertId: number) {
+    this._httpClient
+    .delete(URLs.advert.deleteAdvert + advertId, {headers:this._authService.SecureHeaders})
+    .subscribe();
+  }
 }

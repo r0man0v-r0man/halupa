@@ -1,18 +1,32 @@
 <div class="wrap">
-    <div class="cabinet">
-        <div class="cabinet-item">
-            <h4 nz-typography>Мои объявления</h4>
-            <div class="cabinet-item-list">
-                <div *ngFor="let advert of adverts" class="cabinet-item-list-element">
-                    <div>
-                        {{advert.address.geoObject.name}}
-                    </div>
-                    <pre>{{advert | json}}</pre>
-                </div>
+  <div class="cabinet">
+    <div class="cabinet-item">
+      <h4 nz-typography>Мои объявления</h4>
+      <div class="cabinet-item-list">
+        <div *ngFor="let advert of adverts" class="cabinet-item-list-element">
+          <div
+            class="cabinet-item-list-element-title"
+            [routerLink]="['/adverts', advert.id]"
+          >
+            {{ advert.address.geoObject.name }}
+          </div>
+          <div class="cabinet-item-list-element-advert-actions">
+            <div>
+              <button
+                (click)="onRemove(advert.id)"
+                nz-button
+                nzType="primary"
+                nzDanger
+              >
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <button nz-button nzBlock nzType="text" (click)="onLogOut()">
-        <i nz-icon nzType="logout" nzTheme="outline"></i>Выход
-    </button>    
+  </div>
+  <button nz-button nzBlock nzType="text" (click)="onLogOut()">
+    <i nz-icon nzType="logout" nzTheme="outline"></i>Выход
+  </button>
 </div>

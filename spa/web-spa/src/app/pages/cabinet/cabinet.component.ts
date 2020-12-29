@@ -27,4 +27,7 @@ export class CabinetComponent implements OnInit {
   get adverts(){
     return this._advertService.userAdverts;
   }
+  onRemove(advertId: number){
+    this._advertService.remove(advertId);
+  }
 }
