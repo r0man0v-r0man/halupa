@@ -102,5 +102,19 @@ namespace api.Controllers
                 throw;
             }
         }
+        [Authorize]
+        [HttpDelete("{advertId}")]
+        public async Task<IActionResult> Delete(int advertId)
+        {
+            try
+            {
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+                throw;
+            }
+        }
     }
 }
