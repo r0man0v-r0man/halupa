@@ -108,6 +108,9 @@ namespace api.Controllers
         {
             try
             {
+                await _advertService
+                    .RemoveAsync(advertId)
+                    .ConfigureAwait(false);
                 return NoContent();
             }
             catch (Exception e)

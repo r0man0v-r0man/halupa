@@ -76,7 +76,11 @@ export class AdvertService {
   }
   remove(advertId: number) {
     this._httpClient
-    .delete(URLs.advert.deleteAdvert + advertId, {headers:this._authService.SecureHeaders})
-    .subscribe();
+    .delete(URLs.advert.deleteAdvert + advertId, {headers:this._authService.SecureHeaders, observe: 'response'})
+    .subscribe(response => {
+      if(response.status == 204){
+        this.userAdverts.splice(this.userAdverts.findIndex(x => x.id == advertId),1);
+      }
+    });
   }
 }

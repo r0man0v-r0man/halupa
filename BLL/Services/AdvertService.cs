@@ -82,5 +82,10 @@ namespace BLL.Services
                 .ConfigureAwait(false);
             return _mapper.Map<IEnumerable<BL.Advert>>(result);
         }
+
+        public async Task RemoveAsync(int advertId) =>
+            await _advertRepo
+            .DeleteAdvertAsync(advertId)
+            .ConfigureAwait(false);
     }
 }

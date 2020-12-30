@@ -39,9 +39,19 @@ namespace DAL.Repo
 
         }
 
-        public async Task<bool> DeleteAdvertAsync(int id)
+        public async Task DeleteAdvertAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using var context = _contextFactory.CreateDbContext();
+                var advert = await context.Adverts.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
+                context.Adverts.Remove(advert);
+                await context.SaveChangesAsync().ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<Advert> GetAdvertByIdAsync(int id)
