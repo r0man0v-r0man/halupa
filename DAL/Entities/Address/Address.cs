@@ -2,7 +2,7 @@
 
 namespace DAL.Entities.Address
 {
-    public class Address
+    public record Address
     {
         public int Id { get; set; }
         public string Country_code { get; set; }

@@ -1,8 +1,6 @@
-﻿using DAL.Entities.Address;
-
-namespace BLL.DTO.Address
+﻿namespace BLL.DTO.Address
 {
-    public class YandexAddress
+    public record YandexAddress
     {
         public int? Id { get; set; }
         public int? GeoObjectId { get; set; }

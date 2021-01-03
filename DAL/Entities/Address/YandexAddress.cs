@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities.Address
 {
-    public class YandexAddress
+    public record YandexAddress
     {
         public int Id { get; set; }
         public int GeoObjectId { get; set; }

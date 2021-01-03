@@ -2,7 +2,7 @@
 
 namespace BLL.DTO.Address
 {
-    public class Point
+    public record Point
     {
         public int? Id { get; set; }
         public string Pos { get; set; }

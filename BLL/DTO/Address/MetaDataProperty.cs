@@ -2,7 +2,7 @@
 
 namespace BLL.DTO.Address
 {
-    public class MetaDataProperty
+    public record MetaDataProperty
     {
         public int? Id { get; set; }
         public int? GeocoderMetaDataId { get; set; }

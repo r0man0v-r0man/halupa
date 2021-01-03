@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities.Address
 {
-    public class GeoObject
+    public record GeoObject
     {
         public int Id { get; set; }
         public string Name { get; set; }

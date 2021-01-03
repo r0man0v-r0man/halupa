@@ -4,7 +4,7 @@ using DAL.Entities.Address;
 
 namespace BLL.DTO.Address
 {
-    public class Address
+    public record Address
     {
         public int? Id { get; set; }
         public string Country_code { get; set; }

@@ -2,7 +2,7 @@
 
 namespace BLL.DTO.Address
 {
-    public class GeocoderMetaData
+    public record GeocoderMetaData
     {
         public int? Id { get; set; }
         public string Kind { get; set; }

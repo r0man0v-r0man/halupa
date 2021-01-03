@@ -2,7 +2,7 @@
 
 namespace BLL.DTO.Address
 {
-    public class Component
+    public record Component
     {
         public int? Id { get; set; }
         

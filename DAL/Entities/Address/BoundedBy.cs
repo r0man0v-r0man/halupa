@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities.Address
 {
-    public class BoundedBy
+    public record BoundedBy
     {
         public int Id { get; set; }
         public int EnvelopeId { get; set; }

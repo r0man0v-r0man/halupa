@@ -2,7 +2,7 @@
 
 namespace BLL.DTO.Address
 {
-    public class Envelope
+    public record Envelope
     {
         public int? Id { get; set; }
         public string LowerCorner { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities.Address
 {
-    public class Component
+    public record Component
     {
         public int Id { get; set; }
         public string Kind { get; set; }
