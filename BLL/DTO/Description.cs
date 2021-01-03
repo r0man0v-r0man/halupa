@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DAL.Entities;
-
-namespace BLL.DTO
+﻿namespace BLL.DTO
 {
-    public class Description
+    public record Description
     {
         public string Value { get; set; }
     }

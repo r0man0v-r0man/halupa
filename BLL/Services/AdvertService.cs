@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using BL = BLL.DTO;
-using DA = DAL.Entities;
+﻿using AutoMapper;
+using BLL.Helpers;
 using BLL.Services.Interfaces;
 using DAL.Repo.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
-using BLL.Helpers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using BL = BLL.DTO;
+using DA = DAL.Entities;
 
 namespace BLL.Services
 {
@@ -39,7 +36,7 @@ namespace BLL.Services
              await _advertRepo
                 .AddAdvertAsync(_mapper.Map<DA.Advert>(advert))
                 .ConfigureAwait(false);
-        
+
 
         public async Task<BL.Advert> GetAsync(int id)
         {
@@ -70,22 +67,25 @@ namespace BLL.Services
             return _mapper.Map<IEnumerable<BL.Advert>>(result);
         }
 
-        public async Task<IEnumerable<int>> GetAdvertsIds() => 
+        public async Task<IEnumerable<int>> GetAdvertsIds() =>
             await _advertRepo
                 .GetAdvertsIds()
                 .ConfigureAwait(false);
 
         public async Task<IEnumerable<BL.Advert>> GetUserAdvertsAsync(string userId)
         {
-           var result = await _advertRepo
-                .GetUserAdvertsAsync(userId)
-                .ConfigureAwait(false);
+            var result = await _advertRepo
+                 .GetUserAdvertsAsync(userId)
+                 .ConfigureAwait(false);
             return _mapper.Map<IEnumerable<BL.Advert>>(result);
         }
 
-        public async Task RemoveAsync(int advertId) =>
+        public async Task RemoveAsync(int advertId)
+        {
+            _memoryCache.Remove(advertKey + advertId);
             await _advertRepo
-            .DeleteAdvertAsync(advertId)
-            .ConfigureAwait(false);
+                .DeleteAdvertAsync(advertId)
+                .ConfigureAwait(false);
+        }
     }
 }

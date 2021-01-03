@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities
 {
-    public class Description
+    public record Description
     {
         public int Id { get; set; }
         public string Value { get; set; }

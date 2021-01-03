@@ -24,7 +24,10 @@ namespace DAL.Repo
             _userManager = userManager;
         }
 
-        public async Task<bool> CheckPasswordAsync(AppUser user, string password) => await _userManager.CheckPasswordAsync(user, password).ConfigureAwait(false);
+        public async Task<bool> CheckPasswordAsync(AppUser user, string password) => 
+            await _userManager
+            .CheckPasswordAsync(user, password)
+            .ConfigureAwait(false);
 
         public async Task<IdentityResult> CreateAsync(AppUser user, string password)
         {
@@ -58,11 +61,21 @@ namespace DAL.Repo
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<AppUser> FindByIdAsync(string currentUserId) => await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == currentUserId).ConfigureAwait(false);
+        public async Task<AppUser> FindByIdAsync(string currentUserId) => 
+            await _userManager.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == currentUserId)
+            .ConfigureAwait(false);
 
-        public async Task<AppUser> FindByNameAsync(string userName) => await _userManager.FindByNameAsync(userName).ConfigureAwait(false);
+        public async Task<AppUser> FindByNameAsync(string userName) => 
+            await _userManager
+            .FindByNameAsync(userName)
+            .ConfigureAwait(false);
 
-        public async Task<IEnumerable<Claim>> GetClaims(AppUser user) => await _userManager.GetClaimsAsync(user).ConfigureAwait(false);
+        public async Task<IEnumerable<Claim>> GetClaims(AppUser user) => 
+            await _userManager
+            .GetClaimsAsync(user)
+            .ConfigureAwait(false);
 
         public async Task<bool> IsValidateUserNameAsync(string userName)
         {
