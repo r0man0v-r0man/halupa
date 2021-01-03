@@ -1,6 +1,7 @@
 ﻿using DAL.Entities;
 using DAL.Entities.Address;
 using DAL.Entities.Common;
+using System;
 using System.Collections.Generic;
 
 namespace DAL.Entities
@@ -11,11 +12,13 @@ namespace DAL.Entities
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
         public bool IsActive { get; set; }
-        public YandexAddress Address { get; set; }
-        public List<Image> Images { get; set; }
-        public List<Price> Prices { get; set; }
+        public int YandexAddressId { get; set; }
+        public YandexAddress YandexAddress { get; set; }
+        public int DescriptionId { get; set; }
         public Description Description { get; set; }
-        public List<Area> Areas { get; set; }
-        public List<Contact> Contacts { get; set; }
+        public ICollection<Image> Images { get; set; }
+        public ICollection<Price> Prices { get; set; }
+        public ICollection<Area> Areas { get; set; }
+        public ICollection<Contact> Contacts { get; set; }
     }
 }

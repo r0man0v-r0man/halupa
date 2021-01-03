@@ -3,7 +3,7 @@
         <div class="advert-header">
             <div class="advert-header-item">
                 <a nz-button nzType="text" (click)="onBack()"><i nz-icon nzType="arrow-left" nzTheme="outline"></i></a>
-                <span class="advert-header-item-address" nz-typography><strong>{{advert.address.geoObject.name}}</strong></span>
+                <span class="advert-header-item-address" nz-typography><strong>{{advert.yandexAddress.geoObject.name}}</strong></span>
             </div>
             <div class="advert-header-item">
                 <app-price [prices]="advert.prices"></app-price>
@@ -28,7 +28,7 @@
         </div>
         <div class="advert-footer">
             <div class="advert-footer-item">
-                <span nz-typography nzType="secondary">{{ advert.address.geoObject.description }}</span>
+                <span nz-typography nzType="secondary">{{ advert.yandexAddress.geoObject.description }}</span>
             </div>
             <div class="advert-footer-item">
                 {{ advert.description.value }}

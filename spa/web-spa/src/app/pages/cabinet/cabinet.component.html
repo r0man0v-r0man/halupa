@@ -8,7 +8,7 @@
             class="cabinet-item-list-element-title"
             [routerLink]="['/adverts', advert.id]"
           >
-            {{ advert.address.geoObject.name }}
+            {{ advert?.yandexAddress?.geoObject?.name }}
           </div>
           <div class="cabinet-item-list-element-advert-actions">
             <div>

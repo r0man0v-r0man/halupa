@@ -7,5 +7,7 @@
         public string Url { get; set; }
         public string Uid { get; set; }
         public long Size { get; set; }
+        public int AdvertId { get; set; }
+        public Advert Advert { get; set; }
     }
 }

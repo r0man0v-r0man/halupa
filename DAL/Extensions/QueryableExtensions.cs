@@ -19,12 +19,12 @@ namespace DAL.Extensions
         {
             return adverts
                 .AsSplitQuery()
-                .Include(prop => prop.Address.GeoObject.Point)
-                .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
-                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .Include(prop => prop.YandexAddress.GeoObject.Point)
+                .Include(prop => prop.YandexAddress.GeoObject.BoundedBy.Envelope)
+                .Include(prop => prop.YandexAddress.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .Include(prop => prop.Description)
                 .Include(prop => prop.Areas)
                 .Include(prop => prop.Contacts)
-                .Include(prop => prop.Description)
                 .Include(prop => prop.Images)
                 .Include(prop => prop.Prices);
         }

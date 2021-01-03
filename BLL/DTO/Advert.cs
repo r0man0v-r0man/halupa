@@ -8,7 +8,7 @@ namespace BLL.DTO
         public int Id { get; set; }
         public string AppUserId { get; set; }
         public bool IsActive { get; set; }
-        public YandexAddress Address { get; set; }
+        public YandexAddress YandexAddress { get; set; }
         public List<Image> Images { get; set; }
         public List<Price> Prices { get; set; }
         public Description Description { get; set; }

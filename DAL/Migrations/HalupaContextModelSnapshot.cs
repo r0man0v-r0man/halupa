@@ -14,7 +14,7 @@ namespace DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("DAL.Entities.Address.Address", b =>
                 {
@@ -191,7 +191,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("GeoObjectId");
 
-                    b.ToTable("YandexAddress");
+                    b.ToTable("YandexAddresses");
                 });
 
             modelBuilder.Entity("DAL.Entities.Advert", b =>
@@ -200,16 +200,13 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("AppUserId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DescriptionId")
+                    b.Property<int>("DescriptionId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsActive")
@@ -218,13 +215,18 @@ namespace DAL.Migrations
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<int>("YandexAddressId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("AddressId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("DescriptionId");
+                    b.HasIndex("DescriptionId")
+                        .IsUnique();
+
+                    b.HasIndex("YandexAddressId")
+                        .IsUnique();
 
                     b.ToTable("Adverts");
                 });
@@ -299,7 +301,7 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AdvertId")
+                    b.Property<int>("AdvertId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Kind")
@@ -312,7 +314,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("AdvertId");
 
-                    b.ToTable("Area");
+                    b.ToTable("Areas");
                 });
 
             modelBuilder.Entity("DAL.Entities.Contact", b =>
@@ -321,7 +323,7 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AdvertId")
+                    b.Property<int>("AdvertId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Kind")
@@ -334,7 +336,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("AdvertId");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("DAL.Entities.Description", b =>
@@ -348,7 +350,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Description");
+                    b.ToTable("Descriptions");
                 });
 
             modelBuilder.Entity("DAL.Entities.Image", b =>
@@ -356,7 +358,7 @@ namespace DAL.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("AdvertId")
+                    b.Property<int>("AdvertId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("DeleteHash")
@@ -375,7 +377,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("AdvertId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("DAL.Entities.Price", b =>
@@ -384,7 +386,7 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AdvertId")
+                    b.Property<int>("AdvertId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Currency")
@@ -397,7 +399,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("AdvertId");
 
-                    b.ToTable("Price");
+                    b.ToTable("Prices");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -608,51 +610,72 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Advert", b =>
                 {
-                    b.HasOne("DAL.Entities.Address.YandexAddress", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.HasOne("DAL.Entities.AppUser", "AppUser")
                         .WithMany("Adverts")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("DAL.Entities.Description", "Description")
-                        .WithMany()
-                        .HasForeignKey("DescriptionId");
+                        .WithOne()
+                        .HasForeignKey("DAL.Entities.Advert", "DescriptionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("Address");
+                    b.HasOne("DAL.Entities.Address.YandexAddress", "YandexAddress")
+                        .WithOne()
+                        .HasForeignKey("DAL.Entities.Advert", "YandexAddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
 
                     b.Navigation("Description");
+
+                    b.Navigation("YandexAddress");
                 });
 
             modelBuilder.Entity("DAL.Entities.Area", b =>
                 {
-                    b.HasOne("DAL.Entities.Advert", null)
+                    b.HasOne("DAL.Entities.Advert", "Advert")
                         .WithMany("Areas")
-                        .HasForeignKey("AdvertId");
+                        .HasForeignKey("AdvertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advert");
                 });
 
             modelBuilder.Entity("DAL.Entities.Contact", b =>
                 {
-                    b.HasOne("DAL.Entities.Advert", null)
+                    b.HasOne("DAL.Entities.Advert", "Advert")
                         .WithMany("Contacts")
-                        .HasForeignKey("AdvertId");
+                        .HasForeignKey("AdvertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advert");
                 });
 
             modelBuilder.Entity("DAL.Entities.Image", b =>
                 {
-                    b.HasOne("DAL.Entities.Advert", null)
+                    b.HasOne("DAL.Entities.Advert", "Advert")
                         .WithMany("Images")
-                        .HasForeignKey("AdvertId");
+                        .HasForeignKey("AdvertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advert");
                 });
 
             modelBuilder.Entity("DAL.Entities.Price", b =>
                 {
-                    b.HasOne("DAL.Entities.Advert", null)
+                    b.HasOne("DAL.Entities.Advert", "Advert")
                         .WithMany("Prices")
-                        .HasForeignKey("AdvertId");
+                        .HasForeignKey("AdvertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advert");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

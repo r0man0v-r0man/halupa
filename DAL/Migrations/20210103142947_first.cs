@@ -62,7 +62,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Description",
+                name: "Descriptions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -71,7 +71,7 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Description", x => x.Id);
+                    table.PrimaryKey("PK_Descriptions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -324,7 +324,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "YandexAddress",
+                name: "YandexAddresses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -333,9 +333,9 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_YandexAddress", x => x.Id);
+                    table.PrimaryKey("PK_YandexAddresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_YandexAddress_GeoObject_GeoObjectId",
+                        name: "FK_YandexAddresses_GeoObject_GeoObjectId",
                         column: x => x.GeoObjectId,
                         principalTable: "GeoObject",
                         principalColumn: "Id",
@@ -350,8 +350,8 @@ namespace DAL.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AppUserId = table.Column<string>(type: "TEXT", nullable: true),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AddressId = table.Column<int>(type: "INTEGER", nullable: true),
-                    DescriptionId = table.Column<int>(type: "INTEGER", nullable: true),
+                    YandexAddressId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DescriptionId = table.Column<int>(type: "INTEGER", nullable: false),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: false),
                     LastModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -365,63 +365,63 @@ namespace DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Adverts_Description_DescriptionId",
+                        name: "FK_Adverts_Descriptions_DescriptionId",
                         column: x => x.DescriptionId,
-                        principalTable: "Description",
+                        principalTable: "Descriptions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Adverts_YandexAddress_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "YandexAddress",
+                        name: "FK_Adverts_YandexAddresses_YandexAddressId",
+                        column: x => x.YandexAddressId,
+                        principalTable: "YandexAddresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Area",
+                name: "Areas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Kind = table.Column<int>(type: "INTEGER", nullable: false),
                     Value = table.Column<int>(type: "INTEGER", nullable: false),
-                    AdvertId = table.Column<int>(type: "INTEGER", nullable: true)
+                    AdvertId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Area", x => x.Id);
+                    table.PrimaryKey("PK_Areas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Area_Adverts_AdvertId",
+                        name: "FK_Areas_Adverts_AdvertId",
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contact",
+                name: "Contacts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Kind = table.Column<int>(type: "INTEGER", nullable: false),
                     Value = table.Column<string>(type: "TEXT", nullable: true),
-                    AdvertId = table.Column<int>(type: "INTEGER", nullable: true)
+                    AdvertId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contact", x => x.Id);
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contact_Adverts_AdvertId",
+                        name: "FK_Contacts_Adverts_AdvertId",
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Image",
+                name: "Images",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
@@ -429,44 +429,39 @@ namespace DAL.Migrations
                     Url = table.Column<string>(type: "TEXT", nullable: true),
                     Uid = table.Column<string>(type: "TEXT", nullable: true),
                     Size = table.Column<long>(type: "INTEGER", nullable: false),
-                    AdvertId = table.Column<int>(type: "INTEGER", nullable: true)
+                    AdvertId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Image_Adverts_AdvertId",
+                        name: "FK_Images_Adverts_AdvertId",
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Price",
+                name: "Prices",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Currency = table.Column<int>(type: "INTEGER", nullable: false),
                     Value = table.Column<decimal>(type: "money", nullable: false),
-                    AdvertId = table.Column<int>(type: "INTEGER", nullable: true)
+                    AdvertId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Price", x => x.Id);
+                    table.PrimaryKey("PK_Prices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Price_Adverts_AdvertId",
+                        name: "FK_Prices_Adverts_AdvertId",
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Adverts_AddressId",
-                table: "Adverts",
-                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Adverts_AppUserId",
@@ -476,11 +471,18 @@ namespace DAL.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Adverts_DescriptionId",
                 table: "Adverts",
-                column: "DescriptionId");
+                column: "DescriptionId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Area_AdvertId",
-                table: "Area",
+                name: "IX_Adverts_YandexAddressId",
+                table: "Adverts",
+                column: "YandexAddressId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Areas_AdvertId",
+                table: "Areas",
                 column: "AdvertId");
 
             migrationBuilder.CreateIndex(
@@ -531,8 +533,8 @@ namespace DAL.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contact_AdvertId",
-                table: "Contact",
+                name: "IX_Contacts_AdvertId",
+                table: "Contacts",
                 column: "AdvertId");
 
             migrationBuilder.CreateIndex(
@@ -556,8 +558,8 @@ namespace DAL.Migrations
                 column: "PointId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_AdvertId",
-                table: "Image",
+                name: "IX_Images_AdvertId",
+                table: "Images",
                 column: "AdvertId");
 
             migrationBuilder.CreateIndex(
@@ -566,20 +568,20 @@ namespace DAL.Migrations
                 column: "GeocoderMetaDataId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Price_AdvertId",
-                table: "Price",
+                name: "IX_Prices_AdvertId",
+                table: "Prices",
                 column: "AdvertId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_YandexAddress_GeoObjectId",
-                table: "YandexAddress",
+                name: "IX_YandexAddresses_GeoObjectId",
+                table: "YandexAddresses",
                 column: "GeoObjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Area");
+                name: "Areas");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -600,13 +602,13 @@ namespace DAL.Migrations
                 name: "Component");
 
             migrationBuilder.DropTable(
-                name: "Contact");
+                name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "Images");
 
             migrationBuilder.DropTable(
-                name: "Price");
+                name: "Prices");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -618,10 +620,10 @@ namespace DAL.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Description");
+                name: "Descriptions");
 
             migrationBuilder.DropTable(
-                name: "YandexAddress");
+                name: "YandexAddresses");
 
             migrationBuilder.DropTable(
                 name: "GeoObject");

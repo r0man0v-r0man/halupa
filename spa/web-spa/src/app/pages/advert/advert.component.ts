@@ -32,7 +32,6 @@ export class AdvertComponent implements OnInit {
     this.advertService.getAdvert(id).subscribe(response => {
         if(response) {
           this.advert = response;
-          console.warn(response)
           this.initSlides(this.advert.images);
         }
     });
@@ -50,7 +49,7 @@ export class AdvertComponent implements OnInit {
     images.forEach((image, index) => {
       const img = {
         url: image.url,
-        alt: this.advert.address.geoObject.name,
+        alt: this.advert.yandexAddress.geoObject.name,
         isVisible: false,
         id: index
       };
@@ -64,7 +63,7 @@ export class AdvertComponent implements OnInit {
 
   onShowMap(){
     const modal: NzModalRef = this._modalService.create({
-      nzTitle: `${this.advert.address.geoObject.name}`,
+      nzTitle: `${this.advert.yandexAddress.geoObject.name}`,
       nzContent: YandexMapComponent,
       nzComponentParams: {
         advert: this.advert

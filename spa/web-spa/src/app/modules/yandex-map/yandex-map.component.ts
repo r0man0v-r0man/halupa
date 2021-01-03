@@ -5,7 +5,7 @@ import { YandexMapService } from './yandex-map.service';
   selector: 'app-yandex-map',
   template: `
   <div class="container">
-    <ya-map [center]="[mapCenter[1], mapCenter[0]]" [zoom]="14" (load)="yandexMapService.onLoad($event, advert.address)" >
+    <ya-map [center]="[mapCenter[1], mapCenter[0]]" [zoom]="14" (load)="yandexMapService.onLoad($event, advert.yandexAddress)" >
     </ya-map>
   </div>
   `,
@@ -17,7 +17,7 @@ import { YandexMapService } from './yandex-map.service';
 export class YandexMapComponent implements OnInit{
   advert;
   get mapCenter() {
-    return this.yandexMapService.getCoords(this.advert.address);
+    return this.yandexMapService.getCoords(this.advert.yandexAddress);
   }
   constructor(
     public yandexMapService: YandexMapService

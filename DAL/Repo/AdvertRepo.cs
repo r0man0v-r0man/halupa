@@ -32,7 +32,7 @@ namespace DAL.Repo
                 var result = await context.SaveChangesAsync().ConfigureAwait(false);
                 return result > 0 ? advert.Id : throw new Exception("Error save advert");
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -44,11 +44,14 @@ namespace DAL.Repo
             try
             {
                 using var context = _contextFactory.CreateDbContext();
-                var advert = await context.Adverts.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
+                var advert = await context.Adverts
+                    .IncludeAdvertFields()
+                    .FirstOrDefaultAsync(a => a.Id == id)
+                    .ConfigureAwait(false);
                 context.Adverts.Remove(advert);
                 await context.SaveChangesAsync().ConfigureAwait(false);
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -101,36 +104,51 @@ namespace DAL.Repo
 
         public async Task<IEnumerable<Advert>> GetAnyAdvertsAsync(int pageNumber)
         {
-            using var context = _contextFactory.CreateDbContext();
-            return await context.Adverts
-                .IncludeAdvertFields()
-                .AsNoTracking()
-                .Where(prop => prop.IsActive)
-                .OrderByDescending(prop => prop.Created)
-                .Skip(SkipCalc(pageNumber))
-                .Take(SIZE)
-                .ToListAsync()
-                .ConfigureAwait(false);
+            try
+            {
+                using var context = _contextFactory.CreateDbContext();
+                return await context.Adverts
+                    .IncludeAdvertFields()
+                    .AsNoTracking()
+                    .Where(prop => prop.IsActive)
+                    .OrderByDescending(prop => prop.Created)
+                    .Skip(SkipCalc(pageNumber))
+                    .Take(SIZE)
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+            }
+            catch 
+            {
+                throw;
+            }
         }
         private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
 
         public async Task<IEnumerable<Advert>> SearchByLocalityAsync(int pageNumber, string locality)
         {
-            using var context = _contextFactory.CreateDbContext();
+            try
+            {
+                using var context = _contextFactory.CreateDbContext();
+
+                return await context.Adverts
+                    .IncludeAdvertFields()
+                    .AsNoTracking()
+                    .Where(prop => prop.YandexAddress.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
+                        // linq to sql сравнение без учета регистра
+                        // https://github.com/dotnet/efcore/issues/11414#issuecomment-376272297
+                        // https://docs.microsoft.com/en-us/ef/core/miscellaneous/collations-and-case-sensitivity#column-collation
+                        .Any(c => string.Equals(c.Kind, "locality") && EF.Functions.Collate(c.Name, "NOCASE") == locality)) // todo добавить enum kind
+                    .OrderByDescending(prop => prop.Created)
+                    .Skip(SkipCalc(pageNumber))
+                    .Take(SIZE)
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+            }
+            catch 
+            {
+                throw;
+            }
             
-            return await context.Adverts
-                .IncludeAdvertFields()
-                .AsNoTracking()
-                .Where(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
-                    // linq to sql сравнение без учета регистра
-                    // https://github.com/dotnet/efcore/issues/11414#issuecomment-376272297
-                    // https://docs.microsoft.com/en-us/ef/core/miscellaneous/collations-and-case-sensitivity#column-collation
-                    .Any(c => string.Equals(c.Kind, "locality") && EF.Functions.Collate(c.Name, "NOCASE") == locality)) // todo добавить enum kind
-                .OrderByDescending(prop => prop.Created)
-                .Skip(SkipCalc(pageNumber))
-                .Take(SIZE)
-                .ToListAsync()
-                .ConfigureAwait(false);
         }
     }
 }

@@ -76,7 +76,7 @@ export class AddFormService {
     this.form = this._fb.group({
       appUserId: [ this._authService.currentUser.sub, [Validators.required]],
       isActive:[true, [Validators.required]],
-      address: [ '', [Validators.required]],
+      yandexAddress: [ '', [Validators.required]],
       images: [ null, [Validators.required]],
       prices: this._fb.array(this.listOfPriceControl),
       description: this._fb.group({

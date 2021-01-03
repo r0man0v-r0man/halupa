@@ -5,6 +5,6 @@ namespace DAL.Entities
 {
     public class AppUser : IdentityUser
     {
-        public List<Advert> Adverts { get; }
+        public ICollection<Advert> Adverts { get; set; }
     }
 }

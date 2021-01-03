@@ -8,6 +8,6 @@ namespace DAL.Entities.Address
         public string Country_code { get; set; }
         public string Postal_code { get; set; }
         public string Formatted { get; set; }
-        public IList<Component> Components { get; set; }
+        public ICollection<Component> Components { get; set; }
     }
 }

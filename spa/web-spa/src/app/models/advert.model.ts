@@ -9,7 +9,7 @@ export interface IAdvert {
     id: number;
     appUserId: string;
     isActive: boolean;
-    address: IAddress;
+    yandexAddress: IAddress;
     images: NzUploadFile[];
     prices: IPrice[],
     description: IDescription,
