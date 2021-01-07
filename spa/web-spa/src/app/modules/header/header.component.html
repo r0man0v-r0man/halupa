@@ -14,19 +14,19 @@
                 <a >Объявления</a>
             </li>
             <li class="navbar-items-button">
-                <button nz-button nzType="primary" nzShape="round" (click)="onToggle()" [routerLink]="[ '/add' ]">
-                    <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление
+                <button nz-button nzType="primary" [nzShape]="hideButtonsLabel?'circle':'round'" aria-label="Create advert" (click)="onToggle()" [routerLink]="[ '/add' ]">
+                    <i nz-icon nzType="plus" nzTheme="outline"></i><span *ngIf="!hideButtonsLabel">Добавить объявление</span>
                 </button>
             </li>
             <li >
                 <ng-container *ngIf="_authService.isLogedIn() | async; then privateTpl else publicTpl"></ng-container>
                 <ng-template #privateTpl>
-                    <button nz-button nzType="primary" nzShape="circle" (click)="onToggle()" [routerLink]="[ '/cabinet' ]" >
+                    <button nz-button nzType="primary" nzShape="circle" aria-label="cabinet" (click)="onToggle()" [routerLink]="[ '/cabinet' ]" >
                         <i nz-icon nzType="user" nzTheme="outline"></i>
                     </button>
                 </ng-template>
                 <ng-template #publicTpl>
-                    <button nz-button nzType="primary" nzShape="circle" (click)="onToggle()" [routerLink]="[ '/login' ]">
+                    <button nz-button nzType="primary" nzShape="circle" aria-label="login" (click)="onToggle()" [routerLink]="[ '/login' ]">
                         <i nz-icon nzType="login" nzTheme="outline"></i>
                     </button>
                 </ng-template>
