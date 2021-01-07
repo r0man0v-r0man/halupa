@@ -6,6 +6,7 @@ import { IAdvert } from 'src/app/models/advert.model';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { YandexMapComponent } from 'src/app/modules/yandex-map/yandex-map.component';
+import { IUploadImage } from 'src/app/models/uploadImage';
 @Component({
   selector: 'app-advert',
   templateUrl: './advert.component.html',
@@ -44,11 +45,11 @@ export class AdvertComponent implements OnInit {
     });
   }
   /** преобразование картинок в слайды */
-  private initSlides(images: NzUploadFile[]) {
+  private initSlides(images: IUploadImage[]) {
     const slides: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
     images.forEach((image, index) => {
       const img = {
-        url: image.url,
+        url: image.middle,
         alt: this.advert.yandexAddress.geoObject.name,
         isVisible: false,
         id: index

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(HalupaContext))]
-    [Migration("20210103142947_first")]
+    [Migration("20210107134037_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,33 +355,6 @@ namespace DAL.Migrations
                     b.ToTable("Descriptions");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Image", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AdvertId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("DeleteHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("Size")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Uid")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdvertId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("DAL.Entities.Price", b =>
                 {
                     b.Property<int>("Id")
@@ -402,6 +375,34 @@ namespace DAL.Migrations
                     b.HasIndex("AdvertId");
 
                     b.ToTable("Prices");
+                });
+
+            modelBuilder.Entity("DAL.Entities.UploadImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdvertId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Full")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Middle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Small")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdvertId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -658,10 +659,10 @@ namespace DAL.Migrations
                     b.Navigation("Advert");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Image", b =>
+            modelBuilder.Entity("DAL.Entities.Price", b =>
                 {
                     b.HasOne("DAL.Entities.Advert", "Advert")
-                        .WithMany("Images")
+                        .WithMany("Prices")
                         .HasForeignKey("AdvertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -669,10 +670,10 @@ namespace DAL.Migrations
                     b.Navigation("Advert");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Price", b =>
+            modelBuilder.Entity("DAL.Entities.UploadImage", b =>
                 {
                     b.HasOne("DAL.Entities.Advert", "Advert")
-                        .WithMany("Prices")
+                        .WithMany("Images")
                         .HasForeignKey("AdvertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

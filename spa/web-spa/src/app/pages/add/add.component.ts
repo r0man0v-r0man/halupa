@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
+import { IUploadImage } from 'src/app/models/uploadImage';
 import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { AddFormService } from './services/add-form.service';
@@ -23,11 +24,12 @@ export class AddComponent implements OnInit {
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
+  imageList2: IUploadImage[]=[];
   
   constructor(
     public geocoderService: GeocoderService,
     private addFormService: AddFormService,
-    public imageService: ImageService,
+    private _imageService: ImageService,
     private cd: ChangeDetectorRef,
     private advertService: AdvertService
   ) {
@@ -44,26 +46,30 @@ export class AddComponent implements OnInit {
   get disabledAddContactFieldButton() {
     return this.addFormService.disabledAddContactFieldButton;
   }
+  get previews(){
+    return this._imageService.previews;
+  }
+  // get imageList2(){
+  //   return this._imageService.imageList2;
+  // }
   ngOnInit(): void {
+    this._imageService.imageList2$.asObservable()
+    .subscribe(data => {
+      this.imageList2.push(data);
+      this.setFormControlValue('images', this.imageList2);
+      this.cd.detectChanges();
+    })
   }
   submitForm(){
     const advert: IAdvert = { ...this.form.value };
     this.advertService.addAdvert(advert);
   }
-  /** загрузка картинки */
-  onUploadChange(info: NzUploadChangeParam ) {
-    this.imageService.handleChange(info).subscribe(response => {
-      this.imageList = [...this.imageService.imageList];
-      this.images = response;
-      this.setFormControlValue('images', this.images);
-      this.cd.detectChanges();
-    });
-  }
+ 
   /** Delete file */
   onDelete = (file: NzUploadFile): Observable<boolean> => {
     return new Observable(observer => {
       if (file) {
-        this.imageService.delete(file.response.deleteHash)
+        this._imageService.delete(file.response.deleteHash)
         .subscribe(response => {
           if (response) {
           const index = this.images.findIndex(x => x.uid === file.response.uid);
@@ -104,4 +110,8 @@ export class AddComponent implements OnInit {
   onRemoveContact(index: number){
     this.addFormService.removeContactField(index);
   }
+  onFileChanged(event) {
+    this._imageService.onFileChange(event);
+  }
+
 }

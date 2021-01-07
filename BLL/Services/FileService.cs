@@ -16,13 +16,13 @@ namespace BLL.Services
             _fileRepo = fileRepo;
             _mapper = mapper;
         }
-        public async Task<Image> UploadAsync(IFormFile image)
+        public async Task<UploadImage> UploadAsync(IFormFileCollection images)
         {
             var result = await _fileRepo
-                .UploadFileAsync(image)
+                .UploadFilesAsync(images)
                 .ConfigureAwait(false);
 
-            return _mapper.Map<Image>(result);
+            return _mapper.Map<UploadImage>(result);
         }
 
         public async Task<bool> DeleteAsync(string deleteHash) => 

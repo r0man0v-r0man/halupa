@@ -1,57 +1,30 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subject } from 'rxjs';
+import { IUploadImage } from '../models/uploadImage';
 import { URLs } from '../urls';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
+  previews = [];
+  upload$ = new Subject<File>();
+  uploadFiles:File[] = [];
+
+  imageList2$=new Subject<IUploadImage>();
+
   uploadURL = URLs.addImageURL;
   headers = new HttpHeaders().set('content-type', 'application/json');
-  /** Max file size in mb */
-  maxFileSize = 10;
-  /** для nz-upload */
-  imageList: NzUploadFile[] = [];
-  /** для формы */
-  images: NzUploadFile[] = [];
-  /** настройки списка загруженных картинок */
-  showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
   constructor(
-    private httpService: HttpClient
-  ) { }
-  /** изменение разрешения изображения */
-  transformFile = (file: NzUploadFile) => {
-    return new Observable((observer: Observer<Blob>) => {
-      const width = 600; // разрешение картинки
-      const reader = new FileReader();
-      reader.readAsDataURL(file as any);
-      reader.onload = () => {
-        const canvas = document.createElement('canvas');
-        const img = document.createElement('img');
-        img.src = reader.result as string;
-       
-        img.onload = () => {
-          const scale = width / img.naturalHeight;
-          canvas.width = width;
-          canvas.height = img.naturalHeight * scale;
-          const ctx = canvas.getContext('2d')!;
-          var offsetX = 0.5;   // center x
-          var offsetY = 0.5;   // center y
-          this.drawImageProp(ctx, img, 0, 0, width, img.naturalHeight * scale, offsetX, offsetY);
-          ctx.font = "20px Verdana";
-            ctx.fillStyle = "white";
-            ctx.globalAlpha = 0.5;
-            ctx.fillText('halupa.by', 20 , width - 20);
-          canvas.toBlob(blob => {
-            observer.next(blob!);
-            observer.complete();
-          });
-        };
-      };
-    });
-  };
+    private _httpService: HttpClient
+  ) { 
+    this.upload$.asObservable().subscribe(data => {
+      this.uploadFiles.push(data);
+      this.onUpload(this.uploadFiles);
+    })
+  }
   
   /**
    * By Ken Fyrstenberg Nilsen
@@ -107,47 +80,53 @@ export class ImageService {
     // fill image in dest. rectangle
     ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
   }
-  beforeUpload = (file: File) : Observable<boolean> => {
-    return new Observable((observer: Observer<boolean>)=>{
-      const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
-      if (!isSizeLimit) {
-        observer.next(false);
-        observer.complete();
-        // this.msg.warning(`Максимальный размер изображения ${this.maxFileSize}mb`);
-        console.log(`Максимальный размер изображения ${this.maxFileSize}mb`);
-        
-      } else {
-        observer.next(true);
-        observer.complete();
-      }
-    })
-  }
-  /** загрузка картинки */
-  handleChange(info: NzUploadChangeParam): Observable<NzUploadFile[]> {
-    return new Observable(observer => {
-      let fileList = [...info.fileList];
-      // 2. Read from response and show file link
-      fileList = fileList.map(file => {
-        if (file.response) {
-          // Component will show file.url as link
-          file.url = file.response.url;
-        }
-        return file;
-      });
-      this.imageList = fileList;
-      /** только response сохранять в инфо о картинке к объявлению */
-      let images = fileList.map(file => {
-        if(file.response){
-          file = file.response;
-        }
-        return file
-      });
-      observer.next(images);
-      observer.complete();
-    })
-  }
+ 
   /** удалить изображение */
   delete(deleteHash: string){
-    return this.httpService.delete<boolean>(URLs.deleteImageURL + '/' + deleteHash, { headers: this.headers })
+    return this._httpService.delete<boolean>(URLs.deleteImageURL + '/' + deleteHash, { headers: this.headers })
+  }
+
+
+  onFileChange(event){
+    const file = event.target.files[0];
+    
+    const width = 1000; // разрешение картинки
+    const reader = new FileReader();
+    reader.readAsDataURL(file as any);
+    reader.onload = () => {
+      const canvas = document.createElement('canvas');
+        const img = document.createElement('img');
+        img.src = reader.result as string;
+        img.onload = () => {
+        const scale = width / img.naturalHeight;
+        canvas.width = width;
+        canvas.height = img.naturalHeight * scale;
+          const ctx = canvas.getContext('2d')!;
+          var offsetX = 0.5;   // center x
+          var offsetY = 0.5;   // center y
+          this.drawImageProp(ctx, img, 0, 0, width, img.naturalHeight * scale, offsetX, offsetY);
+          ctx.font = "40px Verdana";
+          ctx.fillStyle = "white";
+          ctx.globalAlpha = 0.5;
+          ctx.fillText('halupa.by', 20 , width - 20);
+            canvas.toBlob(blob => {
+              const fullImage = new File([blob], 'full.jpg', {type: "image/jpeg"});
+              this.upload$.next(fullImage);
+            })
+            this.previews.push(canvas.toDataURL("image/jpeg", 1));
+      }
+    }
+  }
+  onUpload(files?: File[]) {
+    const uploadData = new FormData();
+    files.forEach(item => {
+      uploadData.append(item.name, item);
+    });
+    this._httpService
+      .post<IUploadImage>(this.uploadURL, uploadData)
+      .subscribe((response)=>{
+        this.imageList2$.next(response);
+        this.uploadFiles = [];
+      });
   }
 }

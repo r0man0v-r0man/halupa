@@ -424,11 +424,12 @@ namespace DAL.Migrations
                 name: "Images",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    DeleteHash = table.Column<string>(type: "TEXT", nullable: true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
-                    Uid = table.Column<string>(type: "TEXT", nullable: true),
-                    Size = table.Column<long>(type: "INTEGER", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Icon = table.Column<string>(type: "TEXT", nullable: true),
+                    Small = table.Column<string>(type: "TEXT", nullable: true),
+                    Middle = table.Column<string>(type: "TEXT", nullable: true),
+                    Full = table.Column<string>(type: "TEXT", nullable: true),
                     AdvertId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

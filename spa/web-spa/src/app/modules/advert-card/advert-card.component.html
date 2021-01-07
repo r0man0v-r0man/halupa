@@ -1,7 +1,7 @@
 <nz-card
     [nzExtra]="extraTpl"
     nzSize="default"
-    style="width: 100%;"
+    style="width: 100%;max-width: 250px;"
     nzHoverable="true"
     [nzCover]="coverTpl"
     [nzTitle]="priceTpl"
@@ -24,7 +24,7 @@
     {{ item.created | date : 'shortDate' : '' : 'ru' }}
 </ng-template>
 <ng-template #coverTpl>
-    <img [alt]="item.yandexAddress.geoObject.name" [src]="item.images[0]?.url"/>
+    <img style="width: 250px;height: 250px;" [alt]="item.yandexAddress.geoObject.name" [src]="item.images[0]?.small"/>
 </ng-template>
 <ng-template #viewAction>
     <span (click)="onCardClick(item)">Посмотреть</span>

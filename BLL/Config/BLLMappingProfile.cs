@@ -18,7 +18,7 @@ namespace BLL.Config
             CreateMap<BL.Price, DA.Price>()
                 .ReverseMap();
 
-            CreateMap<BL.Image, DA.Image>()
+            CreateMap<BL.UploadImage, DA.UploadImage>()
                 .ReverseMap();
 
             CreateMap<BL.Description, DA.Description>()

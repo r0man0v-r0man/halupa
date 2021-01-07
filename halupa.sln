@@ -14,6 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Info", "Info", "{837C2E70-B
 		ReadMe.txt = ReadMe.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{5F4DCA8D-9E22-4ED2-8A71-77B070BD620F}"
+	ProjectSection(SolutionItems) = preProject
+		D:\Temp\default.conf = D:\Temp\default.conf
+		D:\Temp\nginx.conf = D:\Temp\nginx.conf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +41,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F4DCA8D-9E22-4ED2-8A71-77B070BD620F} = {837C2E70-B3D2-4918-8319-7B7ACB0798AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03C6FC73-4D32-421B-B6E7-8B157447DF1F}

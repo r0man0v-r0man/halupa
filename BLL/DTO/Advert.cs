@@ -9,7 +9,7 @@ namespace BLL.DTO
         public string AppUserId { get; set; }
         public bool IsActive { get; set; }
         public YandexAddress YandexAddress { get; set; }
-        public List<Image> Images { get; set; }
+        public List<UploadImage> Images { get; set; }
         public List<Price> Prices { get; set; }
         public Description Description { get; set; }
         public List<Area> Areas { get; set; }

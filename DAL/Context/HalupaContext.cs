@@ -1,5 +1,4 @@
 ﻿using DAL.Context.Extensions;
-using DAL.Context.Interfaces;
 using DAL.Entities;
 using DAL.Entities.Address;
 using DAL.Entities.Configuration;
@@ -10,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Context
 {
-    public class HalupaContext : IdentityDbContext<AppUser>, IHalupaContext
+    public class HalupaContext : IdentityDbContext<AppUser>
     {
         public DbSet<Advert> Adverts { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<YandexAddress> YandexAddresses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Description> Descriptions { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<UploadImage> Images { get; set; }
         public DbSet<Price> Prices { get; set; }
         public HalupaContext(DbContextOptions<HalupaContext> options) : base(options)
         {

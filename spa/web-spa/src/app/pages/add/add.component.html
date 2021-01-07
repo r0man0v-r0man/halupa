@@ -24,27 +24,19 @@
             </nz-autocomplete>
         </div>
         <div class="form-item">
-            <nz-upload   class="form-item-upload"
-            nzAction="{{imageService.uploadURL}}"
-            [nzHeaders]="imageService.headers"
-            [nzTransformFile]="imageService.transformFile"
-            [nzBeforeUpload]="imageService.beforeUpload"
-            [nzRemove]="onDelete"
-            [nzShowUploadList]="imageService.showUploadList"
-            [nzFileList]="imageList"
-            [nzShowButton]="imageList.length < 8"
-            [nzAccept]="'image/png,image/jpeg,image/gif,image/jpg'"
-            nzFileType="image/png,image/jpeg,image/gif,image/jpg"
-            (nzChange)="onUploadChange($event)"
-            [nzListType]="'picture'"
-            >
-            <a  nzBlock="true" nz-button>
+            <input style="display: none" 
+            type="file" 
+            (change)="onFileChanged($event)"
+            #fileInput>
+            <button (click)="fileInput.click()"
+            nzBlock="true" nz-button
+            [disabled]="previews.length === 10">
                 <i nz-icon nzType="upload" nzTheme="outline"></i>
                 Загрузите изображение
-            </a>
-            <p><small>Максимальный размер фото 5mb.</small>
-            </p>
-            </nz-upload>
+            </button>
+            <div class="form-item-upload">
+                <img [src]="preview" *ngFor="let preview of previews">
+            </div>
         </div> 
         <div class="form-item">
             <div class="form-item-box">
@@ -128,3 +120,7 @@
         </div>
     </form>
 </div>
+
+
+
+
