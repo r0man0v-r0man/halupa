@@ -1,5 +1,5 @@
 <nz-button-group style="width: 120px">
-    <button [disabled]="prices.length == 1" [nzSize]="'small'" nz-button nzType="primary" (click)="onSwitchPriceCurrency()"><i nz-icon nzType="swap" nzTheme="outline"></i></button>
+    <button [disabled]="prices.length == 1" [nzSize]="'small'" aria-label="swap" nz-button nzType="primary" (click)="onSwitchPriceCurrency()"><i nz-icon nzType="swap" nzTheme="outline"></i></button>
     <a nz-button nzType="text" [nzSize]="'small'">
         {{ priceView.value | currency : '' : '' : '1.0'}} <span style="font-size: xx-small">{{ priceView.currency | price }}</span>
     </a>
