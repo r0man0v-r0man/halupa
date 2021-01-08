@@ -1,7 +1,5 @@
 ﻿using DAL.Entities;
 using DAL.Repo.Interfaces;
-using Imgur.API;
-using Imgur.API.Endpoints;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,11 +10,9 @@ namespace DAL.Repo
 {
     public class FileRepo : IFileRepo
     {
-        private readonly IImageEndpoint _imageEndpoint;
         private readonly IConfiguration _configuration;
-        public FileRepo(IImageEndpoint imageEndpoint, IConfiguration configuration)
+        public FileRepo(IConfiguration configuration)
         {
-            _imageEndpoint = imageEndpoint;
             _configuration = configuration;
         }
         public async Task<bool> DeleteFileAsync(string deleteHash)
@@ -24,9 +20,9 @@ namespace DAL.Repo
             if (string.IsNullOrEmpty(deleteHash)) return false;
             try
             {
-                return await _imageEndpoint.DeleteImageAsync(deleteHash).ConfigureAwait(false);
+                return true;
             }
-            catch (ImgurException)
+            catch
             {
                 throw;
             }

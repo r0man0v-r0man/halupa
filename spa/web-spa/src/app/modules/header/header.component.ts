@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
     }
     
   }
-
   private getHideButtons(width: number) {
     this.hideButtonsLabel = width < 800;
   }

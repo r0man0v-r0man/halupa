@@ -14,9 +14,18 @@
                 <a >Объявления</a>
             </li>
             <li class="navbar-items-button">
-                <button nz-button nzType="primary" [nzShape]="hideButtonsLabel?'circle':'round'" aria-label="Create advert" (click)="onToggle()" [routerLink]="[ '/add' ]">
-                    <i nz-icon nzType="plus" nzTheme="outline"></i><span *ngIf="!hideButtonsLabel">Добавить объявление</span>
-                </button>
+                <ng-container *ngIf="!hideButtonsLabel || toggleMenu; then fullButtonTpl else cutButtonTpl"></ng-container>
+                <ng-template #fullButtonTpl>
+                    <button nz-button nzType="primary" [nzShape]="'round'" aria-label="Create advert" (click)="onToggle()" [routerLink]="[ '/add' ]">
+                        <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление
+                    </button>
+                </ng-template>
+                <ng-template #cutButtonTpl>
+                    <button nz-button nzType="primary" [nzShape]="'circle'" aria-label="Create advert" (click)="onToggle()" [routerLink]="[ '/add' ]">
+                        <i nz-icon nzType="plus" nzTheme="outline"></i>
+                    </button>
+                </ng-template>
+                
             </li>
             <li >
                 <ng-container *ngIf="_authService.isLogedIn() | async; then privateTpl else publicTpl"></ng-container>
