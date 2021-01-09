@@ -9,9 +9,9 @@ import {
   LoginOutline,
   UserOutline,
     MenuOutline,
-    SearchOutline
+    SearchOutline,
+    CloseOutline
 } from '@ant-design/icons-angular/icons';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
 import {SearchBoxModule} from "../search-box/search-box.module";
 import {LogoModule} from "../logo/logo.module";
 const icons = [
@@ -19,7 +19,8 @@ const icons = [
   PlusOutline,
   LoginOutline,
   UserOutline,
-  MenuOutline
+  MenuOutline,
+  CloseOutline
 ]
 @NgModule({
   declarations: [
@@ -30,7 +31,6 @@ const icons = [
     AppRoutingModule,
     NzIconModule.forChild(icons),
     NzButtonModule,
-    NzDividerModule,
       SearchBoxModule,
       LogoModule
   ],

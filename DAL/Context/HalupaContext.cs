@@ -16,8 +16,8 @@ namespace DAL.Context
         public DbSet<YandexAddress> YandexAddresses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Description> Descriptions { get; set; }
-        public DbSet<UploadImage> Images { get; set; }
         public DbSet<Price> Prices { get; set; }
+        public DbSet<Image> Images{ get; set; }
         public HalupaContext(DbContextOptions<HalupaContext> options) : base(options)
         {
 

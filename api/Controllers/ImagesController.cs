@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using BLL.DTO;
 using BLL.Services.Interfaces;
@@ -21,20 +20,20 @@ namespace api.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
         [HttpPost]
-        public async Task<ActionResult<UploadImage>> Post()
+        public async Task<ActionResult<Image>> Post(IFormFile file)
         {
             
-            if (HttpContext.Request.Form.Files.Count == 0) return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            if (file is null) return StatusCode(StatusCodes.Status503ServiceUnavailable);
             try
             {
                 var result = await _fileService
-                    .UploadAsync(HttpContext.Request.Form.Files)
+                    .UploadAsync(file)
                     .ConfigureAwait(false);
                 return CreatedAtAction(nameof(Post), result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
                 throw;
             }
         }

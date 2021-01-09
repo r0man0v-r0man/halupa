@@ -11,7 +11,7 @@ import { URLs } from '../urls';
 export class ImageService {
   previews = [];
   upload$ = new Subject<File>();
-  uploadFiles:File[] = [];
+  uploadFile:File;
 
   imageList2$=new Subject<IUploadImage>();
 
@@ -21,8 +21,7 @@ export class ImageService {
     private _httpService: HttpClient
   ) { 
     this.upload$.asObservable().subscribe(data => {
-      this.uploadFiles.push(data);
-      this.onUpload(this.uploadFiles);
+      this.onUpload(data);
     })
   }
   
@@ -117,16 +116,13 @@ export class ImageService {
       }
     }
   }
-  onUpload(files?: File[]) {
+  onUpload(file: File) {
     const uploadData = new FormData();
-    files.forEach(item => {
-      uploadData.append(item.name, item);
-    });
+    uploadData.append('file', file);
     this._httpService
       .post<IUploadImage>(this.uploadURL, uploadData)
       .subscribe((response)=>{
         this.imageList2$.next(response);
-        this.uploadFiles = [];
       });
   }
 }

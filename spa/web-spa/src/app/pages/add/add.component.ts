@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
@@ -49,12 +49,11 @@ export class AddComponent implements OnInit {
   get previews(){
     return this._imageService.previews;
   }
-  // get imageList2(){
-  //   return this._imageService.imageList2;
-  // }
   ngOnInit(): void {
     this._imageService.imageList2$.asObservable()
     .subscribe(data => {
+      console.warn(data);
+      
       this.imageList2.push(data);
       this.setFormControlValue('images', this.imageList2);
       this.cd.detectChanges();

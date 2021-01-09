@@ -49,7 +49,7 @@ export class AdvertComponent implements OnInit {
     const slides: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
     images.forEach((image, index) => {
       const img = {
-        url: image.middle,
+        url: '/img/600/' + image.fileName,
         alt: this.advert.yandexAddress.geoObject.name,
         isVisible: false,
         id: index

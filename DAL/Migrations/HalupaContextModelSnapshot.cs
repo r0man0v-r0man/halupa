@@ -353,6 +353,25 @@ namespace DAL.Migrations
                     b.ToTable("Descriptions");
                 });
 
+            modelBuilder.Entity("DAL.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdvertId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdvertId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("DAL.Entities.Price", b =>
                 {
                     b.Property<int>("Id")
@@ -373,34 +392,6 @@ namespace DAL.Migrations
                     b.HasIndex("AdvertId");
 
                     b.ToTable("Prices");
-                });
-
-            modelBuilder.Entity("DAL.Entities.UploadImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AdvertId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Full")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Middle")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Small")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdvertId");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -657,10 +648,10 @@ namespace DAL.Migrations
                     b.Navigation("Advert");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Price", b =>
+            modelBuilder.Entity("DAL.Entities.Image", b =>
                 {
                     b.HasOne("DAL.Entities.Advert", "Advert")
-                        .WithMany("Prices")
+                        .WithMany("Images")
                         .HasForeignKey("AdvertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -668,10 +659,10 @@ namespace DAL.Migrations
                     b.Navigation("Advert");
                 });
 
-            modelBuilder.Entity("DAL.Entities.UploadImage", b =>
+            modelBuilder.Entity("DAL.Entities.Price", b =>
                 {
                     b.HasOne("DAL.Entities.Advert", "Advert")
-                        .WithMany("Images")
+                        .WithMany("Prices")
                         .HasForeignKey("AdvertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

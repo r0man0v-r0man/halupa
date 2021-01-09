@@ -18,13 +18,13 @@ namespace BLL.Config
             CreateMap<BL.Price, DA.Price>()
                 .ReverseMap();
 
-            CreateMap<BL.UploadImage, DA.UploadImage>()
-                .ReverseMap();
-
             CreateMap<BL.Description, DA.Description>()
                 .ReverseMap();
 
             CreateMap<BL.Contact, DA.Contact>()
+                .ReverseMap();
+
+            CreateMap<BL.Image, DA.Image>()
                 .ReverseMap();
 
             CreateMap<BL.Area, DA.Area>()

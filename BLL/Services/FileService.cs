@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BLL.DTO;
 using BLL.Services.Interfaces;
 using DAL.Repo.Interfaces;
 using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -16,16 +16,15 @@ namespace BLL.Services
             _fileRepo = fileRepo;
             _mapper = mapper;
         }
-        public async Task<UploadImage> UploadAsync(IFormFileCollection images)
+        public async Task<Image> UploadAsync(IFormFile image)
         {
             var result = await _fileRepo
-                .UploadFilesAsync(images)
+                .UploadFilesAsync(image)
                 .ConfigureAwait(false);
-
-            return _mapper.Map<UploadImage>(result);
+            return _mapper.Map<Image>(result);
         }
 
-        public async Task<bool> DeleteAsync(string deleteHash) => 
+        public async Task<bool> DeleteAsync(string deleteHash) =>
             await _fileRepo
             .DeleteFileAsync(deleteHash)
             .ConfigureAwait(false);

@@ -426,10 +426,7 @@ namespace DAL.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Icon = table.Column<string>(type: "TEXT", nullable: true),
-                    Small = table.Column<string>(type: "TEXT", nullable: true),
-                    Middle = table.Column<string>(type: "TEXT", nullable: true),
-                    Full = table.Column<string>(type: "TEXT", nullable: true),
+                    FileName = table.Column<string>(type: "TEXT", nullable: true),
                     AdvertId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

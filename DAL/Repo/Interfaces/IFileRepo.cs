@@ -7,6 +7,6 @@ namespace DAL.Repo.Interfaces
     public interface IFileRepo
     {
         Task<bool> DeleteFileAsync(string deleteHash);
-        Task<UploadImage> UploadFilesAsync(IFormFileCollection file);
+        Task<Image> UploadFilesAsync(IFormFile file);
     }
 }

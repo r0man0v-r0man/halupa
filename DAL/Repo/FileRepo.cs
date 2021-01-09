@@ -28,26 +28,21 @@ namespace DAL.Repo
             }
         }
 
-        public async Task<UploadImage> UploadFilesAsync(IFormFileCollection files)
+        public async Task<Image> UploadFilesAsync(IFormFile file)
         {
             try
             {
-                var uploadImage = new UploadImage();
-                foreach (var file in files)
+                var name = GetNewFileName(file);
+                var uploadPath = SetUploadPath(GetFileUploadPath(), name);
+                await using var streamFull = File
+                    .Create(uploadPath);
+                await file
+                    .CopyToAsync(streamFull)
+                    .ConfigureAwait(false);
+                return new Image
                 {
-                        var name = GetNewFileName(file);
-                        var uploadPath = SetUploadPath(GetFileUploadPath(), name);
-                        await using var streamFull = File
-                            .Create(uploadPath);
-                        await file
-                            .CopyToAsync(streamFull)
-                            .ConfigureAwait(false);
-                    uploadImage.Icon = "/img/60/" + name;
-                    uploadImage.Small = "/img/250/" + name;
-                    uploadImage.Middle = "/img/600/" + name;
-                    uploadImage.Full = "/img/1000/" + name;
-                }
-                return uploadImage;
+                    FileName = name
+                };
             }
             catch
             {

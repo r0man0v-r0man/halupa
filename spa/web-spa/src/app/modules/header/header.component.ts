@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
   toggleMenu = false;
   hideButtonsLabel:boolean;
+  isMobileMenu = false;
   constructor(
     public _authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any
@@ -26,9 +27,15 @@ export class HeaderComponent implements OnInit {
   }
   private getHideButtons(width: number) {
     this.hideButtonsLabel = width < 800;
+    this.isMobileMenu = width < 620;
   }
 
   onToggle() {
     this.toggleMenu = !this.toggleMenu;
+  }
+  onClickLink(){
+    if(this.isMobileMenu){
+      this.toggleMenu = !this.toggleMenu;
+    }
   }
 }
