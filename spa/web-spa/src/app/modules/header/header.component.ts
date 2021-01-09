@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   }
   private getHideButtons(width: number) {
     this.hideButtonsLabel = width < 800;
-    this.isMobileMenu = width < 620;
+    this.isMobileMenu = width < 620; // переключение в мобильное меню
   }
 
   onToggle() {

@@ -26,6 +26,7 @@
         <div class="form-item">
             <input style="display: none" 
             type="file" 
+            accept="image/*"
             (change)="onFileChanged($event)"
             #fileInput>
             <button (click)="fileInput.click()"
@@ -119,7 +120,6 @@
             </button>
         </div>
     </form>
-    <pre>{{form.value | json}}</pre>
 </div>
 
 
