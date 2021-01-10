@@ -23,14 +23,21 @@
                 </nz-auto-option>
             </nz-autocomplete>
         </div>
-        <div class="form-item">
+        <div>
+            <nz-upload 
+            [nzCustomRequest]="_imageService.customUploadReq" 
+            [nzName]="'file'">
+            <button nzBlock="true" nz-button><i nz-icon nzType="upload"></i> Upload</button>
+            </nz-upload>
+        </div>
+        <!-- <div class="form-item">
             <input style="display: none" 
             type="file" 
             accept="image/*"
             (change)="onFileChanged($event)"
             #fileInput>
             <button (click)="fileInput.click()"
-            nzBlock="true" nz-button
+            nzBlock="true" nz-button #buttonUpload
             [disabled]="previews.length === 10">
                 <i nz-icon nzType="upload" nzTheme="outline"></i>
                 Загрузите изображение
@@ -38,7 +45,7 @@
             <div class="form-item-upload">
                 <img [src]="preview" *ngFor="let preview of previews">
             </div>
-        </div> 
+        </div>  -->
         <div class="form-item">
             <div class="form-item-box">
                 <div class="form-item-box-element">
@@ -49,7 +56,7 @@
                             [price]="form.controls['prices']['controls'][i].value"
                         ></app-price-input>
                         <a [disabled]="i == 0 "
-                           nz-button
+                           nz-button tabindex="1"
                            (click)="onRemovePrice(i)"
                            nzType="text" nzDanger><i nz-icon nzType="delete"></i>
                         </a>

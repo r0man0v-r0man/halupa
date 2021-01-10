@@ -1,10 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer, Subject } from 'rxjs';
+import { NzUploadChangeParam, NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
+import {  Observable, Observer, Subject } from 'rxjs';
 import { IUploadImage } from '../models/uploadImage';
 import { URLs } from '../urls';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,11 +18,7 @@ export class ImageService {
   headers = new HttpHeaders().set('content-type', 'application/json');
   constructor(
     private _httpService: HttpClient
-  ) { 
-    this.upload$.asObservable().subscribe(data => {
-      this.onUpload(data);
-    })
-  }
+  ) { }
   
   /**
    * By Ken Fyrstenberg Nilsen
@@ -85,14 +80,15 @@ export class ImageService {
     return this._httpService.delete<boolean>(URLs.deleteImageURL + '/' + deleteHash, { headers: this.headers })
   }
 
-
-  onFileChange(event){
-    const file = event.target.files[0];
+  onFileChange(file: any) {
+    // const file = event.target.files[0];
     
+    return new Observable((observer: Observer<File>) => {
     const width = 1000; // разрешение картинки
     const reader = new FileReader();
     reader.readAsDataURL(file as any);
     reader.onload = () => {
+
       const canvas = document.createElement('canvas');
         const img = document.createElement('img');
         img.src = reader.result as string;
@@ -109,20 +105,33 @@ export class ImageService {
           ctx.globalAlpha = 0.5;
           ctx.fillText('halupa.by', 20 , width - 20);
             canvas.toBlob(blob => {
-              const fullImage = new File([blob], 'full.jpg', {type: "image/jpeg"});
-              this.upload$.next(fullImage);
+              observer.next(new File([blob], 'file.jpg', {type: 'image/jpeg'}));
+              observer.complete();
             })
-            this.previews.push(canvas.toDataURL("image/jpeg", 1));
       }
     }
-  }
-  onUpload(file: File) {
-    const uploadData = new FormData();
-    uploadData.append('file', file);
-    this._httpService
-      .post<IUploadImage>(this.uploadURL, uploadData)
-      .subscribe((response)=>{
-        this.imageList2$.next(response);
-      });
+  })
+}  
+  customUploadReq = (item: NzUploadXHRArgs) => {
+    const formData = new FormData();
+    this.onFileChange(item.file).subscribe()
+    formData.append('file', item.file as any); 
+    const req = new HttpRequest('POST', this.uploadURL, formData, {
+      reportProgress : true,
+      withCredentials: false
+    });
+   return this._httpService.request(req).subscribe((event: HttpEvent<{}>) => {
+      if (event.type === HttpEventType.UploadProgress) {
+        if (event.total > 0) {
+          (event as any).percent = event.loaded / event.total * 100; 
+        }
+        item.onProgress(event, item.file);
+      } else if (event instanceof HttpResponse) { /* success */
+        this.imageList2$.next(event.body as IUploadImage);
+        item.onSuccess(event.body, item.file, event);
+      }
+    },(err) => { /* error */
+      item.onError(err, item.file);
+    });
   }
 }

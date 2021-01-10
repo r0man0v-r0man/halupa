@@ -29,7 +29,7 @@ export class AddComponent implements OnInit {
   constructor(
     public geocoderService: GeocoderService,
     private addFormService: AddFormService,
-    private _imageService: ImageService,
+    public _imageService: ImageService,
     private cd: ChangeDetectorRef,
     private advertService: AdvertService
   ) {
@@ -109,8 +109,8 @@ export class AddComponent implements OnInit {
   onRemoveContact(index: number){
     this.addFormService.removeContactField(index);
   }
-  onFileChanged(event) {
-    this._imageService.onFileChange(event);
-  }
+  // onFileChanged(event) {
+  //   this._imageService.onFileChange(event);
+  // }
 
 }
