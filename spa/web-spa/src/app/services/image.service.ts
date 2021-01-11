@@ -8,12 +8,6 @@ import { URLs } from '../urls';
   providedIn: 'root'
 })
 export class ImageService {
-  previews = [];
-  upload$ = new Subject<File>();
-  uploadFile:File;
-
-  imageList2$=new Subject<IUploadImage>();
-
   uploadURL = URLs.addImageURL;
   headers = new HttpHeaders().set('content-type', 'application/json');
   uploadButtonsOptions = { showPreviewIcon: false, showRemoveIcon: false, showDownloadIcon: false };

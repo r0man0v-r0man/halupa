@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
@@ -24,7 +24,7 @@ export class AddComponent implements OnInit {
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
-  imageList2: IUploadImage[]=[];
+  imageList2: IUploadImage[] = [];
   
   constructor(
     public geocoderService: GeocoderService,
@@ -46,24 +46,20 @@ export class AddComponent implements OnInit {
   get disabledAddContactFieldButton() {
     return this.addFormService.disabledAddContactFieldButton;
   }
-  get previews(){
-    return this._imageService.previews;
-  }
   ngOnInit(): void {
-    this._imageService.imageList2$.asObservable()
-    .subscribe(data => {
-      console.warn(data);
-      
-      this.imageList2.push(data);
-      this.setFormControlValue('images', this.imageList2);
-      this.cd.detectChanges();
-    })
+    
   }
   submitForm(){
     const advert: IAdvert = { ...this.form.value };
     this.advertService.addAdvert(advert);
   }
- 
+  onUploadChange(event: NzUploadChangeParam){
+    if(event.file.response){
+      this.imageList2.push(event.file.response);
+      this.setFormControlValue('images', this.imageList2);
+      this.cd.detectChanges();
+    }
+  }
   /** Delete file */
   onDelete = (file: NzUploadFile): Observable<boolean> => {
     return new Observable(observer => {
@@ -109,8 +105,4 @@ export class AddComponent implements OnInit {
   onRemoveContact(index: number){
     this.addFormService.removeContactField(index);
   }
-  // onFileChanged(event) {
-  //   this._imageService.onFileChange(event);
-  // }
-
 }

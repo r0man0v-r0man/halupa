@@ -23,33 +23,18 @@
                 </nz-auto-option>
             </nz-autocomplete>
         </div>
-        <div >
+        <div class="form-item">
             <nz-upload 
             [nzAction]="_imageService.uploadURL"
             [nzTransformFile]="_imageService.onFileChange"
             [nzHeaders]="_imageService.headers"
             nzListType="picture"
             [nzShowUploadList]="_imageService.uploadButtonsOptions"
+            (nzChange)="onUploadChange($event)"
             [nzName]="'file'">
-            <button nzBlock="true" nz-button><i nz-icon nzType="upload"></i> Upload</button>
+            <button nzBlock nz-button><i nz-icon nzType="upload"></i> Загрузить изображение</button>
             </nz-upload>
         </div>
-        <!-- <div class="form-item">
-            <input style="display: none" 
-            type="file" 
-            accept="image/*"
-            (change)="onFileChanged($event)"
-            #fileInput>
-            <button (click)="fileInput.click()"
-            nzBlock="true" nz-button #buttonUpload
-            [disabled]="previews.length === 10">
-                <i nz-icon nzType="upload" nzTheme="outline"></i>
-                Загрузите изображение
-            </button>
-            <div class="form-item-upload">
-                <img [src]="preview" *ngFor="let preview of previews">
-            </div>
-        </div>  -->
         <div class="form-item">
             <div class="form-item-box">
                 <div class="form-item-box-element">
