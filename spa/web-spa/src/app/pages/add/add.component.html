@@ -23,9 +23,13 @@
                 </nz-auto-option>
             </nz-autocomplete>
         </div>
-        <div>
+        <div >
             <nz-upload 
-            [nzCustomRequest]="_imageService.customUploadReq" 
+            [nzAction]="_imageService.uploadURL"
+            [nzTransformFile]="_imageService.onFileChange"
+            [nzHeaders]="_imageService.headers"
+            nzListType="picture"
+            [nzShowUploadList]="_imageService.uploadButtonsOptions"
             [nzName]="'file'">
             <button nzBlock="true" nz-button><i nz-icon nzType="upload"></i> Upload</button>
             </nz-upload>

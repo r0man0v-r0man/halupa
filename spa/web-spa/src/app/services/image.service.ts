@@ -16,6 +16,7 @@ export class ImageService {
 
   uploadURL = URLs.addImageURL;
   headers = new HttpHeaders().set('content-type', 'application/json');
+  uploadButtonsOptions = { showPreviewIcon: false, showRemoveIcon: false, showDownloadIcon: false };
   constructor(
     private _httpService: HttpClient
   ) { }
@@ -80,15 +81,12 @@ export class ImageService {
     return this._httpService.delete<boolean>(URLs.deleteImageURL + '/' + deleteHash, { headers: this.headers })
   }
 
-  onFileChange(file: any) {
-    // const file = event.target.files[0];
-    
+  onFileChange = (file: NzUploadFile) => {
     return new Observable((observer: Observer<File>) => {
     const width = 1000; // разрешение картинки
     const reader = new FileReader();
     reader.readAsDataURL(file as any);
     reader.onload = () => {
-
       const canvas = document.createElement('canvas');
         const img = document.createElement('img');
         img.src = reader.result as string;
@@ -108,30 +106,8 @@ export class ImageService {
               observer.next(new File([blob], 'file.jpg', {type: 'image/jpeg'}));
               observer.complete();
             })
-      }
-    }
-  })
-}  
-  customUploadReq = (item: NzUploadXHRArgs) => {
-    const formData = new FormData();
-    this.onFileChange(item.file).subscribe()
-    formData.append('file', item.file as any); 
-    const req = new HttpRequest('POST', this.uploadURL, formData, {
-      reportProgress : true,
-      withCredentials: false
-    });
-   return this._httpService.request(req).subscribe((event: HttpEvent<{}>) => {
-      if (event.type === HttpEventType.UploadProgress) {
-        if (event.total > 0) {
-          (event as any).percent = event.loaded / event.total * 100; 
         }
-        item.onProgress(event, item.file);
-      } else if (event instanceof HttpResponse) { /* success */
-        this.imageList2$.next(event.body as IUploadImage);
-        item.onSuccess(event.body, item.file, event);
       }
-    },(err) => { /* error */
-      item.onError(err, item.file);
-    });
-  }
+    })
+  }  
 }
