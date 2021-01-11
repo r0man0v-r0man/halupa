@@ -26,7 +26,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@nguniversal/express-engine": "^11.0.1",
     "angular8-yandex-maps": "^10.4.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "express": "^4.15.2",
     "ng-zorro-antd": "^11.0.1",
     "rxjs": "~6.6.0",
