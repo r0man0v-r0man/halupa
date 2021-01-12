@@ -1,4 +1,18 @@
-<nz-card
+<div class="card">
+    <div class="card-top">
+
+    </div>
+    <div class="card-image loading" >
+        <img   
+        [alt]="item.yandexAddress.geoObject.name"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+        data-src="{{'/img/250/' + item.images[0]?.fileName}}"/>
+    </div>
+    <div class="card-bottom">
+
+    </div>
+</div>
+<!-- <nz-card
     [nzExtra]="extraTpl"
     nzSize="default"
     style="width: 100%;max-width: 250px;"
@@ -25,8 +39,8 @@
 </ng-template>
 <ng-template #coverTpl>
     <img style="width: 250px;height: 250px;" [alt]="item.yandexAddress.geoObject.name" 
-    [src]="'/img/250/' + item.images[0]?.fileName"/>
+    data-src="'/img/250/' + item.images[0]?.fileName"/>
 </ng-template>
 <ng-template #viewAction>
     <span (click)="onCardClick(item)">Посмотреть</span>
-</ng-template>
+</ng-template> -->
