@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navbar-brand">
-        <a  (click)="onClickLink()" [routerLink]="[ '/' ]"><strong>Halupa.by</strong></a>
+        <a [routerLink]="[ '/' ]"><strong>Halupa.by</strong></a>
     </div>
     <div class="navbar-toggle">
         <ng-container *ngIf="toggleMenu; then closeTpl else menuTpl"></ng-container>
