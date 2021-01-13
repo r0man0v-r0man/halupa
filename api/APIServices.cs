@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -7,8 +9,6 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.HttpOverrides;
 
 namespace api
 {
@@ -54,14 +54,21 @@ namespace api
                         NameClaimType = JwtRegisteredClaimNames.UniqueName
                     };
                 });
-            services.AddCors();
+
+            services.AddCors(options => 
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("https://halupa.by").AllowAnyHeader().AllowAnyMethod();
+                });
+            });
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
             services.AddControllers().AddNewtonsoftJson();
-            
+
             return services;
         }
     }
