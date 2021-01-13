@@ -39,7 +39,9 @@ namespace api
             }
             if (!env.IsDevelopment())
             {
-                app.UseCors();
+                app.UseCors(options => {
+                    options.WithOrigins("https://halupa.by").AllowAnyHeader().AllowAnyMethod();
+                });
             }
             app.UseRouting();
 
