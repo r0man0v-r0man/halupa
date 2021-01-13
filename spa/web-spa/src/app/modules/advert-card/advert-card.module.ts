@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdvertCardComponent } from './advert-card.component';
 import {PriceModule} from "../price/price.module";
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {PriceModule} from "../price/price.module";
   ],
   imports: [
     CommonModule,
-      PriceModule
+      PriceModule,
+      RouterModule
   ],
   exports:[
     AdvertCardComponent

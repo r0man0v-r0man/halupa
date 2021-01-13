@@ -1,15 +1,20 @@
 <div class="card">
-    <div class="card-top">
-
-    </div>
     <div class="card-image loading" >
         <img   
         [alt]="item.yandexAddress.geoObject.name"
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-        data-src="{{'/img/250/' + item.images[0]?.fileName}}"/>
+        data-src="https://placekitten.com/250/250"/>
     </div>
-    <div class="card-bottom">
-
+    <div class="card-top">
+        <app-price [prices]="item.prices"></app-price>
+        <span>{{ item.created | date : 'shortDate' : '' : 'ru' }}</span>
+    </div>
+    <div class="card-bottom" >
+        <span >{{ item.yandexAddress.geoObject.metaDataProperty.geocoderMetaData.address.components[3].name }}</span>
+        <span>{{ item.yandexAddress.geoObject.name }}</span>
+    </div>
+    <div class="card-footer">
+        <a [routerLink]="[ '/adverts', item.id ]">Посмотреть</a>
     </div>
 </div>
 <!-- <nz-card

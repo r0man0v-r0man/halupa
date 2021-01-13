@@ -1,11 +1,31 @@
 @250: 250px;
 .card{
+    width: @250;
+    margin-bottom: 2em;
+    > div {
+        margin-bottom: 1em;
+    }
+    &-top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     &-image{
         width: @250;
         height: @250;
         img{
             width: @250;
             height: @250; 
+        }
+    }
+    &-bottom{
+        color: #aaaaaa;
+        display: flex;
+        flex-direction: column;
+        > span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 }
