@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import {NzTypographyModule} from "ng-zorro-antd/typography";
-import {AdvertCardModule} from "../../modules/advert-card/advert-card.module";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {SwapOutline} from "@ant-design/icons-angular/icons";
+import { RouterModule } from '@angular/router';
+import { PriceModule } from 'src/app/modules/price/price.module';
 
 const icons = [
   SwapOutline
@@ -21,7 +22,8 @@ const icons = [
     CommonModule,
     SearchRoutingModule,
       NzTypographyModule,
-      AdvertCardModule,
+      PriceModule,
+      RouterModule,
       NzIconModule.forChild(icons),
       NzButtonModule
   ]

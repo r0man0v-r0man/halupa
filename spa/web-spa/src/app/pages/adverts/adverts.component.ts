@@ -1,28 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, ViewChildren } from '@angular/core';
 import { IAdvert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'app-adverts',
   templateUrl: './adverts.component.html',
-  styles: [
-  ],
+  styleUrls: [ './adverts.component.less' ],
   providers:[
     AdvertService
   ]
 })
-export class AdvertsComponent implements OnInit {
+export class AdvertsComponent implements OnInit, AfterViewInit {
   list: IAdvert[] = [];
   initLoading = true;
   isShowMoreButton = false;
   pageNumber = 1;
   isAnyAdverts = false;
+  @ViewChildren('cardImage') cardImages: QueryList<ElementRef>;
+  options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.05
+  };
+  loadImage = (entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.parentNode.classList.contains('loading')){
+            entry.target.src = entry.target.getAttribute('data-src');
+            entry.target.onload = () => {
+                entry.target.parentNode.classList.remove('loading');
+                entry.target.removeAttribute('data-src');
+            };
+        }
+    });
+  };
   constructor(
-    private _advertService: AdvertService
+    private _advertService: AdvertService,
+    @Inject(PLATFORM_ID) private platformId: any
   ) { }
+  ngAfterViewInit(): void {
+    this.cardImages.changes.subscribe(()=>{
+      const targets = document.querySelectorAll('[data-src]');
+      const observer = new IntersectionObserver(this.loadImage, this.options);
+      targets.forEach(target => {
+        observer.observe(target);
+      });
+    })
+  }
 
   ngOnInit(): void {
     this.showAnyAdverts();
+    
   }
   /** объявления без фильтра, любые */
   showAnyAdverts() {
@@ -61,11 +89,6 @@ export class AdvertsComponent implements OnInit {
         this.addLoadMoreAdvertsToList(response);
       });
     } 
-    // else {
-    //   this._advertService.getAnyAdverts(this.pageNumber, this.filterOption).subscribe(response => {
-    //     this.addLoadMoreAdvertsToList(response);
-    //   });
-    // }
     this.initLoading = false;
   }
   /** Добавить еще объявлений  */
