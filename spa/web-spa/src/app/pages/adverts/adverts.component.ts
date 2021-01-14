@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, ViewChildren } from '@angular/core';
 import { IAdvert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
@@ -11,42 +10,17 @@ import { AdvertService } from 'src/app/services/advert.service';
     AdvertService
   ]
 })
-export class AdvertsComponent implements OnInit, AfterViewInit {
+export class AdvertsComponent implements OnInit {
   list: IAdvert[] = [];
   initLoading = true;
   isShowMoreButton = false;
   pageNumber = 1;
   isAnyAdverts = false;
-  @ViewChildren('cardImage') cardImages: QueryList<ElementRef>;
-  options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.05
-  };
-  loadImage = (entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && entry.target.parentNode.classList.contains('loading')){
-            entry.target.src = entry.target.getAttribute('data-src');
-            entry.target.onload = () => {
-                entry.target.parentNode.classList.remove('loading');
-                entry.target.removeAttribute('data-src');
-            };
-        }
-    });
-  };
+  
   constructor(
-    private _advertService: AdvertService,
-    @Inject(PLATFORM_ID) private platformId: any
+    private _advertService: AdvertService
   ) { }
-  ngAfterViewInit(): void {
-    this.cardImages.changes.subscribe(()=>{
-      const targets = document.querySelectorAll('[data-src]');
-      const observer = new IntersectionObserver(this.loadImage, this.options);
-      targets.forEach(target => {
-        observer.observe(target);
-      });
-    })
-  }
+
 
   ngOnInit(): void {
     this.showAnyAdverts();

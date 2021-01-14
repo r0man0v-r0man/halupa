@@ -7,8 +7,7 @@ import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {SwapOutline} from "@ant-design/icons-angular/icons";
-import { RouterModule } from '@angular/router';
-import { PriceModule } from 'src/app/modules/price/price.module';
+import { AdvertsListBoxModule } from 'src/app/modules/adverts-list-box/adverts-list-box.module';
 
 const icons = [
   SwapOutline
@@ -22,8 +21,7 @@ const icons = [
     CommonModule,
     SearchRoutingModule,
       NzTypographyModule,
-      PriceModule,
-      RouterModule,
+      AdvertsListBoxModule,
       NzIconModule.forChild(icons),
       NzButtonModule
   ]

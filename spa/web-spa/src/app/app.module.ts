@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularYandexMapsModule, IConfig } from 'angular8-yandex-maps';
 import { AuthGuardService } from './services/auth-guard.service';
+import { MetrikaModule } from 'ng-yandex-metrika';
 const mapConfig: IConfig = {
   apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
   lang: 'ru_RU',
@@ -29,6 +30,13 @@ registerLocaleData(ru);
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AngularYandexMapsModule.forRoot(mapConfig),
+    MetrikaModule.forRoot({
+      id:66772048, 
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor:true
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,

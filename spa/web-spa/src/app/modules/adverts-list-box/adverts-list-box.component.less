@@ -1,0 +1,38 @@
+@250: 250px;
+.adverts{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    row-gap: 2em;
+    column-gap: 1em;
+}
+.card{
+    width: @250;
+    > div:not(:last-child) {
+        padding-bottom: 1em;
+    }
+    &-top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-image{
+        width: @250;
+        height: @250;
+        img{
+            width: @250;
+            height: @250; 
+        }
+    }
+    &-bottom{
+        color: #aaaaaa;
+        display: flex;
+        flex-direction: column;
+        > span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

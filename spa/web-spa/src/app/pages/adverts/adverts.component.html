@@ -1,28 +1,6 @@
 <div class="wrap">
-    <div class="adverts">
-        <div сlass="adverts-item" *ngFor="let item of list">
-            <div class="card">
-                <div class="card-image loading" >
-                    <img #cardImage width="250" height="250"
-                    [alt]="item.yandexAddress.geoObject.name"
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                    data-src="{{'/img/250/' + item.images[0]?.fileName}}"/>
-                </div>
-                <div class="card-top">
-                    <app-price [prices]="item.prices"></app-price>
-                    <span>{{ item.created | date : 'shortDate' : '' : 'ru' }}</span>
-                </div>
-                <div class="card-bottom" >
-                    <span >{{ item.yandexAddress.geoObject.metaDataProperty.geocoderMetaData.address.components[3].name }}</span>
-                    <span>{{ item.yandexAddress.geoObject.name }}</span>
-                </div>
-                <div class="card-footer">
-                    <a [routerLink]="[ '/adverts', item.id ]">Посмотреть</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <app-adverts-list-box [list]="list"></app-adverts-list-box>
     <div class="loadmore" nz-list-load-more>
-      <button nz-button *ngIf="isShowMoreButton" (click)="onLoadMore()">Загрузить еще</button>
+        <button nz-button *ngIf="isShowMoreButton" (click)="onLoadMore()">Загрузить еще</button>
     </div>
 </div>
