@@ -9,7 +9,7 @@
             </div>
             <div class="card-top">
                 <app-price [prices]="item.prices"></app-price>
-                <span>{{ item.created | date : 'shortDate' : '' : 'ru' }}</span>
+                <span>{{ item.created |dateAgo }}</span>
             </div>
             <div class="card-bottom" >
                 <span >{{ item.yandexAddress.geoObject.metaDataProperty.geocoderMetaData.address.components[3].name }}</span>
