@@ -8,3 +8,6 @@ dotnet ef:
 dotnet ef database update -p dal -s api
 dotnet ef database drop -p dal -s api
 dotnet ef migrations add first -p dal -s api   
+
+figma
+https://www.figma.com/file/4LBwVEXBn0AHrUdssQhlQy/halupa?node-id=0%3A1
