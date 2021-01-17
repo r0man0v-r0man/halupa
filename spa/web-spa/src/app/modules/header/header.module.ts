@@ -14,6 +14,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import {SearchBoxModule} from "../search-box/search-box.module";
 import {LogoModule} from "../logo/logo.module";
+import { InlineSVGModule } from 'ng-inline-svg';
 const icons = [
   SearchOutline,
   PlusOutline,
@@ -30,6 +31,7 @@ const icons = [
     CommonModule,
     AppRoutingModule,
     NzIconModule.forChild(icons),
+    InlineSVGModule,
     NzButtonModule,
       SearchBoxModule,
       LogoModule

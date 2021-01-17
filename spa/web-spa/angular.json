@@ -53,7 +53,8 @@
               "src/assets/images"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "src/halupa.less"
             ],
             "scripts": []
           },

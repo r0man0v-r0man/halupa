@@ -1,117 +1,112 @@
-// vars
-@normal-color: #d9d9d9;
-@white: #fff;
-@active-color: #81D4FA;
-@divider-color-header: @normal-color;
-@bg-color: #0277BD;
-// styles
-.navbar{
-  background-color: @bg-color;
-  display: flex;
-  max-width: 1440px;
-  margin: 0 auto;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 24px;
-  &-toggle{
-    display: none;
-    a{
-      color: @white;
-      padding: 0;
-    }
-  }
-  &-brand {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 17%;
-    a{
-      line-height: 60px;
-      font-size: 24px;
-      color: darken(@white, 1%);
-    }
-    a:hover{
-      color: @white;
-      cursor: pointer;
-    }
-  }
-  &-items{
-    width: 100%;
-    max-width: 1166px;
-    &-link {
-      cursor: pointer;
-    }
-    &-link:hover{
-      background-color: lighten(@bg-color, 10%);
-      transition: all .3s;
-    }
-    &-link:active, &-link:focus{
-      outline: none;
-    }
-  }
-  &-items ul{
-    line-height: 60px;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    li{
-      list-style: none;
-      padding: 0 1rem;
-      &:first-child{
-        margin-right: auto;
-      }
-      &:last-child{
-        padding: 0;
-      }
-      a{
-        color: @white;
-      }
-    }
-  }
-}
 
-@media (max-width: 620px) {
-  .navbar{
-    justify-content: center;
-    flex-direction: column;
-    padding: 0;
-    &-toggle{
-      display: block;
-      position: absolute;
-      right: 1rem;
-      top: .75rem;
-    }
-    &-brand{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 115px;
-    }
-    &-items{
-      width: 100%;
-      &-link{
-        width: 100%;
-        text-align: center;
-      }
+// // vars
+// @normal-color: #d9d9d9;
+// @white: #fff;
+// @active-color: #81D4FA;
+// @divider-color-header: @normal-color;
+// @bg-color: #0277BD;
+// // styles
+// .navbar{
+//   background-color: var(--bg-color-dark);
+//   display: flex;
+//   max-width: 1440px;
+//   margin: 0 auto;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 0 24px;
+//   &-toggle{
+//     display: none;
+//     a{
+//       color: @white;
+//       padding: 0;
+//     }
+//   }
+//   &-brand {
+//     height: 80px;
+//     i{
+//       outline: none;
+//       svg{
+//         width: 160px;
+//       }
+//     }
+//   }
+//   &-items{
+//     width: 100%;
+//     max-width: 1166px;
+//     &-link {
+//       cursor: pointer;
+//     }
+//     &-link:hover{
+//       background-color: lighten(@bg-color, 10%);
+//       transition: all .3s;
+//     }
+//     &-link:active, &-link:focus{
+//       outline: none;
+//     }
+//   }
+//   &-items ul{
+//     line-height: 80px;
+//     margin: 0;
+//     padding: 0;
+//     display: flex;
+//     li{
+//       list-style: none;
+//       padding: 0 1rem;
+//       &:first-child{
+//         margin-right: auto;
+//       }
+//       &:last-child{
+//         padding: 0;
+//       }
+//       a{
+//         color: @white;
+//       }
+//     }
+//   }
+// }
+
+// @media (max-width: 620px) {
+//   .navbar{
+//     justify-content: center;
+//     flex-direction: column;
+//     padding: 0;
+//     &-toggle{
+//       display: block;
+//       position: absolute;
+//       right: 1rem;
+//       top: .75rem;
+//     }
+//     &-brand{
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       min-width: 115px;
+//     }
+//     &-items{
+//       width: 100%;
+//       &-link{
+//         width: 100%;
+//         text-align: center;
+//       }
       
-    }
-    &-items ul{
-      display: none; // переключатель в display: flex;
-      flex-direction: column;
-      align-items: center;
-      li{
-        &:first-child{
-          padding: 0 1rem;
-          margin-right: unset;
-        }
-      }
-    }
+//     }
+//     &-items ul{
+//       display: none; // переключатель в display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       li{
+//         &:first-child{
+//           padding: 0 1rem;
+//           margin-right: unset;
+//         }
+//       }
+//     }
     
-  }
-  .visibility{
-    display: flex !important;
-  }
-}
-.ant-btn-link, .ant-btn-link:hover, .ant-btn-link:focus{
-  color: #fff;
-}
+//   }
+//   .visibility{
+//     display: flex !important;
+//   }
+// }
+// .ant-btn-link, .ant-btn-link:hover, .ant-btn-link:focus{
+//   color: #fff;
+// }
