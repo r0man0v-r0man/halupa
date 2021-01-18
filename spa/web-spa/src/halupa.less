@@ -3,12 +3,25 @@
     --color-darken: #323031;
     --color-light: #C1BDB3;
     --color-lighten: #e4e4e4;
-    --default-transition: all .5s;
+    --default-transition: all .3s;
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
+}
+button{
+    cursor: pointer;
+    border: 0;
+    transition: var(--default-transition);
+    outline: none;
+    &:hover{
+        // transform: scale(2, 2);
+    }
+    &:active{
+        transform: scale(1.1, 1.1);
+    }
+    
 }
 body{
     background-color: var(--color-dark);
@@ -28,6 +41,17 @@ header{
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    &-menu-btn{
+        height: 40px;
+        width: 40px;
+        border-radius: 3px;
+        position: absolute;
+        right: 20px;
+        background: var(--color-dark);
+        &:hover{
+            background: lighten(#3D3B3C,5%);
+        }
+    }
 }
 .logo{
     display: grid;
