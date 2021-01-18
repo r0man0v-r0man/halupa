@@ -1,5 +1,7 @@
 :root{
     --color-dark: #3D3B3C;
+    --color-dark-hover: lighten(#3D3B3C, 5%);
+    --color-dark-active: lighten(#3D3B3C, 10%);
     --color-darken: #323031;
     --color-light: #C1BDB3;
     --color-lighten: #e4e4e4;
@@ -10,30 +12,63 @@
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
 }
+body{
+    background-color: var(--color-dark);
+}
+.container{
+    padding: 0 20px;
+}
+// animations
+@keyframes move-light{
+    from {
+        transform: translateX(-3em) skewX(-45deg);
+    }
+    to {
+        transform: translateX(10em) skewX(-45deg);
+    }
+}
+@keyframes btn-scale{
+    from{
+        transform: scale(1, 1);
+    }
+    to{
+        transform: scale(1.05, 1.05);
+    }
+}
+// elements style
 button{
     cursor: pointer;
     border: 0;
     transition: var(--default-transition);
     outline: none;
+    position: relative;
+    overflow: hidden;
+    &:before{
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 100%;
+        background: rgba(#fff, 0.3);
+        transform: translateX(-4em) skewX(-45deg);
+    }
     &:hover{
-        // transform: scale(2, 2);
+        &:before{
+            animation: move-light 1s;
+        }
     }
     &:active{
-        transform: scale(1.1, 1.1);
+        animation: btn-scale .1s;
     }
-    
 }
-body{
-    background-color: var(--color-dark);
-}
+
 header{
     z-index: 1;
     background-color:var(--color-darken);
     box-shadow: 0px 4px 4px 0px var(--color-darken);
 }
-.container{
-    padding: 0 20px;
-}
+
 .header{
     height: 80px;
     background-color:var(--color-darken);
@@ -49,7 +84,10 @@ header{
         right: 20px;
         background: var(--color-dark);
         &:hover{
-            background: lighten(#3D3B3C,5%);
+            background: var(--color-dark-hover);
+        }
+        &:active{
+            background: var(--color-dark-active);
         }
     }
 }
