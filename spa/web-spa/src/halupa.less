@@ -24,7 +24,7 @@ body{
         transform: translateX(-3em) skewX(-45deg);
     }
     to {
-        transform: translateX(10em) skewX(-45deg);
+        transform: translateX(5em) skewX(-45deg);
     }
 }
 @keyframes btn-scale{
@@ -55,18 +55,18 @@ button{
     }
     &:hover{
         &:before{
-            animation: move-light 1s;
+            animation: move-light .8s ease-in-out;
         }
     }
     &:active{
-        animation: btn-scale .1s;
+        animation: btn-scale .1s ease-in-out;
     }
 }
 
 header{
     z-index: 1;
     background-color:var(--color-darken);
-    box-shadow: 0px 4px 4px 0px var(--color-darken);
+    box-shadow: 4px 0px 4px 4px #000;
 }
 
 .header{
@@ -99,5 +99,22 @@ header{
     width: 160px;
     &:hover{
         fill: var(--color-lighten);
+    }
+}
+.square-point{
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    background-color: var(--color-darken);
+}
+section.home {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    article{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
