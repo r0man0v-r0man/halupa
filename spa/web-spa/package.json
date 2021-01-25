@@ -30,7 +30,7 @@
     "express": "^4.15.2",
     "ng-inline-svg": "^11.0.2",
     "ng-yandex-metrika": "^3.0.2",
-    "ng-zorro-antd": "^11.0.1",
+    "ng-zorro-antd": "^11.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
