@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { gsap } from 'gsap';
 
 @Component({
@@ -15,7 +16,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('card_blip3') card_blip3: ElementRef;
   @ViewChild('card_blip4') card_blip4: ElementRef;
   @ViewChild('card_blip5') card_blip5: ElementRef;
-  constructor() { 
+  @ViewChild('whole_card') whole_card: ElementRef;
+  @ViewChild('cta') cta: ElementRef;
+  
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any
+  ) { 
   }
   ngAfterViewInit(): void {
     const card: Element = this.card.nativeElement;
@@ -26,7 +32,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const card_blip3: Element = this.card_blip3.nativeElement;
     const card_blip4: Element = this.card_blip4.nativeElement;
     const card_blip5: Element = this.card_blip5.nativeElement;
+    const whole_card: Element = this.whole_card.nativeElement;
+    const cta: Element = this.cta.nativeElement;
+
     const timeline = gsap.timeline();
+    const timeline2 = gsap.timeline({defaults:{duration: 1.5, delay: 3.7}});
+    const timeline3 = gsap.timeline();
+    if(isPlatformBrowser(this.platformId)){
+      timeline3
+      .from(cta, {
+        duration: 1,
+        delay: 1,
+        css:{
+          opacity: 0,
+          translateX: 50
+        }
+      });
+    }
+    
+    timeline2
+    .to(whole_card,{
+       repeat: -1,
+       yoyo: true,
+       css: {
+         translateX: -10,
+         translateY: -10
+       }
+    });
     timeline
     .from(card, {
       duration: 1,
