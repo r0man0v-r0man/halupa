@@ -22,13 +22,23 @@ nav{
     outline: none;
 }
 .app-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+    transition: all .5s;
+    cursor: pointer;
+
+    &:hover{
+        transform: rotate(90deg);
+    }
     &-item{
+        place-items: flex-end;
         display: block;
-        margin-bottom: 5px;
+        margin: 0 20px 5px 20px;
         background-color: var(--black);
         box-shadow: var(--basic-shadow);
         width: 10px;
         height: 10px;
-        cursor: pointer;
     }
 }
