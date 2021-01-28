@@ -5,15 +5,13 @@ import { gsap } from 'gsap';
 export class GsapService {
   timeline = gsap.timeline();
   constructor() { }
-  applyLogoAnimation(el: Element, el2: Element){
-    this.timeline.from([el, el2], {
-      duration: 1,
-      ease: "back.inOut(2)",
-      delay: 0,
+  applyLogoAnimation(el: Element){
+    this.timeline.from(el, {
+      repeat: 0,
+      duration: .9,
+      ease: "back.inOut(1)",
       css:{
-        opacity: 0,
-        scale: .2,
-        transformOrigin: 'center',
+        translateY: -90
       }
     })
   }
@@ -25,15 +23,12 @@ export class GsapService {
     card_blip2: Element,
     card_blip3: Element, 
     card_blip4: Element,
-    card_blip5: Element,
-    cta_action: Element,
-    cta_h1: Element,
-    cta_subhead: Element){
+    card_blip5: Element){
       this.timeline
       .from(card, {
+        repeat: 0,
         duration: 1,
         ease: "back.inOut(3)",
-        delay: .5,
         css: {
           opacity: 0,
           scale: .2,
@@ -78,20 +73,5 @@ export class GsapService {
           scaleX: 0
         }
       }, "-=.7")
-      .from(cta_action, {
-        duration: .5,
-        ease: "back.inOut(2)",
-        css:{
-          opacity: 0,
-          translateY: 50
-        }
-      })
-      .from([cta_h1,cta_subhead],{
-        ease: "back.inOut(1)",
-        css: {
-          opacity: 0,
-          translateY: -50
-        }
-      }, "-=.5")
   }
 }

@@ -13,18 +13,18 @@ import { GsapService } from 'src/app/services/gsap.service';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('logo') logo: ElementRef;
-  @ViewChild('nav_btn') nav_btn: ElementRef;
   constructor(
     public _authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any,
     private _gsapService: GsapService
   ) { }
+  onLogoClick(){
+    this._gsapService.applyLogoAnimation(this.logo.nativeElement)
+  }
   ngAfterViewInit(): void {
-    if(isPlatformBrowser(this.platformId)){
-      this._gsapService.applyLogoAnimation(
-        this.logo.nativeElement,
-        this.nav_btn.nativeElement)
-    }
+    // if(isPlatformBrowser(this.platformId)){
+    //   this._gsapService.applyLogoAnimation(this.logo.nativeElement)
+    // }
   }
 
   ngOnInit(): void {

@@ -1,14 +1,10 @@
-<nav>
-    <div #logo class="logo">
+<nav class="container">
+    <div #logo class="logo"  [routerLink]="['/home']" (click)="onLogoClick()">
         <span>halupa.by</span>
     </div>
-    <div #nav_btn class="app-menu">
+    <div  class="app-menu">
         <span class="app-menu-item"></span>
         <span class="app-menu-item"></span>
         <span class="app-menu-item"></span>
     </div>
-    <!-- <div class="menu"
-    aria-label="menu"
-    [removeSVGAttributes]="['fill', 'width', 'height']"
-    [inlineSVG]="'../../../assets/menu-btn.svg'"></div> -->
 </nav>

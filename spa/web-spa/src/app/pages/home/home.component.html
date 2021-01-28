@@ -1,11 +1,11 @@
-<section class="top">
+<section class="top container">
     <article class="cta">
-        <p #cta_subhead>Объявления от собственника</p>
-        <h1 #cta_h1>Купить дом с нами просто!</h1>
-        <a #cta_action href="#">посмотреть</a>
+        <p >Объявления от собственника</p>
+        <h1 >Купить дом с нами просто!</h1>
+        <a  [routerLink]="['/adverts']">посмотреть</a>
     </article>
     <article>
-        <div #whole_card class="whole-card">
+        <div (click)="onCtaCardClick()" #whole_card  class="whole-card">
             <div #card class="card">
                 <div #card_top class="card-top">
                     <div #card_icon class="card-top-icon"></div>
@@ -25,3 +25,15 @@
         </div>
     </article>
 </section>
+<div  class="wrap-features">
+    <section class="features container">
+        <ul  class="features-list">
+            <li >Без посредников</li>
+            <li >Прямые контакты</li>
+            <li >Никакой рекламы</li>
+            <li >Подать объявление бесплатно</li>
+            <li >Без ограничений по времени</li>
+            <li >Личный кабинет</li>
+        </ul>
+    </section>
+</div>

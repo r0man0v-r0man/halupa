@@ -10,7 +10,7 @@ import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, View
     GsapService
   ]
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   @ViewChild('card') card: ElementRef;
   @ViewChild('card_top') cardTop: ElementRef;
   @ViewChild('card_icon') cardIcon: ElementRef;
@@ -20,30 +20,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('card_blip4') card_blip4: ElementRef;
   @ViewChild('card_blip5') card_blip5: ElementRef;
   @ViewChild('whole_card') whole_card: ElementRef;
-  @ViewChild('cta_action') cta_action: ElementRef;
-  @ViewChild('cta_h1') cta_h1: ElementRef;
-  @ViewChild('cta_subhead') cta_subhead: ElementRef;
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private _gsapService: GsapService
   ) { }
-  ngAfterViewInit(): void {
+  onCtaCardClick(){
     if(isPlatformBrowser(this.platformId)){
       this._gsapService.applyHeroCtaAnimation(
-        this.card.nativeElement, 
-        this.cardTop.nativeElement, 
-        this.cardIcon.nativeElement, 
-        this.card_blip1.nativeElement, 
-        this.card_blip2.nativeElement, 
-        this.card_blip3.nativeElement, 
-        this.card_blip4.nativeElement, 
-        this.card_blip5.nativeElement,
-        this.cta_action.nativeElement,
-        this.cta_h1.nativeElement,
-        this.cta_subhead.nativeElement)
+        this.card?.nativeElement, 
+        this.cardTop?.nativeElement, 
+        this.cardIcon?.nativeElement, 
+        this.card_blip1?.nativeElement, 
+        this.card_blip2?.nativeElement, 
+        this.card_blip3?.nativeElement, 
+        this.card_blip4?.nativeElement, 
+        this.card_blip5?.nativeElement)
     }
   }
-
   ngOnInit(): void {
   }
 
