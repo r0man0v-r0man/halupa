@@ -48,7 +48,6 @@ nav{
     z-index: 10;
     background: var(--black);
     position: absolute;
-    color: var(--gray);
     width: 100%;
     text-align: center;
     box-shadow: var(--basic-shadow);
@@ -56,6 +55,12 @@ nav{
         cursor: pointer;
         padding: 1.1em ;
         outline: none;
+        a{
+            color: var(--gray);
+            &:hover{
+                color: white;
+            }
+        }
     }
 }
 #nav-links{

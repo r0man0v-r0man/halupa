@@ -29,13 +29,6 @@ registerLocaleData(ru);
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AngularYandexMapsModule.forRoot(mapConfig),
-    // MetrikaModule.forRoot({
-    //   id:66772048, 
-    //   clickmap: true,
-    //   trackLinks: true,
-    //   accurateTrackBounce: true,
-    //   webvisor:true
-    // }),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
