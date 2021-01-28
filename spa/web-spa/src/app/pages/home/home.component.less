@@ -1,47 +1,131 @@
-#svg_img{
-    height: 100%;
+section{
+    padding-top: 4em;
+    padding-bottom: 4em;
+}
+.top{
     width: 100%;
-    position: relative;
-    overflow: hidden;
-    .cta{
-        display: flex;
-        flex-direction: column;
-        row-gap: .5em;
-        align-items: center;
-        z-index: 1;
-        margin-top: 17em;
-        background: rgba(255, 255, 255, 0.2); 
-        backdrop-filter: blur(2px);
-        h1{
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            padding: 10px 40px;
-            text-shadow: var(--basic-shadow);
-            text-transform: uppercase;
-            line-height: 110%;
-        }
-        a{
-            color: #fff;
-            padding: 25px 65px;
-            border: none;
-            outline: none;
-            font-weight: 700;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+.whole-card{
+    z-index: 0;
+    .card{
+        border-radius: 1em;
+        width: 210px;
+        background: #36382E;
+        height: 240px;
+        margin: 0 auto;
+        box-shadow: var(--basic-shadow);
+        .card-top,.blip1,.blip2, .card-bottom-btns-item{
+            background:#484943;
             box-shadow: var(--basic-shadow);
-            background: var(--orange);
-            text-transform: uppercase;
         }
-        p{
-            font-size: 14px;
-            font-weight: 300;
+        .blip-main, .blip1, .blip2, .card-bottom-btns-item{
+            border-radius: 10em;
+        }
+        .card-top{
+            height: 120px;
+            display: grid;
+            place-content: center;
+            border-radius: 1em 1em 0 0;
+            &-icon{
+                width: 20px;
+                height: 20px;
+                background: #36382E;
+                position: relative;
+                &::before{
+                    position: absolute;
+                    content: '';
+                    border: 2px solid #484943;
+                    transform: rotate(45deg);
+                    background: #36382E;
+                    width: 100%;
+                    height: 100%;
+                    top: 10px;
+                }
+                &::after{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background: #484943;
+                    content: '';
+                    top:20px;
+                }
+            }
+        }
+        .card-bottom{
+            &-blips{
+                .blip-main{
+                    background: var(--orange);
+                    width: 68px;
+                    height: 15px;
+                    margin: 20px 22px;
+                }
+                .blip1, .blip2{
+                    height: 12px;
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    margin-bottom: 10px;
+                }
+                .bpli1{
+                    width: 138px;
+                }
+                .blip2{
+                    width: 114px;
+                }
+            }
+            &-btns{
+                display: flex;
+                justify-content: flex-end;
+                margin-right: 10px;
+                &-item{
+                    height: 10px;
+                    width: 28px;
+                    margin-right: 10px;
+                }
+                &-item:nth-child(2){
+                    background: #757272;
+                }
+            }
         }
     }
-    svg{
-        position: absolute;
-        top: -23%;
-        left: -32%;
-        width: 150%;
-        z-index: -1;
-        transform: rotate(35deg);
+}
+
+.cta{
+    text-align: center;
+    h1{
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 1em;
+        padding-bottom: .5em;
+        color: black;
+    }
+    a{
+        text-decoration: none;
+        display: inline-block;
+        color:#fff;
+        padding: 1em 2em;
+        border-radius: 50em;
+        background: var(--red);
+        font-weight: bold;
+        text-transform: uppercase;
+        box-shadow: var(--basic-shadow);
+    }
+    p{
+        color: grey;
+    }
+}
+@media (min-width: 960px){
+    .top{
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .cta{
+        text-align: left;
     }
 }
