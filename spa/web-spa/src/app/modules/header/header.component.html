@@ -2,13 +2,13 @@
     <div #logo class="logo"  [routerLink]="['/home']" (click)="onLogoClick()">
         <span>halupa.by</span>
     </div>
-    <div  class="app-menu" >
+    <div (click)="onToggleMenu()" #app_menu class="app-menu" >
         <span class="app-menu-item"></span>
         <span class="app-menu-item"></span>
         <span class="app-menu-item"></span>
     </div>
-    <ul class="navigation">
-        <li>Личный кабинет</li>
-        <li>Войти</li>
-    </ul>
 </nav>
+<ul id="nav-links" #nav_links class="navigation container">
+    <li [routerLink]="['/adverts']" (click)="onToggleMenu(false)"><a ></a>Объявления</li>
+    <li><a [routerLink]="['/login']"></a>Войти</li>
+</ul>
