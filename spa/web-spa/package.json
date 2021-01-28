@@ -30,7 +30,6 @@
     "axios": "^0.21.1",
     "express": "^4.15.2",
     "gsap": "^3.6.0",
-    "ng-inline-svg": "^11.0.2",
     "ng-zorro-antd": "^11.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
