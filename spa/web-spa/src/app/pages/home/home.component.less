@@ -169,4 +169,35 @@ ul.features-list{
     .cta{
         text-align: left;
     }
+    ul.features-list{
+        margin: 0 10em;
+        // display: block;
+    }
+    .features{
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 90%;
+            background: var(--red);
+            top: -3em;
+            left: 0;
+            box-shadow: var(--basic-shadow);
+        }
+        &::after{
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            position: absolute;
+            top: 3em;
+            border-radius: 50em;
+            left: 5em;
+            box-shadow:  
+            20px 0px 0px white, 40px 0px 0px white, 
+            0px 20px 0px white, 20px 20px 0px white, 40px 20px 0px white,
+            0px 40px 0px white, 20px 40px 0px white, 40px 40px 0px white;
+        }
+    }
 }
