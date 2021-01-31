@@ -6,9 +6,13 @@
     justify-content: space-around;
     row-gap: 2em;
     column-gap: 1em;
+    padding: 0 2em;
+    font-size: 14px;
 }
 .card{
     width: @250;
+    background: white;
+    box-shadow: var(--basic-shadow);
     > div:not(:last-child) {
         padding-bottom: 1em;
     }
@@ -16,6 +20,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 1em 1em 0 1em;
     }
     &-image{
         width: @250;
@@ -26,6 +31,8 @@
         }
     }
     &-bottom{
+        padding: 0 1em;
+
         color: #aaaaaa;
         display: flex;
         flex-direction: column;
@@ -34,5 +41,8 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+    }
+    &-footer{
+        padding: 0 1em 1em 1em;
     }
 }

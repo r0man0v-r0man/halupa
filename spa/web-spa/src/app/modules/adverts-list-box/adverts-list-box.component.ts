@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, QueryList, ViewChildren } from '@angular/core';
 import { IAdvert } from 'src/app/models/advert.model';
 
 @Component({
@@ -27,17 +28,22 @@ export class AdvertsListBoxComponent implements OnInit, AfterViewInit {
     });
   };
 
-  constructor() { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any
+  ) { }
 
   ngOnInit(): void {
   }
   ngAfterViewInit(): void {
-    this.cardImages.changes.subscribe(()=>{
-      const targets = document.querySelectorAll('[data-src]');
-      const observer = new IntersectionObserver(this.loadImage, this.options);
-      targets.forEach(target => {
-        observer.observe(target);
-      });
-    })
+    if(isPlatformBrowser(this.platformId)){
+      this.cardImages.changes.subscribe(()=>{
+        const targets = document.querySelectorAll('[data-src]');
+        const observer = new IntersectionObserver(this.loadImage, this.options);
+        targets.forEach(target => {
+          observer.observe(target);
+        });
+      })
+    }
+    
   }
 }
