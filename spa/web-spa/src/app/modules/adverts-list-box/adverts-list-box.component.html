@@ -5,7 +5,7 @@
                 <img #cardImage width="250" height="250"
                 [alt]="item.yandexAddress.geoObject.name"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                data-src="https://placekitten.com/g/250/250"/>
+                data-src="{{'/img/250/' + item.images[0]?.fileName}}"/>
             </div>
             <div class="card-top">
                 <app-price [prices]="item.prices"></app-price>
