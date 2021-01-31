@@ -38,4 +38,8 @@ export class HeaderComponent implements OnInit {
       this._renderer.setStyle(this.app_menu.nativeElement, 'transform', this.isToggleMenu?'rotate(90deg)':'unset')
     }
   }
+  onLogOut(){
+    this.onToggleMenu(false);
+    this._authService.logOut();
+  }
 }
