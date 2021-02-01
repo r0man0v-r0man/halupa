@@ -51,6 +51,7 @@ export class AuthService {
   }
   /** Is User Login */
   isLogedIn(): Observable<boolean>{
+    
     return new Observable<boolean>(observer => {
       const jwtHelper = new JwtHelperService();
       let token = this._localStorage.getItem('access_token');
