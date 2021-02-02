@@ -1,7 +1,7 @@
 <nz-button-group>
     <p>{{ priceView.value | currency : '' : '' : '1.0'}}<span style="font-size: xx-small">{{ priceView.currency | price }}</span></p>
     <button 
-    *ngIf="prices.length == 1" 
+    *ngIf="prices.length > 1" 
     [nzSize]="'small'" 
     aria-label="swap" 
     nz-button nzType="primary" 
