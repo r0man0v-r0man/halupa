@@ -11,16 +11,21 @@
 }
 .card{
     width: @250;
+    height: 350px;
     background: white;
+    position: relative;
     box-shadow: var(--basic-shadow);
-    > div:not(:last-child) {
-        padding-bottom: 1em;
+    app-price{
+        position: absolute;
+        top: 1em;
+        background: var(--orange);
     }
     &-top{
+        padding: .5em 1em 0 1em;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1em 1em 0 1em;
+        font-size: 12px;
     }
     &-image{
         width: @250;
@@ -33,9 +38,15 @@
     &-bottom{
         padding: 0 1em;
 
-        color: #aaaaaa;
+        color: var(--black);
         display: flex;
         flex-direction: column;
+        &-main{
+            font-weight: bold;
+        }
+        &-secondary{
+            font-size: 12px;
+        }
         > span {
             white-space: nowrap;
             overflow: hidden;
@@ -43,6 +54,26 @@
         }
     }
     &-footer{
-        padding: 0 1em 1em 1em;
+        background: var(--orange);
+        padding: .5em 1em;
+        text-align: center;
+        transition: all 1s;
+        cursor: pointer;
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        &:hover{
+            background: #ffa14e;
+            a{
+                font-weight: bold;
+            }
+        }
     }
+}
+.card-info{
+    display: flex;
+    height: 100px;
+    flex-direction: column;
+    justify-content: space-between;
 }
