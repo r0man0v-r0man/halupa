@@ -53,22 +53,17 @@
             text-overflow: ellipsis;
         }
     }
-    &-footer{
-        background: var(--orange);
-        padding: .5em 1em;
-        text-align: center;
-        transition: all 1s;
-        cursor: pointer;
-        a{
-            color: white;
-            text-decoration: none;
-        }
-        &:hover{
-            background: #ffa14e;
-            a{
-                font-weight: bold;
-            }
-        }
+}
+a.link{
+    color: white;
+    text-decoration: none;
+    background: var(--orange);
+    padding: .5em 1em;
+    text-align: center;
+    transition: all .3s ease-in-out;
+    &:hover{
+        background: #ffa75a;
+        text-decoration: underline;
     }
 }
 .card-info{
