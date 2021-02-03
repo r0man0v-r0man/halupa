@@ -11,8 +11,11 @@ namespace api.Controllers
         {
             var robots =
                 "User-agent: * \n" +
-                "Allow: /$ \n" +
-                "Disallow: / \n";
+                "Allow: / \n" +
+                "Disallow: /register \n" +
+                "Disallow: /add \n" +
+                "Disallow: /login \n" +
+                "Disallow: /cabinet \n";
             return Content(robots);
         }
     }
