@@ -46,19 +46,23 @@ nav{
 }
 .navigation{
     z-index: 10;
-    background: var(--black);
+    background: var(--gray);
     position: absolute;
     width: 100%;
     text-align: center;
     box-shadow: var(--basic-shadow);
     li{
-        cursor: pointer;
-        padding: 1.1em ;
         outline: none;
         a{
+            width: 100%;
+            display: block;
+            text-decoration: none;
+            height: 100%;
             color: var(--gray);
+            padding: 1em 0;
+            color: var(--black);
             &:hover{
-                color: white;
+                color: black;
             }
         }
     }

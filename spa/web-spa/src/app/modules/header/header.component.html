@@ -9,25 +9,25 @@
     </div>
 </nav>
 <ul id="nav-links" #nav_links class="navigation container">
-    <li [routerLink]="['/adverts']" (click)="onToggleMenu(false)"><a >Объявления</a></li>
-    <li [routerLink]="['/add']" (click)="onToggleMenu(false)">
-        <a >Добавить объявление</a>
+    <li >
+        <a [routerLink]="['/adverts']" (click)="onToggleMenu(false)">Объявления</a>
+    </li>
+    <li >
+        <a [routerLink]="['/add']" (click)="onToggleMenu(false)">Добавить объявление</a>
     </li>
     <ng-container *ngIf="_authService.isLogedIn() | async; then privateTpl else publicTpl">
     </ng-container>
     <ng-template #privateTpl>
-        <li [routerLink]="['/cabinet']" (click)="onToggleMenu(false)">
-            <a >Личный кабинет</a>
+        <li >
+            <a [routerLink]="['/cabinet']" (click)="onToggleMenu(false)">Личный кабинет</a>
         </li>
-        
-        <li (click)="onLogOut()">
-            <a >Выйти</a>
+        <li >
+            <a [routerLink]="['/login']" (click)="onLogOut()">Выйти</a>
         </li>
     </ng-template>
     <ng-template #publicTpl>
-        <li [routerLink]="['/login']" (click)="onToggleMenu(false)">
-            <a >Войти</a>
+        <li >
+            <a [routerLink]="['/login']" (click)="onToggleMenu(false)">Войти</a>
         </li>
     </ng-template>
-
 </ul>

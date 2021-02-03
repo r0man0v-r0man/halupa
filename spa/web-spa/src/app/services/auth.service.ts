@@ -39,7 +39,6 @@ export class AuthService {
   /**logout user */
   logOut(){
     this._localStorage.removeItem("access_token");
-    this._router.navigate(['/login']);
   }
   /**check the existing username */
   IsUserNameExist(userName: string){
