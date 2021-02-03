@@ -29,6 +29,12 @@ export function app(): express.Express {
       res.send(sitemap.data)  
     });
   });
+  server.get('*/robots**', (req, res) => {
+    Axios.get('https://halupa.by/robots.txt').then(robot => {
+      res.setHeader('Content-Type','text/plain');
+      res.send(robot.data);
+    });
+  });
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
