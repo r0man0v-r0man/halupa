@@ -1,10 +1,10 @@
 <section class="login">
     <section class="left">
-        <form>
+        <form [formGroup]="form" (ngSubmit)="signIn(form.value)">
             <h1>Войти</h1>
-            <input type="text" placeholder="логин">
-            <input type="password" placeholder="пароль">
-            <button>войти</button>
+            <input formControlName="userName" type="text" placeholder="логин">
+            <input formControlName="password" type="password" placeholder="пароль">
+            <button [disabled]="!form.valid">войти</button>
         </form>
     </section>
     <section class="right">2</section>
