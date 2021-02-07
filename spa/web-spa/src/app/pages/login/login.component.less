@@ -1,24 +1,28 @@
 @600: 600px;
-section.login{
+section{
+    text-align: center;
     width: 100%;
     min-width: 320px;
-    max-width: @600 * 2;
+    max-width: calc(@600 * 2);
     height: 100%;
     max-height: @600;
     background: white;
-}
-section.left, section.right{
-    max-height: @600;
-}
-section.right{
-    display: none;
-}
-section.left{
+    box-shadow: var(--basic-shadow);
     padding: clamp(10px, 5vw, 70px);
     form{
         display: flex;
         flex-direction: column;
         gap: 2em;
+    }
+    a{
+        text-decoration: none;
+        color: var(--black);
+        font-size: clamp(12px, 2vw, 16px);
+        padding: clamp(5px, 5vw, 20px);
+        display: block;
+        &:hover{
+            text-decoration: underline;
+        }
     }
 }
 h1{
@@ -30,5 +34,20 @@ input[type=text], input[type=password]{
     border: none;
     border-bottom: 1px solid var(--gray);
     outline: none;
-    font-size: clamp(14px, 3vw, 22px);
+    font-size: clamp(14px, 2vw, 22px);
+    height: 2em;
+}
+button{
+    background: var(--black);
+    color: white;
+    border: none;
+    outline: none;
+    padding: 1em;
+    font-size: clamp(14px, 2vw, 22px);
+    transition: all .3s;
+    box-shadow: var(--basic-shadow);
+    &:hover, &:active, &:focus{
+        background: #43463a;
+        cursor: pointer;
+    }
 }
