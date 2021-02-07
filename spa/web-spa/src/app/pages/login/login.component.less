@@ -38,7 +38,7 @@ input[type=text], input[type=password]{
     height: 2em;
 }
 button{
-    background: var(--black);
+    background-color: var(--black);
     color: white;
     border: none;
     outline: none;
@@ -47,7 +47,15 @@ button{
     transition: all .3s;
     box-shadow: var(--basic-shadow);
     &:hover, &:active, &:focus{
-        background: #43463a;
+        background-color: #43463a;
         cursor: pointer;
     }
+    
 }
+button:disabled{
+    background: var(--gray);
+    color: #b4b4b4;
+    border: none;
+    box-shadow: none;
+    cursor: not-allowed;
+  }

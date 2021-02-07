@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
   get form() {
     return this._registerFormService.form;
   }
+  get userName() { return this._registerFormService.form.get('userName'); }
   /** регистрация пользователя */
   submitForm(user: IUser){
     if(user){
