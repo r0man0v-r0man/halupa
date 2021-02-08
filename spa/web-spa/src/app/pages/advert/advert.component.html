@@ -17,6 +17,7 @@
         <h3>{{ advert.yandexAddress.geoObject.description }}</h3>
         <p>{{ advert.description.value }}</p>
     </footer>
+    <app-yandex-map [advert]="advert"></app-yandex-map>
 </section>
 <!-- <div class="wrap">
     <div class="advert" *ngIf="advert">

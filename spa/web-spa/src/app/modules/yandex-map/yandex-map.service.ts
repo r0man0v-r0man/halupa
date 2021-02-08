@@ -1,9 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {ILoadEvent} from 'angular8-yandex-maps';
 
 @Injectable()
 export class YandexMapService {
-  constructor() { }
+  constructor(
+    
+  ) { }
   getGeoObject(address: any) {
     const coords = this.getCoords(address);
     return {
@@ -32,6 +34,7 @@ export class YandexMapService {
     return address.geoObject.point.pos.split(' ');
   }
   onLoad(event: ILoadEvent, address: any) {
+    
     const myGeoObject = new event.ymaps.GeoObject(
       this.getGeoObject(address),
       this.getproperties());
