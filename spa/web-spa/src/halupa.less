@@ -11,11 +11,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
 }
 
 body{
     background-color: #e2e2e2;
-    color: black;
+    color: var(--black);
     font-family: 'Montserrat', sans-serif;
 }
 button, input[type=text], input[type=password]{
@@ -28,10 +29,11 @@ button, input[type=text], input[type=password]{
 .container{
     padding: 0 40px;
 }
-h1{
+h1, h3{
   color: var(--black);
 }
 a{
+  transition: all .3s;
   cursor: pointer;
 }
 header{
@@ -44,7 +46,7 @@ header{
 ul{
   list-style-type: none;
 }
-app-login, app-register, app-advert, app-adverts, app-cabinet, app-add{
+app-login, app-register,  app-adverts, app-cabinet, app-add{
   display: grid;
   place-content: center;
   padding: 3em 0;
@@ -55,6 +57,10 @@ app-advert{
   width: 100%;
   max-width: 960px;
   background: white;
+  padding: 1em;
+  display: block;
+  min-height: ~"calc(100vh - 120px)";
+  box-shadow: var(--basic-shadow);
 }
 .cdk-overlay-container {
   left: 50%;
@@ -62,4 +68,9 @@ app-advert{
   background: var(--black);
   position: fixed; 
   z-index: 1000;
+}
+button{
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

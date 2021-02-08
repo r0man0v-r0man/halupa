@@ -1,4 +1,24 @@
-<div class="wrap">
+<section *ngIf="advert" class="advert">
+    <header>
+        <div class="street">
+            <a (click)="onBack()">&#10094;</a>
+            <h3>{{advert.yandexAddress.geoObject.name}}</h3>
+        </div>
+        <app-price [prices]="advert.prices"></app-price>
+        <span >{{advert.created | date : 'shortDate' : '' : 'ru'}}</span>
+    </header>
+    <main>
+        <app-image-slider *ngIf="images" [images]="images"></app-image-slider>
+        <div class="btns">
+            <app-contacts-view [contacts]="advert.contacts"></app-contacts-view>
+        </div>
+    </main>
+    <footer>
+        <h3>{{ advert.yandexAddress.geoObject.description }}</h3>
+        <p>{{ advert.description.value }}</p>
+    </footer>
+</section>
+<!-- <div class="wrap">
     <div class="advert" *ngIf="advert">
         <div class="advert-header">
             <div class="advert-header-item">
@@ -35,4 +55,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -1,40 +1,85 @@
-@bottom-space: .5em;
-.advert{
-  &-header{
-    margin-bottom: @bottom-space;
+section.advert{
+  color: var(--black);
+  .street, header{
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    &-item{
-      margin-bottom: @bottom-space;
-      &-address{
-        font-size: 1.25rem;
-        padding: 0 1rem;
+    justify-content: space-between;
+  }
+  header{
+    height: 100%;
+    background: transparent;
+    box-shadow: none;
+    a{
+      padding: .5em .5em .5em 0;
+      color: #999;
+      display: block;
+      font-weight: bold;
+      font-size: 1.5em;
+      &:hover{
+        color: var(--black);
       }
     }
+    app-price{
+      background: var(--orange);
+    }
+
   }
-  &-info{
-    margin-bottom: @bottom-space;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    &-item{
-      &-buttons{
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        button{
-          margin-bottom: @bottom-space;
-        }
-      }
+  footer{
+    width: 100%;
+    max-width: 600px;
+    h3{
+      padding: .5em .5em .5em 0;
     }
   }
-  &-footer{
+  main{
     display: flex;
-    flex-direction: column;
-    &-item{
-      margin-bottom: @bottom-space;
+    .btns{
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
     }
+    
   }
 }
+// @bottom-space: .5em;
+// .advert{
+//   &-header{
+//     margin-bottom: @bottom-space;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     &-item{
+//       margin-bottom: @bottom-space;
+//       &-address{
+//         font-size: 1.25rem;
+//         padding: 0 1rem;
+//       }
+//     }
+//   }
+//   &-info{
+//     margin-bottom: @bottom-space;
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-around;
+//     &-item{
+//       &-buttons{
+//         display: flex;
+//         flex-wrap: wrap;
+//         flex-direction: column;
+//         button{
+//           margin-bottom: @bottom-space;
+//         }
+//       }
+//     }
+//   }
+//   &-footer{
+//     display: flex;
+//     flex-direction: column;
+//     &-item{
+//       margin-bottom: @bottom-space;
+//     }
+//   }
+// }

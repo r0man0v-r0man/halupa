@@ -1,12 +1,9 @@
 <ng-container *ngIf="isShowPhone; else phoneTpl" >
-    <nz-button-group >
-        <button nz-button nzType="text">{{contacts[0].value}}</button>
-        <button nz-button [nzType]="isCopied?'text':'primary'" (click)="onCopyPhone()"><i nz-icon [nzType]="isCopied?'check':'copy'" nzTheme="outline"></i></button>
-    </nz-button-group>
+    <!-- <a href="tel:+1234567890">{{contacts[0].value}}</a> -->
+    <a [href]="contact.kind === 0? 'tel:' + contact.value : 'mailto:' + contact.value" *ngFor="let contact of contacts">{{contact.value}}</a>
 </ng-container>
 <ng-template #phoneTpl>
-    <button nz-button nzBlock="true" (click)="onShowPhone()">
-        <i nz-icon nzType="phone" nzTheme="outline"></i>
-        Показать
+    <button  (click)="onShowPhone()">
+        Контакты
     </button>
 </ng-template>
