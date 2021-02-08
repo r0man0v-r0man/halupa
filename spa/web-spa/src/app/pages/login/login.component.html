@@ -1,9 +1,14 @@
 <section class="login">
         <form [formGroup]="form" (ngSubmit)="signIn(form.value)">
             <h1>Войти</h1>
-            <input formControlName="userName" type="text" placeholder="логин">
-            <input formControlName="password" type="password" placeholder="пароль">
+            <label for="login">Логин:</label>
+            <input required formControlName="userName" id="login" type="text" placeholder="Имя пользователя">
+            <label for="password">Пароль:</label>
+            <input required formControlName="password"  id="password" type="password" placeholder="******">
             <button [disabled]="!form.valid">войти</button>
         </form>
-        <a [routerLink]="['/register']">Зарегистрироваться</a>
+        <footer>
+            <span>или</span>
+            <a [routerLink]="['/register']">Зарегистрироваться</a>
+        </footer>
 </section>

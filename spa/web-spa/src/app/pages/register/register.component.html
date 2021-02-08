@@ -1,16 +1,21 @@
 <section class="register">
     <form [formGroup]="form" (ngSubmit)="submitForm(form.value)">
         <h1>Регистрация</h1>
+        <label for="userName">Логин:</label>
         <div *ngIf="userName.invalid && (userName.dirty || userName.touched)"
             class="alert">
             <div *ngIf="userName.errors.duplicated">
                 Имя занято!
             </div>
         </div>
-        <input formControlName="userName" type="text" id="userName"  placeHolder="Имя пользователя">
-        <input formControlName="password" type="password" id="password"
-        placeholder="Пароль">
+        <input formControlName="userName"  type="text" id="userName"  placeHolder="Имя пользователя">
+        
+        <label for="password">Пароль:</label>
+        <input formControlName="password"  type="password" id="password"
+        placeholder="*****">
         <button [disabled]="!form.valid">Зарегистрироваться</button>
     </form>
-    <a [routerLink]="['/home']">На главную</a>
+    <footer>
+        <a [routerLink]="['/home']">На главную</a>
+    </footer>
 </section>
