@@ -1,7 +1,10 @@
 <div class="slideshow-container" >
-    <div *ngFor="let image of images; let i = index" class="image-container" >
-        <img [style.display]="image.isVisible == true ? 'block' : 'none' " src="https://placekitten.com/g/600/600" alt="{{image.alt}}" class="image">
-        <!-- <img [style.display]="image.isVisible == true ? 'block' : 'none' " src="{{image.url}}" alt="{{image.alt}}" class="image"> -->
+    <div *ngFor="let image of images; let i = index" class="image-container loading" >
+        <img #slideImage width="600" height="600"
+        [style.display]="image.isVisible == true ? 'block' : 'none' " 
+        src="{{image.src}}"
+        data-src="{{image.url}}" 
+        alt="{{image.alt}}" >
     </div>
     <a class="prev" (click)="prev()">&#10094;</a>
     <a class="next" (click)="next()">&#10095;</a>

@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import {AfterViewInit, Component, Inject, Input, OnInit, PLATFORM_ID} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, Inject, Input, OnInit, PLATFORM_ID} from '@angular/core';
 import { YandexMapService } from './yandex-map.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { YandexMapService } from './yandex-map.service';
     YandexMapService
   ]
 })
-export class YandexMapComponent implements OnInit, AfterViewInit{
+export class YandexMapComponent implements OnInit, AfterContentInit{
   @Input() advert;
   isReady: boolean;
   get mapCenter() {
@@ -25,7 +25,7 @@ export class YandexMapComponent implements OnInit, AfterViewInit{
     public yandexMapService: YandexMapService,
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     if(isPlatformBrowser(this.platformId)){
       this.isReady = true;
     }

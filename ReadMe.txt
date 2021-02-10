@@ -11,3 +11,5 @@ dotnet ef migrations add first -p dal -s api
 
 figma
 https://www.figma.com/file/4LBwVEXBn0AHrUdssQhlQy/halupa?node-id=0%3A1
+
+https://placekitten.com/g/600/600
