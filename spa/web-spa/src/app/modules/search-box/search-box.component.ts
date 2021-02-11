@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchBoxFormService} from "./search-box-form.service";
-import {AdvertService} from "../../services/advert.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -30,13 +29,4 @@ export class SearchBoxComponent implements OnInit {
   onClear() {
     this._searchBoxFormService.resetForm();
   }
-  // onChangedSearchInput(value: string) {
-  //   this.inputValue$.next(value);
-  // }
-  // updateNote(){
-  //   this.noteChange$.asObservable().pipe(
-  //       debounceTime(2000),
-  //       map(note => this._favoriteService.updateNote(note.id, note.note))
-  //   ).subscribe();
-  // }
 }

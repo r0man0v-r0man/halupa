@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { ru_RU } from 'ng-zorro-antd/i18n';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { FooterModule } from './modules/footer/footer.module';
@@ -38,10 +36,7 @@ registerLocaleData(ru);
   ],
   providers: [
     Title,
-    AuthGuardService,
-    { 
-      provide: NZ_I18N, useValue: ru_RU 
-    }
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

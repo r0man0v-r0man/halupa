@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ContactsViewComponent} from "./contacts-view.component";
 import {ClipboardModule} from "@angular/cdk/clipboard";
-import {NzButtonModule} from "ng-zorro-antd/button";
-import {NzIconModule} from "ng-zorro-antd/icon";
 
 
 
@@ -13,9 +11,7 @@ import {NzIconModule} from "ng-zorro-antd/icon";
   ],
   imports: [
     ClipboardModule,
-    CommonModule,
-      NzButtonModule,
-      NzIconModule
+    CommonModule
   ],
   exports: [
       ContactsViewComponent

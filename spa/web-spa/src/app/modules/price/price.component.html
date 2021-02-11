@@ -1,9 +1,6 @@
-<nz-button-group>
+
     <p>{{ priceView.value | currency : '' : '' : '1.0'}}<span style="font-size: xx-small">{{ priceView.currency | price }}</span></p>
     <button 
-    *ngIf="prices.length > 1" 
-    [nzSize]="'small'" 
-    aria-label="swap" 
-    nz-button nzType="primary" 
-    (click)="onSwitchPriceCurrency()"><i nz-icon nzType="swap" nzTheme="outline"></i></button>
-</nz-button-group>
+    *ngIf="prices.length > 1"
+    aria-label="swap"
+    (click)="onSwitchPriceCurrency()">&#10094;&#10095;</button>

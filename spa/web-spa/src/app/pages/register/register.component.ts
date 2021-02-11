@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';

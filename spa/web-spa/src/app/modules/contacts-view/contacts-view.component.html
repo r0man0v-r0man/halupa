@@ -1,5 +1,4 @@
 <ng-container *ngIf="isShowPhone; else phoneTpl" >
-    <!-- <a href="tel:+1234567890">{{contacts[0].value}}</a> -->
     <a [href]="contact.kind === 0? 'tel:' + contact.value : 'mailto:' + contact.value" *ngFor="let contact of contacts">{{contact.value}}</a>
 </ng-container>
 <ng-template #phoneTpl>

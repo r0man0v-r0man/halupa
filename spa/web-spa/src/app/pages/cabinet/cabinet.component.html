@@ -1,7 +1,7 @@
 <div class="wrap">
   <div class="cabinet">
     <div class="cabinet-item">
-      <h4 nz-typography>Мои объявления</h4>
+      <h4>Мои объявления</h4>
       <div class="cabinet-item-list">
         <div *ngFor="let advert of adverts" class="cabinet-item-list-element">
           <div
@@ -14,11 +14,7 @@
             <div>
               <button
                 (click)="onRemove(advert.id)"
-                nz-button
-                nzType="primary"
-                nzDanger
               >
-                <i nz-icon nzType="delete" nzTheme="outline"></i>
               </button>
             </div>
           </div>

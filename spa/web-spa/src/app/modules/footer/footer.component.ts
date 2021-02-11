@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  linkedInUrl: string = 'https://www.linkedin.com/in/roman-romanov-276b0417a';
   currentYear = new Date().getFullYear();
   constructor() { }
 

@@ -1,4 +1,4 @@
-import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ILoadEvent} from 'angular8-yandex-maps';
 
 @Injectable()

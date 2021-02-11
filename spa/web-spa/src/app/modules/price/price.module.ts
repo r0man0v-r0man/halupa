@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 import {PriceComponent} from "./price.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PricePipe } from './price.pipe';
-import {NzTypographyModule} from "ng-zorro-antd/typography";
-import {NzButtonModule} from "ng-zorro-antd/button";
-import {NzIconModule} from "ng-zorro-antd/icon";
 
 @NgModule({
   declarations: [
@@ -14,11 +11,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
   ],
   imports: [
     CommonModule,
-      NzTypographyModule,
       FormsModule,
-      ReactiveFormsModule,
-      NzButtonModule,
-      NzIconModule
+      ReactiveFormsModule
   ],
   exports:[
       PriceComponent,

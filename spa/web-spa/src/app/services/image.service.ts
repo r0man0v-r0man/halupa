@@ -1,8 +1,6 @@
-import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NzUploadChangeParam, NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
-import {  Observable, Observer, Subject } from 'rxjs';
-import { IUploadImage } from '../models/uploadImage';
+import {  Observable, Observer } from 'rxjs';
 import { URLs } from '../urls';
 @Injectable({
   providedIn: 'root'
@@ -75,7 +73,7 @@ export class ImageService {
     return this._httpService.delete<boolean>(URLs.deleteImageURL + '/' + deleteHash, { headers: this.headers })
   }
 
-  onFileChange = (file: NzUploadFile) => {
+  onFileChange = (file: any) => {
     return new Observable((observer: Observer<File>) => {
     const width = 1000; // разрешение картинки
     const reader = new FileReader();

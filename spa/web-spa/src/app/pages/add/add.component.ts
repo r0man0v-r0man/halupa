@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
@@ -22,8 +21,8 @@ import { GeocoderService } from './services/geocoder.service';
 export class AddComponent implements OnInit {
   limitOfPricesArray = Object.keys(CurrencyType).map(key => CurrencyType[key]).filter(x => !(parseInt(x) >= 0)).length - 1;
   /** фото к объявлению */
-  images: NzUploadFile[] = [];
-  imageList: NzUploadFile[] = [];
+  images: any[] = [];
+  imageList: any[] = [];
   imageList2: IUploadImage[] = [];
   
   constructor(
@@ -53,7 +52,7 @@ export class AddComponent implements OnInit {
     const advert: IAdvert = { ...this.form.value };
     this.advertService.addAdvert(advert);
   }
-  onUploadChange(event: NzUploadChangeParam){
+  onUploadChange(event: any){
     if(event.file.response){
       this.imageList2.push(event.file.response);
       this.setFormControlValue('images', this.imageList2);
@@ -61,7 +60,7 @@ export class AddComponent implements OnInit {
     }
   }
   /** Delete file */
-  onDelete = (file: NzUploadFile): Observable<boolean> => {
+  onDelete = (file: any): Observable<boolean> => {
     return new Observable(observer => {
       if (file) {
         this._imageService.delete(file.response.deleteHash)

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import {SearchBoxModule} from "../search-box/search-box.module";
 
 @NgModule({
   declarations: [
@@ -10,8 +9,7 @@ import {SearchBoxModule} from "../search-box/search-box.module";
   ],
   imports: [
     CommonModule,
-    AppRoutingModule,
-      SearchBoxModule
+    AppRoutingModule
   ],
   exports:[
     HeaderComponent

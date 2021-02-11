@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IAdvert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
 

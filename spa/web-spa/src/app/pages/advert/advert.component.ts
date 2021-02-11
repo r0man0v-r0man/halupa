@@ -3,9 +3,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { Location } from '@angular/common';
 import { IAdvert } from 'src/app/models/advert.model';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { YandexMapComponent } from 'src/app/modules/yandex-map/yandex-map.component';
 import { IUploadImage } from 'src/app/models/uploadImage';
 @Component({
   selector: 'app-advert',
@@ -22,8 +19,7 @@ export class AdvertComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService,
-    private location: Location,
-    private _modalService: NzModalService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -62,22 +58,4 @@ export class AdvertComponent implements OnInit {
   onBack(): void {
     this.location.back();
   }
-
-  onShowMap(){
-    const modal: NzModalRef = this._modalService.create({
-      nzTitle: `${this.advert.yandexAddress.geoObject.name}`,
-      nzContent: YandexMapComponent,
-      nzComponentParams: {
-        advert: this.advert
-      },
-      nzFooter: [
-        {
-          label: 'Закрыть',
-          onClick: () => modal.destroy()
-        }
-      ]
-    })
-  }
-
-  
 }
