@@ -1,8 +1,8 @@
 <div class="slideshow-container" >
-    <div *ngFor="let image of images; let i = index" class="image-container loading" >
+    <div *ngFor="let image of images; let i = index" class="image-container" >
         <img #slideImage width="600" height="600"
         [style.display]="image.isVisible == true ? 'block' : 'none' " 
-        src="{{image.src}}"
+        [src]="image.src"
         data-src="{{image.url}}" 
         alt="{{image.alt}}" >
     </div>

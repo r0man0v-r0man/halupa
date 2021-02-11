@@ -1,5 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, OnInit, Input, ElementRef, QueryList, ViewChildren, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IntersectionService } from 'src/app/services/intersection.service';
 
 @Component({
@@ -10,26 +9,12 @@ import { IntersectionService } from 'src/app/services/intersection.service';
     IntersectionService
   ]
 })
-export class ImageSliderComponent implements OnInit, AfterViewInit {
+export class ImageSliderComponent implements OnInit {
     /** картинки для карусели */
     @Input() images: Array<{ url: string; alt: string; isVisible: boolean; id: number; src: string; }> = [];
     /** номер слайдера */
     slideNo: number = 0;
-    @ViewChildren('slideImage') slideImages: QueryList<ElementRef>;
-
-    constructor(
-        @Inject(PLATFORM_ID) private platformId: any,
-        private _intersectionService: IntersectionService
-    ) { }
-    ngAfterViewInit(): void {
-        if(isPlatformBrowser(this.platformId)){
-                const targets = document.querySelectorAll('[data-src]');
-                const observer = new IntersectionObserver(this._intersectionService.loadImage, this._intersectionService.options);
-                targets.forEach(target => {
-                  observer.observe(target);
-                });
-        }
-    }
+    constructor( ) { }
 
     ngOnInit(): void {
         this.сarousel(this.slideNo);
@@ -55,5 +40,16 @@ export class ImageSliderComponent implements OnInit, AfterViewInit {
         this.images.map((image) => {
             image.id === activeSlideIndex ? image.isVisible = true : image.isVisible = false;
         });
+        this.replaceSrcByUrl(activeSlideIndex); 
+    }
+    /**
+     * Замена заглушек настоящими ссылками на изображения
+     * для сео оптимизации
+     * @param activeSlideIndex номер слайда
+     */
+    private replaceSrcByUrl(activeSlideIndex: number) {
+        if (this.images[activeSlideIndex].src !== this.images[activeSlideIndex].url) {
+            this.images[activeSlideIndex].src = this.images[activeSlideIndex].url;
+        }
     }
 }
