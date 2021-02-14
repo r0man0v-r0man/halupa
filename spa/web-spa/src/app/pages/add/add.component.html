@@ -13,7 +13,7 @@
             <button 
             *ngIf="input.value" 
             (click)="input.value = ''">x</button>
-            <div *ngIf="geocoderService.optionList.length > 0" class="list">
+            <div *ngIf="geocoderService.optionList?.length > 0" class="list">
                 <div
                 (click)="onDataClick(option, input);"
                 class="data"
@@ -28,9 +28,19 @@
             </div>
         </div>
     </div>
-    <div class="form-item">
-        <input type="text" placeholder="123">
-        <button>12312</button>
+    <div class="form-item price">
+        <div *ngFor="let control of form.controls['prices']['controls']; let i = index">
+            <app-price-input [price]="form.controls['prices']['controls'][i].value"></app-price-input>
+            <button [disabled]="i == 0 "
+                
+                (click)="onRemovePrice(i)"
+                 >удалить
+            </button>
+        </div>
+        <button  [disabled]="isDisabledAddPriceButton"
+                        (click)="onAddPrice()"
+                        >Добавить цену
+                    </button>
     </div>
 </form>
 <!-- 
