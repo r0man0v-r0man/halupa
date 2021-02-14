@@ -1,3 +1,38 @@
+<form [formGroup]="form">
+    <h3>Добавить объявление</h3>
+    <div class="form-item ">
+        <label for="address">Адрес:</label>
+        <div class="address">
+            <input #input 
+            type="text" 
+            list="addressList" 
+            name="address" 
+            autocomplete="off"
+            placeholder="Лермонтова 2, Несвиж"
+            (input)="geocoderService.onSearch(input.value)">
+            <button 
+            *ngIf="input.value" 
+            (click)="input.value = ''">x</button>
+            <div *ngIf="geocoderService.optionList.length > 0" class="list">
+                <div
+                (click)="onDataClick(option, input);"
+                class="data"
+                *ngFor="let option of geocoderService.optionList">
+                    <div class="main">
+                        {{ option.GeoObject.name }}
+                    </div>
+                    <div class="secondary">
+                        {{ option.GeoObject.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-item">
+        <input type="text" placeholder="123">
+        <button>12312</button>
+    </div>
+</form>
 <!-- 
     <form class="form" [formGroup]="form">
         <div class="form-item">

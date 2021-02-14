@@ -30,6 +30,5 @@ export class GeocoderService {
   }
   onSearch(value: string) {
     this.searchChange$.next(value);
-  
   }
 }

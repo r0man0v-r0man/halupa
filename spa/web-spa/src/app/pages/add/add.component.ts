@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
@@ -16,7 +16,8 @@ import { GeocoderService } from './services/geocoder.service';
     GeocoderService,
     AddFormService,
     AdvertService
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class AddComponent implements OnInit {
   limitOfPricesArray = Object.keys(CurrencyType).map(key => CurrencyType[key]).filter(x => !(parseInt(x) >= 0)).length - 1;
@@ -103,5 +104,12 @@ export class AddComponent implements OnInit {
   }
   onRemoveContact(index: number){
     this.addFormService.removeContactField(index);
+  }
+  onDataClick(data, input){
+    input.value = data.GeoObject.name + ', ' + data.GeoObject.description;
+    this.setFormControlValue('yandexAddress', data);
+    this.geocoderService.optionList = [];
+    console.warn(this.form.value);
+    
   }
 }
