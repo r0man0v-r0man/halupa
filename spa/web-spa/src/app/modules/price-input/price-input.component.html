@@ -1,4 +1,11 @@
-<p>{{price|json}}</p>
+<input 
+type="number" 
+name="price{{price.currency}}" 
+id="price{{price.currency}}"
+[value]="price.value">
+<select [(ngModel)]="price.currency">
+    <option *ngFor="let item of listOfCurrencies" [value]="item.value">{{item.label}}</option>
+</select>
 <!-- <nz-input-group 
 [nzAddOnBefore]="addOnBeforeTemplate">
     <nz-input-number

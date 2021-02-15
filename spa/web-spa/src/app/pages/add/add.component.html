@@ -28,19 +28,22 @@
             </div>
         </div>
     </div>
-    <div class="form-item price">
-        <div *ngFor="let control of form.controls['prices']['controls']; let i = index">
-            <app-price-input [price]="form.controls['prices']['controls'][i].value"></app-price-input>
-            <button [disabled]="i == 0 "
-                
-                (click)="onRemovePrice(i)"
-                 >удалить
-            </button>
+    <div class="form-item">
+        <label for="price">Цена:</label>
+        <div class="price">
+            <div *ngFor="let control of form.controls['prices']['controls']; let i = index">
+                <app-price-input [price]="form.controls['prices']['controls'][i].value"></app-price-input>
+                <button 
+                [disabled]="i == 0 "
+                (click)="onRemovePrice(i)">удалить
+                </button>
+            </div>
         </div>
-        <button  [disabled]="isDisabledAddPriceButton"
-                        (click)="onAddPrice()"
-                        >Добавить цену
-                    </button>
+        
+        <button 
+        [disabled]="isDisabledAddPriceButton"
+        (click)="onAddPrice()"
+        >Добавить цену</button>
     </div>
 </form>
 <!-- 

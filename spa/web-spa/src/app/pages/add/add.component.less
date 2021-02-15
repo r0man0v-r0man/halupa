@@ -1,7 +1,7 @@
 .form-item{
     margin-top: 1em;
 }
-input[type=text]{
+input[type=text], input[type=number]{
     width: 100%;
     border: none;
     border-bottom: 1px solid var(--gray);
@@ -43,7 +43,16 @@ input[type=text]{
         width: 100%;
     }
 }
-
+.price{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.form-item{
+    button{
+        padding: .5em 1em;
+    }
+}
 // nz-upload{
 //     display: block;
 //   ::ng-deep{
