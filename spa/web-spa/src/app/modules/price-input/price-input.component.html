@@ -2,27 +2,7 @@
 type="number" 
 name="price{{price.currency}}" 
 id="price{{price.currency}}"
-[value]="price.value">
+[(ngModel)]="price.value">
 <select [(ngModel)]="price.currency">
     <option *ngFor="let item of listOfCurrencies" [value]="item.value">{{item.label}}</option>
 </select>
-<!-- <nz-input-group 
-[nzAddOnBefore]="addOnBeforeTemplate">
-    <nz-input-number
-    [(ngModel)]="price.value"
-    [nzMin]="1"
-    [nzMax]="99999999"
-    [nzStep]="100"
-    ></nz-input-number>
-</nz-input-group>
-<ng-template #addOnBeforeTemplate>
-    <nz-select class="group-select"
-    [(ngModel)]="price.currency">
-        <nz-option
-        *ngFor="let currency of listOfCurrencies"
-        [nzLabel]="currency.label"
-        [nzValue]="currency.value">
-        </nz-option>
-    </nz-select>
-</ng-template> -->
-  

@@ -1,17 +1,7 @@
-<!-- <nz-input-group 
-[nzAddOnBefore]="addOnBeforeTemplate">
-    <input 
-    [(ngModel)]="contact.value"
-    nz-input 
-    [placeholder]="contact.kind == 0? '80295357164':'ваша почта'"/>
-</nz-input-group>
-<ng-template #addOnBeforeTemplate>
-    <nz-select class="group-select"
-    [(ngModel)]="contact.kind">
-        <nz-option
-        *ngFor="let contact of listOfContacts"
-        [nzLabel]="contact.label"
-        [nzValue]="contact.value">
-        </nz-option>
-    </nz-select>
-</ng-template> -->
+<input 
+type="text" 
+[placeholder]="contact.kind == 0? '80295357164':'ваша почта'"
+[(ngModel)]="contact.value">
+<select [(ngModel)]="contact.kind">
+    <option *ngFor="let contact of listOfContacts" [value]="contact.value" >{{contact.label}}</option>
+</select>
