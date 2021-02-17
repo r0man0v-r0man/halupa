@@ -65,6 +65,25 @@
         (click)="onAddContact()">Добавить контакт
         </button>
     </div>
+    <div class="form-item">
+        <label for="areas">Площадь:</label>
+        <div class="areas">
+            <div 
+            formArrayName="areas"
+            *ngFor="let control of form.controls['contacts']['controls']; let i = index">
+                <app-area-input
+                [area]="form.controls['areas']['controls'][i].value"></app-area-input>
+                <button 
+                [disabled]="i == 0"
+                (click)="onRemoveArea(i)">удалить
+                </button>
+            </div>
+        </div>
+        <button 
+        [disabled]="disabledAddAreaFieldButton"
+        (click)="onAddArea()">Добавить площадь
+        </button>
+    </div>
     <pre>{{form.value | json}}</pre>
 </form>
 <!-- 
