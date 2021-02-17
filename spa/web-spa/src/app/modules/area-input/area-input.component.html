@@ -1,19 +1,6 @@
-<!-- <nz-input-group
-[nzAddOnBefore]="addOnBeforeTemplate">
-    <nz-input-number
-    [(ngModel)]="area.value"
-    [nzMin]="1"
-    [nzMax]="99999999"
-    [nzStep]="100"
-    ></nz-input-number>
-</nz-input-group>
-<ng-template #addOnBeforeTemplate>
-    <nz-select class="group-select"
-    [(ngModel)]="area.kind">
-        <nz-option
-        *ngFor="let area of listOfAreas"
-        [nzLabel]="area.label"
-        [nzValue]="area.value">
-        </nz-option>
-    </nz-select>
-</ng-template> -->
+<input 
+type="text" 
+[(ngModel)]="area.value">
+<select [(ngModel)]="area.kind">
+    <option *ngFor="let area of listOfAreas" [value]="area.value" >{{area.label}}</option>
+</select>

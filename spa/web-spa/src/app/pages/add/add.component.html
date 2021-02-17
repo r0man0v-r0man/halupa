@@ -70,7 +70,7 @@
         <div class="areas">
             <div 
             formArrayName="areas"
-            *ngFor="let control of form.controls['contacts']['controls']; let i = index">
+            *ngFor="let control of form.controls['areas']['controls']; let i = index">
                 <app-area-input
                 [area]="form.controls['areas']['controls'][i].value"></app-area-input>
                 <button 
