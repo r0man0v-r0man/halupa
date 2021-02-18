@@ -84,6 +84,22 @@
         (click)="onAddArea()">Добавить площадь
         </button>
     </div>
+    <div class="form-item">
+        <label for="description">Описание:</label>
+        <div class="description" [formGroup]="form.get('description')">
+            <textarea id="description"
+            formControlName="value" 
+            placeholder="Хороший дом, в хорошем месте"
+            ></textarea>
+        </div>
+    </div>
+    <div class="form-item submit">
+        <button 
+        (click)="submitForm()" 
+        [disabled]="!form.valid">
+            Добавить Объявление
+        </button>
+    </div>
     <pre>{{form.value | json}}</pre>
 </form>
 <!-- 
