@@ -93,6 +93,18 @@
             ></textarea>
         </div>
     </div>
+    <div class="form-item">
+        <input 
+        (change)="onSelectFile(imageInput.files)" 
+        type="file" style="display: none;" 
+        #imageInput 
+        name="imageUpload" 
+        id="imageUpload">
+        <button (click)="imageInput.click()">Загрузить фото</button>
+        <div class="images">
+            <img [src]="preview" width="30" height="30" *ngFor="let preview of previewImgs">
+        </div>
+    </div>
     <div class="form-item submit">
         <button 
         (click)="submitForm()" 
@@ -100,120 +112,4 @@
             Добавить Объявление
         </button>
     </div>
-    <pre>{{form.value | json}}</pre>
 </form>
-<!-- 
-    <form class="form" [formGroup]="form">
-        <div class="form-item">
-            <h3 nz-typography class="form-item-header">Добавить объявление</h3>
-        </div>
-        <div class="form-item">
-            <input 
-            placeholder="Адрес" 
-            #input
-            nz-input 
-            formControlName="yandexAddress" 
-            (input)="geocoderService.onSearch(input.value)" 
-            [nzAutocomplete]="auto" />
-            <nz-autocomplete #auto>
-                <nz-auto-option 
-                class="global-search-item" 
-                *ngFor="let option of geocoderService.optionList" 
-                [nzValue]="option" 
-                [nzLabel]="option.GeoObject.name + ' ' +  option.GeoObject.description">
-                    <span class="global-search-item-desc">
-                        {{ option.GeoObject.name + ' ' +  option.GeoObject.description }}
-                    </span>
-                </nz-auto-option>
-            </nz-autocomplete>
-        </div>
-        <div class="form-item">
-            <nz-upload 
-            [nzAction]="_imageService.uploadURL"
-            [nzTransformFile]="_imageService.onFileChange"
-            [nzHeaders]="_imageService.headers"
-            nzListType="picture"
-            [nzShowUploadList]="_imageService.uploadButtonsOptions"
-            (nzChange)="onUploadChange($event)"
-            [nzName]="'file'">
-            <button nzBlock nz-button><i nz-icon nzType="upload"></i> Загрузить изображение</button>
-            </nz-upload>
-        </div>
-        <div class="form-item">
-            <div class="form-item-box">
-                <div class="form-item-box-element">
-                    <div class="form-item-box-element-array"
-                    formArrayName="prices"
-                    *ngFor="let control of form.controls['prices']['controls']; let i = index">
-                        <app-price-input
-                            [price]="form.controls['prices']['controls'][i].value"
-                        ></app-price-input>
-                        <a [disabled]="i == 0 "
-                           nz-button tabindex="1"
-                           (click)="onRemovePrice(i)"
-                           nzType="text" nzDanger><i nz-icon nzType="delete"></i>
-                        </a>
-                    </div>
-                    <a  [disabled]="isDisabledAddPriceButton"
-                        (click)="onAddPrice()"
-                        nz-button nzBlock
-                        nzType="text"><i nz-icon nzType="plus"></i>Добавить цену
-                    </a>
-                </div>
-                
-                <div class="form-item-box-element">
-                    <div class="form-item-box-element-array"
-                            formArrayName="contacts"
-                            *ngFor="let control of form.controls['contacts']['controls']; let i = index">
-                        <app-contact-input
-                                [contact]="form.controls['contacts']['controls'][i].value"
-                        ></app-contact-input>
-                        <a [disabled]="i == 0 "
-                           nz-button
-                           (click)="onRemoveContact(i)"
-                           nzType="link" nzDanger><i nz-icon nzType="delete"></i>
-                        </a>
-                    </div>
-                    <a  [disabled]="disabledAddContactFieldButton"
-                        (click)="onAddContact()"
-                        nz-button nzBlock
-                        nzType="text"><i nz-icon nzType="plus"></i>Добавить контакт
-                    </a>
-                </div>
-                <div class="form-item-box-element">
-                    <div class="form-item-box-element-array"
-                         formArrayName="areas"
-                         *ngFor="let control of form.controls['areas']['controls']; let i = index">
-                        <app-area-input
-                                [area]="form.controls['areas']['controls'][i].value"
-                        ></app-area-input>
-                        <a [disabled]="i == 0 "
-                           nz-button
-                           (click)="onRemoveArea(i)"
-                           nzType="link" nzDanger><i nz-icon nzType="delete"></i>
-                        </a>
-                    </div>
-                    <a  [disabled]="disabledAddAreaFieldButton"
-                        (click)="onAddArea()"
-                        nz-button nzBlock
-                        nzType="text"><i nz-icon nzType="plus"></i>Добавить площадь
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="form-item">
-            <div [formGroup]="form.get('description')">
-                <textarea 
-                formControlName="value" 
-                placeholder="Описание"
-                ></textarea>
-            </div>
-        </div>
-        <div class="form-item">
-            <button 
-            (click)="submitForm()" 
-            [disabled]="!form.valid">
-                Добавить
-            </button>
-        </div>
-    </form> -->

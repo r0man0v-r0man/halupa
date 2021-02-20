@@ -1,18 +1,24 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Observable, Observer } from 'rxjs';
+import { IUploadImage } from '../models/uploadImage';
 import { URLs } from '../urls';
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
+
   uploadURL = URLs.addImageURL;
   headers = new HttpHeaders().set('content-type', 'application/json');
   uploadButtonsOptions = { showPreviewIcon: false, showRemoveIcon: false, showDownloadIcon: false };
   constructor(
     private _httpService: HttpClient
   ) { }
-  
+  uploadFile(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this._httpService.post<IUploadImage>(this.uploadURL, formData);
+  }
   /**
    * By Ken Fyrstenberg Nilsen
    *

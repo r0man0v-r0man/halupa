@@ -53,13 +53,6 @@ export class AddComponent implements OnInit {
     const advert: IAdvert = { ...this.form.value };
     this.advertService.addAdvert(advert);
   }
-  onUploadChange(event: any){
-    if(event.file.response){
-      this.imageList2.push(event.file.response);
-      this.setFormControlValue('images', this.imageList2);
-      this.cd.detectChanges();
-    }
-  }
   /** Delete file */
   onDelete = (file: any): Observable<boolean> => {
     return new Observable(observer => {
@@ -109,7 +102,23 @@ export class AddComponent implements OnInit {
     input.value = data.GeoObject.name + ', ' + data.GeoObject.description;
     this.setFormControlValue('yandexAddress', data);
     this.geocoderService.optionList = [];
-    console.warn(this.form.value);
-    
+  }
+  previewImgs = [];
+  onSelectFile(files: FileList){
+    var reader = new FileReader();
+    reader.readAsDataURL(files[0]); 
+    reader.onload = () => { 
+      this.previewImgs.push(reader.result);
+    }
+    this.uploadFile(files[0]);
+  }
+  uploadFile(file: File){
+    this._imageService.onFileChange(file).subscribe(file => {
+      this._imageService.uploadFile(file).subscribe(response => {
+        this.imageList2.push(response);
+        this.setFormControlValue('images', this.imageList2);
+        this.cd.detectChanges();
+      })
+    })
   }
 }
