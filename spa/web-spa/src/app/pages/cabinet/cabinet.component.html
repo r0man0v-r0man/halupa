@@ -1,26 +1,10 @@
-<div class="wrap">
-  <div class="cabinet">
-    <div class="cabinet-item">
-      <h4>Мои объявления</h4>
-      <div class="cabinet-item-list">
-        <div *ngFor="let advert of adverts" class="cabinet-item-list-element">
-          <div
-            class="cabinet-item-list-element-title"
-            [routerLink]="['/adverts', advert.id]"
-          >
-            {{ advert?.yandexAddress?.geoObject?.name }}
-          </div>
-          <div class="cabinet-item-list-element-advert-actions">
-            <div>
-              <button
-                (click)="onRemove(advert.id)"
-              >
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+<section>
+  <h1>Мои объявления</h1>
+  
+    <div *ngFor="let advert of adverts" class="user-advert">
+      <a [routerLink]="['/adverts', advert.id]">
+        {{ advert?.yandexAddress?.geoObject?.name }}
+      </a>
+      <button (click)="onRemove(advert.id)">удалить</button>
     </div>
-  </div>
-
-</div>
+</section>

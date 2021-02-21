@@ -8,8 +8,6 @@ import { CabinetComponent } from './cabinet.component';
   imports: [
     CommonModule,
     CabinetRoutingModule
-                        
-
   ],
   exports:[
     CabinetComponent
