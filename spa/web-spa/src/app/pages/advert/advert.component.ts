@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
-import { Location } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import { IAdvert } from 'src/app/models/advert.model';
 import { IUploadImage } from 'src/app/models/uploadImage';
 @Component({
@@ -16,14 +16,25 @@ export class AdvertComponent implements OnInit {
   advert: IAdvert;
   /** изображения для слайдера */
   images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
+  imgWidth: number;
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService,
-    private location: Location
+    private location: Location,
+    @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
   ngOnInit(): void {
+    this.getWindowWidth();
     this.initPage();
+    
+  }
+  private getWindowWidth(){
+    if(isPlatformBrowser(this.platformId)){
+      this.imgWidth = window.innerWidth < 660 
+      ? window.innerWidth - 49
+      : 600;
+    }
   }
   private getAdvert(id: number) {
     this.advertService.getAdvert(id).subscribe(response => {
@@ -42,10 +53,11 @@ export class AdvertComponent implements OnInit {
   }
   /** преобразование картинок в слайды */
   private initSlides(images: IUploadImage[]) {
-    const slides: Array<{ url: string; alt: string; isVisible: boolean; id: number; src: string; }> = [];
+    const slides: Array<{ url: string; alt: string; isVisible: boolean; id: number; src: string; width: number;}> = [];
     images.forEach((image, index) => {
       const img = {
-        url: '/img/600/' + image.fileName,
+        width: this.imgWidth,
+        url: `/img/${this.imgWidth}/${image.fileName}`,
         alt: this.advert.yandexAddress.geoObject.name,
         isVisible: false,
         id: index,

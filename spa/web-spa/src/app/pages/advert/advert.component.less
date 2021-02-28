@@ -33,6 +33,8 @@ section.advert{
   }
   main{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     .btns{
       margin: 0 auto;
       display: flex;
@@ -42,4 +44,16 @@ section.advert{
     }
     
   }
+}
+@media (max-width: 800px){
+  section.advert{
+    app-image-slider{
+      margin-bottom: 1em;
+    }
+    main{
+      flex-direction: column;
+      justify-items: center;
+    }
+  }
+  
 }

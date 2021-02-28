@@ -11,7 +11,13 @@ import { IntersectionService } from 'src/app/services/intersection.service';
 })
 export class ImageSliderComponent implements OnInit {
     /** картинки для карусели */
-    @Input() images: Array<{ url: string; alt: string; isVisible: boolean; id: number; src: string; }> = [];
+    @Input() images: Array<{ 
+        url: string; 
+        alt: string; 
+        isVisible: boolean; 
+        id: number; 
+        src: string; 
+        width: number}> = [];
     /** номер слайдера */
     slideNo: number = 0;
     constructor( ) { }
