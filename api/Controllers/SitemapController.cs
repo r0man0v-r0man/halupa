@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace api.Controllers
 {
@@ -10,10 +11,11 @@ namespace api.Controllers
     public class SitemapController : ControllerBase
     {
         private readonly ISitemapService _sitemapService;
-
-        public SitemapController(ISitemapService sitemapService)
+        private readonly ILogger<SitemapController> _logger;
+        public SitemapController(ISitemapService sitemapService, ILogger<SitemapController> logger)
         {
             _sitemapService = sitemapService;
+            _logger = logger;
         }
 
         [Route("/sitemap.xml")]
@@ -29,10 +31,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e);
-
-                throw;
-
+                _logger.LogError(nameof(Sitemap), e);
+                return BadRequest();
             }
             
         }

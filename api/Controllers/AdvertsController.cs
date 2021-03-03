@@ -2,6 +2,7 @@
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -15,10 +16,12 @@ namespace api.Controllers
     {
         private readonly IAdvertService _advertService;
         private readonly IUserService _userService;
-        public AdvertsController(IAdvertService advertService, IUserService userService)
+        private readonly ILogger<AdvertsController> _logger;
+        public AdvertsController(IAdvertService advertService, IUserService userService, ILogger<AdvertsController> logger)
         {
             _advertService = advertService;
             _userService = userService;
+            _logger = logger;
         }
 
         [HttpPost("add")]
@@ -35,8 +38,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
+                _logger.LogError(nameof(Add), e);
                 return BadRequest();
-                throw;
             }
         }
         [HttpGet("getAdvert")]
@@ -50,8 +53,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
+                _logger.LogError(nameof(GetAdvert), e);
                 return BadRequest();
-                throw;
             }
         }
         [HttpGet("getAnyAdverts")]
@@ -64,8 +67,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
-                throw;
+                _logger.LogError(nameof(GetAnyAdverts), e);
+                return BadRequest();
             }
         }
         [HttpGet("search")]
@@ -78,10 +81,10 @@ namespace api.Controllers
                     .ConfigureAwait(false);
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(nameof(Search), e);
                 return BadRequest();
-                throw;
             }
         }
         [Authorize]
@@ -98,8 +101,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
-                throw;
+                _logger.LogError(nameof(UserAdverts), e);
+                return BadRequest();
             }
         }
         [Authorize]
@@ -115,8 +118,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
+                _logger.LogError(nameof(Delete), e);
                 return BadRequest();
-                throw;
             }
         }
     }

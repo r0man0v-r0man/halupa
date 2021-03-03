@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BLL.DTO;
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace api.Controllers
 {
@@ -12,9 +13,11 @@ namespace api.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IUserService _userService;
-        public AccountsController(IUserService userService)
+        private readonly ILogger<AccountsController> _logger;
+        public AccountsController(IUserService userService, ILogger<AccountsController> logger)
         {
             _userService = userService;
+            _logger = logger;
         }
         [HttpGet("isUserNameExist/{userName}")]
         public async Task<ActionResult<bool>> IsUserNameExist(string userName)
@@ -26,9 +29,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
-                // log e
+                _logger.LogError(nameof(IsUserNameExist), e);
                 return BadRequest(e.Message);
-                throw;
             }
         }
         [HttpPost("register")]
@@ -45,8 +47,8 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
+                _logger.LogError(nameof(Register), e);
                 return BadRequest(e);
-                throw;
             }
             
         }
@@ -58,10 +60,10 @@ namespace api.Controllers
                 var loginUser = await _userService.LoginAsync(user, user?.Password).ConfigureAwait(false);
                 return CreatedAtAction(nameof(Login), new { access_token = loginUser });
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message);
-                throw;
+                _logger.LogError(nameof(Login), e);
+                return BadRequest();
             }
         }
     }
