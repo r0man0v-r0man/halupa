@@ -22,9 +22,9 @@ namespace api.Logging
             {
                 return;
             }
-            var logRecord = string.Format("{0} {1} {2} {3}",
+            var logRecord = string.Format("{0} {1} {2} {3} {4}",
                 "[" + DateTime.Now + "]", "[" + logLevel.ToString() + "]",
-                exception, formatter(state, exception));
+                exception, formatter(state, exception), exception.StackTrace);
             await File.AppendAllTextAsync(path, logRecord + Environment.NewLine);
         }
     }
