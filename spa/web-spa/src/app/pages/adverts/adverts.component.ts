@@ -1,77 +1,33 @@
+import { Destroyer } from './../../modules/destroyer/destroyer.helper';
 import { Component, OnInit } from '@angular/core';
 import { IAdvert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
+import { Store } from '@ngxs/store';
+import { AdvertActions } from 'src/app/store/advert/advert.action';
+import { AdvertState } from 'src/app/store/advert/advert.state';
+import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-adverts',
   templateUrl: './adverts.component.html',
-  styleUrls: [ './adverts.component.less' ],
-  providers:[
-    AdvertService
-  ]
+  styleUrls: [ './adverts.component.less' ]
 })
-export class AdvertsComponent implements OnInit {
-  list: IAdvert[] = [];
-  initLoading = true;
-  isShowMoreButton = false;
-  pageNumber = 1;
-  isAnyAdverts = false;
+export class AdvertsComponent extends Destroyer implements OnInit {
+
+  loading$: Observable<boolean> = this._store.select(AdvertState.loading).pipe(takeUntil(this.destroy$));
   
   constructor(
-    private _advertService: AdvertService
-  ) { }
+    private _store: Store
+  ) { super(); }
 
 
   ngOnInit(): void {
-    this.showAnyAdverts();
-    
+    this._store.dispatch(new AdvertActions.Fetch(1))
   }
-  /** объявления без фильтра, любые */
-  showAnyAdverts() {
-    this.isAnyAdverts = true;
-    this._advertService.getAnyAdverts(this.pageNumber).subscribe(response => {
-      this.AddAdvertsToList(response);
-    });
-  }
-  /** добавить объявления */
-  private AddAdvertsToList(response: IAdvert[]) {
-    if (response && response.length !== 0) {
-      this.list = [...response];
-      this.initLoading = false;
-      this.isShowMoreButton = true;
-    } else {
-      this.list = [...response];
-      this.initLoading = false;
-      this.isShowMoreButton = false;
-    }
-    this.allowToShowMoreButton(response, false);
-  }
-  /** Определяемся, когда показывать кнопку "загрузить еще" */
-  private allowToShowMoreButton(response: IAdvert[], isLoadMore: boolean) {
-    if (isLoadMore) {
-      response && response.length > 0 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
-    } else {
-      response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
-    }
-  }
+
   /** Загрузить еще объявляений */
   onLoadMore() {
-    this.initLoading = true;
-    this.pageNumber++;
-    if (this.isAnyAdverts) {
-      this._advertService.getAnyAdverts(this.pageNumber).subscribe(response => {
-        this.addLoadMoreAdvertsToList(response);
-      });
-    } 
-    this.initLoading = false;
-  }
-  /** Добавить еще объявлений  */
-  private addLoadMoreAdvertsToList(response: IAdvert[]) {
-    if (response && response.length > 0) {
-      response.forEach(advert => {
-        this.list.push(advert)
-      })
-    }
-    this.allowToShowMoreButton(response, true);
+    
   }
 }

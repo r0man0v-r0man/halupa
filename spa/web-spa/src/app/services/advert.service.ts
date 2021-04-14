@@ -13,8 +13,6 @@ export class AdvertService {
   
   userAdverts: IAdvert[] = [];
   searchResult: ISearchResult;
-  /** for SSR */
-  private baseUrl: string;
   headers = new HttpHeaders().set('content-type', 'application/json');
   constructor(
     private _httpClient: HttpClient,
@@ -46,10 +44,10 @@ export class AdvertService {
   navigateToAdvert(item: IAdvert) {
     this.router.navigate(['adverts', item.id]);
   }
-  getAnyAdverts(pageNumber: number){
+  fetchAdverts(pageNumber: number){
     const params = this.setHttpParams(pageNumber);
     return this._httpClient.get<IAdvert[]>(
-      URLs.getAnyAdvertsURL,
+      URLs.fetchAdvertsURL,
       { params: params });
   }
   /**

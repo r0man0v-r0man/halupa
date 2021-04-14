@@ -68,7 +68,7 @@ namespace api.Controllers
             catch (Exception e)
             {
                 _logger.LogError(nameof(GetAnyAdverts), e);
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
         [HttpGet("search")]

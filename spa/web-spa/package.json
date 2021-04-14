@@ -25,6 +25,8 @@
     "@angular/router": "^11.2.9",
     "@auth0/angular-jwt": "^5.0.2",
     "@nguniversal/express-engine": "^11.2.1",
+    "@ngxs/logger-plugin": "^3.7.1",
+    "@ngxs/store": "^3.7.1",
     "@types/gsap": "^1.20.2",
     "angular8-yandex-maps": "^10.4.1",
     "axios": "^0.21.1",
