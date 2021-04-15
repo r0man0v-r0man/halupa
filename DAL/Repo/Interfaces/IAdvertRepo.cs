@@ -6,7 +6,7 @@ namespace DAL.Repo.Interfaces
 {
     public interface IAdvertRepo
     {
-        Task<int> AddAdvertAsync(Advert advert);
+        Task<Advert> AddAdvertAsync(Advert advert);
         Task<Advert> GetAdvertByIdAsync(int id);
         Task<IEnumerable<int>> GetAdvertsIds();
         Task<IEnumerable<Advert>> GetAdvertsAsync(int pageNumber);

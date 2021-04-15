@@ -16,18 +16,24 @@ import { Observable } from 'rxjs';
 export class AdvertsComponent extends Destroyer implements OnInit {
 
   loading$: Observable<boolean> = this._store.select(AdvertState.loading).pipe(takeUntil(this.destroy$));
-  
+  pageNumber: number = 1;
+
   constructor(
     private _store: Store
   ) { super(); }
 
 
   ngOnInit(): void {
-    this._store.dispatch(new AdvertActions.Fetch(1))
+    this._store.dispatch(new AdvertActions.Fetch(this.pageNumber))
   }
 
-  /** Загрузить еще объявляений */
   onLoadMore() {
-    
+    this._store.dispatch(new AdvertActions.Fetch(++this.pageNumber))
+  }
+  onPrevPage(){
+    if(this.pageNumber > 1){
+      --this.pageNumber;
+      this._store.dispatch(new AdvertActions.Fetch(this.pageNumber))
+    }
   }
 }

@@ -1,4 +1,4 @@
-<div class="slideshow-container" >
+<div class="slideshow-container" *ngIf="images">
     <div *ngFor="let image of images; let i = index" class="image-container" >
         <img #slideImage [width]="image.width" [height]="image.width"
         [style.display]="image.isVisible == true ? 'block' : 'none' " 

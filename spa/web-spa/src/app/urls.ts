@@ -1,7 +1,7 @@
 import { environment } from 'src/environments/environment';
 const api = environment.webApi;
 export const URLs = {
-    addAdvertURL: api + 'adverts/add', // todo добавить в advert
+    addAdvertURL: api + 'adverts/create', // todo добавить в advert
     getAdvertURL: api + 'adverts/getAdvert',
     fetchAdvertsURL: api + 'adverts/fetchAdverts',
     addImageURL: api + 'images',

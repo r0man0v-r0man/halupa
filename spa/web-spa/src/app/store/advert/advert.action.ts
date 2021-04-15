@@ -9,4 +9,20 @@ export namespace AdvertActions {
         static readonly type = '[Advert] Fetched';
         constructor(public adverts: IAdvert[]){}
     }
+    export class Create {
+        static readonly type = '[Advert] Create';
+        constructor(public advert: IAdvert){}
+    }
+    export class Created {
+        static readonly type = '[Advert] Created';
+        constructor(public created: IAdvert){}
+    }
+    export class Select {
+        static readonly type = '[Advert] Select';
+        constructor(public id: IAdvert['id']){}
+    }
+    export class Selected {
+        static readonly type = '[Advert] Selected';
+        constructor(public advert: IAdvert){}
+    }
 }

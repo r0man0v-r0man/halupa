@@ -22,14 +22,14 @@ namespace DAL.Repo
             _contextFactory = contextFactory;
             _userManager = userManager;
         }
-        public async Task<int> AddAdvertAsync(Advert advert)
+        public async Task<Advert> AddAdvertAsync(Advert advert)
         {
             try
             {
                 using var context = _contextFactory.CreateDbContext();
                 await context.Adverts.AddAsync(advert).ConfigureAwait(false);
                 var result = await context.SaveChangesAsync().ConfigureAwait(false);
-                return result > 0 ? advert.Id : throw new Exception("Error save advert");
+                return result > 0 ? advert : throw new Exception("Error save advert");
             }
             catch
             {

@@ -1,21 +1,21 @@
-<section *ngIf="advert" class="advert">
+<section *ngIf="advert$ |async" class="advert">
     <header>
         <div class="street">
             <a (click)="onBack()">&#10094;</a>
-            <h3>{{advert.yandexAddress.geoObject.name}}</h3>
+            <h3>{{(advert$ |async)?.yandexAddress.geoObject.name}}</h3>
         </div>
-        <app-price [prices]="advert.prices"></app-price>
-        <span >{{advert.created | date : 'shortDate' : '' : 'ru'}}</span>
+        <app-price [prices]="(advert$ |async)?.prices"></app-price>
+        <span >{{(advert$ |async)?.created | date : 'shortDate' : '' : 'ru'}}</span>
     </header>
     <main>
-        <app-image-slider *ngIf="images" [images]="images"></app-image-slider>
+        <app-image-slider [advert]="(advert$ |async)"></app-image-slider>
         <div class="btns">
-            <app-contacts-view [contacts]="advert.contacts"></app-contacts-view>
+            <app-contacts-view [contacts]="(advert$ |async)?.contacts"></app-contacts-view>
         </div>
     </main>
     <footer>
-        <h3>{{ advert.yandexAddress.geoObject.description }}</h3>
-        <p>{{ advert.description.value }}</p>
+        <h3>{{ (advert$ |async)?.yandexAddress.geoObject.description }}</h3>
+        <p>{{ (advert$ |async)?.description.value }}</p>
     </footer>
-    <app-yandex-map [advert]="advert"></app-yandex-map>
+    <app-yandex-map [advert]="(advert$ |async)"></app-yandex-map>
 </section>

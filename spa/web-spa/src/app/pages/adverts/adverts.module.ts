@@ -1,3 +1,4 @@
+import { HttpHelperService } from './../../services/http.service';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,8 @@ import { AdvertService } from 'src/app/services/advert.service';
     AdvertsComponent
   ],
   providers:[
-    AdvertService
+    AdvertService,
+    HttpHelperService
   ]
 })
 export class AdvertsModule { }

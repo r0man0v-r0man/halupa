@@ -24,8 +24,8 @@ namespace api.Controllers
             _logger = logger;
         }
 
-        [HttpPost("add")]
-        public async Task<ActionResult<int>> Add(Advert advert)
+        [HttpPost("create")]
+        public async Task<ActionResult<Advert>> Create(Advert advert)
         {
             if (advert == null) return BadRequest();
             try
@@ -38,7 +38,7 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(nameof(Add), e);
+                _logger.LogError(nameof(Create), e);
                 return BadRequest();
             }
         }
@@ -57,8 +57,8 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("getAnyAdverts")]
-        public async Task<ActionResult<IEnumerable<Advert>>> GetAnyAdverts(int pageNumber)
+        [HttpGet("fetchAdverts")]
+        public async Task<ActionResult<IEnumerable<Advert>>> FetchAdverts(int pageNumber)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace api.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(nameof(GetAnyAdverts), e);
+                _logger.LogError(nameof(FetchAdverts), e);
                 return BadRequest(e.Message);
             }
         }

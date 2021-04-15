@@ -1,4 +1,6 @@
+import { AdvertActions } from 'src/app/store/advert/advert.action';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
@@ -14,8 +16,7 @@ import { GeocoderService } from './services/geocoder.service';
   styleUrls: ['./add.component.less'],
   providers:[
     GeocoderService,
-    AddFormService,
-    AdvertService
+    AddFormService
   ],
   changeDetection: ChangeDetectionStrategy.Default
 })
@@ -31,7 +32,7 @@ export class AddComponent implements OnInit {
     private addFormService: AddFormService,
     public _imageService: ImageService,
     private cd: ChangeDetectorRef,
-    private advertService: AdvertService
+    private _store: Store
   ) {
    }
   get form() {
@@ -47,11 +48,9 @@ export class AddComponent implements OnInit {
     return this.addFormService.disabledAddContactFieldButton;
   }
   ngOnInit(): void {
-    
   }
   submitForm(){
-    const advert: IAdvert = { ...this.form.value };
-    this.advertService.addAdvert(advert);
+    this._store.dispatch(new AdvertActions.Create({ ...this.form.value }))
   }
   /** Delete file */
   onDelete = (file: any): Observable<boolean> => {

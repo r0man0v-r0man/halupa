@@ -1,15 +1,17 @@
+import { IAdvert } from './../models/advert.model';
+import { HttpHelperService } from './http.service';
 import { HttpParams } from '@angular/common/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { IAdvert } from '../models/advert.model';
 import { URLs } from '../urls';
 import {ISearch, ISearchResult} from "../models/search.model";
 import {AuthService} from "./auth.service";
 
 @Injectable()
 export class AdvertService {
+
   
   userAdverts: IAdvert[] = [];
   searchResult: ISearchResult;
@@ -17,8 +19,30 @@ export class AdvertService {
   constructor(
     private _httpClient: HttpClient,
     private router: Router,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _httpHelper: HttpHelperService
   ) { }
+
+  fetchAdverts(pageNumber: number){
+    const params = this._httpHelper.createRequestParams({pageNumber});
+    return this._httpClient.get<IAdvert[]>(URLs.fetchAdvertsURL, { params });
+  }
+
+  create(advert: IAdvert) {
+    return this._httpClient.post<IAdvert>(URLs.addAdvertURL, advert, {headers: this.headers})
+  }
+
+  getAdvert(id: IAdvert['id']) {
+    const params = this._httpHelper.createRequestParams({id});
+    return this._httpClient.get<IAdvert>(URLs.getAdvertURL, {params})
+  }
+
+
+
+
+
+
+  // depricated
 
   getUserAdverts(){
     this._httpClient
@@ -33,29 +57,16 @@ export class AdvertService {
       .pipe(map((response: number) => this.goToAdvert(response))).subscribe();
   }
 
-  getAdvert(id: number){
-    let params = new HttpParams();
-    params = params.append("id", id.toString());
-    return this._httpClient.get<IAdvert>(URLs.getAdvertURL, { params : params});
-  }
+  // getAdvert(id: number){
+  //   let params = new HttpParams();
+  //   params = params.append("id", id.toString());
+  //   return this._httpClient.get<IAdvert>(URLs.getAdvertURL, { params : params});
+  // }
   private goToAdvert(response: number) {
     this.router.navigate(['adverts', response]);
   }
   navigateToAdvert(item: IAdvert) {
     this.router.navigate(['adverts', item.id]);
-  }
-  fetchAdverts(pageNumber: number){
-    const params = this.setHttpParams(pageNumber);
-    return this._httpClient.get<IAdvert[]>(
-      URLs.fetchAdvertsURL,
-      { params: params });
-  }
-  /**
-   * установка HttpParams
-   * @param pageNumber Номер страницы
-   */
-  private setHttpParams(pageNumber: number) {
-    return new HttpParams().set('pageNumber', pageNumber.toString());
   }
 
   search(value: ISearch) {
