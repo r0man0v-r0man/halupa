@@ -1,3 +1,4 @@
+import { IViewImage } from './../../models/uploadImage';
 import { isPlatformBrowser } from '@angular/common';
 import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
 import { IAdvert } from 'src/app/models/advert.model';
@@ -15,13 +16,7 @@ export class ImageSliderComponent implements OnInit {
     imgWidth: number;
 
     /** картинки для карусели */
-    images: Array<{ 
-        url: string; 
-        alt?: string; 
-        isVisible: boolean; 
-        id: number; 
-        src: string; 
-        width: number}> = [];
+    images: Array<IViewImage> = [];
     @Input() advert: IAdvert;
     /** номер слайдера */
     slideNo: number = 0;
@@ -40,22 +35,22 @@ export class ImageSliderComponent implements OnInit {
           : 600;
         }
       }
-  /** преобразование картинок в слайды */
-  private initSlides(advert: IAdvert) {
-    const slides: Array<{ url: string; alt?: string; isVisible: boolean; id: number; src: string; width: number;}> = [];
-    advert.images.forEach((image, index) => {
-      const img = {
-        width: this.imgWidth,
-        url: `/img/${this.imgWidth}/${image.fileName}`,
-        alt: advert.yandexAddress.geoObject.name,
-        isVisible: false,
-        id: index,
-        src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' // для лайтхауса
-      };
-      slides.push(img);
-    });
-    this.images = [...slides];
-  }
+    /** преобразование картинок в слайды */
+    private initSlides(advert: IAdvert) {
+        const slides: Array<IViewImage> = [];
+        advert.images.forEach((image, index) => {
+        const img = {
+            width: this.imgWidth,
+            url: `/img/${this.imgWidth}/${image.fileName}`,
+            alt: advert.yandexAddress.geoObject.name,
+            isVisible: false,
+            id: index,
+            src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' // для лайтхауса
+        };
+        slides.push(img);
+        });
+        this.images = [...slides];
+    }
     /** предыдущее изображение */
     prev(){
         this.slideNo === 0 ? this.slideNo : this.slideNo--;

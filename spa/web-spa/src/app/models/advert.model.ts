@@ -3,7 +3,7 @@ import { IArea } from './area.model';
 import { IContact } from './contacts.model';
 import { IDescription } from './description.model';
 import { IPrice } from './price.model';
-import { IUploadImage } from './uploadImage';
+import { IUploadImage, IViewImage } from './uploadImage';
 
 export interface IAdvert {
     id: number;
