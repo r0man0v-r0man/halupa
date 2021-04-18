@@ -15,7 +15,7 @@
     <li >
         <a [routerLink]="['/add']" (click)="onToggleMenu(false)">Добавить объявление</a>
     </li>
-    <ng-container *ngIf="_authService.isLogedIn() | async; then privateTpl else publicTpl">
+    <ng-container *ngIf="isAuthenticated$ | async; then privateTpl else publicTpl">
     </ng-container>
     <ng-template #privateTpl>
         <li >

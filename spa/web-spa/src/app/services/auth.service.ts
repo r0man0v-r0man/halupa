@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { IUser } from '../models/user.model';
 import { URLs } from '../urls';
 import { LocalStorageService } from './local-storage.service';
@@ -16,25 +15,12 @@ export class AuthService {
 
   constructor(
     private _httpService: HttpClient,
-    private _localStorage: LocalStorageService,
-    private _router: Router
+    private _localStorage: LocalStorageService
   ) { }
 
   /**login user */
-  login(user: IUser){
+  login(user: IUser):Observable<any>{
     return this._httpService.post(URLs.loginURL, user)
-      .pipe(
-        map((response:any)=>{
-          let token = response.access_token;
-          if(token){
-            this._localStorage.setItem('access_token', token);
-            return true;
-          }
-          else{
-            return false;
-          }
-        })
-      )
   }
   /**logout user */
   logOut(){

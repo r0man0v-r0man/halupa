@@ -1,6 +1,11 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { GsapService } from 'src/app/services/gsap.service';
+import { AuthActions } from 'src/app/store/Auth/auth.action';
+import { AuthState } from 'src/app/store/Auth/auth.state';
+import { Destroyer } from '../destroyer/destroyer.helper';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +15,20 @@ import { GsapService } from 'src/app/services/gsap.service';
     GsapService
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends Destroyer implements OnInit {
+
+  isAuthenticated$: Observable<boolean> = this._store.select(AuthState.isAuthenticated).pipe(takeUntil(this.destroy$));
+
   @ViewChild('logo') logo: ElementRef;
   @ViewChild('nav_links') nav_links: ElementRef;
   @ViewChild('app_menu') app_menu: ElementRef;
   isToggleMenu: boolean;
 
   constructor(
-    public _authService: AuthService,
+    private _store: Store,
     private _gsapService: GsapService,
     private _renderer: Renderer2
-  ) { }
+  ) { super(); }
   onLogoClick(){
     this._gsapService.applyLogoAnimation(this.logo.nativeElement)
     this.onToggleMenu(true);
@@ -40,6 +48,6 @@ export class HeaderComponent implements OnInit {
   }
   onLogOut(){
     this.onToggleMenu(false);
-    this._authService.logOut();
+    this._store.dispatch(new AuthActions.Logout());
   }
 }
