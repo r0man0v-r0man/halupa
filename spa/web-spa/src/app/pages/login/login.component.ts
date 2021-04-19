@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { IUser } from 'src/app/models/user.model';
+import { Destroyer } from 'src/app/modules/destroyer/destroyer.helper';
 import { AuthService } from 'src/app/services/auth.service';
+import { AuthActions } from 'src/app/store/Auth/auth.action';
+import { AuthState } from 'src/app/store/Auth/auth.state';
 import { LoginFormService } from './login-form.service';
 
 @Component({
@@ -12,39 +18,22 @@ import { LoginFormService } from './login-form.service';
     LoginFormService
   ]
 })
-export class LoginComponent implements OnInit {
-  isLoading: boolean = false;
+export class LoginComponent extends Destroyer {
+
+  loading$: Observable<boolean> = this._store.select(AuthState.loading).pipe(takeUntil(this.destroy$));
+
   constructor(
     private _loginFormService: LoginFormService,
-    private _authService: AuthService,
-    private _router: Router,
-    private _route: ActivatedRoute
-  ) { }
+    private _store: Store
+  ) { super(); }
 
-  ngOnInit(): void {
-  }
   get form() {
     return this._loginFormService.form;
   }
   get isValid() {
     return this._loginFormService.isValid;
   }
-  signIn(user: IUser){
-    if(user){
-      this.isLoadingSwitch();
-      this._authService.login(user)
-      .subscribe(response => { 
-        if(response){
-          let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
-          this._router.navigate([returnUrl || '/']);
-        }
-      })
-    }
-    setTimeout(() => {
-      this.isLoadingSwitch();
-    }, 3000);
-  }
-  isLoadingSwitch(){
-    this.isLoading = !this.isLoading;
+  login(user: IUser){
+    this._store.dispatch(new AuthActions.Login(user));
   }
 }

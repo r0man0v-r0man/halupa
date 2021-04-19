@@ -1,5 +1,5 @@
 <section class="login">
-        <form [formGroup]="form" (ngSubmit)="signIn(form.value)">
+        <form [formGroup]="form" (ngSubmit)="login(form.value)">
             <h1>Войти</h1>
             <label for="login">Логин:</label>
             <input required formControlName="userName" id="login" type="text" placeholder="Имя пользователя">
