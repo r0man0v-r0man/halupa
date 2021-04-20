@@ -1,13 +1,12 @@
+import { AuthActions } from 'src/app/store/auth/auth.action';
 import { Injectable, NgZone } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Action, NgxsOnInit, Selector, State, StateContext } from "@ngxs/store";
-
 import { first } from "rxjs/operators";
 import { AuthService } from "src/app/services/auth.service";
 import { LocalStorageService } from "src/app/services/local-storage.service";
 import { LoadableStateModel } from "../loadable.state";
 import { StoreState } from "../store.state";
-import { AuthActions } from "./auth.action";
 
 export interface AuthStateModel extends LoadableStateModel{
     token: string;
@@ -79,5 +78,25 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
     async logouted({patchState}:StateContext<AuthStateModel>, {}:AuthActions.Logouted){
         this._localStorageService.removeItem('access_token');
         patchState({token: null, loading: false});
+    }
+
+    @Action(AuthActions.Register)
+    async register(ctx: StateContext<AuthStateModel>, {payload}: AuthActions.Register){
+        ctx.patchState({loading: true});
+        this._authService.registerUser(payload)
+            .pipe(first())
+            .subscribe(
+                response => {
+                    if(response) ctx.dispatch(new AuthActions.Registered(response))
+                },
+                (e) => this.errorHandler(e, ctx))
+    }
+
+    @Action(AuthActions.Registered)
+    async registered({patchState}: StateContext<AuthStateModel>, {isRegistered}: AuthActions.Registered){
+        patchState({loading: true});
+        this._zone.run(() => {
+            return this._router.navigate(['/login']);
+        })
     }
 }

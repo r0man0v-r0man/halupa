@@ -21,4 +21,8 @@ export namespace AuthActions{
         static readonly type = '[Auth] Register';
         constructor(public payload: IUser){}
     }
+    export class Registered{
+        static readonly type = '[Auth] Registered';
+        constructor(public isRegistered: boolean){}
+    }
 }

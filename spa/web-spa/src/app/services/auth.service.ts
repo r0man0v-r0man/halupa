@@ -30,7 +30,7 @@ export class AuthService {
     return this._httpService.get(URLs.isUserNameExistURL + '/' + userName);
   }
   /** register new user */
-  registerUser(user: IUser){
+  registerUser(user: IUser): Observable<boolean>{
     return this._httpService.post<boolean>(URLs.registerURL, user, { headers: this.headers })
   }
   /** Is User Login */
