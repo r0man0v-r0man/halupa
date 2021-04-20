@@ -6,8 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 import { IUser } from 'src/app/models/user.model';
 import { Destroyer } from 'src/app/modules/destroyer/destroyer.helper';
 import { AuthService } from 'src/app/services/auth.service';
-import { AuthActions } from 'src/app/store/Auth/auth.action';
-import { AuthState } from 'src/app/store/Auth/auth.state';
+import { AuthActions } from 'src/app/store/auth/auth.action';
+import { AuthState } from 'src/app/store/auth/auth.state';
 import { LoginFormService } from './login-form.service';
 
 @Component({

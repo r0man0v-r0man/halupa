@@ -3,8 +3,8 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GsapService } from 'src/app/services/gsap.service';
-import { AuthActions } from 'src/app/store/Auth/auth.action';
-import { AuthState } from 'src/app/store/Auth/auth.state';
+import { AuthActions } from 'src/app/store/auth/auth.action';
+import { AuthState } from 'src/app/store/auth/auth.state';
 import { Destroyer } from '../destroyer/destroyer.helper';
 
 @Component({
