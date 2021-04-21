@@ -57,11 +57,6 @@ export class AdvertService {
       .pipe(map((response: number) => this.goToAdvert(response))).subscribe();
   }
 
-  // getAdvert(id: number){
-  //   let params = new HttpParams();
-  //   params = params.append("id", id.toString());
-  //   return this._httpClient.get<IAdvert>(URLs.getAdvertURL, { params : params});
-  // }
   private goToAdvert(response: number) {
     this.router.navigate(['adverts', response]);
   }

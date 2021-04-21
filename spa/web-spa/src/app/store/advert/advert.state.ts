@@ -2,16 +2,18 @@ import { AdvertActions } from 'src/app/store/advert/advert.action';
 import { AdvertService } from 'src/app/services/advert.service';
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { IAdvert } from "src/app/models/advert.model";
+import { IAdvert, IAdvertFilter } from "src/app/models/advert.model";
 import { StoreState } from "../store.state";
 import { LoadableStateModel } from '../loadable.state';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { FilterableStateModel } from '../filter.state';
 
-export interface AdvertStateModel extends LoadableStateModel {
+export interface AdvertStateModel extends LoadableStateModel, FilterableStateModel {
     adverts: Set<IAdvert>;
     advert:IAdvert;
     pageNumber: number;
+    filter: IAdvertFilter;
 }
 @State<AdvertStateModel>({
     name: 'advert',
@@ -19,7 +21,8 @@ export interface AdvertStateModel extends LoadableStateModel {
         adverts: new Set<IAdvert>(),
         advert: null,
         loading: true,
-        pageNumber: 1
+        pageNumber: 1,
+        filter: null
     }
 })
 @Injectable()

@@ -3,7 +3,7 @@ import { IArea } from './area.model';
 import { IContact } from './contacts.model';
 import { IDescription } from './description.model';
 import { IPrice } from './price.model';
-import { IUploadImage, IViewImage } from './uploadImage';
+import { IUploadImage } from './uploadImage';
 
 export interface IAdvert {
     id: number;
@@ -16,4 +16,8 @@ export interface IAdvert {
     contacts: IContact[],
     areas: IArea[],
     created: any
+}
+
+export interface IAdvertFilter {
+    
 }
