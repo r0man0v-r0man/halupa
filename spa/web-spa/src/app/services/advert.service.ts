@@ -25,7 +25,7 @@ export class AdvertService {
 
   fetchAdverts(pageNumber: number){
     const params = this._httpHelper.createRequestParams({pageNumber});
-    return this._httpClient.get<IAdvert[]>(URLs.fetchAdvertsURL, { params });
+    return this._httpClient.get<Set<IAdvert>>(URLs.fetchAdvertsURL, { params });
   }
 
   create(advert: IAdvert) {

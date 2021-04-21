@@ -7,7 +7,7 @@ export namespace AdvertActions {
     }
     export class Fetched {
         static readonly type = '[Advert] Fetched';
-        constructor(public adverts: IAdvert[]){}
+        constructor(public adverts: Set<IAdvert>){}
     }
     export class Create {
         static readonly type = '[Advert] Create';

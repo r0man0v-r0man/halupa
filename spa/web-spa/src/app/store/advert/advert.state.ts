@@ -9,14 +9,14 @@ import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 export interface AdvertStateModel extends LoadableStateModel {
-    adverts: IAdvert[];
+    adverts: Set<IAdvert>;
     advert:IAdvert;
     pageNumber: number;
 }
 @State<AdvertStateModel>({
     name: 'advert',
     defaults: {
-        adverts: [],
+        adverts: new Set<IAdvert>(),
         advert: null,
         loading: true,
         pageNumber: 1
@@ -55,7 +55,7 @@ export class AdvertState extends StoreState<AdvertStateModel>{
 
     @Action(AdvertActions.Fetched)
     async fetched({patchState}:StateContext<AdvertStateModel>, {adverts}:AdvertActions.Fetched){
-        patchState({adverts: [...adverts], loading: false});
+        patchState({adverts: adverts, loading: false});
     }
 
     @Action(AdvertActions.Create)
@@ -71,7 +71,7 @@ export class AdvertState extends StoreState<AdvertStateModel>{
     @Action(AdvertActions.Created)
     async created(ctx:StateContext<AdvertStateModel>, {created}: AdvertActions.Created){
         const {adverts, advert} = ctx.getState();
-        ctx.patchState({loading: false, adverts: [...adverts, created], advert: created});
+        ctx.patchState({loading: false, adverts: adverts.add(created), advert: created});
         this._router.navigate(['adverts', advert.id]);
     }
 

@@ -18,12 +18,12 @@ import { GeocoderService } from './services/geocoder.service';
   ],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class AddComponent implements OnInit {
+export class AddComponent {
   limitOfPricesArray = Object.keys(CurrencyType).map(key => CurrencyType[key]).filter(x => !(parseInt(x) >= 0)).length - 1;
   /** фото к объявлению */
   images: any[] = [];
   
-  imageList2: IUploadImage[] = [];
+  imageList2 = new Set<IUploadImage>();
   
   constructor(
     public geocoderService: GeocoderService,
@@ -44,8 +44,6 @@ export class AddComponent implements OnInit {
   }
   get disabledAddContactFieldButton() {
     return this.addFormService.disabledAddContactFieldButton;
-  }
-  ngOnInit(): void {
   }
   submitForm(){
     this._store.dispatch(new AdvertActions.Create({ ...this.form.value }))
@@ -112,7 +110,7 @@ export class AddComponent implements OnInit {
   uploadFile(file: File){
     this._imageService.onFileChange(file).subscribe(file => {
       this._imageService.uploadFile(file).subscribe(response => {
-        this.imageList2.push(response);
+        this.imageList2.add(response);
         this.setFormControlValue('images', this.imageList2);
         this.cd.detectChanges();
       })

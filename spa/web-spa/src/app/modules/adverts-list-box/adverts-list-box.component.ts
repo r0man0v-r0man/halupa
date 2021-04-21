@@ -17,7 +17,7 @@ import { AdvertState } from 'src/app/store/advert/advert.state';
   ]
 })
 export class AdvertsListBoxComponent extends Destroyer implements AfterViewInit {
-  adverts$: Observable<IAdvert[]> = this._store.select(AdvertState.getAdverts).pipe(takeUntil(this.destroy$));
+  adverts$: Observable<Set<IAdvert>> = this._store.select(AdvertState.getAdverts).pipe(takeUntil(this.destroy$));
 
   @ViewChildren('cardImage') cardImages: QueryList<ElementRef>;
   
