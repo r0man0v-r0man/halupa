@@ -70,15 +70,6 @@ const routes: Routes = [
     robots: 'noindex, nofollow'
   }
 },
-  {
-    path: 'search',
-    loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule),
-    data: {
-      title: 'Halupa.by - Результаты поиска',
-      description: 'Результаты поиска',
-      robots: 'noindex, nofollow'
-    }
-  },
 {
   path: '**',
   loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)

@@ -2,10 +2,8 @@ import { AdvertActions } from 'src/app/store/advert/advert.action';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
 import { IUploadImage } from 'src/app/models/uploadImage';
-import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { AddFormService } from './services/add-form.service';
 import { GeocoderService } from './services/geocoder.service';
@@ -24,7 +22,7 @@ export class AddComponent implements OnInit {
   limitOfPricesArray = Object.keys(CurrencyType).map(key => CurrencyType[key]).filter(x => !(parseInt(x) >= 0)).length - 1;
   /** фото к объявлению */
   images: any[] = [];
-  imageList: any[] = [];
+  
   imageList2: IUploadImage[] = [];
   
   constructor(
