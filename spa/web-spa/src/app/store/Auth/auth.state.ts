@@ -87,13 +87,13 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
             .pipe(first())
             .subscribe(
                 response => {
-                    if(response) ctx.dispatch(new AuthActions.Registered(response))
+                    if(response) ctx.dispatch(new AuthActions.Registered())
                 },
                 (e) => this.errorHandler(e, ctx))
     }
 
     @Action(AuthActions.Registered)
-    async registered({patchState}: StateContext<AuthStateModel>, {isRegistered}: AuthActions.Registered){
+    async registered({patchState}: StateContext<AuthStateModel>, {}: AuthActions.Registered){
         patchState({loading: true});
         this._zone.run(() => {
             return this._router.navigate(['/login']);

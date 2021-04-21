@@ -23,6 +23,6 @@ export namespace AuthActions{
     }
     export class Registered{
         static readonly type = '[Auth] Registered';
-        constructor(public isRegistered: boolean){}
+        constructor(){}
     }
 }
