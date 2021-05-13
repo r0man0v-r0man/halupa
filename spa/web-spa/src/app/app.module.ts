@@ -1,3 +1,4 @@
+import { StateModule } from './store/state.module';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -32,7 +33,8 @@ registerLocaleData(ru);
     HttpClientModule,
     CommonModule,
     FooterModule,
-    HeaderModule
+    HeaderModule,
+    StateModule
   ],
   providers: [
     Title,

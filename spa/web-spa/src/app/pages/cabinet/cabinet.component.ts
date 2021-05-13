@@ -4,10 +4,7 @@ import {AdvertService} from "../../services/advert.service";
 @Component({
   selector: 'app-cabinet',
   templateUrl: './cabinet.component.html',
-  styleUrls: [ './cabinet.component.less' ],
-  providers:[
-      AdvertService
-  ]
+  styleUrls: [ './cabinet.component.less' ]
 })
 export class CabinetComponent implements OnInit {
   constructor(

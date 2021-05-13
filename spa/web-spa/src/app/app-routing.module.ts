@@ -13,7 +13,7 @@ const routes: Routes = [
   loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
   data: {
     title: 'Halupa.by - Сайт о продаже недвижимости №1 в Беларуси',
-    description: 'Сайт о продаже недвижимости. Halupa.by - ваш помошник в поиске квартиры или дома для покупки. Объявления от собственника. Удобный поиск и простота размещения объявления - это halupa.by'
+    description: 'Сайт о продаже недвижимости. Halupa.by - ваш помошник в поиске дома для покупки. Актуальные объявления от собственников. Удобный поиск и простота размещения вашего объявления.'
   }
 },
 {
@@ -70,15 +70,6 @@ const routes: Routes = [
     robots: 'noindex, nofollow'
   }
 },
-  {
-    path: 'search',
-    loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule),
-    data: {
-      title: 'Halupa.by - Результаты поиска',
-      description: 'Результаты поиска',
-      robots: 'noindex, nofollow'
-    }
-  },
 {
   path: '**',
   loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)

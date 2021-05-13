@@ -1,9 +1,9 @@
+import { AdvertActions } from 'src/app/store/advert/advert.action';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { IAdvert } from 'src/app/models/advert.model';
 import { CurrencyType } from 'src/app/models/price.model';
 import { IUploadImage } from 'src/app/models/uploadImage';
-import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { AddFormService } from './services/add-form.service';
 import { GeocoderService } from './services/geocoder.service';
@@ -14,24 +14,23 @@ import { GeocoderService } from './services/geocoder.service';
   styleUrls: ['./add.component.less'],
   providers:[
     GeocoderService,
-    AddFormService,
-    AdvertService
+    AddFormService
   ],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class AddComponent implements OnInit {
+export class AddComponent {
   limitOfPricesArray = Object.keys(CurrencyType).map(key => CurrencyType[key]).filter(x => !(parseInt(x) >= 0)).length - 1;
   /** фото к объявлению */
   images: any[] = [];
-  imageList: any[] = [];
-  imageList2: IUploadImage[] = [];
+  
+  imageList2 = new Set<IUploadImage>();
   
   constructor(
     public geocoderService: GeocoderService,
     private addFormService: AddFormService,
     public _imageService: ImageService,
     private cd: ChangeDetectorRef,
-    private advertService: AdvertService
+    private _store: Store
   ) {
    }
   get form() {
@@ -46,12 +45,8 @@ export class AddComponent implements OnInit {
   get disabledAddContactFieldButton() {
     return this.addFormService.disabledAddContactFieldButton;
   }
-  ngOnInit(): void {
-    
-  }
   submitForm(){
-    const advert: IAdvert = { ...this.form.value };
-    this.advertService.addAdvert(advert);
+    this._store.dispatch(new AdvertActions.Create({ ...this.form.value }))
   }
   /** Delete file */
   onDelete = (file: any): Observable<boolean> => {
@@ -115,7 +110,7 @@ export class AddComponent implements OnInit {
   uploadFile(file: File){
     this._imageService.onFileChange(file).subscribe(file => {
       this._imageService.uploadFile(file).subscribe(response => {
-        this.imageList2.push(response);
+        this.imageList2.add(response);
         this.setFormControlValue('images', this.imageList2);
         this.cd.detectChanges();
       })

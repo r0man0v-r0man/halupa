@@ -32,11 +32,13 @@ namespace BLL.Services
             _memoryCacheEntryOptions = cacheHelper.MemoryCacheEntryOptions;
         }
 
-        public async Task<int> AddAsync(BL.Advert advert) =>
-             await _advertRepo
+        public async Task<BL.Advert> AddAsync(BL.Advert advert)
+        {
+            var result = await _advertRepo
                 .AddAdvertAsync(_mapper.Map<DA.Advert>(advert))
                 .ConfigureAwait(false);
-
+            return _mapper.Map<BL.Advert>(result);
+        }
 
         public async Task<BL.Advert> GetAsync(int id)
         {

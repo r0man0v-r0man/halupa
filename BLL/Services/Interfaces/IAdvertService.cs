@@ -11,7 +11,7 @@ namespace BLL.Services.Interfaces
         /// </summary>
         /// <param name="advert">BL модель объявления</param>
         /// <returns>Id созданного объявления</returns>
-        Task<int> AddAsync(BL.Advert advert);
+        Task<BL.Advert> AddAsync(BL.Advert advert);
         /// <summary>
         /// Найти объявление по Id
         /// </summary>

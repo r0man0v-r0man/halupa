@@ -1,5 +1,5 @@
 <div class="adverts">
-    <div сlass="adverts-item" *ngFor="let item of list">
+    <div сlass="adverts-item" *ngFor="let item of adverts$ |async">
         <div class="card">
             <div class="card-image loading" >
                 <app-price [prices]="item.prices"></app-price>
@@ -13,7 +13,7 @@
                     <span>{{ item.created | dateAgo }}</span>
                 </div>
                 <div class="card-bottom" >
-                    <span class="card-bottom-main">{{ item.yandexAddress.geoObject.metaDataProperty.geocoderMetaData.address.components[3].name }}</span>
+                    <span class="card-bottom-main">{{ item.yandexAddress.geoObject.metaDataProperty.geocoderMetaData.address.components[3]?.name }}</span>
                     <span class="card-bottom-secondary">{{ item.yandexAddress.geoObject.name }}</span>
                 </div>
                 <a class="link" [routerLink]="[ '/adverts', item.id ]">посмотреть</a>

@@ -1,7 +1,0 @@
-<h3 nz-typography>Результаты поиска: <span nz-typography nzType="secondary">{{searchResult?.searchRequest | lowercase}}</span></h3>
-<div class="wrap">
-    <app-adverts-list-box [list]="searchResult?.advertsByLocality"></app-adverts-list-box>
-    <div class="loadmore" nz-list-load-more>
-      <button nz-button *ngIf="isShowMoreButton" (click)="onLoadMore()">Загрузить еще</button>
-    </div>
-</div>

@@ -1,6 +1,7 @@
 <div class="wrap">
-    <app-adverts-list-box [list]="list"></app-adverts-list-box>
-    <div class="loadmore">
-        <button *ngIf="isShowMoreButton" (click)="onLoadMore()">Загрузить еще</button>
+    <app-adverts-list-box></app-adverts-list-box>
+    <div>
+        <button (click)="onPrevPage()">Назад</button>
+        <button (click)="onLoadMore()">Загрузить еще</button>
     </div>
 </div>

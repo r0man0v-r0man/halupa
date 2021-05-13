@@ -6,6 +6,10 @@ import { ImageSliderModule } from 'src/app/modules/image-slider/image-slider.mod
 import { YandexMapModule } from 'src/app/modules/yandex-map/yandex-map.module';
 import {PriceModule} from "../../modules/price/price.module";
 import {ContactsViewModule} from "../../modules/contacts-view/contacts-view.module";
+import { NgxsModule } from '@ngxs/store';
+import { AdvertState } from 'src/app/store/advert/advert.state';
+import { AdvertService } from 'src/app/services/advert.service';
+import { HttpHelperService } from 'src/app/services/http.service';
 
 
 @NgModule({
@@ -18,10 +22,15 @@ import {ContactsViewModule} from "../../modules/contacts-view/contacts-view.modu
     ImageSliderModule,
     YandexMapModule,
     PriceModule,
-    ContactsViewModule
+    ContactsViewModule,
+    NgxsModule.forFeature([AdvertState])
   ],
   exports: [
     AdvertComponent
+  ],
+  providers:[
+    AdvertService,
+    HttpHelperService
   ]
 })
 export class AdvertModule { }

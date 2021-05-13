@@ -17,3 +17,7 @@ export interface IAdvert {
     areas: IArea[],
     created: any
 }
+
+export interface IAdvertFilter {
+    
+}

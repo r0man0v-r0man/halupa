@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthActions } from 'src/app/store/auth/auth.action';
+import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { IUser } from 'src/app/models/user.model';
-import { AuthService } from 'src/app/services/auth.service';
 import { RegisterFormService } from './services/register-form.service';
 
 @Component({
@@ -12,39 +12,21 @@ import { RegisterFormService } from './services/register-form.service';
     RegisterFormService
   ]
 })
-export class RegisterComponent implements OnInit {
-  isLoading: boolean = false;
+export class RegisterComponent  {
   constructor(
     private _registerFormService: RegisterFormService,
-    private _router: Router,
-    private _authService: AuthService
+    private _store: Store
   ) { }
-
-  ngOnInit(): void {
-  }
 
   get form() {
     return this._registerFormService.form;
   }
-  get userName() { return this._registerFormService.form.get('userName'); }
+  get userName() { 
+    return this._registerFormService.form.get('userName'); 
+  }
   /** регистрация пользователя */
   submitForm(user: IUser){
-    if(user){
-      this.isLoadingSwitch();
-      this._authService.registerUser(user)
-        .subscribe(response => {
-          if(response){
-            this._router.navigate(['/login']);
-          }
-        })
-    }
-    setTimeout(() => {
-      this.isLoadingSwitch();
-    }, 3000);
-  }
-  /** переключение спиннера */
-  isLoadingSwitch(){
-    this.isLoading = !this.isLoading;
+    this._store.dispatch(new AuthActions.Register(user))
   }
   
 }
