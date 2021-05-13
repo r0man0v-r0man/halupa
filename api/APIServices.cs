@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
+using api.PolicyProviders;
 
 namespace api
 {
@@ -16,6 +17,8 @@ namespace api
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<IAuthorizationPolicyProvider, HalupaAuthorizationPolicyProvider>();
+            services.AddScoped<IAuthorizationHandler, HalupaSecurityLevelHandler>();
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)

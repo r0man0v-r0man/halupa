@@ -1,4 +1,5 @@
-﻿using BLL.DTO;
+﻿using api.PolicyProviders;
+using BLL.DTO;
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -121,6 +122,11 @@ namespace api.Controllers
                 _logger.LogError(nameof(Delete), e);
                 return BadRequest();
             }
+        }
+        [HalupaSecurityLevel(1)]
+        public async Task<IActionResult> HalupaSecurityLevelExample()
+        {
+            return Ok();
         }
     }
 }

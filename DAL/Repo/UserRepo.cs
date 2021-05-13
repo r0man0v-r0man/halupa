@@ -38,6 +38,8 @@ namespace DAL.Repo
                 {
                     new Claim(JwtRegisteredClaimNames.UniqueName, user?.UserName),
                     new Claim(JwtRegisteredClaimNames.Sub, user?.Id)
+                    // example for custom halupa policy provider
+                    // new Claim(HalupaPolicies.SecurityLevel, "1")
                 }).ConfigureAwait(false);
             }
             return result;
