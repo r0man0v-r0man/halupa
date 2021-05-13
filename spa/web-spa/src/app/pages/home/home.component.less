@@ -2,7 +2,7 @@ section{
     padding-top: 4em;
     padding-bottom: 4em;
 }
-.top, .features{
+.top, .features, .key-points{
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
@@ -126,11 +126,31 @@ section{
     background: #262E34;
     color: white;
 }
+.wrap-key-points{
+    background: white;
+}
+.key-points{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+.key-point{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin-bottom: 2em;
+    p{
+        text-align: center;
+    }
+}
+.svg-box{
+    width: 200px; margin: 0 auto;
+}
 ul.features-list{
     margin: 0;
     padding-left: .1em;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
     li{
         font-size: 1.1em;
         margin-bottom: 1em;
@@ -162,6 +182,16 @@ ul.features-list{
     }
 }
 @media (min-width: 960px){
+    .key-point{
+        margin-bottom: unset;
+        p{
+            text-align: unset;
+        }
+    }
+    .svg-box{
+        width: 250px; 
+        margin: 0 auto;
+    }
     .top{
         flex-direction: row;
         justify-content: space-around;
@@ -172,7 +202,7 @@ ul.features-list{
     }
     ul.features-list{
         margin: 0 10em;
-        // display: block;
+        grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
     }
     .features{
         position: relative;
