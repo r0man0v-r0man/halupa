@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace api.PolicyProviders
+namespace Extensions.PolicyProviders
 {
     // {type}
     public static class HalupaPolicies

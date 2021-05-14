@@ -1,6 +1,6 @@
-﻿using api.PolicyProviders;
-using BLL.DTO;
+﻿using BLL.DTO;
 using BLL.Services.Interfaces;
+using Extensions.PolicyProviders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
