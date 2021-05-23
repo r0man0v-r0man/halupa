@@ -10,9 +10,9 @@ import { FooterModule } from './modules/footer/footer.module';
 import { HeaderModule } from './modules/header/header.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularYandexMapsModule, IConfig } from 'angular8-yandex-maps';
+import { AngularYandexMapsModule, YaConfig } from 'angular8-yandex-maps';
 import { AuthGuardService } from './services/auth-guard.service';
-const mapConfig: IConfig = {
+const mapConfig: YaConfig = {
   apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
   lang: 'ru_RU',
   coordorder: 'latlong'
