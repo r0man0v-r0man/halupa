@@ -11,7 +11,7 @@ COPY halupa.sln .
 COPY api/api.csproj ./api/
 COPY DAL/DAL.csproj ./DAL/
 COPY BLL/BLL.csproj ./BLL/
-
+COPY Extensions/Extensions.csproj ./Extensions/
 RUN dotnet restore
 
 COPY . .
