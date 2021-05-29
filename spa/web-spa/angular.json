@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "web-spa": {
+    "halupa": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -40,7 +40,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/web-spa/browser",
+            "outputPath": "dist/halupa/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -48,7 +48,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/images"
+              "src/assets/images",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/halupa.less"
@@ -59,7 +60,9 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -94,24 +97,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "web-spa:build"
+            "browserTarget": "halupa:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "web-spa:build:production"
+              "browserTarget": "halupa:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "web-spa:build"
+            "browserTarget": "halupa:build"
           }
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/web-spa/server",
+            "outputPath": "dist/halupa/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "sourceMap": true,
@@ -134,21 +137,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "web-spa:build",
-            "serverTarget": "web-spa:server"
+            "browserTarget": "halupa:build",
+            "serverTarget": "halupa:server"
           },
           "configurations": {
             "production": {
-              "browserTarget": "web-spa:build:production",
-              "serverTarget": "web-spa:server:production"
+              "browserTarget": "halupa:build:production",
+              "serverTarget": "halupa:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "web-spa:build:production",
-            "serverTarget": "web-spa:server:production",
+            "browserTarget": "halupa:build:production",
+            "serverTarget": "halupa:server:production",
             "routes": [
               "/"
             ]
@@ -159,5 +162,5 @@
         }
       }
     }},
-  "defaultProject": "web-spa"
+  "defaultProject": "halupa"
 }

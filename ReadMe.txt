@@ -1,8 +1,15 @@
 docker
 docker build -t romanovdocker/halupa-api . --no-cache 
 docker build -t romanovdocker/halupa-spa . --no-cache
+
+docker push romanovdocker/halupa-api:latest
+docker pull romanovdocker/halupa-api:latest
+
+docker push romanovdocker/halupa-spa:latest
+docker pull romanovdocker/halupa-spa:latest
+
 docker run --rm -d -p 5000:5000/tcp -v /var/www/db:/var/www/db -v /var/www/images:/var/www/images -v /var/www/logs:/var/www/logs romanovdocker/halupa-api:latest 
-docker run --rm -d -p 4000:80/tcp   romanovdocker/halupa-spa:latest 
+docker run --rm -d -p 4000:80/tcp romanovdocker/halupa-spa:latest 
 
 dotnet ef:
 dotnet ef database update -p dal -s api

@@ -5,4 +5,4 @@ RUN npm i
 COPY . ./
 RUN npm run build:ssr
 EXPOSE 80
-CMD ["node", "dist/web-spa/server/main.js"]
+CMD ["node", "dist/halupa/server/main.js"]
