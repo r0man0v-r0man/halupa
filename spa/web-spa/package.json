@@ -29,6 +29,7 @@
     "@ngxs/logger-plugin": "^3.7.2",
     "@ngxs/store": "^3.7.2",
     "@types/gsap": "^1.20.2",
+    "angular-oauth2-oidc": "^10.0.3",
     "angular8-yandex-maps": "^12.1.4",
     "axios": "^0.21.1",
     "express": "^4.15.2",

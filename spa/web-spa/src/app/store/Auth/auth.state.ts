@@ -7,6 +7,8 @@ import { AuthService } from "src/app/services/auth.service";
 import { LocalStorageService } from "src/app/services/local-storage.service";
 import { LoadableStateModel } from "../loadable.state";
 import { StoreState } from "../store.state";
+import { OAuthService } from 'angular-oauth2-oidc';
+import { authCodeFlowConfig } from 'src/app/authCodeFlowConfig';
 
 export interface AuthStateModel extends LoadableStateModel{
     token: string;
@@ -25,7 +27,8 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
         private _localStorageService: LocalStorageService,
         private _zone: NgZone,
         private _router: Router,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private _oauthService: OAuthService
     ){ super(); }
     ngxsOnInit({patchState}: StateContext<AuthStateModel>) {
         const token = this._localStorageService.getItem('access_token');
@@ -51,21 +54,26 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
     @Action(AuthActions.Login)
     async login(ctx: StateContext<AuthStateModel>, {payload}: AuthActions.Login){
         ctx.patchState({loading: true});
-        this._authService.login(payload)
-            .pipe(first())
-            .subscribe(
-                response => ctx.dispatch(new AuthActions.Logined(response.access_token)),
-                (e) => this.errorHandler(e, ctx))
+        this._oauthService.configure(authCodeFlowConfig);
+        this._oauthService.loadDiscoveryDocumentAndTryLogin();
+
+        // this._authService.login(payload)
+        //     .pipe(first())
+        //     .subscribe(
+        //         response => ctx.dispatch(new AuthActions.Logined(response.access_token)),
+        //         (e) => this.errorHandler(e, ctx))
     }
 
     @Action(AuthActions.Logined)
     async logined({patchState}:StateContext<AuthStateModel>, {token}:AuthActions.Logined){
         patchState({token, loading: false});
-        this._localStorageService.setItem('access_token', token);
-        this._zone.run(()=>{
-            let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
-            return this._router.navigate([returnUrl || '/']);
-        })
+        this._oauthService.initCodeFlow();
+
+        // this._localStorageService.setItem('access_token', token);
+        // this._zone.run(()=>{
+        //     let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
+        //     return this._router.navigate([returnUrl || '/']);
+        // })
     }
 
     @Action(AuthActions.Logout)

@@ -7,7 +7,7 @@ export namespace AuthActions{
     }
     export class Logined{
         static readonly type = '[Auth] Logined';
-        constructor(public token: string){}
+        constructor(public token?: string){}
     }
     export class Logout{
         static readonly type = '[Auth] Logout';
