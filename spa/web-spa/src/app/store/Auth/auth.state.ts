@@ -56,7 +56,7 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
         ctx.patchState({loading: true});
         this._oauthService.configure(authCodeFlowConfig);
         this._oauthService.loadDiscoveryDocumentAndTryLogin();
-
+       ctx.dispatch(new AuthActions.Logined())
         // this._authService.login(payload)
         //     .pipe(first())
         //     .subscribe(
@@ -66,7 +66,7 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
 
     @Action(AuthActions.Logined)
     async logined({patchState}:StateContext<AuthStateModel>, {token}:AuthActions.Logined){
-        patchState({token, loading: false});
+        patchState({ loading: false});
         this._oauthService.initCodeFlow();
 
         // this._localStorageService.setItem('access_token', token);
