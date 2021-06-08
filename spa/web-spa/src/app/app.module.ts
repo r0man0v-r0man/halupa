@@ -15,7 +15,6 @@ import { AngularYandexMapsModule, YaConfig } from 'angular8-yandex-maps';
 import { AuthGuardService } from './services/auth-guard.service';
 import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { OAuthModule } from 'angular-oauth2-oidc';
 const mapConfig: YaConfig = {
   apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
   lang: 'ru_RU',
@@ -39,7 +38,6 @@ registerLocaleData(ru);
     FooterModule,
     HeaderModule,
     StateModule,
-    OAuthModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
