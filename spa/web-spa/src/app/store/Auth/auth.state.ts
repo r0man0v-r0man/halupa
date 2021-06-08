@@ -7,6 +7,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { LocalStorageService } from "src/app/services/local-storage.service";
 import { LoadableStateModel } from "../loadable.state";
 import { StoreState } from "../store.state";
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 export interface AuthStateModel extends LoadableStateModel{
     token: string;
@@ -25,7 +26,9 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
         private _localStorageService: LocalStorageService,
         private _zone: NgZone,
         private _router: Router,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        public oidcSecurityService: OidcSecurityService
+
     ){ super(); }
     ngxsOnInit({patchState}: StateContext<AuthStateModel>) {
         const token = this._localStorageService.getItem('access_token');
@@ -51,12 +54,14 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
     @Action(AuthActions.Login)
     async login(ctx: StateContext<AuthStateModel>, {payload}: AuthActions.Login){
         ctx.patchState({loading: true});
-
-        this._authService.login(payload)
-            .pipe(first())
-            .subscribe(
-                response => ctx.dispatch(new AuthActions.Logined(response.access_token)),
-                (e) => this.errorHandler(e, ctx))
+        this.oidcSecurityService.authorize();
+        const t = this.oidcSecurityService.getToken();
+        ctx.dispatch(new AuthActions.Logined(t))
+        // this._authService.login(payload)
+        //     .pipe(first())
+        //     .subscribe(
+        //         response => ctx.dispatch(new AuthActions.Logined(response.access_token)),
+        //         (e) => this.errorHandler(e, ctx))
     }
 
     @Action(AuthActions.Logined)

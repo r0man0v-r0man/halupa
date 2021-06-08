@@ -1,7 +1,7 @@
 
 import { StateModule } from './store/state.module';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,7 @@ import { AngularYandexMapsModule, YaConfig } from 'angular8-yandex-maps';
 import { AuthGuardService } from './services/auth-guard.service';
 import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AuthModule, LogLevel, OidcConfigService } from 'angular-auth-oidc-client';
 const mapConfig: YaConfig = {
   apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
   lang: 'ru_RU',
@@ -23,12 +24,26 @@ const mapConfig: YaConfig = {
 
 registerLocaleData(ru);
 
+export function configureAuth(oidcConfigService: OidcConfigService) {
+  return () =>
+    oidcConfigService.withConfig({
+      stsServer: 'http://localhost:19403',
+      redirectUrl: 'http://localhost:4200',
+      postLogoutRedirectUri: 'http://localhost:4200',
+      clientId: 'HalupaClientId',
+      scope: 'openid profile halupaApi',
+      responseType: 'code',
+      // silentRenew: true,
+      // silentRenewUrl: 'https://localhost:4200/silent-renew.html',
+    });
+}
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    AuthModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AngularYandexMapsModule.forRoot(mapConfig),
     AppRoutingModule,
@@ -47,7 +62,14 @@ registerLocaleData(ru);
   ],
   providers: [
     Title,
-    AuthGuardService
+    AuthGuardService,
+    OidcConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configureAuth,
+      deps: [OidcConfigService],
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

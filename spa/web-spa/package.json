@@ -29,11 +29,12 @@
     "@ngxs/logger-plugin": "^3.7.2",
     "@ngxs/store": "^3.7.2",
     "@types/gsap": "^1.20.2",
+    "angular-auth-oidc-client": "^11.2.0",
     "angular8-yandex-maps": "^12.1.4",
     "axios": "^0.21.1",
     "express": "^4.15.2",
     "gsap": "^3.6.1",
-    "oidc-client": "^1.11.5",
+    "mock-browser": "^0.92.14",
     "rxjs": "~6.6.7",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
