@@ -50,4 +50,8 @@ export class HeaderComponent extends Destroyer implements OnInit {
     this.onToggleMenu(false);
     this._store.dispatch(new AuthActions.Logout());
   }
+  onLogin(){
+    this._store.dispatch(new AuthActions.Login());
+    this.onToggleMenu(false);
+  }
 }

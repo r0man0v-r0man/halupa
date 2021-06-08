@@ -27,7 +27,7 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
         private _zone: NgZone,
         private _router: Router,
         private _route: ActivatedRoute,
-        public oidcSecurityService: OidcSecurityService
+        private _oidcSecurityService: OidcSecurityService
 
     ){ super(); }
     ngxsOnInit({patchState}: StateContext<AuthStateModel>) {
@@ -52,10 +52,10 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
     }
 
     @Action(AuthActions.Login)
-    async login(ctx: StateContext<AuthStateModel>, {payload}: AuthActions.Login){
+    async login(ctx: StateContext<AuthStateModel>, {}: AuthActions.Login){
         ctx.patchState({loading: true});
-        this.oidcSecurityService.authorize();
-        const t = this.oidcSecurityService.getToken();
+        this._oidcSecurityService.authorize();
+        const t = this._oidcSecurityService.getToken();
         ctx.dispatch(new AuthActions.Logined(t))
         // this._authService.login(payload)
         //     .pipe(first())
@@ -67,7 +67,7 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
     @Action(AuthActions.Logined)
     async logined({patchState}:StateContext<AuthStateModel>, {token}:AuthActions.Logined){
         patchState({ loading: false});
-        this._localStorageService.setItem('access_token', token);
+        //this._localStorageService.setItem('access_token', token);
         this._zone.run(()=>{
             let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
             return this._router.navigate([returnUrl || '/']);

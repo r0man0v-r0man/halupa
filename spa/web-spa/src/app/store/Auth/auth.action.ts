@@ -3,7 +3,7 @@ import { IUser } from "src/app/models/user.model";
 export namespace AuthActions{
     export class Login{
         static readonly type = '[Auth] Login';
-        constructor(public payload: IUser){}
+        constructor(){}
     }
     export class Logined{
         static readonly type = '[Auth] Logined';

@@ -32,6 +32,6 @@ export class LoginComponent extends Destroyer {
     return this._loginFormService.isValid;
   }
   login(user: IUser){
-    this._store.dispatch(new AuthActions.Login(user));
+    //this._store.dispatch(new AuthActions.Login(user));
   }
 }

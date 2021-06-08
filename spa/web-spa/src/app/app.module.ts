@@ -15,7 +15,7 @@ import { AngularYandexMapsModule, YaConfig } from 'angular8-yandex-maps';
 import { AuthGuardService } from './services/auth-guard.service';
 import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AuthModule, LogLevel, OidcConfigService } from 'angular-auth-oidc-client';
+import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
 const mapConfig: YaConfig = {
   apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
   lang: 'ru_RU',
@@ -32,9 +32,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
       postLogoutRedirectUri: 'http://localhost:4200',
       clientId: 'HalupaClientId',
       scope: 'openid profile halupaApi',
-      responseType: 'code',
-      // silentRenew: true,
-      // silentRenewUrl: 'https://localhost:4200/silent-renew.html',
+      responseType: 'code'
     });
 }
 

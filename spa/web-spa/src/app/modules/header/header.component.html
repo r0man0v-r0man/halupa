@@ -22,12 +22,12 @@
             <a [routerLink]="['/cabinet']" (click)="onToggleMenu(false)">Личный кабинет</a>
         </li>
         <li >
-            <a [routerLink]="['/login']" (click)="onLogOut()">Выйти</a>
+            <a (click)="onLogOut()">Выйти</a>
         </li>
     </ng-template>
     <ng-template #publicTpl>
         <li >
-            <a [routerLink]="['/login']" (click)="onToggleMenu(false)">Войти</a>
+            <a (click)="onLogin()">Войти</a>
         </li>
     </ng-template>
 </ul>
