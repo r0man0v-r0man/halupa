@@ -1,7 +1,7 @@
 
 import { StateModule } from './store/state.module';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
