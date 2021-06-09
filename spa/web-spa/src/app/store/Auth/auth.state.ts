@@ -55,18 +55,12 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
     async login(ctx: StateContext<AuthStateModel>, {}: AuthActions.Login){
         ctx.patchState({loading: true});
         this._oidcSecurityService.authorize();
-        const t = this._oidcSecurityService.getToken();
-        ctx.dispatch(new AuthActions.Logined(t))
-        // this._authService.login(payload)
-        //     .pipe(first())
-        //     .subscribe(
-        //         response => ctx.dispatch(new AuthActions.Logined(response.access_token)),
-        //         (e) => this.errorHandler(e, ctx))
     }
 
     @Action(AuthActions.Logined)
-    async logined({patchState}:StateContext<AuthStateModel>, {token}:AuthActions.Logined){
+    async logined({patchState}:StateContext<AuthStateModel>, {}:AuthActions.Logined){
         patchState({ loading: false});
+        const token = this._oidcSecurityService.getToken();
         this._localStorageService.setItem('access_token', token);
         this._zone.run(()=>{
             let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
@@ -83,6 +77,7 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
     @Action(AuthActions.Logouted)
     async logouted({patchState}:StateContext<AuthStateModel>, {}:AuthActions.Logouted){
         this._localStorageService.removeItem('access_token');
+        this._oidcSecurityService.logoff()
         patchState({token: null, loading: false});
     }
 

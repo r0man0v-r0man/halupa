@@ -1,6 +1,8 @@
 import { GsapService } from 'src/app/services/gsap.service';
 import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,9 @@ export class HomeComponent implements OnInit {
   @ViewChild('whole_card') whole_card: ElementRef;
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private _gsapService: GsapService
+    private _gsapService: GsapService,
+    
+
   ) { }
   onCtaCardClick(){
     if(isPlatformBrowser(this.platformId)){

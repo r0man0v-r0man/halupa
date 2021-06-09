@@ -15,11 +15,16 @@ export class AppComponent implements OnInit {
     private seoService: SeoService,
     private router: Router, 
     private activatedRoute: ActivatedRoute,
-    public oidcSecurityService: OidcSecurityService
+    private _oidcSecurityService: OidcSecurityService
   ){ }
   ngOnInit() {
     this.getCurrentUrl();
-    this.oidcSecurityService.checkAuth().subscribe((auth) => console.log('is authenticated', auth));
+    this._oidcSecurityService.checkAuth().subscribe((isAuthenticated) => {
+      console.log('app authenticated', isAuthenticated);
+      const at = this._oidcSecurityService.getToken();
+      console.log(`Current access token is '${at}'`);
+    });
+
   }
   /** текущий URL */
   private getCurrentUrl(){
