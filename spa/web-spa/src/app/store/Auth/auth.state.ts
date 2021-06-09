@@ -59,8 +59,8 @@ export class AuthState extends StoreState<AuthStateModel> implements NgxsOnInit 
 
     @Action(AuthActions.Logined)
     async logined({patchState}:StateContext<AuthStateModel>, {}:AuthActions.Logined){
-        patchState({ loading: false});
         const token = this._oidcSecurityService.getToken();
+        patchState({ token, loading: false});
         this._localStorageService.setItem('access_token', token);
         this._zone.run(()=>{
             let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');

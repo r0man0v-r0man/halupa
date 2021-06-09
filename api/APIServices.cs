@@ -17,8 +17,8 @@ namespace api
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IAuthorizationPolicyProvider, HalupaAuthorizationPolicyProvider>();
-            services.AddScoped<IAuthorizationHandler, HalupaSecurityLevelHandler>();
+            //services.AddSingleton<IAuthorizationPolicyProvider, HalupaAuthorizationPolicyProvider>();
+            //services.AddScoped<IAuthorizationHandler, HalupaSecurityLevelHandler>();
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
@@ -33,8 +33,9 @@ namespace api
             })
                 .AddJwtBearer(config =>
                 {
-                    config.Authority = configuration["JwtBearer.JwtAuthority"];
-                    config.Audience = configuration["JwtBearer.Audience"];
+                    config.Authority = configuration["JwtBearer:Authority"];
+                    config.Audience = configuration["JwtBearer:Audience"];
+                    config.RequireHttpsMetadata = false;
                     //var secretsBytes = Encoding.UTF8.GetBytes(configuration["TokenSecret"]);
                     //var key = new SymmetricSecurityKey(secretsBytes);
 

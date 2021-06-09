@@ -1,8 +1,11 @@
+import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { SeoService } from './services/seo.service';
 import { filter } from 'rxjs/operators';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { LocalStorageService } from './services/local-storage.service';
+import { AuthActions } from './store/auth/auth.action';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +18,14 @@ export class AppComponent implements OnInit {
     private seoService: SeoService,
     private router: Router, 
     private activatedRoute: ActivatedRoute,
-    private _oidcSecurityService: OidcSecurityService
+    private _oidcSecurityService: OidcSecurityService,
+    private _store: Store
   ){ }
   ngOnInit() {
     this.getCurrentUrl();
     this._oidcSecurityService.checkAuth().subscribe((isAuthenticated) => {
       console.log('app authenticated', isAuthenticated);
-      const at = this._oidcSecurityService.getToken();
-      console.log(`Current access token is '${at}'`);
+      this._store.dispatch(new AuthActions.Logined())
     });
 
   }

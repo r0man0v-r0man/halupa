@@ -45,8 +45,9 @@ export class AdvertService {
   // depricated
 
   getUserAdverts(){
+const headers = this._authService.SecureHeaders;
     this._httpClient
-        .get<IAdvert[]>(URLs.advert.getUserAdverts, {headers: this._authService.SecureHeaders})
+        .get<IAdvert[]>(URLs.advert.getUserAdverts, {headers})
         .subscribe(response => {
           this.userAdverts = [...response]
         });
