@@ -13,12 +13,13 @@ using Extensions.PolicyProviders;
 
 namespace api
 {
-    public static class APIServices
+    public static class ServiceCollection
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddSingleton<IAuthorizationPolicyProvider, HalupaAuthorizationPolicyProvider>();
-            //services.AddScoped<IAuthorizationHandler, HalupaSecurityLevelHandler>();
+            services.AddSingleton<IAuthorizationPolicyProvider, HalupaAuthorizationPolicyProvider>();
+            services.AddScoped<IAuthorizationHandler, HalupaSecurityLevelHandler>();
+            // In oder to use [Authorize] you can configure de default authorization like this
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)

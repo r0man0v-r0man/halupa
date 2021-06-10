@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BLL
 {
-    public static class BLLServices
+    public static class ServiceCollection
     {
         public static IServiceCollection AddBllServices(this IServiceCollection services)
         {
